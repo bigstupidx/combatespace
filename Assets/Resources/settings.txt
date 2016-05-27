@@ -1,0 +1,11 @@
+{
+	defaultPower:
+	{
+		gancho_up: 10,
+		gancho_down: 7
+	},
+	defaultSpeed:
+	{
+		character_defense:3
+	}
+}
