@@ -15,6 +15,9 @@ public class HeroActions : MonoBehaviour
     public string anim_gancho_down_r;
     public string anim_punched_r;
     public string anim_punched_l;
+    public string anim_ko;
+    public string anim_cortito_l;
+    public string anim_cortito_r;
 
     private Hero hero;
     public actions action;
@@ -33,7 +36,10 @@ public class HeroActions : MonoBehaviour
         GANCHO_DOWN_R,
         GANCHO_DOWN_L,
         PUNCHED_L,
-        PUNCHED_R
+        PUNCHED_R,
+        CORTITO_L,
+        CORTITO_R,
+        KO
     }
     void Start()
     {
@@ -49,6 +55,7 @@ public class HeroActions : MonoBehaviour
     
     public void OnHeroActionWithCrossFade(actions newAction, float CrossFadeTime = 0.1f)
     {
+        if (action == actions.KO) return;
         if (punchedRoutine != null)
         StopCoroutine(punchedRoutine);
 
@@ -60,15 +67,19 @@ public class HeroActions : MonoBehaviour
         string animName = "";
         switch (action)
         {
+            case actions.KO: animName = anim_ko; break;
             case actions.IDLE: animName = anim_idle; break;
-            case actions.DEFENSE: animName = anim_defense; break;
+            case actions.DEFENSE: CrossFadeTime = 0.05f;  animName = anim_defense; break;
             case actions.DEFENSE_L: animName = anim_defense_l; break;
             case actions.DEFENSE_R: animName = anim_defense_r; break;
-            case actions.GANCHO_UP_R: animName = anim_gancho_up_r; hitRoutine = HitRoutine(0.2f, 0.5f); StartCoroutine(hitRoutine); break;
-            case actions.GANCHO_UP_L: animName = anim_gancho_up_l; hitRoutine = HitRoutine(0.2f, 0.5f); StartCoroutine(hitRoutine); break;
+            case actions.GANCHO_UP_R: animName = anim_gancho_up_r; hitRoutine = HitRoutine(0.3f, 0.5f); StartCoroutine(hitRoutine); break;
+            case actions.GANCHO_UP_L: animName = anim_gancho_up_l; hitRoutine = HitRoutine(0.3f, 0.5f); StartCoroutine(hitRoutine); break;
 
             case actions.GANCHO_DOWN_R: animName = anim_gancho_down_r; hitRoutine = HitRoutine(0.2f, 0.5f); StartCoroutine(hitRoutine); break;
             case actions.GANCHO_DOWN_L: animName = anim_gancho_down_l; hitRoutine = HitRoutine(0.2f, 0.5f); StartCoroutine(hitRoutine); break;
+
+            case actions.CORTITO_L: animName = anim_cortito_l; hitRoutine = HitRoutine(0.15f, 0.4f); StartCoroutine(hitRoutine); break;
+            case actions.CORTITO_R: animName = anim_cortito_r; hitRoutine = HitRoutine(0.15f, 0.4f); StartCoroutine(hitRoutine); break;
 
             case actions.PUNCHED_L: animName = anim_punched_l; punchedRoutine = PunchedRoutine(0.5f); StartCoroutine(punchedRoutine); break;
             case actions.PUNCHED_R: animName = anim_punched_r; punchedRoutine = PunchedRoutine(0.5f); StartCoroutine(punchedRoutine); break;
@@ -98,18 +109,30 @@ public class HeroActions : MonoBehaviour
     }
     bool CheckIfCharacterIsInTarget()
     {
-        float angle = Quaternion.Angle(transform.rotation, Game.Instance.characterMovement.pivot.transform.rotation);
+        float angle = GetAngleBetweenFighters();
+        int AreaOfPunch = hero.AreaOfPunch;
 
-        if (angle < hero.AreaOfPunch) 
+        if ( action == actions.CORTITO_L ||  action == actions.CORTITO_R)
+            AreaOfPunch /= 2;
+
+        if (angle < AreaOfPunch) 
             return true;
         else
             return false;
+    }
+    public float GetAngleBetweenFighters()
+    {
+        return Quaternion.Angle(transform.rotation, Game.Instance.characterMovement.pivot.transform.rotation);
     }
     public bool CanMove()
     {
         if (action == HeroActions.actions.IDLE || action == HeroActions.actions.DEFENSE || action == HeroActions.actions.DEFENSE_L || action == HeroActions.actions.DEFENSE_R)
             return true;
         return false;
+    }
+    public void KO()
+    {
+        OnHeroActionWithCrossFade(actions.KO);
     }
 
 }

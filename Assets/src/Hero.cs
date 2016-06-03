@@ -28,6 +28,8 @@ public class Hero : MonoBehaviour
 
     void Update()
     {
+        if (actions.action == HeroActions.actions.KO) return;
+
 #if UNITY_EDITOR
         if (actions.CanMove())
         {
@@ -43,11 +45,13 @@ public class Hero : MonoBehaviour
     }
     void OnKO(bool heroWin)
     {
-       // actions.KO();
+        if(!heroWin)
+            actions.KO();
     }
     
     void OnHeroAction(HeroActions.actions action)
     {
+        if (actions.action == HeroActions.actions.KO) return;
         if (actions.isPunched())
         {
             if (action == HeroActions.actions.DEFENSE)
@@ -58,13 +62,16 @@ public class Hero : MonoBehaviour
     }
     void OnCheckHeroHitted(CharacterActions.actions characterAction)
     {
-        if (actions.action == HeroActions.actions.DEFENSE) return;
+        if (actions.action == HeroActions.actions.KO) return;
+        if (actions.action == HeroActions.actions.DEFENSE && actions.GetAngleBetweenFighters()<25) return;
         switch (characterAction)
         {
+            case CharacterActions.actions.ATTACK_L_CORTITO:
             case CharacterActions.actions.ATTACK_L:
                 actions.OnHeroActionWithCrossFade(HeroActions.actions.PUNCHED_L, 0.01f);
                 Events.OnComputeHeroPunched(characterAction);
                 break;
+            case CharacterActions.actions.ATTACK_R_CORTITO:
             case CharacterActions.actions.ATTACK_R:
                 actions.OnHeroActionWithCrossFade(HeroActions.actions.PUNCHED_R, 0.01f);
                 Events.OnComputeHeroPunched(characterAction);
@@ -73,6 +80,7 @@ public class Hero : MonoBehaviour
     }
     void OnCharacterBlockPunch(HeroActions.actions action)
     {
+        if (actions.action == HeroActions.actions.KO) return;
         switch (action)
         {
             case HeroActions.actions.GANCHO_UP_R: actions.OnHeroActionWithCrossFade(HeroActions.actions.IDLE, 0); break;

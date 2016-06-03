@@ -4,6 +4,8 @@ using System.Collections;
 public static class Events
 {
     public static System.Action<CharacterActions.actions> OnCharacterChangeAction = delegate { };
+    public static System.Action<CharacterActions.actions> OnAICharacterDefense = delegate { };
+    public static System.Action<CharacterActions.actions> OnAICharacterAttack = delegate { };
     public static System.Action<CharacterActions.actions> OnCheckHeroHitted = delegate { };
 
     public static System.Action<HeroActions.actions> OnHeroAction = delegate { };

@@ -12,7 +12,7 @@ public class InputManager:MonoBehaviour  {
     public float heroRotation;
     public float heroRotationVertical;
 
-    private float timeToDefense = 0.1f;
+    private float timeToDefense = 0.08f;
 
     private float minSwipeDistY = 15;
     private float minSwipeDistX = 20;
@@ -28,6 +28,7 @@ public class InputManager:MonoBehaviour  {
     {
         NONE,
         UP,
+        MID,
         DOWN,
         DEFENSE,
         DEFENSE_L,
@@ -35,7 +36,6 @@ public class InputManager:MonoBehaviour  {
     }
 
     private float newTime;
-    private bool touched;
 
     private bool movedByTime;
     private float timeSinceTouch;
@@ -66,28 +66,42 @@ public class InputManager:MonoBehaviour  {
         }
         if (Input.GetKeyDown(KeyCode.A))
         {
-            Events.OnHeroAction(HeroActions.actions.GANCHO_DOWN_L);
+            Events.OnHeroAction(HeroActions.actions.CORTITO_L);
         }
         else if (Input.GetKeyDown(KeyCode.S))
         {
-            Events.OnHeroAction(HeroActions.actions.GANCHO_DOWN_R);
+            Events.OnHeroAction(HeroActions.actions.CORTITO_R);
         }
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            SetDefense(true, true);
+            Events.OnHeroAction(HeroActions.actions.GANCHO_DOWN_L);
         }
-        if (Input.GetKeyDown(KeyCode.X))
+        else if (Input.GetKeyDown(KeyCode.X))
         {
+            Events.OnHeroAction(HeroActions.actions.GANCHO_DOWN_R);
+        }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            SetDefense(true, true);
             SetDefense(false, true);
         }
-        if (Input.GetKeyUp(KeyCode.Z))
+        if (Input.GetKeyUp(KeyCode.Space))
         {
             SetDefense(true, false);
-        }
-        if (Input.GetKeyUp(KeyCode.X))
-        {
             SetDefense(false, false);
         }
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    SetDefense(false, true);
+        //}
+        //if (Input.GetKeyUp(KeyCode.Z))
+        //{
+        //    SetDefense(true, false);
+        //}
+        //if (Input.GetKeyUp(KeyCode.X))
+        //{
+        //    SetDefense(false, false);
+        //}
         float mouseRot = (Input.mousePosition.x / Screen.width) - 0.5f;
         heroRotationVertical = (Input.mousePosition.y / Screen.height) - 0.5f;
         heroRotation = mouseRot;
@@ -116,19 +130,14 @@ public class InputManager:MonoBehaviour  {
                 case TouchPhase.Began:
 
                     startPos = touch.position;
-                    touched = true;
                     Invoke("CheckIfStillTouchungDefense", timeToDefense);  
               
                     break;
-                case TouchPhase.Ended:
-                    touched = false;
-                    if (Vector2.Distance(touch.position, startPos) > minSwipeDistX)
-                    {
+                case TouchPhase.Ended:                        
+                    if (Input.touchCount == 1 && Vector2.Distance(touch.position, startPos) > minSwipeDistX)
                         Move(touch.position.x, touch.position.y);
-                    } else
-                    {
+                    else
                         Events.OnHeroAction(HeroActions.actions.IDLE);
-                    }
                     break;
             }
         }
@@ -137,10 +146,16 @@ public class InputManager:MonoBehaviour  {
 
     void Move(float touchFinalPositionX, float touchFinalPositionY)
     {
-        if (startPos.y > (Screen.height / 2))
+        if (Mathf.Abs(startPos.x - touchFinalPositionX) > Mathf.Abs(startPos.y - touchFinalPositionY))
+            Swipe(directions.MID);
+        else if (touchFinalPositionY < startPos.y)
             Swipe(directions.UP);
         else
             Swipe(directions.DOWN);
+        //if (startPos.y > (Screen.height / 2))
+        //    Swipe(directions.UP);
+        //else
+        //    Swipe(directions.DOWN);
     }
     void Swipe(directions direction)
     {
@@ -154,6 +169,8 @@ public class InputManager:MonoBehaviour  {
                     Events.OnHeroAction(HeroActions.actions.GANCHO_UP_L); break;
                 case directions.DOWN:
                     Events.OnHeroAction(HeroActions.actions.GANCHO_DOWN_L);break;
+                case directions.MID:
+                    Events.OnHeroAction(HeroActions.actions.CORTITO_L); break;
                 case directions.DEFENSE:
                     Events.OnHeroAction(HeroActions.actions.DEFENSE);break;
             }
@@ -166,6 +183,8 @@ public class InputManager:MonoBehaviour  {
                     Events.OnHeroAction(HeroActions.actions.GANCHO_UP_R);break;
                 case directions.DOWN:
                     Events.OnHeroAction(HeroActions.actions.GANCHO_DOWN_R);break;
+                case directions.MID:
+                    Events.OnHeroAction(HeroActions.actions.CORTITO_R); break;
                 case directions.DEFENSE:
                     Events.OnHeroAction(HeroActions.actions.DEFENSE); break;
             }
@@ -189,7 +208,7 @@ public class InputManager:MonoBehaviour  {
     }
     void CheckIfStillTouchungDefense()
     {
-        if (touched)
+        if (Input.touchCount > 1)
         {
             Events.OnHeroAction(HeroActions.actions.DEFENSE);
         }

@@ -16,4 +16,6 @@ public class PlayerSettings : MonoBehaviour {
 
     public Stats characterStats;
 
+    
+
 }

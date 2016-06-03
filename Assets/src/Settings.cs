@@ -17,12 +17,13 @@ public class Settings : MonoBehaviour {
     public class DefaultPower
     {
         public int gancho_up;
+        public int cortito;
         public int gancho_down;
     }
     [Serializable]
     public class DefaultSpeed
     {
-        public float character_defense;
+        public float state_speed;
     }
 
     void Start()
@@ -38,9 +39,10 @@ public class Settings : MonoBehaviour {
         string title = "defaultPower";
         defaultPower.gancho_up = int.Parse (Json[title]["gancho_up"]);
         defaultPower.gancho_down = int.Parse(Json[title]["gancho_down"]);
+        defaultPower.cortito = int.Parse(Json[title]["cortito"]);
 
         title = "defaultSpeed";
-        defaultSpeed.character_defense = float.Parse(Json[title]["character_defense"]);
+        defaultSpeed.state_speed = float.Parse(Json[title]["state_speed"]);
 
 
     }

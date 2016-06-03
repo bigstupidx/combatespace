@@ -2,10 +2,11 @@
 	defaultPower:
 	{
 		gancho_up: 10,
-		gancho_down: 7
+		gancho_down: 7,
+		cortito: 4
 	},
 	defaultSpeed:
 	{
-		character_defense:3
+		state_speed:2
 	}
 }
