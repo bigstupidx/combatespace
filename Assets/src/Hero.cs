@@ -63,7 +63,10 @@ public class Hero : MonoBehaviour
     void OnCheckHeroHitted(CharacterActions.actions characterAction)
     {
         if (actions.action == HeroActions.actions.KO) return;
-        if (actions.action == HeroActions.actions.DEFENSE && actions.GetAngleBetweenFighters()<25) return;
+		if (actions.action == HeroActions.actions.DEFENSE && actions.GetAngleBetweenFighters () < 25) {
+			Events.OnHeroBlockPunch (characterAction);
+			return;
+		}
         switch (characterAction)
         {
             case CharacterActions.actions.ATTACK_L_CORTITO:

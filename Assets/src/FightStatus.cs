@@ -20,6 +20,8 @@ public class FightStatus : MonoBehaviour {
     public ProgressBar HeroAguanteProgressBar;
     public ProgressBar EnemyAguanteProgressBar;
 
+	public BreathSfx heroBreath;
+
     public float power_gancho_up;
     public float power_gancho_down;
     public float power_cortito;
@@ -74,6 +76,8 @@ public class FightStatus : MonoBehaviour {
 
         HeroAguanteProgressBar.SetProgress(heroAguanteStatus);
         EnemyAguanteProgressBar.SetProgress(characterAguanteStatus);
+
+		heroBreath.SetBreathProgress (heroAguanteStatus);
 
         Invoke("Loop", 0.1f);
     }
