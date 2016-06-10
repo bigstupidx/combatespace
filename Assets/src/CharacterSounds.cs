@@ -58,7 +58,7 @@ public class CharacterSounds : MonoBehaviour {
 		else if(action.Equals(HeroActions.actions.GANCHO_DOWN_L)||action.Equals(HeroActions.actions.GANCHO_DOWN_R))
 			clip = hitClips.abajoBlockClips [(int)(Random.value * hitClips.abajoBlockClips.Length)];
 		float vol = Random.Range (volLowRange, volHighRange);
-		receiveSource.volume = vol;
+		receiveSource.volume = vol*0.5f;
 		float pitch = Random.Range (pitchLowRange, pitchHighRange);
 		receiveSource.pitch = pitch;
 		receiveSource.PlayOneShot (clip);

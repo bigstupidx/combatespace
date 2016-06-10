@@ -58,7 +58,7 @@ public class HeroSounds : MonoBehaviour {
 		else if(action.Equals(CharacterActions.actions.ATTACK_L_CORTITO)||action.Equals(CharacterActions.actions.ATTACK_R_CORTITO))
 			hitClip = hitClips.jabsBlockClips [(int)(Random.value * hitClips.jabsBlockClips.Length)];	
 		float vol = Random.Range (volLowRange, volHighRange);
-		receiveSource.volume = vol;
+		receiveSource.volume = vol*0.5f;
 		float pitch = Random.Range (pitchLowRange, pitchHighRange);
 		receiveSource.pitch = pitch;
 		receiveSource.PlayOneShot (hitClip);
