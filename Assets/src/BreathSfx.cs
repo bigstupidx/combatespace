@@ -12,7 +12,7 @@ public class BreathSfx : MonoBehaviour {
 	private int next;
 
 	// Use this for initialization
-	void Awake () {
+	void Start () {
 		source = GetComponent<AudioSource> ();
 	}
 	

@@ -159,8 +159,6 @@ public class InputManager:MonoBehaviour  {
     }
     void Swipe(directions direction)
     {
-        UI.Instance.debugField.text = "startPosX: " + startPos.x + "     screenWidth: " + (Screen.width/2);
-
         if (startPos.x < (Screen.width / 2))
         {
             switch (direction)

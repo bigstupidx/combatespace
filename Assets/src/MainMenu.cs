@@ -9,16 +9,24 @@ public class MainMenu : MonoBehaviour {
 
     public LigaStats[] ligas;
 
-    public void Mode_360()
+    void Start()
     {
-        Data.Instance.playerSettings.control = PlayerSettings.controls.CONTROL_360;
-        Data.Instance.LoadLevel("Dificulty");
+        Invoke("Load", 0.1f);
     }
-    public void Mode_Volante()
+    void Load()
     {
-        Data.Instance.playerSettings.control = PlayerSettings.controls.CONTROL_JOYSTICK;
-        Data.Instance.LoadLevel("Dificulty");
-    }
+        heroStats[0].Init(Data.Instance.playerSettings.heroStats.Power);
+        heroStats[1].Init(Data.Instance.playerSettings.heroStats.Resistence);
+        heroStats[2].Init(Data.Instance.playerSettings.heroStats.Defense);
+        heroStats[3].Init(Data.Instance.playerSettings.heroStats.Speed);
+        ligas[0].Init(Data.Instance.playerSettings.heroStats.Inteligencia);
+
+        characterStats[0].Init(Data.Instance.playerSettings.characterStats.Power);
+        characterStats[1].Init(Data.Instance.playerSettings.characterStats.Resistence);
+        characterStats[2].Init(Data.Instance.playerSettings.characterStats.Defense);
+        characterStats[3].Init(Data.Instance.playerSettings.characterStats.Speed);
+        ligas[1].Init(Data.Instance.playerSettings.characterStats.Inteligencia);
+    }   
     public void StartGame()
     {
         Data.Instance.playerSettings.heroStats.SetStats(
@@ -38,5 +46,9 @@ public class MainMenu : MonoBehaviour {
             );
 
         Data.Instance.LoadLevel("Game");
+    }
+    public void Back()
+    {
+        Data.Instance.LoadLevel("Dificulty");
     }
 }

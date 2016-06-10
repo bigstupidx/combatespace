@@ -30,6 +30,7 @@ public class Hero : MonoBehaviour
 
     void Update()
     {
+        if (fightStatus.state == FightStatus.states.BETWEEN_ROUNDS) return;
 #if UNITY_EDITOR
         if (actions.CanMove())
         {
@@ -51,6 +52,7 @@ public class Hero : MonoBehaviour
     
     void OnHeroAction(HeroActions.actions action)
     {
+        if (fightStatus.state == FightStatus.states.BETWEEN_ROUNDS) return;
         if (actions.isPunched())
         {
             if (action == HeroActions.actions.DEFENSE)
@@ -61,6 +63,7 @@ public class Hero : MonoBehaviour
     }
     void OnCheckHeroHitted(CharacterActions.actions characterAction)
     {
+        if (fightStatus.state == FightStatus.states.BETWEEN_ROUNDS) return;
         if (fightStatus.state != FightStatus.states.FIGHTING) return;
 		if (actions.action == HeroActions.actions.DEFENSE && actions.GetAngleBetweenFighters () < 25) {
 			Events.OnHeroBlockPunch (characterAction);

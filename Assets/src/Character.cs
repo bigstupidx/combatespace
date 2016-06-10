@@ -30,6 +30,7 @@ public class Character : MonoBehaviour {
         Events.OnAICharacterDefense += OnAICharacterDefense;
         Events.OnHeroBlockPunch += OnHeroBlockPunch;
         Events.OnKO += OnKO;
+        Events.OnRoundComplete += OnRoundComplete;
 	}
     void OnDestroy()
     {
@@ -40,9 +41,15 @@ public class Character : MonoBehaviour {
         Events.OnAICharacterDefense -= OnAICharacterDefense;
         Events.OnHeroBlockPunch -= OnHeroBlockPunch;
         Events.OnKO -= OnKO;
+        Events.OnRoundComplete -= OnRoundComplete;
+    }
+    void OnRoundComplete()
+    {
+        characterActions.ChangeRandomDefense();
     }
     void Update()
     {
+        if (Game.Instance.fightStatus.state == FightStatus.states.BETWEEN_ROUNDS) return;
         if (characterActions.state == CharacterActions.states.KO) return;
         if (timer > state_speed && characterActions.state == CharacterActions.states.DEFENDING)
         {
@@ -55,7 +62,7 @@ public class Character : MonoBehaviour {
     {
         if (heroWin)
         {
-            ChangeDefense(false, false, false, false);
+            //ChangeDefense(false, false, false, false);
             characterActions.KO();
         }
         ai.Reset();

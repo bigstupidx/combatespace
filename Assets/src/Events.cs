@@ -24,5 +24,6 @@ public static class Events
 
     //true ganaste, false perdiste:
     public static System.Action<bool> OnKO = delegate { };
-    public static System.Action OnRoundReady = delegate { };
+    public static System.Action OnRoundStart = delegate { };
+    
 }

@@ -7,7 +7,8 @@ public class DemoStat : MonoBehaviour {
     public int num;
     public Slider slider;
 
-	void Start () {
+	public void Init (int num) {
+        this.num = num;
         slider.value = float.Parse(num.ToString()) / 100;
     }
     void Update()

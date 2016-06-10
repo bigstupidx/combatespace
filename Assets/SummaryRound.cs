@@ -1,21 +1,32 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class SummaryRound : MonoBehaviour {
 
     public GameObject panel;
+    public Text field;
 
 	void Start () {
-        panel.SetActive(false);
-        Events.OnRoundReady += OnRoundReady;
+        SetOff();
+        Events.OnRoundComplete += OnRoundComplete;
 	}
     void OnDestroy()
     {
-        Events.OnRoundReady -= OnRoundReady;
+        Events.OnRoundComplete -= OnRoundComplete;
     }
-    void OnRoundReady()
+    void SetOff()
+    {
+        panel.SetActive(false);
+    }
+    void OnRoundComplete()
     {
         panel.SetActive(true);
-        Game.Instance.fightStatus.state = FightStatus.states.BETWEEN_ROUNDS;
+        field.text = Game.Instance.fightStatus.Round.ToString();
 	}
+    public void NextRound()
+    {
+        SetOff();
+        Events.OnRoundStart();
+    }
 }

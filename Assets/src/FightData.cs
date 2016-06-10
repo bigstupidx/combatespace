@@ -4,25 +4,49 @@ using System.Collections;
 
 public class FightData : MonoBehaviour {
 
-    public Text field;
-    private int sec = 59;
+    public Text ChronometerField;
+    public Text RoundField;
+    public int sec = 30;
+    private IEnumerator timeLoop;
 
-	void Start () {
-        loop();
+	void Awake () {        
+        Events.OnRoundStart += OnRoundStart;
+        Events.OnRoundComplete += OnRoundComplete;
 	}
-    void loop()
+    void OnDestroy()
     {
-        if (Game.Instance.fightStatus.state != FightStatus.states.FIGHTING) return;
-        sec--;
-        Invoke("loop", 1);
+        Events.OnRoundStart -= OnRoundStart;
+        Events.OnRoundComplete -= OnRoundComplete;
+    }
+    void OnRoundComplete()
+    {
+        StopCoroutine(timeLoop);
+    }
+    void OnRoundStart()
+    {
+        RoundField.text = "ROUND " + Game.Instance.fightStatus.Round.ToString();
+        sec = 30;
+        StartRoutine();
+    }
+    void StartRoutine()
+    {
+        timeLoop = Loop();
+        StartCoroutine(timeLoop);
+    }
+    IEnumerator Loop()
+    {
+        yield return new WaitForSeconds(1);
+        sec--;        
         SetField();
+        if (Game.Instance.fightStatus.state == FightStatus.states.FIGHTING)
+            StartRoutine();
     }
     void SetField()
     {
         string secs = sec.ToString();
         if (sec < 10) secs = "0" + sec;
 
-        field.text = "0:" + secs;
+        ChronometerField.text = "0:" + secs;
         if (sec == 0)
         {
             Events.OnRoundComplete();

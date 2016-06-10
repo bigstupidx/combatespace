@@ -6,10 +6,14 @@ public class FightStatus : MonoBehaviour {
     public states state;
     public enum states
     {
+        IDLE,
         FIGHTING,
         KO,
         BETWEEN_ROUNDS
     }
+
+    public int Round;
+
     public float heroStatus = 1;
     public float characterStatus = 1;
 
@@ -27,7 +31,7 @@ public class FightStatus : MonoBehaviour {
     public ProgressBar HeroAguanteProgressBar;
     public ProgressBar EnemyAguanteProgressBar;
 
-	public BreathSfx heroBreath;
+	//public BreathSfx heroBreath;
 
     public float power_gancho_up;
     public float power_gancho_down;
@@ -46,7 +50,10 @@ public class FightStatus : MonoBehaviour {
         Events.OnKO += OnKO;
         Events.OnHeroAction += OnHeroAction;
         Events.OnCharacterChangeAction += OnCharacterChangeAction;
+        Events.OnRoundComplete += OnRoundComplete;
+        Events.OnRoundStart += OnRoundStart;
         Loop();
+        Events.OnRoundStart();
 	}
     void OnDestroy()
     {
@@ -55,6 +62,17 @@ public class FightStatus : MonoBehaviour {
         Events.OnChangeStatusCharacter -= OnChangeStatusCharacter;
         Events.OnHeroAction -= OnHeroAction;
         Events.OnCharacterChangeAction -= OnCharacterChangeAction;
+        Events.OnRoundComplete -= OnRoundComplete;
+        Events.OnRoundStart -= OnRoundStart;
+    }
+    void OnRoundStart()
+    {
+        state = states.FIGHTING;
+        Round++;
+    }
+    void OnRoundComplete()
+    {
+        state = states.BETWEEN_ROUNDS;
     }
     void OnKO(bool isHero)
     {
@@ -83,7 +101,7 @@ public class FightStatus : MonoBehaviour {
         HeroAguanteProgressBar.SetProgress(heroAguanteStatus);
         EnemyAguanteProgressBar.SetProgress(characterAguanteStatus);
 
-		heroBreath.SetBreathProgress (heroAguanteStatus);
+		//heroBreath.SetBreathProgress (heroAguanteStatus);
 
         Invoke("Loop", 0.1f);
     }

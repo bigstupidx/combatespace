@@ -69,7 +69,7 @@ public class CharacterAI : MonoBehaviour {
     private bool AIWillActive(int probability)
     {
         int rand = Random.Range(0, 100);
-        print("AIWillActive " + rand + " de " + probability);
+      //  print("AIWillActive " + rand + " de " + probability);
         if (rand < probability)
             return true;
         return false;

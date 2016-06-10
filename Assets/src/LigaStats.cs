@@ -8,7 +8,7 @@ public class LigaStats : MonoBehaviour
     public int num;
     public Slider slider;
 
-    void Start()
+    public void Init(int num)
     {
         slider.value = float.Parse(num.ToString()) / 100;
     }
