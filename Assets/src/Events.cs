@@ -3,12 +3,15 @@ using System.Collections;
 
 public static class Events
 {
+
+    public static System.Action OnRoundComplete = delegate { };
     public static System.Action<CharacterActions.actions> OnCharacterChangeAction = delegate { };
     public static System.Action<CharacterActions.actions> OnAICharacterDefense = delegate { };
     public static System.Action<CharacterActions.actions> OnAICharacterAttack = delegate { };
     public static System.Action<CharacterActions.actions> OnCheckHeroHitted = delegate { };
 
     public static System.Action<HeroActions.actions> OnHeroAction = delegate { };
+    public static System.Action<HeroActions.actions> OnHeroSound = delegate { };
     public static System.Action<HeroActions.actions> OnCheckCharacterHitted = delegate { };    
     public static System.Action<HeroActions.actions> OnCharacterBlockPunch = delegate { };
 	public static System.Action<CharacterActions.actions> OnHeroBlockPunch = delegate { };
@@ -21,4 +24,5 @@ public static class Events
 
     //true ganaste, false perdiste:
     public static System.Action<bool> OnKO = delegate { };
+    public static System.Action OnRoundReady = delegate { };
 }

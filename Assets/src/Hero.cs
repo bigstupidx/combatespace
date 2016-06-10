@@ -6,9 +6,11 @@ public class Hero : MonoBehaviour
     public int AreaOfPunch;
     private HeroActions actions;
     private InputManager inputManager;
+    public FightStatus fightStatus;
 
     void Start()
     {
+        fightStatus = Game.Instance.fightStatus;
         Input.gyro.enabled = true;
         actions = GetComponent<HeroActions>();
         inputManager = Game.Instance.inputManager;
@@ -28,8 +30,6 @@ public class Hero : MonoBehaviour
 
     void Update()
     {
-        if (actions.action == HeroActions.actions.KO) return;
-
 #if UNITY_EDITOR
         if (actions.CanMove())
         {
@@ -51,7 +51,6 @@ public class Hero : MonoBehaviour
     
     void OnHeroAction(HeroActions.actions action)
     {
-        if (actions.action == HeroActions.actions.KO) return;
         if (actions.isPunched())
         {
             if (action == HeroActions.actions.DEFENSE)
@@ -62,7 +61,7 @@ public class Hero : MonoBehaviour
     }
     void OnCheckHeroHitted(CharacterActions.actions characterAction)
     {
-        if (actions.action == HeroActions.actions.KO) return;
+        if (fightStatus.state != FightStatus.states.FIGHTING) return;
 		if (actions.action == HeroActions.actions.DEFENSE && actions.GetAngleBetweenFighters () < 25) {
 			Events.OnHeroBlockPunch (characterAction);
 			return;
@@ -83,7 +82,7 @@ public class Hero : MonoBehaviour
     }
     void OnCharacterBlockPunch(HeroActions.actions action)
     {
-        if (actions.action == HeroActions.actions.KO) return;
+        if (fightStatus.state != FightStatus.states.FIGHTING) return;
         switch (action)
         {
             case HeroActions.actions.GANCHO_UP_R: actions.OnHeroActionWithCrossFade(HeroActions.actions.IDLE, 0); break;

@@ -20,13 +20,13 @@ public class HeroSounds : MonoBehaviour {
 		//receiveSource = GetComponent<AudioSource> ();
 		Events.OnComputeHeroPunched += OnComputeHeroPunched;
 		Events.OnHeroBlockPunch += OnHeroBlockPunch;
-		Events.OnHeroAction += OnHeroAction;
+        Events.OnHeroSound += OnHeroSound;
 	}
 
 	void OnDestroy(){
 		Events.OnCheckHeroHitted -= OnComputeHeroPunched;
 		Events.OnHeroBlockPunch -= OnHeroBlockPunch;
-		Events.OnHeroAction -= OnHeroAction;
+        Events.OnHeroSound -= OnHeroSound;
 	}
 
 	void OnComputeHeroPunched(CharacterActions.actions action){
@@ -64,7 +64,8 @@ public class HeroSounds : MonoBehaviour {
 		receiveSource.PlayOneShot (hitClip);
 	}
 
-	void OnHeroAction(HeroActions.actions action){
+    void OnHeroSound(HeroActions.actions action)
+    {
 		//Debug.Log (action);
 		if (!action.Equals (HeroActions.actions.DEFENSE) && !action.Equals (HeroActions.actions.IDLE)) {
 			float vol = Random.Range (volLowRange-0.4f, volHighRange-0.4f);

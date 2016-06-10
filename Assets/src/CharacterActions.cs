@@ -67,6 +67,7 @@ public class CharacterActions : MonoBehaviour {
 	}
     public void ChangeRandomDefense()
     {
+        combo = 0;
         if (state == states.KO) return;
         int randomAction = Random.Range(1,5);
         switch (randomAction)
@@ -84,18 +85,32 @@ public class CharacterActions : MonoBehaviour {
         state = states.DEFENDING;
         PlayAnim();
     }
+
+    bool lastAttackRight;
+    int combo =0;
     public void Attack()
     {
         if (state == states.KO) return;
+
+        combo++;
+        lastAttackRight = !lastAttackRight;
+
         int rand = Random.Range(0, 100);
-        if (rand < 40)
-            action = actions.ATTACK_L;
-        else if (rand < 80)
-            action = actions.ATTACK_R;
-        else if (rand < 90)
-            action = actions.ATTACK_L_CORTITO;
-        else
-            action = actions.ATTACK_R_CORTITO;
+        int rand2 = Random.Range(0, 100);
+
+        if (rand < 20 + (combo*20))
+        {
+            if (lastAttackRight)
+                action = actions.ATTACK_L;
+            else
+                action = actions.ATTACK_R;
+        } else
+        {
+            if (lastAttackRight)
+                action = actions.ATTACK_L_CORTITO;
+            else
+                action = actions.ATTACK_R_CORTITO;
+        }
 
         AttackSpecificAction(action);
         
@@ -115,17 +130,22 @@ public class CharacterActions : MonoBehaviour {
     }
     public void KO()
     {
+        Reset();
         state = states.KO;
         anim.CrossFade(anim_ko, 0.1f);
+    }
+    public void Reset()
+    {
+        if (attackRoutine != null)
+            StopCoroutine(attackRoutine);
+        if (defenseRoutine != null)
+            StopCoroutine(defenseRoutine);
     }
     void PlayAnim()
     {
         if (state == states.KO) return;
 
-        if (attackRoutine!= null)
-            StopCoroutine(attackRoutine);
-        if(defenseRoutine != null)
-            StopCoroutine(defenseRoutine);
+        Reset();
 
         string actionName = "";
         switch (action)
@@ -135,15 +155,15 @@ public class CharacterActions : MonoBehaviour {
             case actions.DEFENSE_DOWN: actionName = anim_defense_down; break;
             case actions.DEFENSE_UP_L_DOWN_R: actionName = anim_defense_up_l_down_r; break;
             case actions.DEFENSE_UP_R_DOWN_L: actionName = anim_defense_up_r_down_l; break;
-            case actions.PUNCHED_UP_L: actionName = anim_punched_up_l; defenseRoutine =ResetActions(0.4f); StartCoroutine(defenseRoutine);  break;
-            case actions.PUNCHED_UP_R: actionName = anim_punched_up_r; defenseRoutine =ResetActions(0.4f); StartCoroutine(defenseRoutine); break;
+            case actions.PUNCHED_UP_L: actionName = anim_punched_up_l; defenseRoutine = ResetActions(0.4f); StartCoroutine(defenseRoutine);  break;
+            case actions.PUNCHED_UP_R: actionName = anim_punched_up_r; defenseRoutine = ResetActions(0.4f); StartCoroutine(defenseRoutine); break;
             case actions.PUNCHED_DOWN_L: actionName = anim_punched_down_l; defenseRoutine =ResetActions(0.4f); StartCoroutine(defenseRoutine); break;
             case actions.PUNCHED_DOWN_R: actionName = anim_punched_down_r; defenseRoutine = ResetActions(0.4f); StartCoroutine(defenseRoutine); break;
             case actions.PUNCHED_CENTER: actionName = anim_punched_center; defenseRoutine = ResetActions(0.3f); StartCoroutine(defenseRoutine); break;
-            case actions.ATTACK_L: actionName = anim_attack_l; attackRoutine = AttackRoutine(0.7f, 0.9f); StartCoroutine(attackRoutine); break;
-            case actions.ATTACK_R: actionName = anim_attack_r; attackRoutine = AttackRoutine(0.7f, 0.9f); StartCoroutine(attackRoutine); break;
-            case actions.ATTACK_L_CORTITO: actionName = anim_attack_l_cortito; attackRoutine = AttackRoutine(0.5f, 0.8f); StartCoroutine(attackRoutine); break;
-            case actions.ATTACK_R_CORTITO: actionName = anim_attack_r_cortito; attackRoutine = AttackRoutine(0.5f, 0.8f); StartCoroutine(attackRoutine); break;
+            case actions.ATTACK_L: actionName = anim_attack_l; attackRoutine = AttackRoutine(0.6f, 0.4f); StartCoroutine(attackRoutine); break;
+            case actions.ATTACK_R: actionName = anim_attack_r; attackRoutine = AttackRoutine(0.6f, 0.4f); StartCoroutine(attackRoutine); break;
+            case actions.ATTACK_L_CORTITO: actionName = anim_attack_l_cortito; attackRoutine = AttackRoutine(0.4f, 0.3f); StartCoroutine(attackRoutine); break;
+            case actions.ATTACK_R_CORTITO: actionName = anim_attack_r_cortito; attackRoutine = AttackRoutine(0.4f, 0.3f); StartCoroutine(attackRoutine); break;
         }
         anim.CrossFade(actionName, 0.15f,0,0);
         Events.OnCharacterChangeAction(action);
@@ -186,7 +206,7 @@ public class CharacterActions : MonoBehaviour {
             Events.OnCheckHeroHitted(action);
         yield return new WaitForSeconds(resetTime);
         if (state == states.ATTACKING)
-            character.ChangeState();
+            character.ContinueHitting();
     }
     IEnumerator ResetActions(float timer)
     {

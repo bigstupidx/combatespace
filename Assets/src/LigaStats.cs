@@ -4,28 +4,16 @@ using System.Collections;
 
 public class LigaStats : MonoBehaviour
 {
-    public Text field;
+
     public int num;
-    private int max = 10;
+    public Slider slider;
 
     void Start()
     {
-        SetNum();
+        slider.value = float.Parse(num.ToString()) / 100;
     }
-    public void Add()
+    void Update()
     {
-        num -= 1;
-        if (num < 1) num = 1;
-        SetNum();
-    }
-    public void Remove()
-    {
-        num += 1;
-        if (num > max) num = max;
-        SetNum();
-    }
-    public void SetNum()
-    {
-        field.text = num.ToString();
+        num = (int)slider.value * 100;
     }
 }

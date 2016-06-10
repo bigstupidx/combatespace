@@ -52,17 +52,23 @@ public class HeroActions : MonoBehaviour
         if (action == actions.PUNCHED_L || action == actions.PUNCHED_R) return true;
         else return false;
     }
-    
+    void Reset()
+    {
+        if (punchedRoutine != null)
+            StopCoroutine(punchedRoutine);
+        if (hitRoutine != null)
+            StopCoroutine(hitRoutine);
+    }
     public void OnHeroActionWithCrossFade(actions newAction, float CrossFadeTime = 0.1f)
     {
         if (action == actions.KO) return;
-        if (punchedRoutine != null)
-        StopCoroutine(punchedRoutine);
-
         if (action == newAction) return;
-        this.action = newAction;
-        if (hitRoutine!=null)
-            StopCoroutine(hitRoutine);
+
+        Events.OnHeroSound(newAction);
+
+        Reset();
+
+        this.action = newAction;       
         
         string animName = "";
         switch (action)
@@ -100,11 +106,8 @@ public class HeroActions : MonoBehaviour
     }
     public void CheckHit()
     {
-        if(!CheckIfCharacterIsInTarget())
-        {
-            //Debug.Log("fuera"); 
-            return;
-        }
+        if (hero.fightStatus.state != FightStatus.states.FIGHTING) return;
+        if(!CheckIfCharacterIsInTarget()) return;
         Events.OnCheckCharacterHitted(action);
     }
     bool CheckIfCharacterIsInTarget()
@@ -132,6 +135,7 @@ public class HeroActions : MonoBehaviour
     }
     public void KO()
     {
+        Reset();
         OnHeroActionWithCrossFade(actions.KO);
     }
 

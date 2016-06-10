@@ -1,9 +1,9 @@
 {
 	defaultPower:
 	{
-		gancho_up: 10,
-		gancho_down: 7,
-		cortito: 4
+		gancho_up: 7,
+		gancho_down: 5,
+		cortito: 3
 	},
 	defaultSpeed:
 	{

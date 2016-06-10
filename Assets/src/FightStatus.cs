@@ -1,15 +1,22 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class FightStatus : MonoBehaviour {    
+public class FightStatus : MonoBehaviour {
 
+    public states state;
+    public enum states
+    {
+        FIGHTING,
+        KO,
+        BETWEEN_ROUNDS
+    }
     public float heroStatus = 1;
     public float characterStatus = 1;
 
     public float heroAguanteStatus = 1;
     public float characterAguanteStatus = 1;
 
-    private float AguanteRecovery = 0.02f;
+    private float AguanteRecovery = 0.015f;
 
     public float heroRecovery;
     public float characterRecovery;
@@ -26,8 +33,6 @@ public class FightStatus : MonoBehaviour {
     public float power_gancho_down;
     public float power_cortito;
 
-    private bool ready;
-
 	void Start () {
         power_gancho_up = (float)Data.Instance.settings.defaultPower.gancho_up;
         power_gancho_down = (float)Data.Instance.settings.defaultPower.gancho_down;
@@ -35,6 +40,7 @@ public class FightStatus : MonoBehaviour {
 
         heroRecovery = (float)Data.Instance.playerSettings.heroStats.Resistence/25000;
         characterRecovery = (float)Data.Instance.playerSettings.characterStats.Resistence / 25000;
+
         Events.OnChangeStatusHero += OnChangeStatusHero;
         Events.OnChangeStatusCharacter += OnChangeStatusCharacter;
         Events.OnKO += OnKO;
@@ -52,13 +58,13 @@ public class FightStatus : MonoBehaviour {
     }
     void OnKO(bool isHero)
     {
-        ready = true;
+        state = states.KO;
         HeroAguanteProgressBar.transform.gameObject.SetActive(false);
         EnemyAguanteProgressBar.transform.gameObject.SetActive(false);
     }
     void Loop()
     {
-        if (ready) return;
+        if (state == states.KO) return;
 
         heroStatus += heroRecovery;
         if(heroStatus>1)heroStatus = 1;
@@ -99,20 +105,20 @@ public class FightStatus : MonoBehaviour {
     }
     void OnHeroAction(HeroActions.actions action)
     {
-        float aguanteResta = 0.2f;
+        float aguanteResta = 0;
         switch (action)
         {
             case HeroActions.actions.GANCHO_UP_L:
             case HeroActions.actions.GANCHO_UP_R:
-                aguanteResta = power_gancho_up / 50;
+                aguanteResta = power_gancho_up / 40;
                 break;
             case HeroActions.actions.GANCHO_DOWN_L:
             case HeroActions.actions.GANCHO_DOWN_R:
-                aguanteResta = power_gancho_down / 50;
+                aguanteResta = power_gancho_down / 40;
                 break;
             case HeroActions.actions.CORTITO_L:
             case HeroActions.actions.CORTITO_R:
-                aguanteResta = power_cortito / 50;
+                aguanteResta = power_cortito / 40;
                 break;
         }
         //print( " aguanteResta:  " + aguanteResta);
@@ -125,11 +131,11 @@ public class FightStatus : MonoBehaviour {
         {
             case CharacterActions.actions.ATTACK_L:
             case CharacterActions.actions.ATTACK_R:
-                aguanteResta = power_gancho_up / 50;
+                aguanteResta = power_gancho_up / 40;
                 break;
             case CharacterActions.actions.ATTACK_L_CORTITO:
             case CharacterActions.actions.ATTACK_R_CORTITO:
-                aguanteResta = power_gancho_down / 50;
+                aguanteResta = power_gancho_down / 40;
                 break;
         }
         characterAguanteStatus -= aguanteResta;

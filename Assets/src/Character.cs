@@ -28,6 +28,7 @@ public class Character : MonoBehaviour {
         Events.OnCharacterBlockPunch += OnCharacterBlockPunch;
         Events.OnAICharacterAttack += OnAICharacterAttack;
         Events.OnAICharacterDefense += OnAICharacterDefense;
+        Events.OnHeroBlockPunch += OnHeroBlockPunch;
         Events.OnKO += OnKO;
 	}
     void OnDestroy()
@@ -37,6 +38,7 @@ public class Character : MonoBehaviour {
         Events.OnCharacterBlockPunch -= OnCharacterBlockPunch;
         Events.OnAICharacterAttack -= OnAICharacterAttack;
         Events.OnAICharacterDefense -= OnAICharacterDefense;
+        Events.OnHeroBlockPunch -= OnHeroBlockPunch;
         Events.OnKO -= OnKO;
     }
     void Update()
@@ -57,6 +59,16 @@ public class Character : MonoBehaviour {
             characterActions.KO();
         }
         ai.Reset();
+    }
+    void OnHeroBlockPunch(CharacterActions.actions action)
+    {
+        if (characterActions.state == CharacterActions.states.ATTACKING)
+            characterActions.ChangeRandomDefense();
+    }
+    public void ContinueHitting()
+    {
+        if (characterActions.state == CharacterActions.states.KO) return;
+            characterActions.Attack();
     }
     public void ChangeState()
     {

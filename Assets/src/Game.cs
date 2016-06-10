@@ -5,7 +5,10 @@ public class Game : MonoBehaviour {
 
     public CharacterMovement characterMovement;
     public InputManager inputManager;
+    public FightStatus fightStatus;
+
     static Game mInstance = null;
+    
 
 	public static Game Instance
     {
@@ -24,5 +27,6 @@ public class Game : MonoBehaviour {
         inputManager = GetComponent<InputManager>();
         characterMovement = GetComponent<CharacterMovement>();
         characterMovement.Init();
+        fightStatus = GetComponent<FightStatus>();
     }
 }
