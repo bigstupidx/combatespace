@@ -14,6 +14,6 @@ public class LigaStats : MonoBehaviour
     }
     void Update()
     {
-        num = (int)slider.value * 100;
+        num = (int)(slider.value * 100);
     }
 }

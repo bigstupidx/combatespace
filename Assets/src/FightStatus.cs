@@ -53,6 +53,7 @@ public class FightStatus : MonoBehaviour {
         Events.OnRoundComplete += OnRoundComplete;
         Events.OnRoundStart += OnRoundStart;
         Loop();
+        if(state != states.KO)
         Events.OnRoundStart();
 	}
     void OnDestroy()

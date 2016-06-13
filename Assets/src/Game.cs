@@ -26,7 +26,8 @@ public class Game : MonoBehaviour {
     {
         inputManager = GetComponent<InputManager>();
         characterMovement = GetComponent<CharacterMovement>();
-        characterMovement.Init();
+
         fightStatus = GetComponent<FightStatus>();
+        characterMovement.Init();
     }
 }

@@ -14,6 +14,7 @@ public class Character : MonoBehaviour {
     private float timer;
     public  CharacterActions characterActions;
     public CharacterAI ai;
+    public int combo = 0;
 
 	void Start () {
         ai = GetComponent<CharacterAI>();
@@ -70,22 +71,40 @@ public class Character : MonoBehaviour {
     void OnHeroBlockPunch(CharacterActions.actions action)
     {
         if (characterActions.state == CharacterActions.states.ATTACKING)
-            characterActions.ChangeRandomDefense();
+            DefenseRandom();
     }
-    public void ContinueHitting()
-    {
+    public void CheckAIToContinueHittingBeforeHit()
+    {        
         if (characterActions.state == CharacterActions.states.KO) return;
-            characterActions.Attack();
+
+        if (ai.ContinueHittingBeforeHit())
+            Attack();
+        else
+            DefenseRandom();
     }
     public void ChangeState()
     {
         if (characterActions.state == CharacterActions.states.KO) return;
-      //  if (characterActions.state == CharacterActions.states.ATTACKING) return;
 
         if (Random.Range(0, 100) < 50)
-            characterActions.Attack();
+            Attack();
         else
-            characterActions.ChangeRandomDefense();
+            DefenseRandom();
+    }
+    void Attack()
+    {
+        combo++;
+        int percentProbability = (100 - (combo * 10)) - (100 - ai.intelligence) + (Data.Instance.playerSettings.characterStats.Speed/2);
+        bool hardAttack = ai.GetPrecentProbability(percentProbability);
+
+        print("ATTACK HARD  " + hardAttack + "  percentProbability : " + percentProbability + "   combo: " + combo + " ai.intelligence " + ai.intelligence);
+
+        characterActions.Attack(hardAttack);
+    }
+    void DefenseRandom()
+    {
+        combo = 0;
+        characterActions.ChangeRandomDefense();
     }
     void OnAICharacterAttack(CharacterActions.actions action)
     {
@@ -95,9 +114,7 @@ public class Character : MonoBehaviour {
         timer = 1f;
     }
     void OnAICharacterDefense(CharacterActions.actions action)
-    {
-        print("OnAICharacterDefense " + action);
-        
+    {        
         if (characterActions.state == CharacterActions.states.KO) return;        
         if (characterActions.state == CharacterActions.states.ATTACKING) return;
         characterActions.Defense(action);

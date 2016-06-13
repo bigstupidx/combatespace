@@ -13,12 +13,14 @@ public class CharacterMovement : MonoBehaviour {
     public void Init()
     {
         //speed = 30;
+        RotationArea = Data.Instance.settings.defaultSpeed.rotationArea;
         speed = 30 + (Data.Instance.playerSettings.characterStats.Speed/2);
-        Loop();
+        Invoke("Loop", 4);
     }
     void Loop()
     {
-        if (character.characterActions.state == CharacterActions.states.KO) return;
+        if (Game.Instance.fightStatus.state == FightStatus.states.KO) return;
+
         int rand = Random.Range(0, RotationArea);
         rand += (Data.Instance.playerSettings.characterStats.Speed / 5);
         if(Random.Range(0,100)<50) rand *= -1;
@@ -27,6 +29,7 @@ public class CharacterMovement : MonoBehaviour {
         Invoke("Loop", 4);
     }
 	void Update () {
+        if (Game.Instance.fightStatus.state == FightStatus.states.KO) return;
         if (MoveTo > Mathf.Floor(actualZ))
             actualZ += Time.deltaTime*speed;
         else if (MoveTo < Mathf.Floor(actualZ))

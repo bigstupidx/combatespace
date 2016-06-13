@@ -67,7 +67,6 @@ public class CharacterActions : MonoBehaviour {
 	}
     public void ChangeRandomDefense()
     {
-        combo = 0;
         if (state == states.KO) return;
         int randomAction = Random.Range(1,5);
         switch (randomAction)
@@ -81,24 +80,20 @@ public class CharacterActions : MonoBehaviour {
     }
     public void Defense(actions defenseAction)
     {
+        if (state == states.KO) return;
         action = defenseAction;
         state = states.DEFENDING;
         PlayAnim();
     }
 
     bool lastAttackRight;
-    int combo =0;
-    public void Attack()
+    
+    public void Attack(bool hard)
     {
         if (state == states.KO) return;
-
-        combo++;
+        
         lastAttackRight = !lastAttackRight;
-
-        int rand = Random.Range(0, 100);
-        int rand2 = Random.Range(0, 100);
-
-        if (rand < 20 + (combo*20))
+        if (!hard)
         {
             if (lastAttackRight)
                 action = actions.ATTACK_L;
@@ -111,12 +106,12 @@ public class CharacterActions : MonoBehaviour {
             else
                 action = actions.ATTACK_R_CORTITO;
         }
-
-        AttackSpecificAction(action);
-        
+        AttackSpecificAction(action);        
     }
+    
     public void AttackSpecificAction(actions action)
     {
+        if (state == states.KO) return;
         this.action = action;
         switch (action)
         {
@@ -170,6 +165,7 @@ public class CharacterActions : MonoBehaviour {
     }
     public void OnCortito()
     {
+        if (state == states.KO) return;
         state = states.PUNCHED;
         action = actions.PUNCHED_CENTER;
         PlayAnim();
@@ -197,6 +193,7 @@ public class CharacterActions : MonoBehaviour {
     }
     public void ResetActions()
     {
+        if (state == states.KO) return;
         ChangeRandomDefense();
     }
     IEnumerator AttackRoutine(float hitTime, float resetTime)
@@ -206,7 +203,7 @@ public class CharacterActions : MonoBehaviour {
             Events.OnCheckHeroHitted(action);
         yield return new WaitForSeconds(resetTime);
         if (state == states.ATTACKING)
-            character.ContinueHitting();
+            character.CheckAIToContinueHittingBeforeHit();
     }
     IEnumerator ResetActions(float timer)
     {

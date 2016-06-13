@@ -1,12 +1,10 @@
 {
-	defaultPower:
+	data:
 	{
 		gancho_up: 7,
 		gancho_down: 5,
-		cortito: 3
-	},
-	defaultSpeed:
-	{
-		state_speed:2
+		cortito: 3,
+		state_speed:2,
+		rotationArea:12
 	}
 }

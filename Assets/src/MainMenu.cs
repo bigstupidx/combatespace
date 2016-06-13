@@ -45,7 +45,15 @@ public class MainMenu : MonoBehaviour {
             (characterStats[3].num)
             );
 
-        Data.Instance.LoadLevel("Game");
+        if(Data.Instance.settings.ToturialReady == 0)
+            Data.Instance.LoadLevel("Tutorial");
+        else
+            Data.Instance.LoadLevel("Game");
+    }
+    public void PlayTutorial()
+    {
+        Events.OnTutorialReady(0);
+        StartGame();
     }
     public void Back()
     {

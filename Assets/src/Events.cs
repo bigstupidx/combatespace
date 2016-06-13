@@ -5,6 +5,8 @@ public static class Events
 {
 
     public static System.Action OnRoundComplete = delegate { };
+    public static System.Action OnAllRoundsComplete = delegate { };
+    public static System.Action<int> OnTutorialReady = delegate { };
     public static System.Action<CharacterActions.actions> OnCharacterChangeAction = delegate { };
     public static System.Action<CharacterActions.actions> OnAICharacterDefense = delegate { };
     public static System.Action<CharacterActions.actions> OnAICharacterAttack = delegate { };
