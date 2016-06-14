@@ -51,9 +51,9 @@ public class Tutorial : MonoBehaviour {
         switch (id)
         {
             case 0: SetCartel("Aprendé los básicos"); break;
-            case 1: SetCartel("Primero, el cortito"); break;
-            case 2: SetCartel("Bien!, ahora el gancho a bajo"); break;
-            case 3: SetCartel("Perfecto! ahora el gancho arriba"); break;
+            case 1: SetCartel("Primero, el JAB"); break;
+            case 2: SetCartel("Bien!, ahora el UPPERCUT al cuerpo"); break;
+            case 3: SetCartel("Perfecto! ahora el GANCHO"); break;
             case 4: SetCartel("Bien! Ahora la defensa"); break;
             case 5: SetCartel("Prefecto!, estás listo para boxear"); break;
         }
