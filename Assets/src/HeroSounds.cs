@@ -24,7 +24,7 @@ public class HeroSounds : MonoBehaviour {
 	}
 
 	void OnDestroy(){
-		Events.OnCheckHeroHitted -= OnComputeHeroPunched;
+		Events.OnComputeHeroPunched -= OnComputeHeroPunched;
 		Events.OnHeroBlockPunch -= OnHeroBlockPunch;
         Events.OnHeroSound -= OnHeroSound;
 	}

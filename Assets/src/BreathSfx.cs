@@ -14,6 +14,12 @@ public class BreathSfx : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		source = GetComponent<AudioSource> ();
+
+		Events.OnHeroAguanteStatus += OnHeroAguanteStatus;
+	}
+
+	void OnDestroy(){
+		Events.OnHeroAguanteStatus -= OnHeroAguanteStatus;
 	}
 	
 	// Update is called once per frame
@@ -27,7 +33,7 @@ public class BreathSfx : MonoBehaviour {
 		}
 	}
 
-	public void SetBreathProgress(float progress){
+	public void OnHeroAguanteStatus(float progress){
 		int sel = (int)((clips.Length-1) * progress);
 		//Debug.Log (" P: "+progress+" S: "+sel);
 		if (source.clip != clips [sel]) {

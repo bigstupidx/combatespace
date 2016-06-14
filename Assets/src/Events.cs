@@ -18,6 +18,8 @@ public static class Events
     public static System.Action<HeroActions.actions> OnCharacterBlockPunch = delegate { };
 	public static System.Action<CharacterActions.actions> OnHeroBlockPunch = delegate { };
 
+	public static System.Action<float> OnHeroAguanteStatus = delegate { };
+
     public static System.Action<CharacterActions.actions> OnComputeHeroPunched = delegate { };
     public static System.Action<HeroActions.actions> OnComputeCharacterPunched = delegate { };
 

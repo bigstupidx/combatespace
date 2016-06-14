@@ -103,6 +103,7 @@ public class FightStatus : MonoBehaviour {
         EnemyAguanteProgressBar.SetProgress(characterAguanteStatus);
 
 		//heroBreath.SetBreathProgress (heroAguanteStatus);
+		Events.OnHeroAguanteStatus (heroAguanteStatus);
 
         Invoke("Loop", 0.1f);
     }
