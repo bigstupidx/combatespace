@@ -45,7 +45,7 @@ public class Summary : MonoBehaviour
         else
             field.text = "Perdiste\n";
 
-        field.text += "Rounds: " + Game.Instance.fightStatus.Round;
+        field.text += "En " + Game.Instance.fightStatus.Round + " rounds";
     }
     public void Restart()
     {
