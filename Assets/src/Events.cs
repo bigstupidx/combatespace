@@ -3,6 +3,10 @@ using System.Collections;
 
 public static class Events
 {
+    public static System.Action<bool> OnLoadingShow = delegate { };
+    public static System.Action OnRegisterPopup = delegate { };
+    public static System.Action<bool> OnShowBackButton = delegate { };
+    public static System.Action OnBackButtonPressed = delegate { };
 
     public static System.Action OnRoundComplete = delegate { };
     public static System.Action OnAllRoundsComplete = delegate { };

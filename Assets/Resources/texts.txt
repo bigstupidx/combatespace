@@ -1,0 +1,9 @@
+{
+	names:
+	[
+		"Latigo",
+		"Mano de piedra",
+		"Puño de acero",
+		"Tigre"
+	]
+}
