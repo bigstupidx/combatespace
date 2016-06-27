@@ -4,6 +4,12 @@
 		"Latigo",
 		"Mano de piedra",
 		"Puño de acero",
-		"Tigre"
+		"Tigre",
+		"Peste",
+		"Roña",
+		"El Pocho",
+		"Araña",
+		"Gato",
+		"Filoso"
 	]
 }

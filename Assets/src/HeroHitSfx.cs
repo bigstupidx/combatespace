@@ -21,11 +21,11 @@ public class HeroHitSfx : MonoBehaviour {
 	}
 
 	void OnDestroy(){
-		Events.OnCheckHeroHitted -= OnComputeHeroPunched;
-		//Events.OnHeroBlockPunch -= OnHeroBlockPunch;
+        Events.OnComputeHeroPunched -= OnComputeHeroPunched;
+        Events.OnHeroBlockPunch -= OnHeroBlockPunch;
 	}
 
-	void OnComputeHeroPunched(CharacterActions.actions action){
+	void OnComputeHeroPunched(CharacterActions.actions action, int combo){
 		Debug.Log (action);
 		AudioClip clip = null;
 		if(action.Equals(CharacterActions.actions.ATTACK_L)||action.Equals(CharacterActions.actions.ATTACK_R))

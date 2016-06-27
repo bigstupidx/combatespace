@@ -12,9 +12,10 @@ public class ComputeFight : MonoBehaviour {
         Events.OnComputeCharacterPunched -= OnComputeCharacterPunched;
         Events.OnComputeHeroPunched -= OnComputeHeroPunched;
     }
-    void OnComputeHeroPunched(CharacterActions.actions action)
+    void OnComputeHeroPunched(CharacterActions.actions action, int combo)
     {
         float damage = CalculateDamage(Data.Instance.playerSettings.characterStats, Data.Instance.playerSettings.heroStats);
+        damage += AddDamageByCombo(combo);
         switch (action)
         {
             case CharacterActions.actions.ATTACK_L_CORTITO:
@@ -28,7 +29,7 @@ public class ComputeFight : MonoBehaviour {
         }
         Events.OnChangeStatusHero(damage);
 	}
-    void OnComputeCharacterPunched(HeroActions.actions action)
+    void OnComputeCharacterPunched(HeroActions.actions action, int combo)
     {
         float damage = CalculateDamage(Data.Instance.playerSettings.heroStats, Data.Instance.playerSettings.characterStats);
         switch (action)
@@ -53,6 +54,10 @@ public class ComputeFight : MonoBehaviour {
         int num = (attack.Power / 2) - (defense.Resistence / 3) - (defense.Defense / 10);
         if (num < 0) num = 0;
         return num;
+    }
+    private int AddDamageByCombo(int combo)
+    {
+        return combo*5;
     }
 
 }

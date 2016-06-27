@@ -8,10 +8,12 @@ public class DataController : MonoBehaviour
     const string URL = "http://www.pontura.com/combateSpace/";
     private string getUserIdByFacebookID_URL = URL + "getUserIdByFacebookID.php?";
     private string createUser_URL = URL + "createUser.php?";
+    private string updateUser_URL = URL + "updateUser.php?";
 
     void Start()
     {
         SocialEvents.OnFacebookLogin += OnFacebookLogin;
+        Events.OnUpdatePlayerData += OnUpdatePlayerData;
     }
     void OnFacebookLogin(string facebookID, string username, string email)
     {
@@ -68,6 +70,32 @@ public class DataController : MonoBehaviour
             print("user agregado: " + hs_post.text);
             int userId = int.Parse(hs_post.text);
             SocialEvents.OnUserReady(_facebookID, _username, _email);
+        }
+    }
+
+    void OnUpdatePlayerData(PlayerData playerData)
+    {
+        StartCoroutine(UpdateUserRoutine( playerData ));
+    }
+    IEnumerator UpdateUserRoutine(PlayerData playerData)
+    {
+       // username = username.Replace(" ", "_");
+        string hash = playerData.facebookID;
+
+        if (playerData.nick != "")
+            hash += playerData.nick;
+
+        hash = Md5Test.Md5Sum(hash + secretKey);
+        string post_url = updateUser_URL + "nick=" + WWW.EscapeURL(playerData.nick) + "&facebookID=" + playerData.facebookID + "&hash=" + hash;
+        print("UpdateUser : " + post_url);
+        WWW hs_post = new WWW(post_url);
+        yield return hs_post;
+        if (hs_post.error != null)
+            print("Error haciendo update de user");
+        else
+        {
+            print("user updateado: " + hs_post.text);
+
         }
     }
 

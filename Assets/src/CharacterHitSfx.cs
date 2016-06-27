@@ -29,7 +29,7 @@ public class CharacterHitSfx : MonoBehaviour {
 		Events.OnCharacterBlockPunch -= OnCharacterBlockPunch;
 	}
 
-	void OnComputeCharacterPunched(HeroActions.actions action){
+	void OnComputeCharacterPunched(HeroActions.actions action, int combo){
 		Debug.Log (action);
 		AudioClip clip = null;
 		if(action.Equals(HeroActions.actions.GANCHO_UP_L)||action.Equals(HeroActions.actions.GANCHO_UP_R))

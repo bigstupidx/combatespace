@@ -3,6 +3,8 @@ using System.Collections;
 
 public static class Events
 {
+
+    public static System.Action<PlayerData> OnUpdatePlayerData = delegate { };
     public static System.Action<bool> OnLoadingShow = delegate { };
     public static System.Action OnRegisterPopup = delegate { };
     public static System.Action<bool> OnShowBackButton = delegate { };
@@ -24,8 +26,10 @@ public static class Events
 
 	public static System.Action<float> OnHeroAguanteStatus = delegate { };
 
-    public static System.Action<CharacterActions.actions> OnComputeHeroPunched = delegate { };
-    public static System.Action<HeroActions.actions> OnComputeCharacterPunched = delegate { };
+    //accion y combo
+    public static System.Action<HeroActions.actions, int> OnComputeCharacterPunched = delegate { };
+    public static System.Action<CharacterActions.actions, int> OnComputeHeroPunched = delegate { };
+
 
     public static System.Action<float> OnChangeStatusHero = delegate { };
     public static System.Action<float> OnChangeStatusCharacter = delegate { };

@@ -50,7 +50,7 @@ public class Data : MonoBehaviour
     }
     void OnUserReady(string a, string b, string c)
     {
-        LoadLevel("03_Home");
+        LoadLevel("04_Names");
     }
 
 }
