@@ -54,11 +54,11 @@ public class HeroSounds : MonoBehaviour {
 		//Debug.Log (action);
 		AudioClip hitClip = null;
 		if(action.Equals(CharacterActions.actions.ATTACK_L)||action.Equals(CharacterActions.actions.ATTACK_R))
-			hitClip = hitClips.ganchoBlockClips [(int)(Random.value * hitClips.ganchoBlockClips.Length)];
+			hitClip = hitClips.jabsBlockClips [(int)(Random.value * hitClips.jabsBlockClips.Length)];
 		else if(action.Equals(CharacterActions.actions.ATTACK_L_CORTITO)||action.Equals(CharacterActions.actions.ATTACK_R_CORTITO))
-			hitClip = hitClips.jabsBlockClips [(int)(Random.value * hitClips.jabsBlockClips.Length)];	
+			hitClip = hitClips.abajoBlockClips [(int)(Random.value * hitClips.abajoBlockClips.Length)];	
 		float vol = Random.Range (volLowRange, volHighRange);
-		receiveSource.volume = vol*0.5f;
+		receiveSource.volume = vol*0.2f;
 		float pitch = Random.Range (pitchLowRange, pitchHighRange);
 		receiveSource.pitch = pitch;
 		receiveSource.PlayOneShot (hitClip);
