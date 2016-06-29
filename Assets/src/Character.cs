@@ -147,25 +147,25 @@ public class Character : MonoBehaviour {
             case HeroActions.actions.CORTITO_R:
                 if (characterActions.action == CharacterActions.actions.DEFENSE_DOWN
                     || characterActions.action == CharacterActions.actions.DEFENSE_UP_CENTER) return;
-                Events.OnComputeCharacterPunched(action); 
+                Events.OnComputeCharacterPunched(action, combo); 
                 characterActions.OnCortito(); 
                 punched = true; 
                 break;
             case HeroActions.actions.GANCHO_UP_L:
                 if (characterActions.action == CharacterActions.actions.DEFENSE_DOWN) return;
-                if (!DEFENSE_UP && !DEFENSE_UP_L) { Events.OnComputeCharacterPunched(action); characterActions.OnGanchoHitted(true, true); punched = true; } 
+                if (!DEFENSE_UP && !DEFENSE_UP_L) { Events.OnComputeCharacterPunched(action, combo); characterActions.OnGanchoHitted(true, true); punched = true; } 
                 break;
             case HeroActions.actions.GANCHO_UP_R:
                 if (characterActions.action == CharacterActions.actions.DEFENSE_DOWN) return;
-                if (!DEFENSE_UP && !DEFENSE_UP_R) { Events.OnComputeCharacterPunched(action); characterActions.OnGanchoHitted(false, true); punched = true; } 
+                if (!DEFENSE_UP && !DEFENSE_UP_R) { Events.OnComputeCharacterPunched(action, combo); characterActions.OnGanchoHitted(false, true); punched = true; } 
                 break;
             case HeroActions.actions.GANCHO_DOWN_L:
                // if (characterActions.action == CharacterActions.actions.DEFENSE_UP) return;
-                if (!DEFENSE_DOWN_L) { Events.OnComputeCharacterPunched(action); characterActions.OnGanchoHitted(true, false); punched = true; }
+                if (!DEFENSE_DOWN_L) { Events.OnComputeCharacterPunched(action, combo); characterActions.OnGanchoHitted(true, false); punched = true; }
                 break;
             case HeroActions.actions.GANCHO_DOWN_R:
                // if (characterActions.action == CharacterActions.actions.DEFENSE_UP) return;
-                if (!DEFENSE_DOWN_R) { Events.OnComputeCharacterPunched(action); characterActions.OnGanchoHitted(false, false); punched = true; }
+                if (!DEFENSE_DOWN_R) { Events.OnComputeCharacterPunched(action, combo); characterActions.OnGanchoHitted(false, false); punched = true; }
                 break;
         }
         if(!punched)

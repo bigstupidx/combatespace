@@ -83,7 +83,8 @@ public class FightStatus : MonoBehaviour {
     }
     void Loop()
     {
-        if (state == states.KO) return;
+
+        //if (state == states.KO) return;
 
         heroStatus += heroRecovery;
         if(heroStatus>1)heroStatus = 1;
@@ -109,16 +110,21 @@ public class FightStatus : MonoBehaviour {
     }
     void OnChangeStatusHero(float damage)
     {
-        damage *= characterAguanteStatus;
+        float aguanteNormalizado = characterAguanteStatus / (characterAguanteStatus + ((1 - characterAguanteStatus) / 4));
+        damage *= aguanteNormalizado;
         heroStatus -= damage / 100;
+        print("damage " + damage);
         HeroProgressBar.SetProgress(heroStatus);
         if (heroStatus <= 0)
             Events.OnKO(false);
 	}
     void OnChangeStatusCharacter(float damage)
     {
-        damage *= heroAguanteStatus;
+      //  print("D: " + damage);
+        float aguanteNormalizado = heroAguanteStatus / (heroAguanteStatus + ((1 - heroAguanteStatus) / 4));
+        damage *= aguanteNormalizado;
         characterStatus -= damage / 100;
+      //  Debug.LogError("enemy damage heroAguanteStatus: " + heroAguanteStatus + " damage: " + damage);
         EnemyProgressBar.SetProgress(characterStatus);
         if (characterStatus <= 0)
             Events.OnKO(true);
@@ -141,7 +147,7 @@ public class FightStatus : MonoBehaviour {
                 aguanteResta = power_cortito / 40;
                 break;
         }
-        //print( " aguanteResta:  " + aguanteResta);
+       // print( " aguanteResta:  " + aguanteResta);
         heroAguanteStatus -= aguanteResta;
     }
     void OnCharacterChangeAction(CharacterActions.actions action)

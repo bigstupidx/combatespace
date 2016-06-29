@@ -7,6 +7,7 @@ public class Hero : MonoBehaviour
     private HeroActions actions;
     private InputManager inputManager;
     public FightStatus fightStatus;
+    public int combo = 0;
 
     void Start()
     {
@@ -74,12 +75,12 @@ public class Hero : MonoBehaviour
             case CharacterActions.actions.ATTACK_L_CORTITO:
             case CharacterActions.actions.ATTACK_L:
                 actions.OnHeroActionWithCrossFade(HeroActions.actions.PUNCHED_L, 0.01f);
-                Events.OnComputeHeroPunched(characterAction);
+                Events.OnComputeHeroPunched(characterAction, combo);
                 break;
             case CharacterActions.actions.ATTACK_R_CORTITO:
             case CharacterActions.actions.ATTACK_R:
                 actions.OnHeroActionWithCrossFade(HeroActions.actions.PUNCHED_R, 0.01f);
-                Events.OnComputeHeroPunched(characterAction);
+                Events.OnComputeHeroPunched(characterAction, combo);
                 break;
         }
     }

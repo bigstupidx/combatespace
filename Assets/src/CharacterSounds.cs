@@ -27,7 +27,7 @@ public class CharacterSounds : MonoBehaviour {
 		Events.OnCharacterBlockPunch -= OnCharacterBlockPunch;
 	}
 
-	void OnComputeCharacterPunched(HeroActions.actions action){
+	void OnComputeCharacterPunched(HeroActions.actions action, int combo){
 		//Debug.Log (action);
 		AudioClip clip = null;
 		AudioClip breakClip = null;

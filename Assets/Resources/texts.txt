@@ -1,0 +1,15 @@
+{
+	names:
+	[
+		"Latigo",
+		"Mano de piedra",
+		"Puño de acero",
+		"Tigre",
+		"Peste",
+		"Roña",
+		"El Pocho",
+		"Araña",
+		"Gato",
+		"Filoso"
+	]
+}

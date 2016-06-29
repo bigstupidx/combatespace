@@ -2,6 +2,7 @@
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class Data : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class Data : MonoBehaviour
     static Data mInstance = null;
     public Settings settings;
     public PlayerSettings playerSettings;
+    public string lastScene;
 
     public static Data Instance
     {
@@ -25,8 +27,9 @@ public class Data : MonoBehaviour
         }
     }
     public void LoadLevel(string aLevelName)
-    {     
-        Application.LoadLevel(aLevelName);
+    {
+        lastScene = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene(aLevelName);
     }
     void Awake()
     {
@@ -40,6 +43,14 @@ public class Data : MonoBehaviour
             return;
         }
         DontDestroyOnLoad(this);
+    }
+    void Start()
+    {
+        SocialEvents.OnUserReady += OnUserReady;
+    }
+    void OnUserReady(string a, string b, string c)
+    {
+        LoadLevel("04_Names");
     }
 
 }
