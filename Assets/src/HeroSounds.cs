@@ -29,7 +29,7 @@ public class HeroSounds : MonoBehaviour {
         Events.OnHeroSound -= OnHeroSound;
 	}
 
-	void OnComputeHeroPunched(CharacterActions.actions action, int combo){
+	void OnComputeHeroPunched(CharacterActions.actions action){
 		//Debug.Log (action);
 		AudioClip clip = null;
 		AudioClip breakClip = null;

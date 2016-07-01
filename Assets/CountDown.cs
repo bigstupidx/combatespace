@@ -13,6 +13,7 @@ public class CountDown : MonoBehaviour {
     public ProgressBar progressBar;
     public float hero_progress;
     private bool ready;
+    public Animation anim;
 
 	void Start () {
         fightStatus = Game.Instance.fightStatus;
@@ -25,6 +26,7 @@ public class CountDown : MonoBehaviour {
     }
     void OnAvatarFall(bool isHero)
     {
+
         ready = false;
         this.isHero = isHero;
         progressBar.gameObject.SetActive(false);
@@ -42,8 +44,9 @@ public class CountDown : MonoBehaviour {
             hero_progress = 0;
             progressBar.gameObject.SetActive(true);
             LoopHero();
+            
         } else
-        {
+        {            
             probabilityToStandAgain = ((100 - (int)(fightStatus.cansancio_hero * 50)) / 2) - (fightStatus.caidas_character*10);
             if (fightStatus.caidas_character >= 3)
             {
@@ -54,6 +57,12 @@ public class CountDown : MonoBehaviour {
         }
         sec = 0;
         panel.SetActive(true);
+        
+        if (isHero)
+            anim.Play("countDown");
+        else
+            anim.Play("countDownOff");
+
         Loop();
     }
     void Loop()
