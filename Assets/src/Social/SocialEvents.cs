@@ -1,28 +1,22 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public static class SocialEvents {
+
+    public static System.Action<System.Action<string>, int, int> OnGetUsersByScore = delegate { };
 
     public static System.Action<bool> OnUserExistInDB = delegate { };
     public static System.Action OnUserCreatedInDB = delegate { };
     public static System.Action ResetApp = delegate { };
-    
 
     //facebookID, id
     public static System.Action<string, string, string> OnUserReady = delegate { };
-
     public static System.Action OnFacebookLoginPressed = delegate { };
-
     public static System.Action OnFacebookFriends = delegate { };
-    public static System.Action OnFacebookNotConnected = delegate { };
     public static System.Action OnFacebookInviteFriends = delegate { };
-
     public static System.Action<string, string, string> OnFacebookLogin = delegate { };
-    public static System.Action OnFacebookLoginCanceled = delegate { };
     public static System.Action<string, string> AddFacebookFriend = delegate { }; 
-
-    public static System.Action<string, float, int> OnParseLoadedScore = delegate { };
-    public static System.Action OnLoadLocalData = delegate { };
 
     //Hiscores:
     public static System.Action<int> OnNewHiscore = delegate { };

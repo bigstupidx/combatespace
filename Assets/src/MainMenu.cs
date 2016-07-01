@@ -15,21 +15,21 @@ public class MainMenu : MonoBehaviour {
     }
     void Load()
     {
-        heroStats[0].Init(Data.Instance.playerSettings.heroStats.Power);
-        heroStats[1].Init(Data.Instance.playerSettings.heroStats.Resistence);
-        heroStats[2].Init(Data.Instance.playerSettings.heroStats.Defense);
-        heroStats[3].Init(Data.Instance.playerSettings.heroStats.Speed);
-        ligas[0].Init(Data.Instance.playerSettings.heroStats.Inteligencia);
+        heroStats[0].Init(Data.Instance.playerSettings.heroData.stats.Power);
+        heroStats[1].Init(Data.Instance.playerSettings.heroData.stats.Resistence);
+        heroStats[2].Init(Data.Instance.playerSettings.heroData.stats.Defense);
+        heroStats[3].Init(Data.Instance.playerSettings.heroData.stats.Speed);
+        ligas[0].Init(Data.Instance.playerSettings.heroData.stats.Inteligencia);
 
-        characterStats[0].Init(Data.Instance.playerSettings.characterStats.Power);
-        characterStats[1].Init(Data.Instance.playerSettings.characterStats.Resistence);
-        characterStats[2].Init(Data.Instance.playerSettings.characterStats.Defense);
-        characterStats[3].Init(Data.Instance.playerSettings.characterStats.Speed);
-        ligas[1].Init(Data.Instance.playerSettings.characterStats.Inteligencia);
+        characterStats[0].Init(Data.Instance.playerSettings.characterData.stats.Power);
+        characterStats[1].Init(Data.Instance.playerSettings.characterData.stats.Resistence);
+        characterStats[2].Init(Data.Instance.playerSettings.characterData.stats.Defense);
+        characterStats[3].Init(Data.Instance.playerSettings.characterData.stats.Speed);
+        ligas[1].Init(Data.Instance.playerSettings.characterData.stats.Inteligencia);
     }   
     public void StartGame()
     {
-        Data.Instance.playerSettings.heroStats.SetStats(
+        Data.Instance.playerSettings.heroData.stats.SetStats(
             ligas[0].num,
             (heroStats[0].num),
             (heroStats[1].num),
@@ -37,7 +37,7 @@ public class MainMenu : MonoBehaviour {
             (heroStats[3].num)
             );
 
-        Data.Instance.playerSettings.characterStats.SetStats(
+        Data.Instance.playerSettings.characterData.stats.SetStats(
             ligas[1].num,
             (characterStats[0].num),
             (characterStats[1].num),

@@ -25,7 +25,7 @@ public class HeroHitSfx : MonoBehaviour {
         Events.OnHeroBlockPunch -= OnHeroBlockPunch;
 	}
 
-	void OnComputeHeroPunched(CharacterActions.actions action, int combo){
+	void OnComputeHeroPunched(CharacterActions.actions action){
 		Debug.Log (action);
 		AudioClip clip = null;
 		if(action.Equals(CharacterActions.actions.ATTACK_L)||action.Equals(CharacterActions.actions.ATTACK_R))

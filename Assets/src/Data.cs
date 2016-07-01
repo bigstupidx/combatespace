@@ -10,6 +10,7 @@ public class Data : MonoBehaviour
     static Data mInstance = null;
     public Settings settings;
     public PlayerSettings playerSettings;
+    public FightersManager fightersManager;
     public string lastScene;
 
     public static Data Instance
@@ -47,10 +48,19 @@ public class Data : MonoBehaviour
     void Start()
     {
         SocialEvents.OnUserReady += OnUserReady;
+        fightersManager = GetComponent<FightersManager>();
+        Invoke("StartLoadingFromServer", 1);
+    }
+    void StartLoadingFromServer()
+    {
+        fightersManager.LoadFighters(0, 100);
     }
     void OnUserReady(string a, string b, string c)
     {
-        LoadLevel("04_Names");
+        if(playerSettings.heroData.nick == "")
+            LoadLevel("04_Names");
+        else
+            LoadLevel("03_Home");
     }
 
 }

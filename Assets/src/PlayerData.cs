@@ -6,7 +6,12 @@ using System;
 public class PlayerData {
 
     public string nick;
-    public string username;
     public string facebookID;
+    public string username;
+    public int score;
+
+    public Styles styles;
+    public Stats stats;
+    public Peleas peleas;
 
 }

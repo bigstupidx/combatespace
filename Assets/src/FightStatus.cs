@@ -9,10 +9,14 @@ public class FightStatus : MonoBehaviour {
         IDLE,
         FIGHTING,
         KO,
-        BETWEEN_ROUNDS
+        BETWEEN_ROUNDS,
+        DONE
     }
 
     public int Round;
+
+    public int caidas_hero;
+    public int caidas_character;
 
     public float heroStatus = 1;
     public float characterStatus = 1;
@@ -20,7 +24,8 @@ public class FightStatus : MonoBehaviour {
     public float heroAguanteStatus = 1;
     public float characterAguanteStatus = 1;
 
-    private float AguanteRecovery = 0.015f;
+    private float AguanteRecovery = 0.025f;
+    private float MIN_AguanteRecovery = 0.005f;
 
     public float heroRecovery;
     public float characterRecovery;
@@ -37,34 +42,53 @@ public class FightStatus : MonoBehaviour {
     public float power_gancho_down;
     public float power_cortito;
 
-	void Start () {
+    public float cansancio_hero;
+    public float cansancio_character;
+
+    void Start()
+    {
+        Round = 0;
         power_gancho_up = (float)Data.Instance.settings.defaultPower.gancho_up;
         power_gancho_down = (float)Data.Instance.settings.defaultPower.gancho_down;
         power_cortito = (float)Data.Instance.settings.defaultPower.cortito;
 
-        heroRecovery = (float)Data.Instance.playerSettings.heroStats.Resistence/25000;
-        characterRecovery = (float)Data.Instance.playerSettings.characterStats.Resistence / 25000;
+        heroRecovery = (float)Data.Instance.playerSettings.heroData.stats.Resistence / 25000;
+        characterRecovery = (float)Data.Instance.playerSettings.characterData.stats.Resistence / 25000;
 
         Events.OnChangeStatusHero += OnChangeStatusHero;
         Events.OnChangeStatusCharacter += OnChangeStatusCharacter;
-        Events.OnKO += OnKO;
+        Events.OnAvatarFall += OnAvatarFall;
         Events.OnHeroAction += OnHeroAction;
         Events.OnCharacterChangeAction += OnCharacterChangeAction;
         Events.OnRoundComplete += OnRoundComplete;
         Events.OnRoundStart += OnRoundStart;
+        Events.OnAvatarStandUp += OnAvatarStandUp;
+        Events.OnKO += OnKO;
         Loop();
         if(state != states.KO)
         Events.OnRoundStart();
 	}
     void OnDestroy()
     {
-        Events.OnKO -= OnKO;
+        Events.OnAvatarFall -= OnAvatarFall;
         Events.OnChangeStatusHero -= OnChangeStatusHero;
         Events.OnChangeStatusCharacter -= OnChangeStatusCharacter;
         Events.OnHeroAction -= OnHeroAction;
         Events.OnCharacterChangeAction -= OnCharacterChangeAction;
         Events.OnRoundComplete -= OnRoundComplete;
         Events.OnRoundStart -= OnRoundStart;
+        Events.OnAvatarStandUp -= OnAvatarStandUp;
+        Events.OnKO -= OnKO;
+    }
+    void OnKO(bool isHero)
+    {
+        state = states.DONE;
+        HeroAguanteProgressBar.transform.gameObject.SetActive(false);
+        EnemyAguanteProgressBar.transform.gameObject.SetActive(false);
+    }
+    void OnAvatarStandUp(bool isHero)
+    {
+        state = states.FIGHTING;
     }
     void OnRoundStart()
     {
@@ -75,35 +99,53 @@ public class FightStatus : MonoBehaviour {
     {
         state = states.BETWEEN_ROUNDS;
     }
-    void OnKO(bool isHero)
+    void OnAvatarFall(bool isHero)
     {
+        if (isHero)
+            caidas_hero++;
+        else
+            caidas_character++;
+
         state = states.KO;
-        HeroAguanteProgressBar.transform.gameObject.SetActive(false);
-        EnemyAguanteProgressBar.transform.gameObject.SetActive(false);
     }
     void Loop()
     {
+        //Recupera más rapido:
+        if (state == states.DONE)
+            return;
+        if (state == states.KO)
+        {
+            heroStatus += ((1 - cansancio_character) * Time.deltaTime) / 3.2f;
+            characterStatus += ((1 - cansancio_character) * Time.deltaTime) / 3.2f;
+        }
+        else
+        {
+            heroStatus += heroRecovery;
+            characterStatus += characterRecovery;
 
-        //if (state == states.KO) return;
+            float AguanteRecovery_hero = AguanteRecovery - (cansancio_hero / 50);
+            float AguanteRecovery_character = AguanteRecovery - (cansancio_hero / 50);
 
-        heroStatus += heroRecovery;
-        if(heroStatus>1)heroStatus = 1;
-        characterStatus += characterRecovery;
-        if(characterStatus>1)characterStatus = 1;
+            if (AguanteRecovery_hero < MIN_AguanteRecovery) AguanteRecovery_hero = MIN_AguanteRecovery;
+            if (AguanteRecovery_character < MIN_AguanteRecovery) AguanteRecovery_character = MIN_AguanteRecovery;
+
+            heroAguanteStatus += AguanteRecovery_hero;
+            characterAguanteStatus += AguanteRecovery_character;
+        }
+        if (heroStatus > 1) heroStatus = 1;
+        if (characterStatus > 1) characterStatus = 1;
 
         HeroProgressBar.SetProgress(heroStatus);
-        EnemyProgressBar.SetProgress(characterStatus);
+        EnemyProgressBar.SetProgress(characterStatus);    
 
-
-        heroAguanteStatus += AguanteRecovery;
+        
         if (heroAguanteStatus > 1) heroAguanteStatus = 1; else if (heroAguanteStatus < 0) heroAguanteStatus = 0.05f;
-        characterAguanteStatus += AguanteRecovery;
+       
         if (characterAguanteStatus > 1) characterAguanteStatus = 1; else if (characterAguanteStatus < 0) characterAguanteStatus = 0.05f;
 
         HeroAguanteProgressBar.SetProgress(heroAguanteStatus);
         EnemyAguanteProgressBar.SetProgress(characterAguanteStatus);
 
-		//heroBreath.SetBreathProgress (heroAguanteStatus);
 		Events.OnHeroAguanteStatus (heroAguanteStatus);
 
         Invoke("Loop", 0.1f);
@@ -113,10 +155,9 @@ public class FightStatus : MonoBehaviour {
         float aguanteNormalizado = characterAguanteStatus / (characterAguanteStatus + ((1 - characterAguanteStatus) / 4));
         damage *= aguanteNormalizado;
         heroStatus -= damage / 100;
-        print("damage " + damage);
         HeroProgressBar.SetProgress(heroStatus);
         if (heroStatus <= 0)
-            Events.OnKO(false);
+            Events.OnAvatarFall(true);
 	}
     void OnChangeStatusCharacter(float damage)
     {
@@ -127,7 +168,10 @@ public class FightStatus : MonoBehaviour {
       //  Debug.LogError("enemy damage heroAguanteStatus: " + heroAguanteStatus + " damage: " + damage);
         EnemyProgressBar.SetProgress(characterStatus);
         if (characterStatus <= 0)
-            Events.OnKO(true);
+        {
+            Events.OnAvatarFall(false);
+            characterStatus = 0;
+        }
     }
     void OnHeroAction(HeroActions.actions action)
     {

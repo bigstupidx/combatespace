@@ -9,10 +9,13 @@ public class CharacterAI : MonoBehaviour {
 
     public void Init()
     {
-        intelligence = Data.Instance.playerSettings.characterStats.Inteligencia;
+        intelligence = Data.Instance.playerSettings.characterData.stats.Inteligencia;
         Events.OnHeroAction += OnHeroAction;
-        DefenseProbability = Data.Instance.playerSettings.characterStats.Inteligencia * 5;
-        ContinueAttackingProbability = Data.Instance.playerSettings.characterStats.Inteligencia;
+        DefenseProbability = Data.Instance.playerSettings.characterData.stats.Inteligencia * 5;
+       // ContinueAttackingProbability = Data.Instance.playerSettings.characterStats.Inteligencia;
+        //linea recta: 100 - (0.5*(100-10))
+        int inteligencia = Data.Instance.playerSettings.characterData.stats.Inteligencia;
+        ContinueAttackingProbability = 100 - (int)(0.5f * (100 - inteligencia));
     }
     public void Reset()
     {
@@ -79,7 +82,7 @@ public class CharacterAI : MonoBehaviour {
     }
     public bool AttackOverDefense()
     {
-        if (Random.Range(0, DefenseProbability) < Random.Range(0, Data.Instance.playerSettings.characterStats.Power))
+        if (Random.Range(0, DefenseProbability) < Random.Range(0, Data.Instance.playerSettings.characterData.stats.Power))
             return true;
         return false;
     }

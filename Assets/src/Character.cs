@@ -20,7 +20,7 @@ public class Character : MonoBehaviour {
         ai = GetComponent<CharacterAI>();
         ai.Init();
         float speed = Data.Instance.settings.defaultSpeed.state_speed;
-        float characterSettingsSpeed = Data.Instance.playerSettings.characterStats.Speed;
+        float characterSettingsSpeed = Data.Instance.playerSettings.characterData.stats.Speed;
         state_speed = speed - (speed * (characterSettingsSpeed / 150));
 
         characterActions = GetComponent<CharacterActions>();
@@ -30,8 +30,9 @@ public class Character : MonoBehaviour {
         Events.OnAICharacterAttack += OnAICharacterAttack;
         Events.OnAICharacterDefense += OnAICharacterDefense;
         Events.OnHeroBlockPunch += OnHeroBlockPunch;
-        Events.OnKO += OnKO;
+        Events.OnAvatarFall += OnAvatarFall;
         Events.OnRoundComplete += OnRoundComplete;
+        Events.OnAvatarStandUp += OnAvatarStandUp;
 	}
     void OnDestroy()
     {
@@ -41,8 +42,14 @@ public class Character : MonoBehaviour {
         Events.OnAICharacterAttack -= OnAICharacterAttack;
         Events.OnAICharacterDefense -= OnAICharacterDefense;
         Events.OnHeroBlockPunch -= OnHeroBlockPunch;
-        Events.OnKO -= OnKO;
+        Events.OnAvatarFall -= OnAvatarFall;
         Events.OnRoundComplete -= OnRoundComplete;
+        Events.OnAvatarStandUp -= OnAvatarStandUp;
+    }
+    void OnAvatarStandUp(bool isHero)
+    {
+        characterActions.state = CharacterActions.states.DEFENDING;
+        characterActions.ChangeRandomDefense();
     }
     void OnRoundComplete()
     {
@@ -59,14 +66,14 @@ public class Character : MonoBehaviour {
         }
         timer += Time.deltaTime;
     }
-    void OnKO(bool heroWin)
+    void OnAvatarFall(bool isHero)
     {
-        if (heroWin)
+        print("OnAvatarFall__________" + isHero);
+        if (!isHero)
         {
-            //ChangeDefense(false, false, false, false);
             characterActions.KO();
         }
-        ai.Reset();
+        //ai.Reset();
     }
     void OnHeroBlockPunch(CharacterActions.actions action)
     {
@@ -94,10 +101,10 @@ public class Character : MonoBehaviour {
     void Attack()
     {
         combo++;
-        int percentProbability = (100 - (combo * 10)) - (100 - ai.intelligence) + (Data.Instance.playerSettings.characterStats.Speed/2);
+        int percentProbability = (100 - (combo * 10)) - (100 - ai.intelligence) + (Data.Instance.playerSettings.characterData.stats.Speed / 2);
         bool hardAttack = ai.GetPrecentProbability(percentProbability);
 
-        print("ATTACK HARD  " + hardAttack + "  percentProbability : " + percentProbability + "   combo: " + combo + " ai.intelligence " + ai.intelligence);
+        //print("ATTACK HARD  " + hardAttack + "  percentProbability : " + percentProbability + "   combo: " + combo + " ai.intelligence " + ai.intelligence);
 
         characterActions.Attack(hardAttack);
     }
@@ -147,29 +154,31 @@ public class Character : MonoBehaviour {
             case HeroActions.actions.CORTITO_R:
                 if (characterActions.action == CharacterActions.actions.DEFENSE_DOWN
                     || characterActions.action == CharacterActions.actions.DEFENSE_UP_CENTER) return;
-                Events.OnComputeCharacterPunched(action, combo); 
+                Events.OnComputeCharacterPunched(action); 
                 characterActions.OnCortito(); 
                 punched = true; 
                 break;
             case HeroActions.actions.GANCHO_UP_L:
                 if (characterActions.action == CharacterActions.actions.DEFENSE_DOWN) return;
-                if (!DEFENSE_UP && !DEFENSE_UP_L) { Events.OnComputeCharacterPunched(action, combo); characterActions.OnGanchoHitted(true, true); punched = true; } 
+                if (!DEFENSE_UP && !DEFENSE_UP_L) { Events.OnComputeCharacterPunched(action); characterActions.OnGanchoHitted(true, true); punched = true; } 
                 break;
             case HeroActions.actions.GANCHO_UP_R:
                 if (characterActions.action == CharacterActions.actions.DEFENSE_DOWN) return;
-                if (!DEFENSE_UP && !DEFENSE_UP_R) { Events.OnComputeCharacterPunched(action, combo); characterActions.OnGanchoHitted(false, true); punched = true; } 
+                if (!DEFENSE_UP && !DEFENSE_UP_R) { Events.OnComputeCharacterPunched(action); characterActions.OnGanchoHitted(false, true); punched = true; } 
                 break;
             case HeroActions.actions.GANCHO_DOWN_L:
                // if (characterActions.action == CharacterActions.actions.DEFENSE_UP) return;
-                if (!DEFENSE_DOWN_L) { Events.OnComputeCharacterPunched(action, combo); characterActions.OnGanchoHitted(true, false); punched = true; }
+                if (!DEFENSE_DOWN_L) { Events.OnComputeCharacterPunched(action); characterActions.OnGanchoHitted(true, false); punched = true; }
                 break;
             case HeroActions.actions.GANCHO_DOWN_R:
                // if (characterActions.action == CharacterActions.actions.DEFENSE_UP) return;
-                if (!DEFENSE_DOWN_R) { Events.OnComputeCharacterPunched(action, combo); characterActions.OnGanchoHitted(false, false); punched = true; }
+                if (!DEFENSE_DOWN_R) { Events.OnComputeCharacterPunched(action); characterActions.OnGanchoHitted(false, false); punched = true; }
                 break;
         }
-        if(!punched)
+        if (!punched)
+        {
             Events.OnCharacterBlockPunch(action);
+        }
     }
     public void ResetActions()
     {

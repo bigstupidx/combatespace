@@ -34,9 +34,4 @@ public class PlayerSettings : MonoBehaviour {
     public PlayerData heroData;
     public PlayerData characterData;
 
-    public Stats heroStats;
-    public Stats characterStats;
-
-    
-
 }

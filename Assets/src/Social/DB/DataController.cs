@@ -9,11 +9,16 @@ public class DataController : MonoBehaviour
     private string getUserIdByFacebookID_URL = URL + "getUserIdByFacebookID.php?";
     private string createUser_URL = URL + "createUser.php?";
     private string updateUser_URL = URL + "updateUser.php?";
-
+    private string updatePeleas_URL = URL + "updatePeleas.php?";
+    private string getUsersByScore_URL = URL + "getUsersByScore.php?";
+    
     void Start()
-    {
-        SocialEvents.OnFacebookLogin += OnFacebookLogin;
+    {        
         Events.OnUpdatePlayerData += OnUpdatePlayerData;
+        Events.OnSavePelea += OnSavePelea;
+
+        SocialEvents.OnFacebookLogin += OnFacebookLogin;
+        SocialEvents.OnGetUsersByScore += OnGetUsersByScore;
     }
     void OnFacebookLogin(string facebookID, string username, string email)
     {
@@ -26,6 +31,9 @@ public class DataController : MonoBehaviour
             yield break;
 
         string post_url = getUserIdByFacebookID_URL + "facebookID=" + _facebookID;
+
+        print(post_url);
+
         WWW receivedData = new WWW(post_url);
         yield return receivedData;
         if (receivedData.error != null)
@@ -37,29 +45,46 @@ public class DataController : MonoBehaviour
                 string[] userData = Regex.Split(receivedData.text, ":");
                 int userID = System.Int32.Parse(userData[1]);
                 string username = userData[2];
-                int p1 = System.Int32.Parse(userData[3]);
-                int p2 = System.Int32.Parse(userData[4]);
-                int p3 = System.Int32.Parse(userData[5]);
-                int p4 = System.Int32.Parse(userData[6]);
+
+                Stats stats = new Stats();
+                stats.Power = System.Int32.Parse(userData[3]);
+                stats.Resistence = System.Int32.Parse(userData[4]);
+                stats.Defense = System.Int32.Parse(userData[5]);
+                stats.Speed = System.Int32.Parse(userData[6]);
+
                 int score = System.Int32.Parse(userData[7]);
+                
+                Peleas peleas = new Peleas();
+                peleas.peleas_g = System.Int32.Parse(userData[8]);
+                peleas.peleas_p = System.Int32.Parse(userData[9]);
+                peleas.retos_g = System.Int32.Parse(userData[10]);
+                peleas.retos_p = System.Int32.Parse(userData[11]);
+
+                Data.Instance.playerSettings.heroData.stats = stats;
+                Data.Instance.playerSettings.heroData.peleas = peleas;
+
                 SocialEvents.OnUserReady(_facebookID, _username, _email);
             }
             catch
             {
-                Debug.Log("New user!");
+                Debug.Log("new user!");
                 CreateUser(_facebookID, _username, _email);
             }
         }
     }
     public void CreateUser(string _facebookID, string _username, string _email)
     {
+        Stats stats = new Stats();
+        stats.Power = 10;  stats.Resistence = 10; stats.Defense = 10;  stats.Speed = 10;
+        Data.Instance.playerSettings.heroData.stats = stats;
+
         StartCoroutine(CreateUserRoutine(_facebookID, _username, _email));
     }
     IEnumerator CreateUserRoutine(string _facebookID, string _username, string _email)
     {
        // username = username.Replace(" ", "_");
-        string hash = Md5Test.Md5Sum(_facebookID + _username + _email + secretKey);
-        string post_url = createUser_URL + "username=" + WWW.EscapeURL(_username) + "&email=" + WWW.EscapeURL(_email) + "&facebookID=" + WWW.EscapeURL(_facebookID) + "&hash=" + hash;
+        string hash = Md5Test.Md5Sum(_facebookID + _username  + secretKey);
+        string post_url = createUser_URL + "username=" + WWW.EscapeURL(_username) + "&facebookID=" + WWW.EscapeURL(_facebookID) + "&hash=" + hash;
         print("CreateUser : " + post_url);
         WWW hs_post = new WWW(post_url);
         yield return hs_post;
@@ -99,139 +124,39 @@ public class DataController : MonoBehaviour
         }
     }
 
-    ///////////////////////////////////////
-    //private System.Action<string> RankingListener;
-    //public void OnGetRanking(System.Action<string> RankingListener)
-    //{
-    //    this.RankingListener = RankingListener;
-    //    StartCoroutine(GetRankingRoutine());
-    //}
-    //IEnumerator GetRankingRoutine()
-    //{
-    //    //string post_url = getRanking_URL;
-    //    //print("GetRankingRoutine : " + post_url);
-    //    //WWW receivedData = new WWW(post_url);
-    //    //yield return receivedData;
-    //    //if (receivedData.error != null)
-    //    //    print("There was an error in getting hiscores: " + receivedData.error);
-    //    //else
-    //    //{
-    //    //    RankingListener(receivedData.text);
-    //    //}
-    //}
-    ///////////////////////////////////////
-
-    //void OnSaveAchievements(int totalToSave)
-    //{
-    //    StartCoroutine(OnSaveAchievementsRoutine(totalToSave));
-    //}
-    //IEnumerator OnSaveAchievementsRoutine(int total)
-    //{
-    //    //string hash = Md5Test.Md5Sum(Data.Instance.userData.userID.ToString() + total.ToString() + secretKey);
-    //    //string post_url = saveRanking_URL + "userID=" + Data.Instance.userData.userID + "&total=" + total + "&hash=" + hash;
-    //    //print("OnSaveAchievementsRoutine : " + post_url);
-    //    //WWW hs_post = new WWW(post_url);
-    //    //yield return hs_post;
-    //    //if (hs_post.error != null)
-    //    //    print("No pudo updatear achievements: " + hs_post.error);
-    //    //else
-    //    //{
-    //    //    print("achievements updateado: " + hs_post.text);
-    //    //  //  int userId = int.Parse(hs_post.text);
-    //    //}
-    //}
-
-    //private System.Action OnSetFilteredListener;
-    //void OnSetFiltered(int userID, int filtered, System.Action OnSetFilteredListener)
-    //{
-    //    this.OnSetFilteredListener = OnSetFilteredListener;
-    //    StartCoroutine(OnSetFilteredRoutine(userID, filtered));
-    //}
-    //IEnumerator OnSetFilteredRoutine(int userID, int filtered)
-    //{
-    //    //string hash = Md5Test.Md5Sum(userID.ToString() + filtered.ToString() + secretKey);
-    //    //string post_url = setUserFilter_URL + "userID=" + userID + "&filtered=" + filtered + "&hash=" + hash;
-    //    //print("setUserFilter_URL : " + post_url);
-    //    //WWW hs_post = new WWW(post_url);
-    //    //yield return hs_post;
-    //    //if (hs_post.error != null)
-    //    //    print("No pudo updatear filter: " + hs_post.error);
-    //    //else
-    //    //{
-    //    //    print("filter updateado: " + hs_post.text);
-    //    //    OnSetFilteredListener();
-    //    //}
-    //}
-
-    ///////////////////////////////////////
-    //private System.Action<string> OnGetAlumnosListener;
-    //public void OnGetAlumnos(int filtered, System.Action<string> OnGetAlumnosListener)
-    //{
-    //    this.OnGetAlumnosListener = OnGetAlumnosListener;
-    //    StartCoroutine(OnGetAlumnosRoutine(filtered));
-    //}
-    //IEnumerator OnGetAlumnosRoutine(int filtered)
-    //{
-    //    //string post_url = getUsersByFilter_URL + "filtered=" + filtered.ToString();
-    //    //print("getUsersByFilter_URL : " + post_url);
-    //    //WWW receivedData = new WWW(post_url);
-    //    //yield return receivedData;
-    //    //if (receivedData.error != null)
-    //    //    print("There was an error in getting hiscores: " + receivedData.error);
-    //    //else
-    //    //{
-    //    //    OnGetAlumnosListener(receivedData.text);
-    //    //}
-    //}
-    ///////////////////////////////////////
 
 
 
-
-    //public void OnSaveBlockToDB(string title, string content)
-    //{
-    //    StartCoroutine(OnSaveBlockToDBRoutine(Data.Instance.userData.userID, title, content));
-    //}
-    //IEnumerator OnSaveBlockToDBRoutine(int userID, string title, string content)
-    //{
-    //    //string hash = Md5Test.Md5Sum(userID.ToString() + title + content + secretKey);
-    //    //string post_url = saveBlock_URL + "userID=" + userID + "&title=" + WWW.EscapeURL(title) + "&content=" + WWW.EscapeURL(content) + "&hash=" + hash;
-    //    //print("OnSaveBlockToDBRoutine : " + post_url);
-    //    //WWW hs_post = new WWW(post_url);
-    //    //yield return hs_post;
-    //    //if (hs_post.error != null)
-    //    //    print("No pudo crear el nuevo user: " + hs_post.error);
-    //    //else
-    //    //{
-    //    //    print("OnSaveBlockToDBRoutine agregado: " + hs_post.text);
-    //    //}
-    //}
+    void OnSavePelea(string facebookID, Peleas peleas)
+    {
+        StartCoroutine(OnUpdatePeleasRoutine(facebookID, peleas.peleas_g, peleas.peleas_p, peleas.retos_g, peleas.retos_p));
+    }
+    IEnumerator OnUpdatePeleasRoutine(string facebookID, int peleas_g, int peleas_p, int retos_g, int retos_p)
+    {
+        string hash = facebookID + peleas_g + peleas_p + retos_g + retos_p;
+        hash = Md5Test.Md5Sum(hash + secretKey);
+        string post_url = updatePeleas_URL + "facebookID=" + facebookID + "&peleas_g=" + peleas_g + "&peleas_p=" + peleas_p + "&retos_g=" + retos_g + "&retos_p=" + retos_p + "&hash=" + hash;
+        print("OnUpdatePeleas : " + post_url);
+        WWW hs_post = new WWW(post_url);
+        yield return hs_post;
+        if (hs_post.error != null) print("Error haciendo update de user"); else{ print("user updateado: " + hs_post.text); }
+    }
 
 
-
-    ///////////////////////////////////////
-    //private System.Action<string> OnGetEjerciciosListener;
-    //public void OnGetEjercicios(int userID, System.Action<string> OnGetAlumnosListener)
-    //{
-    //    this.OnGetEjerciciosListener = OnGetAlumnosListener;
-    //    StartCoroutine(OnGetEjerciciosRoutine(userID));
-    //}
-    //IEnumerator OnGetEjerciciosRoutine(int userID)
-    //{
-    //    //string post_url = getEjercicios_URL + "userID=" + userID.ToString();
-    //    //print("OnGetEjerciciosRoutine : " + post_url);
-    //    //WWW receivedData = new WWW(post_url);
-    //    //yield return receivedData;
-    //    //if (receivedData.error != null)
-    //    //    print("There was an error in getting hiscores: " + receivedData.error);
-    //    //else
-    //    //{
-    //    //    OnGetEjerciciosListener(receivedData.text);
-    //    //}
-    //}
-    ///////////////////////////////////////
-    
-
+    private System.Action<string> OnGetUsersByScoreListener;
+    public void OnGetUsersByScore(System.Action<string> OnGetUsersByScoreListener, int min, int max)
+    {
+        this.OnGetUsersByScoreListener = OnGetUsersByScoreListener;
+        StartCoroutine(GetUsersByScoreRoutine(min, max));
+    }
+    IEnumerator GetUsersByScoreRoutine(int min, int max)
+    {
+        string post_url = getUsersByScore_URL + "min=" + min + "&max=" + max;
+        print("OnGetUsersByScore : " + post_url);
+        WWW hs_post = new WWW(post_url);
+        yield return hs_post;
+        if (hs_post.error != null) print("Error con: GetUsersByScoreRoutine: " + hs_post.error); else {OnGetUsersByScoreListener(hs_post.text);}
+    }
 
 }
 

@@ -59,6 +59,11 @@ public class HeroActions : MonoBehaviour
         if (hitRoutine != null)
             StopCoroutine(hitRoutine);
     }
+    public void StandUp()
+    {
+        action = actions.DEFENSE;
+        OnHeroActionWithCrossFade(actions.IDLE, 0.3f);
+    }
     public void OnHeroActionWithCrossFade(actions newAction, float CrossFadeTime = 0.1f)
     {
         if (action == actions.KO) return;
@@ -98,7 +103,7 @@ public class HeroActions : MonoBehaviour
         OnHeroActionWithCrossFade(actions.IDLE);
     }
     IEnumerator HitRoutine(float timer1, float timer2)
-    {
+    {        
         yield return new WaitForSeconds(timer1);
         CheckHit();
         yield return new WaitForSeconds(timer2);

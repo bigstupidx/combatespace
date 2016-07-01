@@ -13,16 +13,16 @@ public class Dificulty : MonoBehaviour {
         switch (id)
         {
             case 1:
-                playerSettings.heroStats.SetStats (50, 70, 80, 65, 80);
-                playerSettings.characterStats.SetStats (10, 14, 11, 19, 15);
+                playerSettings.heroData.stats.SetStats(50, 70, 80, 65, 80);
+                playerSettings.characterData.stats.SetStats(10, 14, 11, 19, 15);
                 break;
             case 2:
-                playerSettings.heroStats.SetStats(25, 20, 20, 20, 40);
-                playerSettings.characterStats.SetStats(25, 20, 20, 20, 40);
+                playerSettings.heroData.stats.SetStats(25, 20, 20, 20, 40);
+                playerSettings.characterData.stats.SetStats(25, 20, 20, 20, 40);
                 break;
             case 3:
-                playerSettings.heroStats.SetStats(13, 10, 15, 10, 10);
-                playerSettings.characterStats.SetStats(75, 90, 90, 84, 100);
+                playerSettings.heroData.stats.SetStats(13, 10, 15, 10, 10);
+                playerSettings.characterData.stats.SetStats(75, 90, 90, 84, 100);
                 break;
         }
         Data.Instance.LoadLevel("Stats");        

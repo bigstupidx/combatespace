@@ -3,6 +3,9 @@ using System.Collections;
 
 public class ComputeFight : MonoBehaviour {
 
+    public Character character;
+    public Hero hero;
+
 	void Start () {
         Events.OnComputeCharacterPunched += OnComputeCharacterPunched;
         Events.OnComputeHeroPunched += OnComputeHeroPunched;
@@ -12,10 +15,10 @@ public class ComputeFight : MonoBehaviour {
         Events.OnComputeCharacterPunched -= OnComputeCharacterPunched;
         Events.OnComputeHeroPunched -= OnComputeHeroPunched;
     }
-    void OnComputeHeroPunched(CharacterActions.actions action, int combo)
+    void OnComputeHeroPunched(CharacterActions.actions action)
     {
-        float damage = CalculateDamage(Data.Instance.playerSettings.characterStats, Data.Instance.playerSettings.heroStats);
-        damage += AddDamageByCombo(combo);
+        float damage = CalculateDamage(Data.Instance.playerSettings.characterData.stats, Data.Instance.playerSettings.heroData.stats);
+        damage += AddDamageByCombo(character.combo);
         switch (action)
         {
             case CharacterActions.actions.ATTACK_L_CORTITO:
@@ -28,10 +31,13 @@ public class ComputeFight : MonoBehaviour {
                 break;
         }
         Events.OnChangeStatusHero(damage);
+
+        print("HERO damage: " + damage + " combo: " + character.combo);
 	}
-    void OnComputeCharacterPunched(HeroActions.actions action, int combo)
+    void OnComputeCharacterPunched(HeroActions.actions action)
     {
-        float damage = CalculateDamage(Data.Instance.playerSettings.heroStats, Data.Instance.playerSettings.characterStats);
+        float damage = CalculateDamage(Data.Instance.playerSettings.heroData.stats, Data.Instance.playerSettings.characterData.stats);
+        damage += AddDamageByCombo(hero.combo);
         switch (action)
         {
             case HeroActions.actions.CORTITO_L:

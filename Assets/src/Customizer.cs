@@ -27,6 +27,9 @@ public class Customizer : ScreenBase {
     }
     public void ChangeName()
     {
-        Data.Instance.LoadLevel("04_Names");
+        if (SocialManager.Instance.userData.logged)
+            Data.Instance.LoadLevel("04_Names");
+        else
+            Events.OnRegisterPopup();
     }
 }

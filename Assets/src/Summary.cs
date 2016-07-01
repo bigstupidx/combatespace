@@ -19,9 +19,9 @@ public class Summary : MonoBehaviour
         Events.OnAllRoundsComplete -= OnAllRoundsComplete;
         Events.OnKO -= OnKO;
     }
-    void OnKO(bool heroWin)
+    void OnKO(bool isHero)
     {
-        this.heroWin = heroWin;
+        this.heroWin = !isHero;
         Invoke("FightEnd", 2);
     }
     void SetOff()
@@ -39,6 +39,8 @@ public class Summary : MonoBehaviour
     }
     void FightEnd()
     {
+        Events.OnFightEnd(heroWin);
+
         panel.SetActive(true);
         if (heroWin)
             field.text = "Ganaste\n";
@@ -49,6 +51,6 @@ public class Summary : MonoBehaviour
     }
     public void Restart()
     {
-        Data.Instance.LoadLevel("MainMenu");
+        Data.Instance.LoadLevel("03_Home");
     }
 }
