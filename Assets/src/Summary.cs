@@ -51,6 +51,9 @@ public class Summary : MonoBehaviour
     }
     public void Restart()
     {
-        Data.Instance.LoadLevel("03_Home");
+        if (heroWin)
+            Data.Instance.LoadLevel("06_Summary");
+        else
+            Data.Instance.LoadLevel("03_Home");
     }
 }

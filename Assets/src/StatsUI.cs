@@ -14,7 +14,6 @@ public class StatsUI : MonoBehaviour {
 	}
     public void Init(Stats stats)
     {
-        print("stats" + stats.Power);
         fuerza.value = (float)stats.Power / 100;
         resistencia.value = (float)stats.Resistence / 100;
         defensa.value = (float)stats.Defense / 100;

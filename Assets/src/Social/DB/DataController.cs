@@ -11,11 +11,13 @@ public class DataController : MonoBehaviour
     private string updateUser_URL = URL + "updateUser.php?";
     private string updatePeleas_URL = URL + "updatePeleas.php?";
     private string getUsersByScore_URL = URL + "getUsersByScore.php?";
+    private string saveStats_URL = URL + "saveStats.php?";
     
     void Start()
     {        
         Events.OnUpdatePlayerData += OnUpdatePlayerData;
         Events.OnSavePelea += OnSavePelea;
+        Events.OnSaveStats += OnSaveStats;
 
         SocialEvents.OnFacebookLogin += OnFacebookLogin;
         SocialEvents.OnGetUsersByScore += OnGetUsersByScore;
@@ -157,6 +159,18 @@ public class DataController : MonoBehaviour
         yield return hs_post;
         if (hs_post.error != null) print("Error con: GetUsersByScoreRoutine: " + hs_post.error); else {OnGetUsersByScoreListener(hs_post.text);}
     }
+
+
+    public void OnSaveStats(int stat1, int stat2, int stat3, int stat4)
+    {
+        string facebookID = SocialManager.Instance.userData.facebookID;
+        string hash =  facebookID + stat1 + stat2 + stat3 + stat4;
+        hash = Md5Test.Md5Sum(hash + secretKey);
+        string post_url = saveStats_URL + "facebookID=" + facebookID + "&stat1=" + stat1 + "&stat2=" + stat2 + "&stat3=" + stat3 + "&stat4=" + stat4 + "&hash=" + hash;
+        print("OnSaveStats : " + post_url);
+        WWW hs_post = new WWW(post_url);
+    }    
+
 
 }
 

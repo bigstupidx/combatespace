@@ -7,10 +7,12 @@ public static class Events
     public static System.Action<PlayerData> OnUpdatePlayerData = delegate { };
     public static System.Action<bool> OnLoadingShow = delegate { };
     public static System.Action OnRegisterPopup = delegate { };
+    public static System.Action<string, string> OnGenericPopup = delegate { };
     public static System.Action<bool> OnShowBackButton = delegate { };
     public static System.Action OnBackButtonPressed = delegate { };
 
     public static System.Action<string, Peleas> OnSavePelea = delegate { };
+    public static System.Action<int, int, int, int> OnSaveStats = delegate { };
     public static System.Action<bool> OnFightEnd = delegate { };   
     
 
