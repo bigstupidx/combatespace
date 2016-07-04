@@ -133,7 +133,11 @@ public class InputManager:MonoBehaviour  {
                     Invoke("CheckIfStillTouchungDefense", timeToDefense);  
               
                     break;
-                case TouchPhase.Ended:                        
+                case TouchPhase.Ended:    
+        ////cortito
+                    if (Input.touchCount == 1 && Vector2.Distance(touch.position, startPos) < minSwipeDistX)
+                        Swipe(directions.MID);
+                    else            
                     if (Input.touchCount == 1 && Vector2.Distance(touch.position, startPos) > minSwipeDistX)
                         Move(touch.position.x, touch.position.y);
                     else
