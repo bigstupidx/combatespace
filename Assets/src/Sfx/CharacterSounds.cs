@@ -5,6 +5,7 @@ public class CharacterSounds : MonoBehaviour {
 
 	public HitAudioClips hitClips;
 	public BreakAudioClips breakClips;
+	public AudioClip knock;
 	public  AudioSource receiveSource;
 	public AudioSource damage;
 
@@ -20,11 +21,30 @@ public class CharacterSounds : MonoBehaviour {
 		//receiveSource = GetComponent<AudioSource> ();
 		Events.OnComputeCharacterPunched += OnComputeCharacterPunched;
 		Events.OnCharacterBlockPunch += OnCharacterBlockPunch;
+		Events.OnAvatarFall += OnAvatarFall;
 	}
 
 	void OnDestroy(){
 		Events.OnComputeCharacterPunched -= OnComputeCharacterPunched;
 		Events.OnCharacterBlockPunch -= OnCharacterBlockPunch;
+		Events.OnAvatarFall -= OnAvatarFall;
+	}
+
+	void OnAvatarFall(bool isHero)
+	{
+		if (!isHero)
+			StartCoroutine(LonaSfx(0.4f));		
+	}
+
+	IEnumerator LonaSfx(float delay)
+	{		
+		yield return new WaitForSeconds(delay);
+		float vol = Random.Range (volLowRange-0.2f, volHighRange-0.4f);
+		receiveSource.volume = vol;
+		float pitch = Random.Range (pitchLowRange-0.4f, pitchHighRange-0.2f);
+		receiveSource.pitch = pitch;
+		receiveSource.PlayOneShot (knock);
+		yield return null;
 	}
 
 	void OnComputeCharacterPunched(HeroActions.actions action){
