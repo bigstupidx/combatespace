@@ -15,5 +15,5 @@ public class PeleasUI : MonoBehaviour {
         this.peleas_p.text = "Peleas perdidas: " + peleas.peleas_p;
         this.retos_g.text = "Retos ganados: " + peleas.retos_g;
         this.retos_p.text = "Retos perdidos: " + peleas.retos_p;
-    }
+    }   
 }

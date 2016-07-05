@@ -12,4 +12,13 @@ public static class Categories {
         else
             return "ORO";    
     }
+    public static int GetCategorieIdScore(int score)
+    {
+        if (score < 33)
+            return 1;
+        else if (score < 66)
+            return 2;
+        else
+            return 3;
+    }
 }

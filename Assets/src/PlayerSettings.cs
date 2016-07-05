@@ -8,11 +8,22 @@ public class PlayerSettings : MonoBehaviour {
 
     void Start()
     {
+        SocialEvents.ResetApp += ResetApp;
         Events.OnUpdatePlayerData += OnUpdatePlayerData;
 
         heroData.username  = PlayerPrefs.GetString("username", "");
         heroData.facebookID = PlayerPrefs.GetString("facebookID", "");
         heroData.nick = PlayerPrefs.GetString("nick", "");
+    }
+    void OnDestroy()
+    {
+        SocialEvents.ResetApp -= ResetApp;
+        Events.OnUpdatePlayerData -= OnUpdatePlayerData;
+    }
+    void ResetApp()
+    {
+        heroData.facebookID = "";
+        heroData.username = "";
     }
     void OnUpdatePlayerData(PlayerData playerData)
     {

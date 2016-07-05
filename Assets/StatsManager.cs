@@ -9,6 +9,7 @@ public class StatsManager : MonoBehaviour {
         Data.Instance.playerSettings.heroData.stats.Resistence = PlayerPrefs.GetInt("Resistence", 10);
         Data.Instance.playerSettings.heroData.stats.Defense = PlayerPrefs.GetInt("Defense", 10);
         Data.Instance.playerSettings.heroData.stats.Speed = PlayerPrefs.GetInt("Speed", 10);
+        Data.Instance.playerSettings.heroData.stats.SetScore();
     }
     public void Save()
     {
@@ -17,7 +18,9 @@ public class StatsManager : MonoBehaviour {
         int Defense = Data.Instance.playerSettings.heroData.stats.Defense;
         int Speed = Data.Instance.playerSettings.heroData.stats.Speed;
 
-        Events.OnSaveStats(Power, Resistence, Defense, Speed);
+        Data.Instance.playerSettings.heroData.stats.SetScore();
+        int score = Data.Instance.playerSettings.heroData.stats.score;
+        Events.OnSaveStats(Data.Instance.playerSettings.heroData.stats);
 
         PlayerPrefs.SetInt("Power", Power);
         PlayerPrefs.SetInt("Resistence", Resistence);

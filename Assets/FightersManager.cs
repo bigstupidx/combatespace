@@ -27,11 +27,14 @@ public class FightersManager : MonoBehaviour {
         else if(activeID<0)
             activeID = all.Count-1;
 
-        return all[activeID];
+        if (all[activeID].facebookID == SocialManager.Instance.userData.facebookID)
+            return GetFighter(Next);
+        else
+            return all[activeID];
     }
     void UsersReady(string result)
     {
-        print("OnGetUsersByScore" + result);
+        print("UsersReady" + result);
         string[] allData = Regex.Split(result, "</n>");
 
         for (var i = 0; i < allData.Length - 1; i++)
@@ -43,14 +46,12 @@ public class FightersManager : MonoBehaviour {
             playerData.facebookID = userData[1];
             playerData.nick = userData[2];
 
-            playerData.score = int.Parse(userData[3]);
-
             playerData.stats = new Stats();
+            playerData.stats.score = int.Parse(userData[3]);
             playerData.stats.Power =        int.Parse(userData[4]);
             playerData.stats.Resistence =   int.Parse(userData[5]);
             playerData.stats.Defense =      int.Parse(userData[6]);
             playerData.stats.Speed =        int.Parse(userData[7]);
-
 
             playerData.peleas = new Peleas();
             playerData.peleas.peleas_g =    int.Parse(userData[8]);

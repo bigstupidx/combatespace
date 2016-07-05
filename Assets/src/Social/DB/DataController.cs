@@ -161,12 +161,18 @@ public class DataController : MonoBehaviour
     }
 
 
-    public void OnSaveStats(int stat1, int stat2, int stat3, int stat4)
+    public void OnSaveStats(Stats stats)
     {
+        int stat1 = stats.Power;
+        int stat2 = stats.Resistence;
+        int stat3 = stats.Defense;
+        int stat4 = stats.Speed;
+        int score = stats.score;
+
         string facebookID = SocialManager.Instance.userData.facebookID;
-        string hash =  facebookID + stat1 + stat2 + stat3 + stat4;
+        string hash = facebookID + score + stat1 + stat2 + stat3 + stat4;
         hash = Md5Test.Md5Sum(hash + secretKey);
-        string post_url = saveStats_URL + "facebookID=" + facebookID + "&stat1=" + stat1 + "&stat2=" + stat2 + "&stat3=" + stat3 + "&stat4=" + stat4 + "&hash=" + hash;
+        string post_url = saveStats_URL + "facebookID=" + facebookID + "&score=" + score + "&stat1=" + stat1 + "&stat2=" + stat2 + "&stat3=" + stat3 + "&stat4=" + stat4 + "&hash=" + hash;
         print("OnSaveStats : " + post_url);
         WWW hs_post = new WWW(post_url);
     }    

@@ -10,8 +10,26 @@ public class SummaryScreen : MonoBehaviour {
 
     void Start()
     {
-        num = 4;
-        Events.OnGenericPopup("¡Buena peléa!", "Ganaste " + num + " puntos. ¿En qué habilidad lo querés volcar?");
+        int score = Data.Instance.playerSettings.heroData.stats.score;
+        int characterScore = Data.Instance.playerSettings.characterData.stats.score;
+
+        int hero_cat = Categories.GetCategorieIdScore(score);
+        int character_cat = Categories.GetCategorieIdScore(characterScore);
+
+        num = 1;
+        string text = "+1 por ganarle a uno de tu misma categoría";
+
+        if (hero_cat+1 == character_cat)
+        {
+            num++;
+            text += "/n+1 por ganarle a alguien de una categoría más avanzada";
+        } else if (hero_cat + 2 == character_cat)
+        {
+            num += 2;
+            text += "/n+2 por ganarle a alguien dos categorías más avanzadas";
+        }
+
+        Events.OnGenericPopup("Ganaste " + num + " puntos.", text);
         Invoke("Init", 0.1f);
     }
     void Init()

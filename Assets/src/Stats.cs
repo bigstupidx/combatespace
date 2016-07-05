@@ -4,6 +4,8 @@ using System;
 
 [Serializable]
 public class Stats {
+
+    public int score;
     public int Inteligencia;
     public int Power;
     public int Resistence;
@@ -16,6 +18,11 @@ public class Stats {
         this.Power = power;
         this.Resistence = resistence;
         this.Defense = defense;
-        this.Speed = speed;
+        this.Speed = speed;        
+    }
+    public void SetScore()
+    {
+        this.score = Power + Resistence + Defense + Speed - 40;
+        Debug.Log("SetScore" + Power + " score: " + score);
     }
 }

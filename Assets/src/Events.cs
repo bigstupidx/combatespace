@@ -12,7 +12,7 @@ public static class Events
     public static System.Action OnBackButtonPressed = delegate { };
 
     public static System.Action<string, Peleas> OnSavePelea = delegate { };
-    public static System.Action<int, int, int, int> OnSaveStats = delegate { };
+    public static System.Action<Stats> OnSaveStats = delegate { };
     public static System.Action<bool> OnFightEnd = delegate { };   
     
 

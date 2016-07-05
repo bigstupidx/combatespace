@@ -13,6 +13,10 @@ public class Styles {
 
     public void Parse(string content)
     {
+        if (content == "") return;
+
+        Debug.Log("content: " + content);
+
          string[] allData = Regex.Split(content, "-");
 
          if(allData.Length>0)

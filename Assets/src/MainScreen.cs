@@ -16,4 +16,10 @@ public class MainScreen : MonoBehaviour {
         Data.Instance.playerSettings.control = PlayerSettings.controls.CONTROL_JOYSTICK;
         Data.Instance.LoadLevel("03_Home");
     }
+    public void ResetApp()
+    {
+        PlayerPrefs.DeleteAll();
+        SocialEvents.ResetApp();
+        Data.Instance.LoadLevel("03_Home");
+    }
 }

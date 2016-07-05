@@ -12,21 +12,33 @@ public class FighterSelector : MonoBehaviour {
 
     public Text userName;
     public Text category;
+    public Text heroScore;
 
     public Text characterName;
     public Text characterCategory;
+    public Text characterScore;
 
     void Start()
     {
         Events.OnBackButtonPressed += OnBackButtonPressed;
 
         stats.Init(Data.Instance.playerSettings.heroData.stats);
-        peleas.Init(Data.Instance.playerSettings.heroData.peleas);
+
+        if (SocialManager.Instance.userData.logged)
+            peleas.Init(Data.Instance.playerSettings.heroData.peleas);
+        else
+            peleas.gameObject.SetActive(false);
 
         SetFighter(Data.Instance.fightersManager.GetActualFighter());
 
-        userName.text = Data.Instance.playerSettings.heroData.nick;
-        category.text = "Categoría 1";
+        if (SocialManager.Instance.userData.logged)
+            userName.text = Data.Instance.playerSettings.heroData.nick;
+        else
+            userName.text = "Anónimo";
+
+        int score = Data.Instance.playerSettings.heroData.stats.score;
+        category.text = "Categoría: " + Categories.GetCategorieByScore(score);
+        heroScore.text = "puntos: " + score;
     }
     void OnDestroy()
     {
@@ -51,7 +63,10 @@ public class FighterSelector : MonoBehaviour {
         Data.Instance.playerSettings.characterData = playerData;
 
         characterName.text = Data.Instance.playerSettings.characterData.nick;
-        characterCategory.text = "Categoría 1";
+
+        int score = Data.Instance.playerSettings.characterData.stats.score;
+        characterCategory.text = "Categoría: " + Categories.GetCategorieByScore(score);
+        characterScore.text = "puntos: " + score;
 
         stats_character.Init(Data.Instance.playerSettings.characterData.stats);
         peleas_character.Init(Data.Instance.playerSettings.characterData.peleas);

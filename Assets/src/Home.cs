@@ -9,19 +9,28 @@ public class Home : MonoBehaviour
     public ProfilePicture profilePicture;
     public Text usernameField;
     public Text categoriaField;
+    public Text scoreField;
 
     void Start()
     {
         stats.Init(Data.Instance.playerSettings.heroData.stats);
-        peleas.Init(Data.Instance.playerSettings.heroData.peleas);
 
         if (SocialManager.Instance.userData.logged)
-        {                        
+        {
             profilePicture.setPicture(SocialManager.Instance.userData.facebookID);
+            usernameField.text = Data.Instance.playerSettings.heroData.nick;            
+            peleas.Init(Data.Instance.playerSettings.heroData.peleas);
         }
-
-        usernameField.text = Data.Instance.playerSettings.heroData.nick;
-        categoriaField.text = "Categoría: " + Categories.GetCategorieByScore(Data.Instance.playerSettings.heroData.score);
+        else
+        {
+            profilePicture.gameObject.SetActive(false);
+            usernameField.text = "Anónimo (No estás registrado en el tornéo)";
+            peleas.gameObject.SetActive(false);
+        }
+        int score = Data.Instance.playerSettings.heroData.stats.score;
+        scoreField.text = "Puntos: " + score;
+        categoriaField.text = "Categoría: " + Categories.GetCategorieByScore(score);        
+        
     }
     public void StartGame()
     {
