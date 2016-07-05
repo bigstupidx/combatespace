@@ -10,21 +10,26 @@ public class BreathSfx : MonoBehaviour {
 
 	private AudioSource source;
 	private int next;
+	private bool paused;
 
 	// Use this for initialization
 	void Start () {
 		source = GetComponent<AudioSource> ();
 
 		Events.OnHeroAguanteStatus += OnHeroAguanteStatus;
+		Events.OnRoundComplete += OnRoundComplete;
+		Events.OnRoundStart += OnRoundStart;
 	}
 
 	void OnDestroy(){
 		Events.OnHeroAguanteStatus -= OnHeroAguanteStatus;
+		Events.OnRoundComplete -= OnRoundComplete;
+		Events.OnRoundStart -= OnRoundStart;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (!source.isPlaying) {
+		if (!source.isPlaying && !paused) {
 			source.clip = clips [next];
 			source.loop = true;
 			float vol = Random.Range (volLowRange, volHighRange);
@@ -40,5 +45,16 @@ public class BreathSfx : MonoBehaviour {
 			next = sel;
 			source.loop = false;
 		}		
+	}
+
+	void OnRoundStart()
+	{		
+		paused = false;
+		source.Play ();
+	}
+	void OnRoundComplete()
+	{
+		paused = true;
+		source.Pause ();
 	}
 }

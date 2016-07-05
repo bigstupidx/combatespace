@@ -38,6 +38,7 @@ public class HeroSounds : MonoBehaviour {
 
 	IEnumerator LonaSfx(float delay)
 	{		
+		Debug.Log ("ACA");
 		yield return new WaitForSeconds(delay);
 		float vol = Random.Range (volLowRange-0.2f, volHighRange-0.4f);
 		receiveSource.volume = vol;
