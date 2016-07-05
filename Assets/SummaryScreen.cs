@@ -5,21 +5,34 @@ using UnityEngine.UI;
 public class SummaryScreen : MonoBehaviour {
 
     public DemoStat[] heroStats;
+    public int num;
+    public Text field;
 
     void Start()
     {
-        Invoke("Load", 0.1f);
+        num = 4;
+        Events.OnGenericPopup("¡Buena peléa!", "Ganaste " + num + " puntos. ¿En qué habilidad lo querés volcar?");
+        Invoke("Init", 0.1f);
     }
-    void Load()
+    void Init()
     {
+        
         heroStats[0].Init(Data.Instance.playerSettings.heroData.stats.Power);
         heroStats[1].Init(Data.Instance.playerSettings.heroData.stats.Resistence);
         heroStats[2].Init(Data.Instance.playerSettings.heroData.stats.Defense);
         heroStats[3].Init(Data.Instance.playerSettings.heroData.stats.Speed);
+        SetField();
+    }
+    public void SetField()
+    {
+        field.text = num.ToString();
     }
     public void Add(int statID)
     {
         heroStats[statID].Add();
+        num--;
+        SetField();
+        if (num == 0) Ready();
     }
     public void Ready()
     {
@@ -30,6 +43,7 @@ public class SummaryScreen : MonoBehaviour {
             (heroStats[2].num),
             (heroStats[3].num)
             );
+        Data.Instance.GetComponent<StatsManager>().Save();
         Data.Instance.LoadLevel("03_Home");
     }
 }
