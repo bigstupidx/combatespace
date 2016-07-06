@@ -38,7 +38,7 @@ public class NameSelectorScreen : MonoBehaviour {
             if (nameArr.Length > 1)
                 apellido = nameArr[1];
 
-            string username = nameArr[0] + " '" + nameSTR + "' " + apellido;
+            string username = nameArr[0] + " " + nameSTR + " " + apellido;
             newButton.Init(this, id, username);
             id++;
         }

@@ -12,12 +12,14 @@ public class DataController : MonoBehaviour
     private string updatePeleas_URL = URL + "updatePeleas.php?";
     private string getUsersByScore_URL = URL + "getUsersByScore.php?";
     private string saveStats_URL = URL + "saveStats.php?";
+    private string saveNewPelea_URL = URL + "saveNewPelea.php?";
     
     void Start()
     {        
         Events.OnUpdatePlayerData += OnUpdatePlayerData;
         Events.OnSavePelea += OnSavePelea;
         Events.OnSaveStats += OnSaveStats;
+        Events.OnSaveNewPelea += OnSaveNewPelea;
 
         SocialEvents.OnFacebookLogin += OnFacebookLogin;
         SocialEvents.OnGetUsersByScore += OnGetUsersByScore;
@@ -159,7 +161,14 @@ public class DataController : MonoBehaviour
         yield return hs_post;
         if (hs_post.error != null) print("Error con: GetUsersByScoreRoutine: " + hs_post.error); else {OnGetUsersByScoreListener(hs_post.text);}
     }
-
+    private void OnSaveNewPelea(Fight fight)
+    {
+        string hash = fight.retador_facebookID + fight.retado_facebookID + fight.winner;
+        hash = Md5Test.Md5Sum(hash + secretKey);
+        string post_url = saveNewPelea_URL + "retador_username=" + WWW.EscapeURL(fight.retador_username) + "&retado_username=" + WWW.EscapeURL(fight.retado_username) + "&retador_facebookID=" + fight.retador_facebookID + "&retado_facebookID=" + fight.retado_facebookID + "&winner=" + fight.winner + "&hash=" + hash;
+        print("OnSaveNewPelea : " + post_url);
+        WWW hs_post = new WWW(post_url);
+    }
 
     public void OnSaveStats(Stats stats)
     {

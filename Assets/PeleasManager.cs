@@ -17,17 +17,29 @@ public class PeleasManager : MonoBehaviour {
     void OnFightEnd(bool youWon)
     {
         if (!SocialManager.Instance.userData.logged) return;
-            
+
+        Fight fight = new Fight();
+
         if (youWon)
         {
+            fight.winner = Data.Instance.playerSettings.heroData.facebookID;
             Data.Instance.playerSettings.heroData.peleas.peleas_g++;
             PlayerPrefs.SetInt("peleas_g", Data.Instance.playerSettings.heroData.peleas.peleas_g);
         }
         else
         {
+            fight.winner = Data.Instance.playerSettings.characterData.facebookID;
             Data.Instance.playerSettings.heroData.peleas.peleas_p++;
             PlayerPrefs.SetInt("peleas_p", Data.Instance.playerSettings.heroData.peleas.peleas_p);
         }
         Events.OnSavePelea(SocialManager.Instance.userData.facebookID, Data.Instance.playerSettings.heroData.peleas);
+
+        fight.retador_facebookID = Data.Instance.playerSettings.heroData.facebookID;
+        fight.retado_facebookID = Data.Instance.playerSettings.characterData.facebookID;
+
+        fight.retador_username = Data.Instance.playerSettings.heroData.nick;
+        fight.retado_username = Data.Instance.playerSettings.characterData.nick;
+        
+        Events.OnSaveNewPelea(fight);
     }
 }

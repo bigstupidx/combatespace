@@ -3,6 +3,10 @@ using System.Collections;
 
 public class TopMenu : MonoBehaviour {
 
+    public void Carrera()
+    {
+        Data.Instance.LoadLevel("07_Carrera");
+    }
     public void Back()
     {
         Data.Instance.LoadLevel("Dificulty");
