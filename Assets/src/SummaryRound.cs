@@ -4,7 +4,7 @@ using System.Collections;
 
 public class SummaryRound : MonoBehaviour
 {
-
+    public GameObject campana;
     public GameObject panel;
     public Text field;
 
@@ -23,10 +23,22 @@ public class SummaryRound : MonoBehaviour
     }
     void OnRoundComplete()
     {
+        StartCoroutine(AnimatedState());
+    }
+    IEnumerator AnimatedState()
+    {
+        campana.SetActive(true);
+        campana.GetComponent<Animation>().Play("campana");
+
         if (Game.Instance.fightStatus.Round >= 12)
             Events.OnAllRoundsComplete();
         panel.SetActive(true);
         field.text = Game.Instance.fightStatus.Round.ToString();
+
+        yield return new WaitForSeconds(1.2f);
+
+        campana.GetComponent<Animation>().Stop();
+        campana.SetActive(false);        
     }
     public void NextRound()
     {

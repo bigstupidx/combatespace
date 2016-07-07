@@ -14,8 +14,8 @@ public class CharacterMovement : MonoBehaviour {
     {
         //speed = 30;
         RotationArea = Data.Instance.settings.defaultSpeed.rotationArea;
-        speed = 30 + (Data.Instance.playerSettings.characterData.stats.Speed / 2);
-        Invoke("Loop", 4);
+        speed = 20 + (Data.Instance.playerSettings.characterData.stats.Speed / 2);
+        Invoke("Loop", 3);
     }
     void Loop()
     {
@@ -26,7 +26,7 @@ public class CharacterMovement : MonoBehaviour {
         if(Random.Range(0,100)<50) rand *= -1;
         MoveTo += rand;
 
-        Invoke("Loop", 4);
+        Invoke("Loop", 2);
     }
 	void Update () {
         if (Game.Instance.fightStatus.state == FightStatus.states.KO) return;

@@ -16,6 +16,8 @@ public class FacebookFriends : MonoBehaviour {
     public IList<string> ids;
     public List<Friend> all;
 
+    public List<Friend> notFriends;
+
 	void Start () {
         ids = new List<string>();
         SocialEvents.AddFacebookFriend += AddFacebookFriend;
@@ -89,13 +91,33 @@ public class FacebookFriends : MonoBehaviour {
     {
         foreach (Friend friend in all)
         {
-            if (friend.id == facebookID)
+            if (friend.id == facebookID && friend.picture == null)
+            {
                 friend.picture = picture;
+                return;
+            }
         }
+        foreach (Friend friend in notFriends)
+        {
+            if (friend.id == facebookID && friend.picture == null)
+            {
+                friend.picture = picture;
+                return;
+            }
+        }
+        Friend newFriend = new Friend();
+        newFriend.id = facebookID;
+        newFriend.picture = picture;
+        notFriends.Add(newFriend);   
     }
     public Texture2D GetProfilePicture(string facebookID)
     {
         foreach (Friend friend in all)
+        {
+            if (friend.id == facebookID)
+                return friend.picture;
+        }
+        foreach (Friend friend in notFriends)
         {
             if (friend.id == facebookID)
                 return friend.picture;

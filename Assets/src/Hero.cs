@@ -8,6 +8,7 @@ public class Hero : MonoBehaviour
     private InputManager inputManager;
     public FightStatus fightStatus;
     public int combo = 0;
+    public Camera herocamera;
 
     void Start()
     {
@@ -46,6 +47,12 @@ public class Hero : MonoBehaviour
         }
         
 #elif UNITY_ANDROID || UNITY_IPHONE
+            float _x = Game.Instance.inputManager.gyro_rotation.x*2;
+            //if(_x>15) 
+            //    _x = 15; 
+            //else if(_x<-15) 
+            //    _x = -15;
+            herocamera.transform.Rotate(_x, -180, 0);
             transform.Rotate(0, -Game.Instance.inputManager.gyro_rotation.y*2, 0);
 #endif
     }

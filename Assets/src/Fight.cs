@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
+[Serializable]
 public class Fight {
 
     public string retador_username;
@@ -9,5 +11,6 @@ public class Fight {
     public string retado_facebookID;
     public string winner;
     public int round;
+    public string timestamp;
 
 }

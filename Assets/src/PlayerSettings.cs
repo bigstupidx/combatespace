@@ -10,18 +10,27 @@ public class PlayerSettings : MonoBehaviour {
     {
         SocialEvents.ResetApp += ResetApp;
         Events.OnUpdatePlayerData += OnUpdatePlayerData;
+        SocialEvents.OnUserReady += OnUserReady;
 
         heroData.username  = PlayerPrefs.GetString("username", "");
         heroData.facebookID = PlayerPrefs.GetString("facebookID", "");
-        heroData.nick = PlayerPrefs.GetString("nick", "");
+        heroData.nick = PlayerPrefs.GetString("nick", "Anónimo");
+    }
+    public void OnUserReady(string facebookID, string username, string nick)
+    {
+        heroData.username = username;
+        heroData.facebookID = facebookID;
+        heroData.nick = nick;
     }
     void OnDestroy()
     {
         SocialEvents.ResetApp -= ResetApp;
         Events.OnUpdatePlayerData -= OnUpdatePlayerData;
+        SocialEvents.OnUserReady -= OnUserReady;
     }
     void ResetApp()
     {
+        heroData.nick = "";
         heroData.facebookID = "";
         heroData.username = "";
     }

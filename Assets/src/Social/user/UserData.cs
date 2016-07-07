@@ -39,10 +39,11 @@ public class UserData : MonoBehaviour {
             logged = true;
         }
     }
-    public void OnUserReady(string facebookID, string username, string email)
+    public void OnUserReady(string facebookID, string username, string nick)
     {
         PlayerPrefs.SetString("facebookID", facebookID);
         PlayerPrefs.SetString("username", username);
+        PlayerPrefs.SetString("nick", nick);
         SetUser(username, facebookID);
     }
     public void Reset()

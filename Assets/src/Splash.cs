@@ -8,7 +8,7 @@ public class Splash : MonoBehaviour {
 
     void Start()
     {
-        debug.text = "Giroscopio: " + Input.gyro.enabled.ToString();
+        //debug.text = "Giroscopio: " + Input.gyro.enabled.ToString();
     }
     public void Clicked()
     {

@@ -36,10 +36,12 @@ public class FightData : MonoBehaviour {
     IEnumerator Loop()
     {
         yield return new WaitForSeconds(1);
-        sec--;        
-        SetField();
         if (Game.Instance.fightStatus.state == FightStatus.states.FIGHTING)
-            StartRoutine();
+        {
+            sec--;
+            SetField();
+        }
+        StartRoutine();
     }
     void SetField()
     {

@@ -5,6 +5,8 @@ using System;
 public static class SocialEvents {
 
     public static System.Action<System.Action<string>, int, int> OnGetUsersByScore = delegate { };
+    public static System.Action<System.Action<string>> OnGetFights = delegate { };
+    
 
     public static System.Action<bool> OnUserExistInDB = delegate { };
     public static System.Action OnUserCreatedInDB = delegate { };
@@ -15,6 +17,7 @@ public static class SocialEvents {
     public static System.Action OnFacebookLoginPressed = delegate { };
     public static System.Action OnFacebookFriends = delegate { };
     public static System.Action OnFacebookInviteFriends = delegate { };
+
     public static System.Action<string, string, string> OnFacebookLogin = delegate { };
     public static System.Action<string, string> AddFacebookFriend = delegate { }; 
 

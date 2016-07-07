@@ -13,6 +13,7 @@ public class DataController : MonoBehaviour
     private string getUsersByScore_URL = URL + "getUsersByScore.php?";
     private string saveStats_URL = URL + "saveStats.php?";
     private string saveNewPelea_URL = URL + "saveNewPelea.php?";
+    private string getPeleas_URL = URL + "getPeleasByFacebookID.php?";
     
     void Start()
     {        
@@ -23,6 +24,7 @@ public class DataController : MonoBehaviour
 
         SocialEvents.OnFacebookLogin += OnFacebookLogin;
         SocialEvents.OnGetUsersByScore += OnGetUsersByScore;
+        SocialEvents.OnGetFights += OnGetFights;
     }
     void OnFacebookLogin(string facebookID, string username, string email)
     {
@@ -64,10 +66,12 @@ public class DataController : MonoBehaviour
                 peleas.retos_g = System.Int32.Parse(userData[10]);
                 peleas.retos_p = System.Int32.Parse(userData[11]);
 
+                string nick = userData[12];
+
                 Data.Instance.playerSettings.heroData.stats = stats;
                 Data.Instance.playerSettings.heroData.peleas = peleas;
 
-                SocialEvents.OnUserReady(_facebookID, _username, _email);
+                SocialEvents.OnUserReady(_facebookID, _username, nick);
             }
             catch
             {
@@ -184,7 +188,22 @@ public class DataController : MonoBehaviour
         string post_url = saveStats_URL + "facebookID=" + facebookID + "&score=" + score + "&stat1=" + stat1 + "&stat2=" + stat2 + "&stat3=" + stat3 + "&stat4=" + stat4 + "&hash=" + hash;
         print("OnSaveStats : " + post_url);
         WWW hs_post = new WWW(post_url);
-    }    
+    }
+    private System.Action<string> OnGetFightsListener;
+    public void OnGetFights(System.Action<string> OnGetFightsListener)
+    {
+        this.OnGetFightsListener = OnGetFightsListener;
+        StartCoroutine(OnGetFightsRoutine());
+    }
+    IEnumerator OnGetFightsRoutine()
+    {
+        string facebookID = SocialManager.Instance.userData.facebookID;
+        string post_url = getPeleas_URL + "facebookID=" + facebookID;
+        print("OnGetFightsRoutine : " + post_url);
+        WWW hs_post = new WWW(post_url);
+        yield return hs_post;
+        if (hs_post.error != null) print("Error con: OnGetFightsRoutine: " + hs_post.error); else { OnGetFightsListener(hs_post.text); }
+    }
 
 
 }
