@@ -45,7 +45,7 @@ public class Hero : MonoBehaviour
            // rot.x = inputManager.heroRotationVertical * 20;
             transform.localEulerAngles = rot;
            // herocamera.transform.Rotate(inputManager.heroRotationVertical * 20, 0, 0);
-            herocamera.transform.localEulerAngles = new Vector3(14 + inputManager.heroRotationVertical * 20, 180, 0);
+          //  herocamera.transform.localEulerAngles = new Vector3(14 + inputManager.heroRotationVertical * 20, 180, 0);
         }
         
 #elif UNITY_ANDROID || UNITY_IPHONE
