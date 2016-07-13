@@ -119,7 +119,7 @@ public class InputManager:MonoBehaviour  {
         {
             gyro_rotation = new Vector3(0, -Input.acceleration.x*4, 0);
         }
-
+        heroRotationVertical = -Input.acceleration.y;
 
 
         if (Input.touchCount > 0)

@@ -8,7 +8,7 @@ public class Hero : MonoBehaviour
     private InputManager inputManager;
     public FightStatus fightStatus;
     public int combo = 0;
-    public Camera herocamera;
+    public GameObject herocamera;
 
     void Start()
     {
@@ -42,17 +42,19 @@ public class Hero : MonoBehaviour
         {
             Vector3 rot = transform.localEulerAngles;
             rot.y += inputManager.heroRotation * 4;
-            rot.x = inputManager.heroRotationVertical * 20;
+           // rot.x = inputManager.heroRotationVertical * 20;
             transform.localEulerAngles = rot;
+           // herocamera.transform.Rotate(inputManager.heroRotationVertical * 20, 0, 0);
+            herocamera.transform.localEulerAngles = new Vector3(14 + inputManager.heroRotationVertical * 20, 180, 0);
         }
         
 #elif UNITY_ANDROID || UNITY_IPHONE
-            float _x = Game.Instance.inputManager.gyro_rotation.x*2;
-            //if(_x>15) 
-            //    _x = 15; 
-            //else if(_x<-15) 
-            //    _x = -15;
-            herocamera.transform.Rotate(_x, -180, 0);
+            float _x = Game.Instance.inputManager.gyro_rotation.x*1.2f;
+
+            //if(herocamera.transform.localEulerAngles.x>40 && _x>0) return;
+            //if(herocamera.transform.localEulerAngles.x<40 && _x<0) return;
+
+            herocamera.transform.Rotate(_x, 0, 0);
             transform.Rotate(0, -Game.Instance.inputManager.gyro_rotation.y*2, 0);
 #endif
     }
