@@ -8,10 +8,12 @@ public class Splash : MonoBehaviour {
 
     void Start()
     {
-        //debug.text = "Giroscopio: " + Input.gyro.enabled.ToString();
     }
     public void Clicked()
     {
-        Data.Instance.LoadLevel("01_Register");        
+        if(SocialManager.Instance.userData.logged || Data.Instance.playerSettings.heroData.username != "")
+            Data.Instance.LoadLevel("03_Home");
+        else
+            Data.Instance.LoadLevel("01_Register");
     }
 }

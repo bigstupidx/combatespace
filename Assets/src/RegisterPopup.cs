@@ -34,6 +34,7 @@ public class RegisterPopup : ScreenBase
     }
 	public void ClickedLater () {
         SetOff();
+        Data.Instance.playerSettings.SetAnonimo();
         Data.Instance.LoadLevel("03_Home");
 	}
     public override void OnBackButtonPressed() 
