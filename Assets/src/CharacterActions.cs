@@ -3,6 +3,9 @@ using System.Collections;
 
 public class CharacterActions : MonoBehaviour {
 
+    public Animator animator;
+    public Animation anim;
+
     public MeshRenderer puno_L;
     public MeshRenderer puno_R;
 
@@ -38,7 +41,6 @@ public class CharacterActions : MonoBehaviour {
         KO
     }
 
-    private Animator anim;
     public string anim_attack_l;
     public string anim_attack_r;
     public string anim_attack_l_cortito;
@@ -63,7 +65,7 @@ public class CharacterActions : MonoBehaviour {
     
 	void Start () {
         character = GetComponent<Character>();
-        anim = GetComponent<Animator>();
+       // anim = GetComponent<Animator>();
 	}
     public void ChangeRandomDefense()
     {
@@ -127,7 +129,8 @@ public class CharacterActions : MonoBehaviour {
     {
         Reset();
         state = states.KO;
-        anim.CrossFade(anim_ko, 0.1f);
+        animator.CrossFade(anim_ko, 0.1f);
+        anim.Play(anim_ko);
     }
     public void Reset()
     {
@@ -160,7 +163,11 @@ public class CharacterActions : MonoBehaviour {
             case actions.ATTACK_L_CORTITO: actionName = anim_attack_l_cortito; attackRoutine = AttackRoutine(0.4f, 0.3f); StartCoroutine(attackRoutine); break;
             case actions.ATTACK_R_CORTITO: actionName = anim_attack_r_cortito; attackRoutine = AttackRoutine(0.4f, 0.3f); StartCoroutine(attackRoutine); break;
         }
-        anim.CrossFade(actionName, 0.15f,0,0);
+        animator.CrossFade(actionName, 0.15f, 0, 0);
+
+        if (anim[actionName] != null)
+            anim.Play(actionName);
+
         Events.OnCharacterChangeAction(action);
     }
     public void OnCortito()
