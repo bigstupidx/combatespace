@@ -3,7 +3,7 @@ using System.Collections;
 
 public static class Events
 {
-
+    public static System.Action OnGameSettings = delegate { };
     public static System.Action<PlayerData> OnUpdatePlayerData = delegate { };
     public static System.Action<bool> OnLoadingShow = delegate { };
     public static System.Action OnRegisterPopup = delegate { };

@@ -52,24 +52,18 @@ public class DataController : MonoBehaviour
                 int userID = System.Int32.Parse(userData[1]);
                 string username = userData[2];
 
-                Stats stats = new Stats();
-                stats.Power = System.Int32.Parse(userData[3]);
-                stats.Resistence = System.Int32.Parse(userData[4]);
-                stats.Defense = System.Int32.Parse(userData[5]);
-                stats.Speed = System.Int32.Parse(userData[6]);
-
-                int score = System.Int32.Parse(userData[7]);
+                Data.Instance.playerSettings.heroData.stats.Power = System.Int32.Parse(userData[3]);
+                Data.Instance.playerSettings.heroData.stats.Resistence = System.Int32.Parse(userData[4]);
+                Data.Instance.playerSettings.heroData.stats.Defense = System.Int32.Parse(userData[5]);
+                Data.Instance.playerSettings.heroData.stats.Speed = System.Int32.Parse(userData[6]);
+                Data.Instance.playerSettings.heroData.stats.score = System.Int32.Parse(userData[7]);
                 
-                Peleas peleas = new Peleas();
-                peleas.peleas_g = System.Int32.Parse(userData[8]);
-                peleas.peleas_p = System.Int32.Parse(userData[9]);
-                peleas.retos_g = System.Int32.Parse(userData[10]);
-                peleas.retos_p = System.Int32.Parse(userData[11]);
+                Data.Instance.playerSettings.heroData.peleas.peleas_g = System.Int32.Parse(userData[8]);
+                Data.Instance.playerSettings.heroData.peleas.peleas_p = System.Int32.Parse(userData[9]);
+                Data.Instance.playerSettings.heroData.peleas.retos_g = System.Int32.Parse(userData[10]);
+                Data.Instance.playerSettings.heroData.peleas.retos_p = System.Int32.Parse(userData[11]);
 
                 string nick = userData[12];
-
-                Data.Instance.playerSettings.heroData.stats = stats;
-                Data.Instance.playerSettings.heroData.peleas = peleas;
 
                 SocialEvents.OnUserReady(_facebookID, _username, nick);
             }

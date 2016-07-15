@@ -20,12 +20,12 @@ public class TopMenu : MonoBehaviour {
     }
     public void Settings()
     {
-        Data.Instance.LoadLevel("05_Settings");
+        Events.OnGameSettings();
     }
     public void Tutorial()
     {
         Data.Instance.settings.playingTutorial = true;
-        Data.Instance.playerSettings.heroData.stats.SetStats(50, 50, 50, 50, 50);
+        Data.Instance.playerSettings.heroData.stats.SetStats(10, 10, 10, 10, 10);
         Data.Instance.playerSettings.characterData.stats.SetStats(10, 14, 11, 15, 15);
         Data.Instance.LoadLevel("Tutorial");
     }

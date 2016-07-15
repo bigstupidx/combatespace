@@ -20,9 +20,8 @@ public class Stats {
         this.Defense = defense;
         this.Speed = speed;        
     }
-    public void SetScore()
+    public void AddScore(int qty)
     {
-        this.score = Power + Resistence + Defense + Speed - 40;
-        Debug.Log("SetScore" + Power + " score: " + score);
+        score += qty;
     }
 }

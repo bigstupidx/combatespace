@@ -117,4 +117,8 @@ public class Tutorial : MonoBehaviour {
         title.text = _title;
         field.text = _text;
     }
+    public void Exit()
+    {
+        Data.Instance.LoadLevel("03_Home");
+    }
 }

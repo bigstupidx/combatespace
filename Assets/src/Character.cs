@@ -48,8 +48,7 @@ public class Character : MonoBehaviour {
     }
     void OnAvatarStandUp(bool isHero)
     {
-        characterActions.state = CharacterActions.states.DEFENDING;
-        characterActions.ChangeRandomDefense();
+        characterActions.Levanta();
     }
     void OnRoundComplete()
     {

@@ -28,7 +28,7 @@ public class SummaryScreen : MonoBehaviour {
             num += 2;
             text += "/n+2 por ganarle a alguien dos categorías más avanzadas";
         }
-
+        Data.Instance.playerSettings.heroData.stats.AddScore(num);
         Events.OnGenericPopup("Ganaste " + num + " puntos.", text);
         Invoke("Init", 0.1f);
     }

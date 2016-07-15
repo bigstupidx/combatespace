@@ -18,7 +18,8 @@ public class CharacterActions : MonoBehaviour {
         DEFENDING,
         ATTACKING,
         PUNCHED,
-        KO
+        KO,
+        LEVANTA
     }
 
     public actions action;
@@ -57,9 +58,11 @@ public class CharacterActions : MonoBehaviour {
     public string anim_punched_down_r;
     public string anim_punched_center;
     public string anim_ko;
+    public string anim_levanta;
 
     private Character character;
 
+    private IEnumerator levantaRoutine;
     private IEnumerator attackRoutine;
     private IEnumerator defenseRoutine;    
     
@@ -130,7 +133,22 @@ public class CharacterActions : MonoBehaviour {
         Reset();
         state = states.KO;
         animator.CrossFade(anim_ko, 0.1f);
-        anim.Play(anim_ko);
+        if (anim[anim_ko] != null)
+            anim.Play(anim_ko);
+    }
+    public void Levanta()
+    {
+        Reset();
+        state = states.LEVANTA;
+        animator.CrossFade(anim_levanta, 0.1f);
+        if (anim[anim_levanta] != null)
+            anim.Play(anim_levanta);
+        levantaRoutine = LevantaRoutine(); StartCoroutine(levantaRoutine); 
+    }
+    IEnumerator LevantaRoutine()
+    {
+        yield return new WaitForSeconds(2);
+        ChangeRandomDefense();
     }
     public void Reset()
     {
