@@ -12,6 +12,7 @@ public class Data : MonoBehaviour
     public PlayerSettings playerSettings;
     public FightersManager fightersManager;
     public PeleasManager peleasManager;
+    public HistorialManager hostorialManager;
     public string lastScene;
 
     public static Data Instance
@@ -51,6 +52,7 @@ public class Data : MonoBehaviour
         SocialEvents.OnUserReady += OnUserReady;
         fightersManager = GetComponent<FightersManager>();
         peleasManager = GetComponent<PeleasManager>();
+        hostorialManager = GetComponent<HistorialManager>();
         Invoke("StartLoadingFromServer", 1);
     }
     void StartLoadingFromServer()

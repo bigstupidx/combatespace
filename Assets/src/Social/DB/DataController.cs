@@ -14,6 +14,7 @@ public class DataController : MonoBehaviour
     private string saveStats_URL = URL + "saveStats.php?";
     private string saveNewPelea_URL = URL + "saveNewPelea.php?";
     private string getPeleas_URL = URL + "getPeleasByFacebookID.php?";
+    private string getHistorialPeleas_URL = URL + "getHistorialPeleas.php?";
     
     void Start()
     {        
@@ -25,6 +26,7 @@ public class DataController : MonoBehaviour
         SocialEvents.OnFacebookLogin += OnFacebookLogin;
         SocialEvents.OnGetUsersByScore += OnGetUsersByScore;
         SocialEvents.OnGetFights += OnGetFights;
+        SocialEvents.OnGetHistorial += OnGetHistorial;
     }
     void OnFacebookLogin(string facebookID, string username, string email)
     {
@@ -197,6 +199,21 @@ public class DataController : MonoBehaviour
         WWW hs_post = new WWW(post_url);
         yield return hs_post;
         if (hs_post.error != null) print("Error con: OnGetFightsRoutine: " + hs_post.error); else { OnGetFightsListener(hs_post.text); }
+    }
+
+    private System.Action<string> OnGetHistorialListener;
+    public void OnGetHistorial(System.Action<string> OnGetHistorialListener, string facebookID, string facebookID2)
+    {
+        this.OnGetHistorialListener = OnGetHistorialListener;
+        StartCoroutine(OnGetHistorial(facebookID, facebookID2));
+    }
+    IEnumerator OnGetHistorial(string facebookID, string facebookID2)
+    {
+        string post_url = getHistorialPeleas_URL + "facebookID=" + facebookID + "&facebookID2=" + facebookID2;
+        print("OnGetHistorial : " + post_url);
+        WWW hs_post = new WWW(post_url);
+        yield return hs_post;
+        if (hs_post.error != null) print("Error con: OnGetHistorial: " + hs_post.error); else { OnGetHistorialListener(hs_post.text); }
     }
 
 

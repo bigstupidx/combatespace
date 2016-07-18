@@ -81,7 +81,10 @@ public class FighterSelector : MonoBehaviour {
             Data.Instance.LoadLevel("Tutorial");
         }
         else
-            Data.Instance.LoadLevel("Game");
+        {
+            Data.Instance.GetComponent<HistorialManager>().LoadHistorial();
+            Data.Instance.LoadLevel("04_FightIntro");
+        }
     }
     public void PlayTutorial()
     {

@@ -48,7 +48,8 @@ public class Character : MonoBehaviour {
     }
     void OnAvatarStandUp(bool isHero)
     {
-        characterActions.Levanta();
+        if(!isHero)
+            characterActions.Levanta();
     }
     void OnRoundComplete()
     {

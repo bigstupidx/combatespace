@@ -14,6 +14,7 @@ public class FightersManager : MonoBehaviour {
 	}
     public PlayerData GetActualFighter()
     {
+        if (all.Count == 0) return null;
         return all[activeID];
     }
     public PlayerData GetFighter(bool Next)

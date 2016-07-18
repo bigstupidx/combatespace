@@ -4,6 +4,7 @@ using System;
 
 public static class SocialEvents {
 
+    public static System.Action<System.Action<string>, string, string> OnGetHistorial = delegate { };
     public static System.Action<System.Action<string>, int, int> OnGetUsersByScore = delegate { };
     public static System.Action<System.Action<string>> OnGetFights = delegate { };
     
