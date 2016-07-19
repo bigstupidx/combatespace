@@ -21,6 +21,7 @@ public class SummaryRound : MonoBehaviour
 
     void Start()
     {
+        anim.gameObject.SetActive(false);
         minaCamera.enabled = false;
         SetOff();
         Events.OnRoundComplete += OnRoundComplete;
@@ -39,6 +40,7 @@ public class SummaryRound : MonoBehaviour
     }
     IEnumerator AnimatedState()
     {
+        anim.gameObject.SetActive(true);
         ready = false;
         foreach(GameObject go in toDisable)
             go.SetActive(false);
@@ -80,20 +82,35 @@ public class SummaryRound : MonoBehaviour
         campana.GetComponent<Animation>().Stop();
         campana.SetActive(false);
 
-        yield return new WaitForSeconds(4);
+        yield return new WaitForSeconds(6);
         NextRound();
     }
     public void NextRound()
     {
         if (ready) return;
 
-        ready = true;
-        foreach (GameObject go in toDisable)
-            go.SetActive(true);
-
         heroCamera.enabled = true;
         minaCamera.enabled = false;
-        SetOff();
+
+        ready = true;
+        StartCoroutine(FinishedCoroutine());
+    }
+    IEnumerator FinishedCoroutine()
+    {
         Events.OnRoundStart();
+        campana.SetActive(true);
+        campana.GetComponent<Animation>().Play("campana");
+
+        yield return new WaitForSeconds(1f);
+
+        campana.GetComponent<Animation>().Stop();
+        campana.SetActive(false);
+        anim.gameObject.SetActive(false);
+        
+        foreach (GameObject go in toDisable)
+            go.SetActive(true);
+        
+        SetOff();
+        
     }
 }

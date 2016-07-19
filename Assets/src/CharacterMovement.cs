@@ -10,6 +10,20 @@ public class CharacterMovement : MonoBehaviour {
     public int MoveTo;
     public float actualZ;
 
+    void Start()
+    {
+        Events.OnRoundStart += OnRoundStart;
+    }
+    void OnDestroy()
+    {
+        Events.OnRoundStart -= OnRoundStart;
+    }
+    void OnRoundStart()
+    {
+        MoveTo =  0;
+        actualZ = 0;
+        pivot.transform.localEulerAngles = Vector3.zero;
+    }
     public void Init()
     {
         //speed = 30;
@@ -29,7 +43,10 @@ public class CharacterMovement : MonoBehaviour {
         Invoke("Loop", 2);
     }
 	void Update () {
+
         if (Game.Instance.fightStatus.state == FightStatus.states.KO) return;
+        if (Game.Instance.fightStatus.state == FightStatus.states.BETWEEN_ROUNDS) return;
+
         if (MoveTo > Mathf.Floor(actualZ))
             actualZ += Time.deltaTime*speed;
         else if (MoveTo < Mathf.Floor(actualZ))

@@ -23,6 +23,7 @@ public class Hero : MonoBehaviour
         Events.OnAvatarFall += OnAvatarFall;
         Events.OnComputeCharacterPunched += OnComputeCharacterPunched;
         Events.OnAvatarStandUp += OnAvatarStandUp;
+        Events.OnRoundStart += OnRoundStart;
     }
     void OnDestroy()
     {
@@ -32,8 +33,13 @@ public class Hero : MonoBehaviour
         Events.OnAvatarFall -= OnAvatarFall;
         Events.OnComputeCharacterPunched -= OnComputeCharacterPunched;
         Events.OnAvatarStandUp -= OnAvatarStandUp;
+        Events.OnRoundStart -= OnRoundStart;
     }
 
+    void OnRoundStart()
+    {
+        transform.localEulerAngles = Vector3.zero;
+    }
     void Update()
     {
         if (fightStatus.state == FightStatus.states.BETWEEN_ROUNDS) return;

@@ -3,7 +3,7 @@ using System.Collections;
 
 public class CharacterActions : MonoBehaviour {
 
-    public Animator animator;
+   // public Animator animator;
     public Animation anim;
 
     public MeshRenderer puno_L;
@@ -132,17 +132,17 @@ public class CharacterActions : MonoBehaviour {
     {
         Reset();
         state = states.KO;
-        animator.CrossFade(anim_ko, 0.1f);
-        if (anim[anim_ko] != null)
-            anim.Play(anim_ko);
+        //animator.CrossFade(anim_ko, 0.1f);
+        anim.Play(anim_ko);
+        anim[anim_ko].speed = 1;
     }
     public void Levanta()
     {
         Reset();
         state = states.LEVANTA;
-        animator.CrossFade(anim_levanta, 0.1f);
-        if (anim[anim_levanta] != null)
-            anim.Play(anim_levanta);
+       // animator.CrossFade(anim_levanta, 0.1f);
+        anim.Play(anim_levanta);
+        anim[anim_levanta].speed = 1;
         levantaRoutine = LevantaRoutine(); StartCoroutine(levantaRoutine); 
     }
     IEnumerator LevantaRoutine()
@@ -164,6 +164,8 @@ public class CharacterActions : MonoBehaviour {
         Reset();
 
         string actionName = "";
+
+
         switch (action)
         {
             case actions.DEFENSE_UP: actionName = anim_defense_up; break;
@@ -176,15 +178,26 @@ public class CharacterActions : MonoBehaviour {
             case actions.PUNCHED_DOWN_L: actionName = anim_punched_down_l; defenseRoutine =ResetActions(0.4f); StartCoroutine(defenseRoutine); break;
             case actions.PUNCHED_DOWN_R: actionName = anim_punched_down_r; defenseRoutine = ResetActions(0.4f); StartCoroutine(defenseRoutine); break;
             case actions.PUNCHED_CENTER: actionName = anim_punched_center; defenseRoutine = ResetActions(0.3f); StartCoroutine(defenseRoutine); break;
-            case actions.ATTACK_L: actionName = anim_attack_l; attackRoutine = AttackRoutine(0.6f, 0.4f); StartCoroutine(attackRoutine); break;
-            case actions.ATTACK_R: actionName = anim_attack_r; attackRoutine = AttackRoutine(0.6f, 0.4f); StartCoroutine(attackRoutine); break;
-            case actions.ATTACK_L_CORTITO: actionName = anim_attack_l_cortito; attackRoutine = AttackRoutine(0.4f, 0.3f); StartCoroutine(attackRoutine); break;
-            case actions.ATTACK_R_CORTITO: actionName = anim_attack_r_cortito; attackRoutine = AttackRoutine(0.4f, 0.3f); StartCoroutine(attackRoutine); break;
+            case actions.ATTACK_L: actionName = anim_attack_l; attackRoutine = AttackRoutine(0.4f, 0.4f); StartCoroutine(attackRoutine); break;
+            case actions.ATTACK_R: actionName = anim_attack_r; attackRoutine = AttackRoutine(0.4f, 0.4f); StartCoroutine(attackRoutine); break;
+            case actions.ATTACK_L_CORTITO: actionName = anim_attack_l_cortito; attackRoutine = AttackRoutine(0.25f, 0.3f); StartCoroutine(attackRoutine); break;
+            case actions.ATTACK_R_CORTITO: actionName = anim_attack_r_cortito; attackRoutine = AttackRoutine(0.25f, 0.3f); StartCoroutine(attackRoutine); break;
         }
-        animator.CrossFade(actionName, 0.15f, 0, 0);
+      //  animator.CrossFade(actionName, 0.5f, 0, 0);
 
-        if (anim[actionName] != null)
-            anim.Play(actionName);
+        anim.CrossFade(actionName, 0.15f);
+        anim[actionName].speed = 1;
+        switch (action)
+        {
+            case actions.ATTACK_L:
+            case actions.ATTACK_R:
+            case actions.ATTACK_L_CORTITO:
+            case actions.ATTACK_R_CORTITO:
+                anim[actionName].speed = 0.5f;
+                break;
+        }
+       
+
 
         Events.OnCharacterChangeAction(action);
     }
@@ -223,6 +236,7 @@ public class CharacterActions : MonoBehaviour {
     }
     IEnumerator AttackRoutine(float hitTime, float resetTime)
     {
+        
         yield return new WaitForSeconds(hitTime);
         if (state == states.ATTACKING)
             Events.OnCheckHeroHitted(action);
@@ -238,6 +252,8 @@ public class CharacterActions : MonoBehaviour {
     }
     public void DefendedWith(bool isLeft)
     {
+        return;
+
         MeshRenderer puno;
         if (isLeft) 
             puno = puno_L;

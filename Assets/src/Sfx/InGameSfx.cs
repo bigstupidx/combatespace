@@ -76,6 +76,5 @@ public class InGameSfx : MonoBehaviour {
 	{
 		source.Stop ();
 		source.PlayOneShot(bell);
-
 	}
 }

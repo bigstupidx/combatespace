@@ -44,7 +44,7 @@ public class Character : MonoBehaviour {
         Events.OnHeroBlockPunch -= OnHeroBlockPunch;
         Events.OnAvatarFall -= OnAvatarFall;
         Events.OnRoundComplete -= OnRoundComplete;
-        Events.OnAvatarStandUp -= OnAvatarStandUp;
+        Events.OnAvatarStandUp -= OnAvatarStandUp; 
     }
     void OnAvatarStandUp(bool isHero)
     {
