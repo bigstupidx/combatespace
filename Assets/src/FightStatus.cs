@@ -65,8 +65,8 @@ public class FightStatus : MonoBehaviour {
         Events.OnAvatarStandUp += OnAvatarStandUp;
         Events.OnKO += OnKO;
         Loop();
-        if(state != states.KO)
-        Events.OnRoundStart();
+        //if(state != states.KO)
+        //Events.OnRoundStart();
 	}
     void OnDestroy()
     {

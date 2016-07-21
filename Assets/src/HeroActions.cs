@@ -111,7 +111,7 @@ public class HeroActions : MonoBehaviour
     }
     public void CheckHit()
     {
-        if (hero.fightStatus.state != FightStatus.states.FIGHTING) return;
+        if (Game.Instance.fightStatus.state != FightStatus.states.FIGHTING) return;
         if(!CheckIfCharacterIsInTarget()) return;
         Events.OnCheckCharacterHitted(action);
     }
