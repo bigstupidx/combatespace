@@ -347,7 +347,7 @@ ModelImporter:
     7400026: punchedDown_L
     7400028: attack_l
     7400030: attack_r_cortito
-    7400032: arrack_l_cortito
+    7400032: attack_l_cortito
     9500000: //RootNode
     11100000: //RootNode
     13700000: MEDIO_UV
@@ -4215,7 +4215,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: arrack_l_cortito
+      name: attack_l_cortito
       takeName: Take 001
       firstFrame: 261
       lastFrame: 270

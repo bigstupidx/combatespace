@@ -6,7 +6,7 @@ public class FightData : MonoBehaviour {
 
     public Text ChronometerField;
     public Text RoundField;
-    public int sec = 30;
+    public int sec;
     private IEnumerator timeLoop;
 
 	void Awake () {        
@@ -25,7 +25,7 @@ public class FightData : MonoBehaviour {
     void OnRoundStart()
     {
         RoundField.text = "ROUND " + Game.Instance.fightStatus.Round.ToString();
-        sec = 30;
+        sec = 45;
         StartRoutine();
     }
     void StartRoutine()

@@ -48,6 +48,7 @@ public class Character : MonoBehaviour {
     }
     void OnAvatarStandUp(bool isHero)
     {
+        timer = 0;
         if(!isHero)
             characterActions.Levanta();
     }
