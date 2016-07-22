@@ -51,5 +51,8 @@ public static class Events
     //true ganaste, false perdiste:
    // public static System.Action<bool> OnKO = delegate { };
     public static System.Action OnRoundStart = delegate { };
+    public static System.Action<int> OnVerticalScrollSnapChanged = delegate { };
+    public static System.Action<int> SetFighter = delegate { };
+    
     
 }

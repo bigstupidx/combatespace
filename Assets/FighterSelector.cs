@@ -4,11 +4,10 @@ using System.Collections;
 
 public class FighterSelector : MonoBehaviour {
 
-    public StatsUI stats;
-    public PeleasUI peleas;
-
-    public StatsUI stats_character;
-    public PeleasUI peleas_character;
+    public ProfilePicture profilePicture;
+    public FighterSelectorButton button;
+    public Transform Content;
+    public CompareStatsLine[] compareStatsLine;
 
     public Text userName;
     public Text category;
@@ -16,49 +15,66 @@ public class FighterSelector : MonoBehaviour {
 
     public Text characterName;
     public Text characterCategory;
-    public Text characterScore;
+
+    public VerticalScrollSnap verticalScrollSnap;
 
     void Start()
     {
         Data.Instance.settings.playingTutorial = false;
 
         Events.OnBackButtonPressed += OnBackButtonPressed;
+        Events.SetFighter += SetFighter;
 
-        stats.Init(Data.Instance.playerSettings.heroData.stats);
+        int id = 0;
 
-        if (SocialManager.Instance.userData.logged)
-            peleas.Init(Data.Instance.playerSettings.heroData.peleas);
-        else
-            peleas.gameObject.SetActive(false);
+        foreach(PlayerData playerData in Data.Instance.fightersManager.all)
+        {
+            FighterSelectorButton newButton = Instantiate(button);
+            newButton.transform.SetParent(Content);
+            newButton.transform.localScale = Vector3.one;
+            newButton.Init(id, playerData);
+            id++;
+        }
 
         SetFighter(Data.Instance.fightersManager.GetActualFighter());
 
         if (SocialManager.Instance.userData.logged)
+        {
             userName.text = Data.Instance.playerSettings.heroData.nick;
+            profilePicture.setPicture(SocialManager.Instance.userData.facebookID);
+        }
         else
             userName.text = "Anónimo";
 
         int score = Data.Instance.playerSettings.heroData.stats.score;
         category.text = "Categoría: " + Categories.GetCategorieByScore(score);
         heroScore.text = "puntos: " + score;
+
+        verticalScrollSnap.Init((int)(id/2));
+        
     }
     void OnDestroy()
     {
         Events.OnBackButtonPressed -= OnBackButtonPressed;
+        Events.SetFighter -= SetFighter;
     }
     void OnBackButtonPressed()
     {
         Data.Instance.LoadLevel("03_Home");
     }
-    public void Next()
+    //public void Next(PlayerData playerData)
+    //{
+    //    //PlayerData playerData = Data.Instance.fightersManager.GetFighter(true);
+    //    SetFighter(playerData);
+    //}
+    //public void Prev(PlayerData playerData)
+    //{
+    //    //PlayerData playerData = Data.Instance.fightersManager.GetFighter(false);
+    //    SetFighter(playerData);
+    //}
+    void SetFighter(int playerID)
     {
-        PlayerData playerData = Data.Instance.fightersManager.GetFighter(true);
-        SetFighter(playerData);
-    }
-    public void Prev()
-    {
-        PlayerData playerData = Data.Instance.fightersManager.GetFighter(false);
-        SetFighter(playerData);
+        SetFighter(Data.Instance.fightersManager.all[playerID]);
     }
     void SetFighter(PlayerData playerData)
     {
@@ -67,11 +83,26 @@ public class FighterSelector : MonoBehaviour {
         characterName.text = Data.Instance.playerSettings.characterData.nick;
 
         int score = Data.Instance.playerSettings.characterData.stats.score;
-        characterCategory.text = "Categoría: " + Categories.GetCategorieByScore(score);
-        characterScore.text = "puntos: " + score;
+        characterCategory.text = Categories.GetCategorieByScore(score).ToUpper();
 
-        stats_character.Init(Data.Instance.playerSettings.characterData.stats);
-        peleas_character.Init(Data.Instance.playerSettings.characterData.peleas);
+       PlayerSettings playerSettings = Data.Instance.playerSettings;
+
+       compareStatsLine[0].Init("FUERZA", playerSettings.heroData.stats.Power.ToString(), playerSettings.characterData.stats.Power.ToString());
+       compareStatsLine[1].Init("RESISTENCIA", playerSettings.heroData.stats.Resistence.ToString(), playerSettings.characterData.stats.Resistence.ToString());
+       compareStatsLine[2].Init("DEFENSA", playerSettings.heroData.stats.Defense.ToString(), playerSettings.characterData.stats.Defense.ToString());
+       compareStatsLine[3].Init("VELOCIDAD", playerSettings.heroData.stats.Speed.ToString(), playerSettings.characterData.stats.Speed.ToString());
+
+        string hero_p_g = "";
+        string hero_r_g = "";
+
+        if (SocialManager.Instance.userData.logged)
+        {
+            hero_p_g = playerSettings.heroData.peleas.peleas_g + "/" + playerSettings.heroData.peleas.peleas_p;
+            hero_r_g = playerSettings.heroData.peleas.retos_g + "/" + playerSettings.heroData.peleas.retos_p;
+        }
+
+        compareStatsLine[4].Init("PELEAS G.", hero_p_g, playerSettings.characterData.peleas.peleas_g + "/" + playerSettings.characterData.peleas.peleas_p);
+        compareStatsLine[5].Init("RETOS G.", hero_r_g, playerSettings.characterData.peleas.retos_g + "/" + playerSettings.characterData.peleas.retos_p);
     }
     public void StartGame()
     {
