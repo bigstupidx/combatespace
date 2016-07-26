@@ -7,6 +7,7 @@ public class Hero : MonoBehaviour
     private HeroActions actions;
     public int combo = 0;
     public GameObject herocamera;
+ 
 
     void Start()
     {

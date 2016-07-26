@@ -16,6 +16,9 @@ public class SummaryRound : MonoBehaviour
     public GameObject panel;
 
     public GameObject[] toDisable;
+    public GameObject StartButton;
+
+    private IEnumerator startFightCoroutine;
 
     private bool ready;
 
@@ -25,7 +28,8 @@ public class SummaryRound : MonoBehaviour
         minaCamera.enabled = false;
         SetOff();
         Events.OnRoundComplete += OnRoundComplete;
-        StartCoroutine(AnimatedIntro());
+        startFightCoroutine = AnimatedIntro();
+        StartCoroutine(startFightCoroutine);
     }
     void OnDestroy()
     {
@@ -43,14 +47,21 @@ public class SummaryRound : MonoBehaviour
     }
     IEnumerator AnimatedIntro()
     {
+        panel.SetActive(true);
         SetNumbers();
 
         anim.Play("intro");
 
         yield return new WaitForSeconds(9);
+        StartGame();
+    }
+    public void StartGame()
+    {
+        if (startFightCoroutine != null)
+            StopCoroutine(startFightCoroutine);
+        StartButton.SetActive(false);
         NextRound();
     }
-    
     IEnumerator AnimatedState()
     {
         SetNumbers();

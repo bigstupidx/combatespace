@@ -47,7 +47,7 @@ public class FighterSelector : MonoBehaviour {
             userName.text = "Anónimo";
 
         int score = Data.Instance.playerSettings.heroData.stats.score;
-        category.text = "Categoría: " + Categories.GetCategorieByScore(score);
+        category.text = Categories.GetCategorieByScore(score);
         heroScore.text = "puntos: " + score;
 
         verticalScrollSnap.Init((int)(id/2));
