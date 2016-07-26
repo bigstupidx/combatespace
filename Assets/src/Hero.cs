@@ -7,6 +7,8 @@ public class Hero : MonoBehaviour
     private HeroActions actions;
     public int combo = 0;
     public GameObject herocamera;
+    public ParticleSystem particles_left;
+    public ParticleSystem particles_right;
  
 
     void Start()
@@ -120,6 +122,12 @@ public class Hero : MonoBehaviour
             combo++;
         else
             combo = 0;
+
+        if (action == HeroActions.actions.GANCHO_UP_L || action == HeroActions.actions.GANCHO_DOWN_L || action == HeroActions.actions.CORTITO_L) 
+            particles_left.Play();
+        else
+            particles_right.Play();
+
         lastAttackTime = Time.time;
     }
     void OnAvatarStandUp(bool isHero)

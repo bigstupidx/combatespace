@@ -25,8 +25,7 @@ public class HeroActions : MonoBehaviour
     public IEnumerator hitRoutine;
     private IEnumerator punchedRoutine;
 
-    public ParticleSystem particles_left;
-    public ParticleSystem particles_right;
+
 
     public enum actions
     {
@@ -116,12 +115,7 @@ public class HeroActions : MonoBehaviour
     {
         if (Game.Instance.fightStatus.state != FightStatus.states.FIGHTING) return;
         if(!CheckIfCharacterIsInTarget()) return;
-
-        if (animName == anim_cortito_l || animName == anim_gancho_up_l || animName == anim_gancho_down_l)
-            particles_left.Play();
-        else
-            particles_right.Play();
-
+        
         Events.OnCheckCharacterHitted(action);
     }
     bool CheckIfCharacterIsInTarget()
