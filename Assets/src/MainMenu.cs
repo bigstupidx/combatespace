@@ -29,6 +29,8 @@ public class MainMenu : MonoBehaviour {
     }   
     public void StartGame()
     {
+        if (Data.Instance.playerSettings.characterData.nick == null) return;
+
         Data.Instance.playerSettings.heroData.stats.SetStats(
             ligas[0].num,
             (heroStats[0].num),
