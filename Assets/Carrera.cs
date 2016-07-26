@@ -60,6 +60,8 @@ public class Carrera : MonoBehaviour {
             CarreraLine newCarreraLine = Instantiate(carreraLine);
             newCarreraLine.transform.SetParent(content);
             newCarreraLine.Init(fight);
+            newCarreraLine.transform.localScale = Vector2.one;
+            newCarreraLine.transform.localPosition = Vector2.zero;
         }
     }
     public void Peleas()
