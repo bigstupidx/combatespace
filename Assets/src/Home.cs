@@ -4,22 +4,36 @@ using UnityEngine.UI;
 
 public class Home : MonoBehaviour
 {
-    public StatsUI stats;
-    public PeleasUI peleas;
+
     public ProfilePicture profilePicture;
     public Text usernameField;
     public Text categoriaField;
     public Text scoreField;
 
+    public Text power;
+    public Text defense;
+    public Text speed;
+    public Text resistence;
+
+    public Text peleas;
+    public Text retos;
+
     void Start()
     {
-        stats.Init(Data.Instance.playerSettings.heroData.stats);
+        power.text = Data.Instance.playerSettings.heroData.stats.Power.ToString() ;
+        defense.text = Data.Instance.playerSettings.heroData.stats.Defense.ToString();
+        speed.text = Data.Instance.playerSettings.heroData.stats.Speed.ToString();
+        resistence.text = Data.Instance.playerSettings.heroData.stats.Resistence.ToString();
+
+        
 
         if (SocialManager.Instance.userData.logged)
         {
             profilePicture.setPicture(SocialManager.Instance.userData.facebookID);
-            usernameField.text = Data.Instance.playerSettings.heroData.nick;            
-            peleas.Init(Data.Instance.playerSettings.heroData.peleas);
+            usernameField.text = Data.Instance.playerSettings.heroData.nick;
+
+            peleas.text = Data.Instance.playerSettings.heroData.peleas.peleas_g + "/" + Data.Instance.playerSettings.heroData.peleas.peleas_p;
+            retos.text = Data.Instance.playerSettings.heroData.peleas.retos_g + "/" + Data.Instance.playerSettings.heroData.peleas.retos_p;
         }
         else
         {
