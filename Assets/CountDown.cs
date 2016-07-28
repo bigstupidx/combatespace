@@ -14,11 +14,13 @@ public class CountDown : MonoBehaviour {
     public float hero_progress;
     private bool ready;
     public Animation anim;
+    public Image GlowImage;
 
 	void Start () {
         fightStatus = Game.Instance.fightStatus;
         SetOff();
         Events.OnAvatarFall += OnAvatarFall;
+        GlowImage.enabled = false;
 	}
     void OnDestroy()
     {
@@ -108,5 +110,11 @@ public class CountDown : MonoBehaviour {
     public void OnClik()
     {
         hero_progress += 0.2f * (1-fightStatus.cansancio_hero);
+        GlowImage.enabled = true;
+        Invoke("SetGlowOff", 0.1f);
+    }
+    void SetGlowOff()
+    {
+        GlowImage.enabled = false;
     }
 }

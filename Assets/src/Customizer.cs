@@ -12,7 +12,7 @@ public class Customizer : ScreenBase {
         if (Data.Instance.lastScene == "01_Register") 
             backButton.gameObject.SetActive(false);
 
-        usernameField.text = Data.Instance.playerSettings.heroData.nick;
+     //   usernameField.text = Data.Instance.playerSettings.heroData.nick;
     }
     public override void OnBackButtonPressed() 
     {
