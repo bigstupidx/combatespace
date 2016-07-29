@@ -38,7 +38,7 @@ public class Home : MonoBehaviour
         else
         {
             profilePicture.gameObject.SetActive(false);
-            usernameField.text = "Anónimo (No estás registrado en el tornéo)";
+            usernameField.text = "Anónimo (No estás registrado en el torneo)";
             peleas.gameObject.SetActive(false);
         }
         int score = Data.Instance.playerSettings.heroData.stats.score;

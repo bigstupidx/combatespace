@@ -5,6 +5,9 @@ public class GameSettingsPopup : MonoBehaviour
 {
     public GameObject canvas;
     public GameObject panel;
+    public GameObject mode360On;
+    public GameObject modeVolanteOn;
+
     void Start()
     {
         panel.SetActive(false);
@@ -19,16 +22,19 @@ public class GameSettingsPopup : MonoBehaviour
         panel.SetActive(true);
         canvas.SetActive(true);
         Time.timeScale = 0;
+        SetActive();
     }
     public void Mode_360()
     {
         Data.Instance.playerSettings.control = PlayerSettings.controls.CONTROL_360;
         Data.Instance.LoadLevel("03_Home");
+        SetActive();
     }
     public void Mode_Volante()
     {
         Data.Instance.playerSettings.control = PlayerSettings.controls.CONTROL_JOYSTICK;
         Data.Instance.LoadLevel("03_Home");
+        SetActive();
     }
     public void ResetApp()
     {
@@ -41,5 +47,18 @@ public class GameSettingsPopup : MonoBehaviour
         panel.SetActive(false);
         canvas.SetActive(false);
         Time.timeScale = 1;
+    }
+    void SetActive()
+    {
+        if (Data.Instance.playerSettings.control == PlayerSettings.controls.CONTROL_360)
+        {
+            mode360On.SetActive(true);
+            modeVolanteOn.SetActive(false);
+        }
+        else
+        {
+            mode360On.SetActive(false);
+            modeVolanteOn.SetActive(true);
+        }
     }
 }
