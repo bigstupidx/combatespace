@@ -4,7 +4,16 @@ using UnityEngine.UI;
 
 public class SummaryScreen : MonoBehaviour {
 
-    public DemoStat[] heroStats;
+    public Text Power_field;
+    public Text Resistence_field;
+    public Text Defense_field;
+    public Text Speed_field;
+
+    public int Power;
+    public int Resistence;
+    public int Defense;
+    public int Speed;
+
     public int num;
     public Text field;
 
@@ -34,21 +43,30 @@ public class SummaryScreen : MonoBehaviour {
     }
     void Init()
     {
-        
-        heroStats[0].Init(Data.Instance.playerSettings.heroData.stats.Power);
-        heroStats[1].Init(Data.Instance.playerSettings.heroData.stats.Resistence);
-        heroStats[2].Init(Data.Instance.playerSettings.heroData.stats.Defense);
-        heroStats[3].Init(Data.Instance.playerSettings.heroData.stats.Speed);
+        Power =  Data.Instance.playerSettings.heroData.stats.Power;
+        Resistence = Data.Instance.playerSettings.heroData.stats.Resistence;
+        Defense = Data.Instance.playerSettings.heroData.stats.Defense;
+        Speed =  Data.Instance.playerSettings.heroData.stats.Speed;
         SetField();
     }
     public void SetField()
     {
-        field.text = num.ToString();
+        field.text = "Puntos: " + num;
+        Power_field.text = Power.ToString();
+        Resistence_field.text = Resistence.ToString();
+        Defense_field.text = Defense.ToString();
+        Speed_field.text = Speed.ToString();
     }
     public void Add(int statID)
     {
-        heroStats[statID].Add();
         num--;
+        switch (statID)
+        {
+            case 1: Power++; break;
+            case 2: Resistence++; break;
+            case 3: Defense++; break;
+            case 4: Speed++; break;
+        }
         SetField();
         if (num == 0) Ready();
     }
@@ -56,10 +74,10 @@ public class SummaryScreen : MonoBehaviour {
     {
         Data.Instance.playerSettings.heroData.stats.SetStats(
             0,
-            (heroStats[0].num),
-            (heroStats[1].num),
-            (heroStats[2].num),
-            (heroStats[3].num)
+            (Power),
+            (Resistence),
+            (Defense),
+            (Speed)
             );
         Data.Instance.GetComponent<StatsManager>().Save();
         Data.Instance.LoadLevel("03_Home");
