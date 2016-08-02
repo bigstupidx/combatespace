@@ -29,6 +29,18 @@ public class FacebookFriends : MonoBehaviour {
         var perms = new List<string>() { "public_profile", "email", "user_friends" };
         FB.API("/me?fields=id,name,friends.limit(100).fields(name,id)", Facebook.Unity.HttpMethod.GET, FBFriendsCallback);
     }
+    public string GetAllFriendsString()
+    {
+        string ids = "";
+        int id = 0;
+        foreach(Friend friend in all)
+        {
+            ids += friend.id;
+            id++;
+            if (id < all.Count) ids += ",";
+        }
+        return ids;
+    }
     void FBFriendsCallback(IGraphResult result)
     {
         if (result.Error != null)

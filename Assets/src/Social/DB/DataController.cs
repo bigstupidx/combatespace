@@ -148,14 +148,22 @@ public class DataController : MonoBehaviour
 
 
     private System.Action<string> OnGetUsersByScoreListener;
-    public void OnGetUsersByScore(System.Action<string> OnGetUsersByScoreListener, int min, int max)
+    public void OnGetUsersByScore(System.Action<string> OnGetUsersByScoreListener, int min, int max, bool onlyFriends)
     {
         this.OnGetUsersByScoreListener = OnGetUsersByScoreListener;
-        StartCoroutine(GetUsersByScoreRoutine(min, max));
+        StartCoroutine(GetUsersByScoreRoutine(min, max, onlyFriends));
     }
-    IEnumerator GetUsersByScoreRoutine(int min, int max)
+    IEnumerator GetUsersByScoreRoutine(int min, int max, bool onlyFriends)
     {
-        string post_url = getUsersByScore_URL + "min=" + min + "&max=" + max;
+        string post_url = "";
+        if (onlyFriends)
+        {
+            string ids = SocialManager.Instance.facebookFriends.GetAllFriendsString();
+            post_url = getUsersByScore_URL + "ids=" + ids;
+        }
+        else
+            post_url = getUsersByScore_URL + "min=" + min + "&max=" + max;
+
         print("OnGetUsersByScore : " + post_url);
         WWW hs_post = new WWW(post_url);
         yield return hs_post;

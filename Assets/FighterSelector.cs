@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 
 public class FighterSelector : MonoBehaviour {
 
@@ -13,30 +14,18 @@ public class FighterSelector : MonoBehaviour {
     public Text category;
     public Text heroScore;
 
-    public Text characterName;
     public Text characterCategory;
-
+    public SwitchButton switchButtons;
     public VerticalScrollSnap verticalScrollSnap;
+
 
     void Start()
     {
+        Events.OnLoadingShow(true);
         Data.Instance.settings.playingTutorial = false;
 
         Events.OnBackButtonPressed += OnBackButtonPressed;
         Events.SetFighter += SetFighter;
-
-        int id = 0;
-
-        foreach(PlayerData playerData in Data.Instance.fightersManager.all)
-        {
-            FighterSelectorButton newButton = Instantiate(button);
-            newButton.transform.SetParent(Content);
-            newButton.transform.localScale = Vector3.one;
-            newButton.Init(id, playerData);
-            id++;
-        }
-
-        SetFighter(Data.Instance.fightersManager.GetActualFighter());
 
         if (SocialManager.Instance.userData.logged)
         {
@@ -49,9 +38,50 @@ public class FighterSelector : MonoBehaviour {
         int score = Data.Instance.playerSettings.heroData.stats.score;
         category.text = Categories.GetCategorieByScore(score);
         heroScore.text = "puntos: " + score;
+        LoadFighters();    
+    }
+    void LoadFighters()
+    {
+        if (Data.Instance.fightersManager.filter == FightersManager.filters.ONLY_FRIENDS && !Data.Instance.fightersManager.FriendsLoaded)
+            Data.Instance.fightersManager.LoadFriends(0, 100);
+        LoopUntilReady();
+    }
+    void LoopUntilReady()
+    {
+        List<PlayerData> fighters;
+        if (Data.Instance.fightersManager.filter == FightersManager.filters.ALL)
+            fighters = Data.Instance.fightersManager.all;
+        else
+            fighters = Data.Instance.fightersManager.friends;
 
-        verticalScrollSnap.Init((int)(id/2));
-        
+        if (fighters.Count < 1)
+            Invoke("LoopUntilReady", 1);
+        else
+            AddFighters(fighters);
+    }
+    void AddFighters(List<PlayerData> fighters)
+    {
+        Events.OnLoadingShow(false);
+        int id = 0;
+        foreach (PlayerData playerData in fighters)
+        {
+            FighterSelectorButton newButton = Instantiate(button);
+            newButton.transform.SetParent(Content);
+            newButton.transform.localScale = Vector3.one;
+            newButton.Init(id, playerData);
+            id++;
+        }
+
+        SetFighter(Data.Instance.fightersManager.GetActualFighter());
+
+        int FighterID = (int)(id / 2);
+
+        verticalScrollSnap.Init(FighterID);
+
+        if (Data.Instance.fightersManager.filter == FightersManager.filters.ALL)
+            switchButtons.Init(1);
+        else
+            switchButtons.Init(2);
     }
     void OnDestroy()
     {
@@ -74,23 +104,21 @@ public class FighterSelector : MonoBehaviour {
     //}
     void SetFighter(int playerID)
     {
-        SetFighter(Data.Instance.fightersManager.all[playerID]);
+        SetFighter(Data.Instance.fightersManager.GetActualFighters()[playerID]);
     }
     void SetFighter(PlayerData playerData)
     {
         Data.Instance.playerSettings.characterData = playerData;
-
-        characterName.text = Data.Instance.playerSettings.characterData.nick;
-
-        int score = Data.Instance.playerSettings.characterData.stats.score;
+        int score = playerData.stats.score;
+        
         characterCategory.text = Categories.GetCategorieByScore(score).ToUpper();
 
        PlayerSettings playerSettings = Data.Instance.playerSettings;
 
-       compareStatsLine[0].Init("FUERZA", playerSettings.heroData.stats.Power.ToString(), playerSettings.characterData.stats.Power.ToString());
-       compareStatsLine[1].Init("RESISTENCIA", playerSettings.heroData.stats.Resistence.ToString(), playerSettings.characterData.stats.Resistence.ToString());
-       compareStatsLine[2].Init("DEFENSA", playerSettings.heroData.stats.Defense.ToString(), playerSettings.characterData.stats.Defense.ToString());
-       compareStatsLine[3].Init("VELOCIDAD", playerSettings.heroData.stats.Speed.ToString(), playerSettings.characterData.stats.Speed.ToString());
+       compareStatsLine[0].Init("FUERZA", playerSettings.heroData.stats.Power.ToString(), playerData.stats.Power.ToString());
+       compareStatsLine[1].Init("RESISTENCIA", playerSettings.heroData.stats.Resistence.ToString(), playerData.stats.Resistence.ToString());
+       compareStatsLine[2].Init("DEFENSA", playerSettings.heroData.stats.Defense.ToString(), playerData.stats.Defense.ToString());
+       compareStatsLine[3].Init("VELOCIDAD", playerSettings.heroData.stats.Speed.ToString(), playerData.stats.Speed.ToString());
 
         string hero_p_g = "";
         string hero_r_g = "";
@@ -101,8 +129,8 @@ public class FighterSelector : MonoBehaviour {
             hero_r_g = playerSettings.heroData.peleas.retos_g + "/" + playerSettings.heroData.peleas.retos_p;
         }
 
-        compareStatsLine[4].Init("PELEAS G.", hero_p_g, playerSettings.characterData.peleas.peleas_g + "/" + playerSettings.characterData.peleas.peleas_p);
-        compareStatsLine[5].Init("RETOS G.", hero_r_g, playerSettings.characterData.peleas.retos_g + "/" + playerSettings.characterData.peleas.retos_p);
+        compareStatsLine[4].Init("PELEAS G.", hero_p_g, playerSettings.characterData.peleas.peleas_g + "/" + playerData.peleas.peleas_p);
+        compareStatsLine[5].Init("RETOS G.", hero_r_g, playerSettings.characterData.peleas.retos_g + "/" + playerData.peleas.retos_p);
     }
     public void StartGame()
     {
@@ -122,5 +150,26 @@ public class FighterSelector : MonoBehaviour {
         
         Events.OnTutorialReady(0);
         StartGame();
+    }
+
+    public void ToggleFighters()
+    {
+        if (Data.Instance.fightersManager.filter == FightersManager.filters.ONLY_FRIENDS)
+            Data.Instance.fightersManager.filter = FightersManager.filters.ALL;
+        else
+        {
+            if (SocialManager.Instance.facebookFriends.all.Count == 0)
+            {
+                Events.OnGenericPopup("Sin amigos", "No tenés amigos registrados en Combate Space");
+                return;
+            }
+            Data.Instance.fightersManager.SetActivePlayer(0);
+            Data.Instance.fightersManager.filter = FightersManager.filters.ONLY_FRIENDS;
+        }
+
+
+        Events.OnLoadingShow(true);
+        verticalScrollSnap.Reset();
+        LoadFighters();
     }
 }

@@ -22,8 +22,8 @@ public class UserData : MonoBehaviour {
 
         SocialEvents.OnUserReady += OnUserReady;
 #if UNITY_EDITOR
-      //  SetUser("", "");
-       // return;
+        SetUser("", "");
+        return;
 #endif
         if (PlayerPrefs.GetString("username") != "" && PlayerPrefs.GetString("facebookID") != "")
             SetUser(PlayerPrefs.GetString("username"), PlayerPrefs.GetString("facebookID"));

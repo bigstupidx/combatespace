@@ -57,12 +57,14 @@ public class Hero : MonoBehaviour
         }
         
 #elif UNITY_ANDROID || UNITY_IPHONE
-            float _x = Game.Instance.inputManager.gyro_rotation.x*1.2f;
-            if(_x>180) _x += Time.deltaTime*10;
-             else if(_x>1) _x -= Time.deltaTime*10;
+            Vector3 gyroRot = Game.Instance.inputManager.gyro_rotation;
+            Vector3 myRot = herocamera.transform.localEulerAngles;
 
-            herocamera.transform.Rotate(_x, 0, 0);
-            transform.Rotate(0, -Game.Instance.inputManager.gyro_rotation.y*2, 0);
+            float _x = myRot.x + (gyroRot.x*1.2f);
+            float angle_x = Mathf.LerpAngle(_x,0, 2 * Time.deltaTime);
+            herocamera.transform.localEulerAngles = new Vector3(angle_x,0,0);
+
+            transform.Rotate(0, -gyroRot.y*2, 0);
 #endif
     }
     void OnAvatarFall(bool heroWin)

@@ -39,6 +39,14 @@ public class VerticalScrollSnap : MonoBehaviour
     {
         ChangeValue(activeID);
     }
+    public void Reset()
+    {
+        started = false;
+        actual_Y = 0;
+        new_Y = 0;
+        active = 0;
+        Utils.RemoveAllChildsIn(container.transform);
+    }
     public void Init(int activeID)
     {
         scrollRect = GetComponent<ScrollRect>();
@@ -62,6 +70,8 @@ public class VerticalScrollSnap : MonoBehaviour
     }
     void Update()
     {
+        if (!started) return;
+
         if (movement == Movement.NONE)
         {
             scrollRect.inertia = true;
