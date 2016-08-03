@@ -1,8 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using System;
 
 public class FightStatus : MonoBehaviour {
 
+    public List<RoundData> roundsData;
+    [Serializable]
+    public class RoundData
+    {
+        public int hero_punches;
+        public int character_punches;
+
+        public int hero_falls;
+        public int character_falls;
+    }
     public states state;
     public enum states
     {
@@ -64,6 +76,8 @@ public class FightStatus : MonoBehaviour {
         Events.OnRoundStart += OnRoundStart;
         Events.OnAvatarStandUp += OnAvatarStandUp;
         Events.OnKO += OnKO;
+        Events.OnComputeCharacterPunched += OnComputeCharacterPunched;
+        Events.OnComputeHeroPunched += OnComputeHeroPunched;
         Loop();
         //if(state != states.KO)
         //Events.OnRoundStart();
@@ -79,6 +93,8 @@ public class FightStatus : MonoBehaviour {
         Events.OnRoundStart -= OnRoundStart;
         Events.OnAvatarStandUp -= OnAvatarStandUp;
         Events.OnKO -= OnKO;
+        Events.OnComputeCharacterPunched -= OnComputeCharacterPunched;
+        Events.OnComputeHeroPunched -= OnComputeHeroPunched;
     }
     void OnKO(bool isHero)
     {
@@ -92,8 +108,13 @@ public class FightStatus : MonoBehaviour {
     }
     void OnRoundStart()
     {
+        roundsData.Add(new RoundData());
         state = states.FIGHTING;
         Round++;
+    }
+    RoundData GetActiveRound()
+    {
+        return roundsData[roundsData.Count - 1];
     }
     void OnRoundComplete()
     {
@@ -102,9 +123,15 @@ public class FightStatus : MonoBehaviour {
     void OnAvatarFall(bool isHero)
     {
         if (isHero)
+        {
             caidas_hero++;
+            GetActiveRound().hero_falls++;
+        }
         else
+        {
             caidas_character++;
+            GetActiveRound().character_falls++;
+        }
 
         state = states.KO;
     }
@@ -209,5 +236,13 @@ public class FightStatus : MonoBehaviour {
                 break;
         }
         characterAguanteStatus -= aguanteResta;
+    }
+    void OnComputeCharacterPunched(HeroActions.actions action)
+    {
+        GetActiveRound().hero_punches++;
+    }
+    void OnComputeHeroPunched(CharacterActions.actions action)
+    {
+        GetActiveRound().character_punches++;
     }
 }

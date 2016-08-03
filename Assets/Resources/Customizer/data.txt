@@ -1,0 +1,28 @@
+{
+	piel:
+	[
+		{  image1:"negro" },
+		{  image1:"blanco" },
+		{  image1:"rosaClaro" },
+		{  image1:"naranja" }
+	],
+	botas:
+	[
+		{  image1:"rojo" },
+		{  image1:"azul" },
+		{  image1:"verde" }
+	],
+	guantes:
+	[
+		{  image1:"rojo", image2:"negro" },
+		{  image1:"azul", image2:"negro" },
+		{  image1:"verde", image2:"negro" },
+		{  image1:"rosa", image2:"negro" }
+	],
+	pantalon:
+	[
+		{  image1:"verde" },
+		{  image1:"rojo" },
+		{  image1:"azul" },
+	]
+}

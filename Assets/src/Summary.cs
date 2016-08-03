@@ -4,6 +4,8 @@ using System.Collections;
 
 public class Summary : MonoBehaviour
 {
+    public RoundDataLine[] RoundDataLine;
+    public RoundDataLine TotalRoundDataLine;
 
     public GameObject panel;
     public Text field;
@@ -48,6 +50,20 @@ public class Summary : MonoBehaviour
             field.text = "Perdiste\n";
 
         field.text += "En " + Game.Instance.fightStatus.Round + " rounds";
+
+        int id = 0;
+        int totalHero = 0;
+        int totalCharacter = 0;
+        foreach (FightStatus.RoundData roundData in Game.Instance.fightStatus.roundsData)
+        {
+            totalHero += roundData.hero_punches;
+            totalCharacter += roundData.character_punches;
+            RoundDataLine[id].Init(id + 1, roundData.hero_punches, roundData.character_punches);
+            if (id < 6)
+                id++;
+        }
+        print( totalHero + " + " + totalCharacter);
+        TotalRoundDataLine.Init(0, totalHero, totalCharacter);
     }
     public void Restart()
     {

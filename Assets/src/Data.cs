@@ -13,6 +13,7 @@ public class Data : MonoBehaviour
     public FightersManager fightersManager;
     public PeleasManager peleasManager;
     public HistorialManager hostorialManager;
+    public CustomizerData customizerData;
     public string lastScene;
 
     public static Data Instance
@@ -53,6 +54,7 @@ public class Data : MonoBehaviour
         fightersManager = GetComponent<FightersManager>();
         peleasManager = GetComponent<PeleasManager>();
         hostorialManager = GetComponent<HistorialManager>();
+        customizerData = GetComponent<CustomizerData>();
         Invoke("StartLoadingFromServer", 1);
     }
     void StartLoadingFromServer()
