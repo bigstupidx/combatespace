@@ -13,17 +13,20 @@
 	],
 	pelos:
 	[
-		{  color:"ff0000" },
-		{  color:"00ff00" },
-		{  color:"00ffff" },
-		{  color:"0000ff" },
-		{  color:"ff00ff" }
+		{  color:"f7ba1e" },
+		{  color:"912626" },
+		{  color:"000000" },
+		{  color:"333333" },
+		{  color:"f15a24" },
+		{  color:"009245" },
+		{  color:"229cb8" },
+		{  color:"ff0000" }
 	],
 	piel:
 	[
 		{  color:"e3c28d" },
 		{  color:"f0ba9a" },
-		{  color:"f0a67a"  },
+		{  color:"f0a67a" },
 		{  color:"db8065" },
 		{  color:"912626" }
 	],
@@ -46,7 +49,7 @@
 	[
 		{  color:"ff0000" },
 		{  color:"f7931e" },
-		{  color:"ffd600"  },
+		{  color:"ffd600" },
 		{  color:"39b54a" },
 		{  color:"56c6c9" },
 		{  color:"2e3192" },
@@ -61,7 +64,7 @@
 	[
 		{  color:"ff0000" },
 		{  color:"f7931e" },
-		{  color:"ffd600"  },
+		{  color:"ffd600" },
 		{  color:"39b54a" },
 		{  color:"56c6c9" },
 		{  color:"2e3192" },
@@ -76,7 +79,7 @@
 	[
 		{  color:"ff0000" },
 		{  color:"f7931e" },
-		{  color:"ffd600"  },
+		{  color:"ffd600" },
 		{  color:"39b54a" },
 		{  color:"56c6c9" },
 		{  color:"2e3192" },
