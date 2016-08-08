@@ -19,7 +19,21 @@ public class AvatarCustomizer : MonoBehaviour {
     public void OnCustomizerChangePart(string partName, string partType, Color color, int materialID)
     {
        // print("partName  : "  + partName + "    partType: " + partType + "  color: " + color);
-
+        if (partName == "narices")
+        {
+            print(partType);
+            head.SetCabeza(int.Parse(partType));
+        } else if (partName == "cejas")
+        {
+            print(partType);
+            head.SetCabeza(int.Parse(partType));
+        }
+        else if (partName == "peinados")
+        {
+            print(partType);
+            head.SetPeinados(int.Parse(partType));
+        }
+        else
         if (partName == "cabezas")
         {
             print(partType);
@@ -28,6 +42,8 @@ public class AvatarCustomizer : MonoBehaviour {
 
         if (partName == "piel")
             head.ChangePiel(partType, color);
+        else if (partName == "pelos")
+            head.ChangePelos(partType, color);
 
         int partNum = materialID+1;
         foreach (AvatarCustomizerPart part in parts)

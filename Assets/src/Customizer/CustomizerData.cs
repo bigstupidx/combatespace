@@ -43,6 +43,7 @@ public class CustomizerData : MonoBehaviour
 
                 if (Json[part][a]["color"] != null)
                     cd.color = hexToColor(Json[part][a]["color"]);
+               
 
                 cd.url = new List<string>();
                 for (int b = 1; b < 4; b++)
@@ -51,6 +52,8 @@ public class CustomizerData : MonoBehaviour
                     if (image != null && image != "")
                         cd.url.Add(image);
                 }
+                if (Json[part][a]["id"] != null)
+                    cd.url.Add( Json[part][a]["id"]);
                 data.Add(cd);
             }
         }

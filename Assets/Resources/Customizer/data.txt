@@ -1,4 +1,24 @@
 {
+	peinados:
+	[
+		{  id:"1" },
+		{  id:"2" },
+		{  id:"3" },
+		{  id:"4" },
+		{  id:"5" },
+		{  id:"6" },
+		{  id:"7" },
+		{  id:"8" },
+		{  id:"9" }			
+	],
+	pelos:
+	[
+		{  color:"ff0000" },
+		{  color:"00ff00" },
+		{  color:"00ffff" },
+		{  color:"0000ff" },
+		{  color:"ff00ff" }
+	],
 	piel:
 	[
 		{  color:"e3c28d" },
@@ -6,6 +26,21 @@
 		{  color:"f0a67a"  },
 		{  color:"db8065" },
 		{  color:"912626" }
+	],
+	narices:
+	[
+		{  id:"1" },
+		{  id:"2" },
+		{  id:"3" },
+		{  id:"4" },		
+		{  id:"5" }
+	],
+	cejas:
+	[
+		{  id:"1" },
+		{  id:"2" },
+		{  id:"3" },
+		{  id:"4" }
 	],
 	botas:
 	[
