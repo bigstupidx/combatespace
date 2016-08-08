@@ -1,34 +1,55 @@
 {
 	piel:
 	[
-		{  color:"FF0000" },
-		{  color:"FF00FF" },
-		{  color:"FFFF00"  },
-		{  color:"000000" },
-		{  color:"FFFFFF" }
+		{  color:"e3c28d" },
+		{  color:"f0ba9a" },
+		{  color:"f0a67a"  },
+		{  color:"db8065" },
+		{  color:"912626" }
 	],
 	botas:
 	[
-		{  color:"FF0000" },
-		{  color:"FF00FF" },
-		{  color:"FFFF00"  },
-		{  color:"000000" },
-		{  color:"FFFFFF" }
+		{  color:"ff0000" },
+		{  color:"f7931e" },
+		{  color:"ffd600"  },
+		{  color:"39b54a" },
+		{  color:"56c6c9" },
+		{  color:"2e3192" },
+		{  color:"783576" },
+		{  color:"e063bb" },
+		{  color:"f5f5f5" },
+		{  color:"999999" },
+		{  color:"333333" },
+		{  color:"000000" }
 	],
 	guantes:
 	[
-		{  color:"FF0000" },
-		{  color:"FF00FF" },
-		{  color:"FFFF00"  },
-		{  color:"000000" },
-		{  color:"FFFFFF" }
+		{  color:"ff0000" },
+		{  color:"f7931e" },
+		{  color:"ffd600"  },
+		{  color:"39b54a" },
+		{  color:"56c6c9" },
+		{  color:"2e3192" },
+		{  color:"783576" },
+		{  color:"e063bb" },
+		{  color:"f5f5f5" },
+		{  color:"999999" },
+		{  color:"333333" },
+		{  color:"000000" }
 	],
 	pantalon:
 	[
-		{  color:"FF0000" },
-		{  color:"FF00FF" },
-		{  color:"FFFF00" },
-		{  color:"000000" },
-		{  color:"FFFFFF" }
-	]
+		{  color:"ff0000" },
+		{  color:"f7931e" },
+		{  color:"ffd600"  },
+		{  color:"39b54a" },
+		{  color:"56c6c9" },
+		{  color:"2e3192" },
+		{  color:"783576" },
+		{  color:"e063bb" },
+		{  color:"f5f5f5" },
+		{  color:"999999" },
+		{  color:"333333" },
+		{  color:"000000" }
+	],
 }
