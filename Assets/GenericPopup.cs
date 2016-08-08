@@ -22,6 +22,8 @@ public class GenericPopup : ScreenBase
     }
     void OnGenericPopup(string _title, string _text)
     {
+        print("OnGenericPopup" + _title + ": " + _text);
+
         titleField.text = _title;
         textField.text = _text;
         canvas.SetActive(true);

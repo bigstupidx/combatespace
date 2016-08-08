@@ -9,8 +9,12 @@ public class PeleasManager : MonoBehaviour {
     public List<Fight> peleas;
     public bool loaded;
     public bool showRetos;
+    public int lastTimeViewed;
+    public List<string> retadoPor;
 
 	void Start () {
+        lastTimeViewed = PlayerPrefs.GetInt("lastTimeViewed", 0);
+        
         retos = new List<Fight>();
         peleas = new List<Fight>();
         Events.OnFightEnd += OnFightEnd;        
@@ -18,10 +22,16 @@ public class PeleasManager : MonoBehaviour {
         Data.Instance.playerSettings.heroData.peleas.peleas_p = PlayerPrefs.GetInt("peleas_p", 0);
         Data.Instance.playerSettings.heroData.peleas.retos_g = PlayerPrefs.GetInt("retos_g", 0);
         Data.Instance.playerSettings.heroData.peleas.retos_p = PlayerPrefs.GetInt("retos_p", 0);
+
+        SocialEvents.OnFacebookFriends += OnFacebookFriends;        
 	}
     void OnDestroy()
     {
         Events.OnFightEnd -= OnFightEnd;
+    }
+    void OnFacebookFriends()
+    {
+        Invoke("Init", 2);
     }
     public void Init()
     {
@@ -30,9 +40,17 @@ public class PeleasManager : MonoBehaviour {
         peleas.Clear();
         SocialEvents.OnGetFights(OnGetFightsReady);
     }
+    void SaveNewViewedFights()
+    {
+        var epochStart = new System.DateTime(1970, 1, 1, 0, 0, 0, System.DateTimeKind.Utc);
+        int timestamp = (int)(System.DateTime.UtcNow - epochStart).TotalSeconds;
+        lastTimeViewed = timestamp;
+        PlayerPrefs.SetInt("lastTimeViewed", lastTimeViewed);
+    }
     void OnGetFightsReady(string result)
     {
         print("OnGetFightsReady" + result);
+        retadoPor.Clear();
         string[] allData = Regex.Split(result, "</n>");
 
         for (var i = 0; i < allData.Length - 1; i++)
@@ -46,7 +64,24 @@ public class PeleasManager : MonoBehaviour {
             fight.retador_username = userData[3];
             fight.retado_username = userData[4];
             fight.winner = userData[5];
-            fight.timestamp = userData[6];
+            int fightTimestamp = int.Parse(userData[6]);
+            if (fightTimestamp > lastTimeViewed)
+            {
+                if (fight.retado_facebookID == SocialManager.Instance.userData.facebookID)
+                {
+                    bool yaEsta = false;
+                    foreach (string retador in retadoPor)
+                    {
+                        if (retador == fight.retador_username)
+                            yaEsta = true;
+                    }
+                    if (!yaEsta)
+                        retadoPor.Add(fight.retador_username);
+                    fight.timestamp = "NUEVO!";
+                }
+            }
+            else
+                fight.timestamp = fightTimestamp + " - " + lastTimeViewed;
 
             if (fight.retador_facebookID == SocialManager.Instance.userData.facebookID)
                 peleas.Add(fight);
@@ -54,7 +89,38 @@ public class PeleasManager : MonoBehaviour {
                 retos.Add(fight);
         }
         loaded = true;
-    }    
+        SaveNewViewedFights();
+        if (retadoPor.Count >0)
+        {
+            string field = "Tenés un nuevo reto de " + retadoPor[0];
+            if (retadoPor.Count > 1)
+            {
+                field = "Tenés nuevos Retos de " + GetNamesRetadores();
+            }
+            Events.OnRetosPopup("FUISTE RETADO!", field);
+        }
+    }
+    private string GetNamesRetadores()
+    {
+        string retadoPorNames = "";
+        int id = 0;
+        foreach (string retador in retadoPor)
+        {
+            id++;
+            if (id == 1)
+                retadoPorNames += retador;
+            else if (id == retadoPor.Count)
+                retadoPorNames += " y " + retador;
+            else if (id > 5)
+            {
+                retadoPorNames += ", " + retador + "...";
+                return retadoPorNames;
+            }
+            else
+                retadoPorNames += ", " + retador;
+        }
+        return retadoPorNames;
+    }
     void OnFightEnd(bool youWon)
     {
         if (!SocialManager.Instance.userData.logged) return;

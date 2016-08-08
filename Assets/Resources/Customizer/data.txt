@@ -1,28 +1,34 @@
 {
 	piel:
 	[
-		{  image1:"negro" },
-		{  image1:"blanco" },
-		{  image1:"rosaClaro" },
-		{  image1:"naranja" }
+		{  color:"FF0000" },
+		{  color:"FF00FF" },
+		{  color:"FFFF00"  },
+		{  color:"000000" },
+		{  color:"FFFFFF" }
 	],
 	botas:
 	[
-		{  image1:"rojo" },
-		{  image1:"azul" },
-		{  image1:"verde" }
+		{  color:"FF0000" },
+		{  color:"FF00FF" },
+		{  color:"FFFF00"  },
+		{  color:"000000" },
+		{  color:"FFFFFF" }
 	],
 	guantes:
 	[
-		{  image1:"rojo", image2:"negro" },
-		{  image1:"azul", image2:"negro" },
-		{  image1:"verde", image2:"negro" },
-		{  image1:"rosa", image2:"negro" }
+		{  color:"FF0000" },
+		{  color:"FF00FF" },
+		{  color:"FFFF00"  },
+		{  color:"000000" },
+		{  color:"FFFFFF" }
 	],
 	pantalon:
 	[
-		{  image1:"verde" },
-		{  image1:"rojo" },
-		{  image1:"azul" },
+		{  color:"FF0000" },
+		{  color:"FF00FF" },
+		{  color:"FFFF00" },
+		{  color:"000000" },
+		{  color:"FFFFFF" }
 	]
 }

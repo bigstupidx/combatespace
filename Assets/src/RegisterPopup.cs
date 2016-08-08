@@ -14,7 +14,7 @@ public class RegisterPopup : ScreenBase
     }
     void SetOff()
     {
-        canvas.SetActive(false);
+        //canvas.SetActive(false);
         panel.SetActive(false);
     }
     void OnRegisterPopup()

@@ -16,7 +16,6 @@ public class Carrera : MonoBehaviour {
     void Start()
     {
         Events.OnLoadingShow(true);
-        Data.Instance.peleasManager.Init();
         Events.OnBackButtonPressed += OnBackButtonPressed;
     }
     void OnDestroy()

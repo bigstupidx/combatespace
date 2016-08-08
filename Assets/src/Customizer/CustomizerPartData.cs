@@ -8,5 +8,6 @@ public class CustomizerPartData{
 
     public string name;
     public List<string> url;
+    public Color color;
 
 }

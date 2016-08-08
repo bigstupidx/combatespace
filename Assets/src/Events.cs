@@ -8,6 +8,7 @@ public static class Events
     public static System.Action<bool> OnLoadingShow = delegate { };
     public static System.Action OnRegisterPopup = delegate { };
     public static System.Action<string, string> OnGenericPopup = delegate { };
+    public static System.Action<string, string> OnRetosPopup = delegate { };
     public static System.Action<bool> OnShowBackButton = delegate { };
     public static System.Action OnBackButtonPressed = delegate { };
 
@@ -55,7 +56,7 @@ public static class Events
     public static System.Action<int> SetFighter = delegate { };
 
     public static System.Action<string> OnCustomizerRefresh = delegate { };
-    public static System.Action<string, string, int> OnCustomizerChangePart = delegate { };
+    public static System.Action<string, string, Color, int> OnCustomizerChangePart = delegate { };
     
     
 }
