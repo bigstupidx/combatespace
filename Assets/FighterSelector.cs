@@ -37,7 +37,7 @@ public class FighterSelector : MonoBehaviour {
 
         int score = Data.Instance.playerSettings.heroData.stats.score;
         category.text = Categories.GetCategorieByScore(score);
-        heroScore.text = "puntos: " + score;
+        heroScore.text = "" + score;
         LoadFighters();    
     }
     void LoadFighters()

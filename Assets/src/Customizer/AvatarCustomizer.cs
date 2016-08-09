@@ -4,29 +4,14 @@ using System;
 
 public class AvatarCustomizer : MonoBehaviour {
 
-    public string style;
-    public Parts parts;
-    [Serializable]
-    public class Parts
-    {
-        public int cabezas;
-        public int peinados;
-        public int pelos;
-        public int piel;
-        public int narices;
-        public int barbas;
-        public int cejas;        
-        public int guantes;
-        public int pantalon;
-        public int botas;
-        public int tatoo;
-    }
+    public Styles style;
 
     public AvatarCustomizerPart[] avatarCustomizerParts;
     public CharacterHead head;
 
     void Start()
     {
+        style = Data.Instance.playerSettings.heroData.styles;
         head.SetCabeza(1);
         Events.OnCustomizerChangePart += OnCustomizerChangePart;
     }
@@ -81,16 +66,16 @@ public class AvatarCustomizer : MonoBehaviour {
     {
         switch (partName)
         {
-            case "cabezas":     parts.cabezas = partID; break;
-            case "piel":        parts.piel = partID; break;
-            case "tatoo":       parts.tatoo = partID; break;
-            case "pelos":       parts.pelos = partID; break;
-            case "peinados":    parts.peinados = partID; break;
-            case "cejas":       parts.cejas = partID; break;
-            case "narices":     parts.narices = partID; break;
-            case "barbas":      parts.barbas = partID; break;
-            case "pantalon":    parts.pantalon = partID; break;
-            case "botas":       parts.botas = partID; break;
+            case "cabezas": style.cabezas = partID; break;
+            case "piel": style.piel = partID; break;
+            case "tatoo": style.tatoo = partID; break;
+            case "pelos": style.pelos = partID; break;
+            case "peinados": style.peinados = partID; break;
+            case "cejas": style.cejas = partID; break;
+            case "narices": style.narices = partID; break;
+            case "barbas": style.barbas = partID; break;
+            case "pantalon": style.pantalon = partID; break;
+            case "botas": style.botas = partID; break;
         }
     }
 }
