@@ -37,15 +37,22 @@ public class CustomizerView : MonoBehaviour {
     void OnCustomizerRefresh(string part)
     {
         Utils.RemoveAllChildsIn(partContainer);
+        int id = 0;
         foreach (CustomizerPartData data in Data.Instance.customizerData.data)
         {
             if (data.name == part)
             {
                 CustomizerPartButton newPartButton = Instantiate(partbutton);
                 newPartButton.transform.SetParent(partContainer);
-                newPartButton.data = data;
+               // newPartButton.data = data;
                 newPartButton.transform.localScale = Vector3.one;
+                newPartButton.Init(id, part, this);
+                id++;
             }
         }
+    }
+    public void Selected(string part, int partID)
+    {
+        Events.OnCustomizerChangePart(part, partID);       
     }
 }

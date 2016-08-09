@@ -10,6 +10,7 @@ public class CharacterHead : MonoBehaviour {
     public GameObject cejas;
     public GameObject narices;
     public GameObject pelos;
+    public GameObject barbas;
 
     private int cabezaID;
 
@@ -26,12 +27,21 @@ public class CharacterHead : MonoBehaviour {
         SetContainer("orejas", orejas);
         SetContainer("pelos", pelos);
     }
-    public void SetPeinados(int itemId)
+    public void SetMeshPart(int itemId, string part)
     {
+        GameObject container = null;
+        if(part == "peinados")
+            container = pelos;
+        else if (part == "cejas")
+            container = cejas;
+        else if (part == "narices")
+            container = narices;
+        else if (part == "barbas")
+            container = barbas;
+
         int id = 0;
-        foreach (MeshRenderer go in pelos.GetComponentsInChildren<MeshRenderer>())
+        foreach (MeshRenderer go in container.GetComponentsInChildren<MeshRenderer>())
         {
-            print(id + " ---- " + itemId);
             id++;
             if (id == itemId)
                 go.enabled = true;
@@ -39,6 +49,7 @@ public class CharacterHead : MonoBehaviour {
                 go.enabled = false;
         }
     }
+
     void SetContainer(string partName, GameObject part)
     {
         Transform container = GetContainerFor(partName);

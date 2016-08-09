@@ -34,9 +34,9 @@
 			fixed4 c = tex2D (_MainTex, IN.uv_MainTex);
 			fixed4 c2 = tex2D (_MainTex2, IN.uv_MainTex);
 
-			if(c.a > 0.0 && (c.r!=1) && (c.g!=1) && (c.b!=1))
+			if(c.a > 0.0 && ((c.r!=1) || (c.g!=1) || (c.b!=1)))
 				o.Albedo =  c.rgba;
-			else if(c2.a > 0.0 && (c2.r!=1) && (c2.g!=1) && (c2.b!=1))
+			else if(c2.a > 0.0 && ((c2.r!=1) || (c2.g!=1) || (c2.b!=1)))
 				o.Albedo =  c2.rgba;
 			else
 				o.Albedo = _Color.rgb;

@@ -3,12 +3,18 @@ using System.Collections;
 
 public class CustomizerPartButton : MonoBehaviour {
 
-    public CustomizerPartData data;
+    private int id;
+   // public CustomizerPartData data;
+    private string part;
+    private CustomizerView view;
 
+    public void Init(int id, string part, CustomizerView view)
+    {
+        this.view = view;
+        this.id = id;
+        this.part = part;
+    }
 	public void OnClicked () {
-        if(data.color.a > 0)
-            Events.OnCustomizerChangePart(data.name, "", data.color, 0);
-        for (int a= 0; a<data.url.Count; a++)
-            Events.OnCustomizerChangePart(data.name, data.url[a], data.color, a);
+        view.Selected(part, id);
 	}
 }
