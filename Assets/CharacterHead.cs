@@ -55,8 +55,9 @@ public class CharacterHead : MonoBehaviour {
     }
     public void ChangePiel(string partType, Color color)
     {
+        print(partType + " - " + color);
         foreach (GameObject go in cabezas)
-            Change(go.GetComponent<MeshRenderer>().material, partType, color);
+            Change(go.GetComponent<SkinnedMeshRenderer>().material, partType, color);
         foreach (MeshRenderer mr in orejas.GetComponentsInChildren<MeshRenderer>())
             Change(mr.material, partType, color);
         foreach (MeshRenderer mr in narices.GetComponentsInChildren<MeshRenderer>())

@@ -94,7 +94,8 @@ public class Character : MonoBehaviour {
     {
         if (characterActions.state == CharacterActions.states.KO) return;
 
-        if (Random.Range(0, 100) < 50)
+       // if (Random.Range(0, 100) < 50)
+        if (Random.Range(0, 100) < 0)
             Attack();
         else
             DefenseRandom();
@@ -132,11 +133,12 @@ public class Character : MonoBehaviour {
     {
         switch (action)
         {
+            case CharacterActions.actions.IDLE:                     ChangeDefense(false, false,false,false); break;
             case CharacterActions.actions.DEFENSE_UP:               ChangeDefense(true, true, false, false); break;
             case CharacterActions.actions.DEFENSE_UP_CENTER:        ChangeDefense(true, true, false, false); break;
             case CharacterActions.actions.DEFENSE_DOWN:             ChangeDefense(false, false, true, true); break;
-            case CharacterActions.actions.DEFENSE_UP_L_DOWN_R:      ChangeDefense(false, true, true, false); break;
-            case CharacterActions.actions.DEFENSE_UP_R_DOWN_L:      ChangeDefense(true, false, false, true); break;
+            case CharacterActions.actions.DEFENSE_UP_L_DOWN_R:      ChangeDefense(false, true, true, true); break;
+            case CharacterActions.actions.DEFENSE_UP_R_DOWN_L:      ChangeDefense(true, false, true, true); break;
         }
     }
     public void ChangeDefense(bool up_r, bool up_l, bool down_r, bool down_l)

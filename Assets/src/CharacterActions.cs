@@ -25,6 +25,7 @@ public class CharacterActions : MonoBehaviour {
     public actions action;
     public enum actions
     {
+        IDLE,
         DEFENSE_UP,
         DEFENSE_UP_CENTER,
         DEFENSE_DOWN,
@@ -42,6 +43,7 @@ public class CharacterActions : MonoBehaviour {
         KO
     }
 
+    public string anim_idle;
     public string anim_attack_l;
     public string anim_attack_r;
     public string anim_attack_l_cortito;
@@ -70,21 +72,32 @@ public class CharacterActions : MonoBehaviour {
         character = GetComponent<Character>();
        // anim = GetComponent<Animator>();
 	}
+
+    int randomDefense;
     public void ChangeRandomDefense()
     {
         if (state == states.KO) return;
-        int randomAction = Random.Range(1,5);
-        switch (randomAction)
+        
+        //para que no repita entre Down y Idle:
+        if (randomDefense < 3)
+            randomDefense = Random.Range(3, 6);
+        else
+            randomDefense = Random.Range(1, 6);
+
+        switch (randomDefense)
         {
-            case 1: Defense( actions.DEFENSE_UP ); break;
-            case 2: Defense( actions.DEFENSE_UP_CENTER); break;
-            case 3: Defense( actions.DEFENSE_DOWN); break;
+            case 1: Defense(actions.DEFENSE_DOWN); break;
+            case 2: Defense( actions.IDLE); break;
+            case 3: Defense(actions.DEFENSE_UP); break;
             case 4: Defense( actions.DEFENSE_UP_R_DOWN_L); break;
             case 5: Defense( actions.DEFENSE_UP_L_DOWN_R); break;
+            case 6: Defense(actions.DEFENSE_UP_CENTER); break;
         }
     }
+
     public void Defense(actions defenseAction)
     {
+        print("Change defense: " + defenseAction);
         if (state == states.KO) return;
         action = defenseAction;
         state = states.DEFENDING;
@@ -173,6 +186,7 @@ public class CharacterActions : MonoBehaviour {
             case actions.DEFENSE_DOWN: actionName = anim_defense_down; break;
             case actions.DEFENSE_UP_L_DOWN_R: actionName = anim_defense_up_l_down_r; break;
             case actions.DEFENSE_UP_R_DOWN_L: actionName = anim_defense_up_r_down_l; break;
+            case actions.IDLE: actionName = anim_idle; break;
             case actions.PUNCHED_UP_L: actionName = anim_punched_up_l; defenseRoutine = ResetActions(0.4f); StartCoroutine(defenseRoutine);  break;
             case actions.PUNCHED_UP_R: actionName = anim_punched_up_r; defenseRoutine = ResetActions(0.4f); StartCoroutine(defenseRoutine); break;
             case actions.PUNCHED_DOWN_L: actionName = anim_punched_down_l; defenseRoutine =ResetActions(0.4f); StartCoroutine(defenseRoutine); break;
