@@ -12,6 +12,8 @@ public static class Events
     public static System.Action<bool> OnShowBackButton = delegate { };
     public static System.Action OnBackButtonPressed = delegate { };
 
+
+    public static System.Action<string> OnSaveStyles = delegate { };
     public static System.Action<Fight> OnSaveNewPelea = delegate { };
     public static System.Action<string, Peleas> OnSavePelea = delegate { };
     public static System.Action<Stats> OnSaveStats = delegate { };

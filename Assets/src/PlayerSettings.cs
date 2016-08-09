@@ -15,6 +15,11 @@ public class PlayerSettings : MonoBehaviour {
         heroData.username  = PlayerPrefs.GetString("username", "");
         heroData.facebookID = PlayerPrefs.GetString("facebookID", "");
         heroData.nick = PlayerPrefs.GetString("nick", "Anónimo");
+        string styles = PlayerPrefs.GetString("styles");
+        if (styles.Length > 0)
+        {
+            heroData.styles.Parse(styles);
+        }
     }
     public void SetAnonimo()
     {        

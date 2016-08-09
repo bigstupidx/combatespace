@@ -1,18 +1,26 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using System.Text.RegularExpressions;
 
 public class AvatarCustomizer : MonoBehaviour {
 
-    public Styles style;
+    public bool isMyAvatar;
+
+    public Styles styles;
 
     public AvatarCustomizerPart[] avatarCustomizerParts;
     public CharacterHead head;
 
     void Start()
     {
-        style = Data.Instance.playerSettings.heroData.styles;
-        head.SetCabeza(1);
+        if (isMyAvatar)
+        {
+            styles = Data.Instance.playerSettings.heroData.styles;
+            string style = styles.style;
+            if (style.Length > 8)
+                ParseStyles(style);
+        }
         Events.OnCustomizerChangePart += OnCustomizerChangePart;
     }
     void OnDestroy()
@@ -22,6 +30,10 @@ public class AvatarCustomizer : MonoBehaviour {
     public void OnCustomizerChangePart(string partName, int partID)
     {
         SetStyle(partName, partID);
+        OnChangePart(partName, partID);
+	}
+    public void OnChangePart(string partName, int partID)
+    {
         int id = 0;
         foreach (CustomizerPartData data in Data.Instance.customizerData.data)
         {
@@ -38,9 +50,11 @@ public class AvatarCustomizer : MonoBehaviour {
                 id++;
             }
         }
-	}
+    }
     public void ChangePart(string partName, string partType, Color color, int materialID)
     {
+        //print("ChangePart  " + partName + "  partType: " + partType + " color: " + color + " materialID:" + materialID);
+
         if (partName == "peinados" || partName == "cejas" || partName == "narices" || partName == "barbas")
         {
             head.SetMeshPart(int.Parse(partType), partName);
@@ -66,16 +80,44 @@ public class AvatarCustomizer : MonoBehaviour {
     {
         switch (partName)
         {
-            case "cabezas": style.cabezas = partID; break;
-            case "piel": style.piel = partID; break;
-            case "tatoo": style.tatoo = partID; break;
-            case "pelos": style.pelos = partID; break;
-            case "peinados": style.peinados = partID; break;
-            case "cejas": style.cejas = partID; break;
-            case "narices": style.narices = partID; break;
-            case "barbas": style.barbas = partID; break;
-            case "pantalon": style.pantalon = partID; break;
-            case "botas": style.botas = partID; break;
+            case "cabezas": styles.cabezas = partID; break;
+            case "piel": styles.piel = partID; break;
+            case "tatoo": styles.tatoo = partID; break;
+            case "pelos": styles.pelos = partID; break;
+            case "peinados": styles.peinados = partID; break;
+            case "cejas": styles.cejas = partID; break;
+            case "narices": styles.narices = partID; break;
+            case "barbas": styles.barbas = partID; break;
+            case "guantes": styles.guantes = partID; break;
+            case "pantalon": styles.pantalon = partID; break;
+            case "botas": styles.botas = partID; break;
+        }
+    }
+    public void ParseStyles(string style)
+    {
+        if (style == "") return;
+
+        Debug.Log("content: " + style);
+
+        string[] allData = Regex.Split(style, "-");
+
+        if (allData.Length > 8)
+        {
+            OnChangePart("cabezas", int.Parse(allData[0]));
+            OnChangePart("peinados", int.Parse(allData[1]));
+            OnChangePart("pelos", int.Parse(allData[2]));
+            OnChangePart("piel", int.Parse(allData[3]));
+            OnChangePart("narices", int.Parse(allData[4]));
+            OnChangePart("barbas", int.Parse(allData[5]));
+            OnChangePart("cejas", int.Parse(allData[6]));
+            OnChangePart("guantes", int.Parse(allData[7]));
+            OnChangePart("pantalon", int.Parse(allData[8]));
+            OnChangePart("botas", int.Parse(allData[9]));
+            OnChangePart("tatoo", int.Parse(allData[10]));
+        }
+        else
+        {
+            Debug.Log("Styles vacio o insuficiente");
         }
     }
 }

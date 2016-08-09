@@ -18,6 +18,7 @@ public class Customizer : ScreenBase {
     }
     public void Ready()
     {
+        Data.Instance.playerSettings.heroData.styles.Save();
         if (Data.Instance.lastScene == "01_Register") 
             Events.OnRegisterPopup();
         else

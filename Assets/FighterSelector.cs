@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 public class FighterSelector : MonoBehaviour {
 
+    public AvatarCustomizer characterCustomizer;
+    public Camera CharacterCamera;
+
     public ProfilePicture profilePicture;
     public FighterSelectorButton button;
     public Transform Content;
@@ -17,6 +20,7 @@ public class FighterSelector : MonoBehaviour {
     public Text characterCategory;
     public SwitchButton switchButtons;
     public VerticalScrollSnap verticalScrollSnap;
+    
 
 
     void Start()
@@ -74,7 +78,7 @@ public class FighterSelector : MonoBehaviour {
 
         SetFighter(Data.Instance.fightersManager.GetActualFighter());
 
-        int FighterID = (int)(id / 2);
+        FighterID = (int)(id / 2);
 
         verticalScrollSnap.Init(FighterID);
 
@@ -102,13 +106,17 @@ public class FighterSelector : MonoBehaviour {
     //    //PlayerData playerData = Data.Instance.fightersManager.GetFighter(false);
     //    SetFighter(playerData);
     //}
+    int FighterID;
     void SetFighter(int playerID)
     {
+        FighterID = playerID;
         SetFighter(Data.Instance.fightersManager.GetActualFighters()[playerID]);
     }
     void SetFighter(PlayerData playerData)
     {
         Data.Instance.playerSettings.characterData = playerData;
+        Invoke("DelayToCharacterAppear", 0.2f);
+
         int score = playerData.stats.score;
         
         characterCategory.text = Categories.GetCategorieByScore(score).ToUpper();
@@ -131,6 +139,20 @@ public class FighterSelector : MonoBehaviour {
 
         compareStatsLine[4].Init("PELEAS G.", hero_p_g, playerSettings.characterData.peleas.peleas_g + "/" + playerData.peleas.peleas_p);
         compareStatsLine[5].Init("RETOS G.", hero_r_g, playerSettings.characterData.peleas.retos_g + "/" + playerData.peleas.retos_p);
+    }
+    void DelayToCharacterAppear()
+    {
+        foreach (FighterSelectorButton button in Content.GetComponentsInChildren<FighterSelectorButton>())
+        {
+            if (button.id == FighterID)
+                button.SetOn();
+            else
+                button.SetOff();
+        }
+        characterCustomizer.ParseStyles(Data.Instance.playerSettings.characterData.styles.style);
+        CharacterCamera.enabled = true;
+        CharacterCamera.GetComponent<Animation>()["characterSelectorPresentAvatar"].time = 0;
+        CharacterCamera.GetComponent<Animation>().Play("characterSelectorPresentAvatar");
     }
     public void StartGame()
     {

@@ -12,6 +12,7 @@ public class DataController : MonoBehaviour
     private string updatePeleas_URL = URL + "updatePeleas.php?";
     private string getUsersByScore_URL = URL + "getUsersByScore.php?";
     private string saveStats_URL = URL + "saveStats.php?";
+    private string saveStyles_URL = URL + "saveStyles.php?";
     private string saveNewPelea_URL = URL + "saveNewPelea.php?";
     private string getPeleas_URL = URL + "getPeleasByFacebookID.php?";
     private string getHistorialPeleas_URL = URL + "getHistorialPeleas.php?";
@@ -22,6 +23,7 @@ public class DataController : MonoBehaviour
         Events.OnSavePelea += OnSavePelea;
         Events.OnSaveStats += OnSaveStats;
         Events.OnSaveNewPelea += OnSaveNewPelea;
+        Events.OnSaveStyles += OnSaveStyles;
 
         SocialEvents.OnFacebookLogin += OnFacebookLogin;
         SocialEvents.OnGetUsersByScore += OnGetUsersByScore;
@@ -191,6 +193,16 @@ public class DataController : MonoBehaviour
         hash = Md5Test.Md5Sum(hash + secretKey);
         string post_url = saveStats_URL + "facebookID=" + facebookID + "&score=" + score + "&stat1=" + stat1 + "&stat2=" + stat2 + "&stat3=" + stat3 + "&stat4=" + stat4 + "&hash=" + hash;
         print("OnSaveStats : " + post_url);
+        WWW hs_post = new WWW(post_url);
+    }
+    public void OnSaveStyles(string myStyles)
+    {
+        string styles = myStyles;
+        string facebookID = SocialManager.Instance.userData.facebookID;
+        string hash = facebookID + styles;
+        hash = Md5Test.Md5Sum(hash + secretKey);
+        string post_url = saveStyles_URL + "facebookID=" + facebookID + "&style=" + styles + "&hash=" + hash;
+        print("onSaveStyles_URL : " + post_url);
         WWW hs_post = new WWW(post_url);
     }
     private System.Action<string> OnGetFightsListener;

@@ -6,6 +6,8 @@ using System.Text.RegularExpressions;
 [Serializable]
 public class Styles {
 
+    public string style;
+
     public int cabezas;
     public int peinados;
     public int pelos;
@@ -18,15 +20,16 @@ public class Styles {
     public int botas;
     public int tatoo;
 
-    public void Parse(string content)
+    public void Parse(string style)
     {
-        if (content == "") return;
+        this.style = style;
+        if (style == "") return;
 
-        Debug.Log("content: " + content);
+        Debug.Log("content: " + style);
 
-         string[] allData = Regex.Split(content, "-");
+        string[] allData = Regex.Split(style, "-");
 
-         if(allData.Length>0)
+         if(allData.Length>9)
          {
              cabezas = int.Parse(allData[0]);
              peinados = int.Parse(allData[1]);
@@ -41,5 +44,22 @@ public class Styles {
              tatoo = int.Parse(allData[10]);
          }
     }
+    public void Save()
+    {
+        style = cabezas + "-";
+        style += peinados + "-";
+        style += pelos + "-";
+        style += piel + "-";
+        style += narices + "-";
+        style += barbas + "-";
+        style += cejas + "-";
+        style += guantes + "-";
+        style += pantalon + "-";
+        style += botas + "-";
+        style += tatoo;
+        PlayerPrefs.SetString("styles", style);
+        Events.OnSaveStyles(style);
+    }
+
 
 }

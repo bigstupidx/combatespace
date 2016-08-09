@@ -16,11 +16,13 @@ public class CharacterHead : MonoBehaviour {
 
     public void SetCabeza(int cabezaID)
     {
+        print("cabezaID " + cabezaID);
         this.cabezaID = cabezaID;
         foreach (GameObject cabeza in cabezas)
                 cabeza.SetActive(false);
 
         GetCabeza(cabezaID).SetActive(true);
+        print("GetCabeza " + GetCabeza(cabezaID).name);
 
         SetContainer("nariz", narices);
         SetContainer("cejas", cejas);
@@ -66,7 +68,7 @@ public class CharacterHead : MonoBehaviour {
     }
     public void ChangePiel(string partType, Color color)
     {
-        print(partType + " - " + color);
+       // print(partType + " - " + color);
         foreach (GameObject go in cabezas)
             Change(go.GetComponent<SkinnedMeshRenderer>().material, partType, color);
         foreach (MeshRenderer mr in orejas.GetComponentsInChildren<MeshRenderer>())
