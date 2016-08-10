@@ -15,13 +15,22 @@ public class AvatarCustomizer : MonoBehaviour {
     void Start()
     {
         if (isMyAvatar)
-        {
             styles = Data.Instance.playerSettings.heroData.styles;
-            string style = styles.style;
-            if (style.Length > 8)
-                ParseStyles(style);
-        }
+        else
+            styles = Data.Instance.playerSettings.characterData.styles;
+
+        string style = styles.style;
+        if (style.Length > 8)
+            ParseStyles(style);
         Events.OnCustomizerChangePart += OnCustomizerChangePart;
+        LoopRandomFaces();
+    }
+    void LoopRandomFaces()
+    {
+        int num = UnityEngine.Random.Range(0, 10);
+        if (num < 3)
+            Events.OnAvatarExpresion(AvatarExpresiones.types.CERRADA, isMyAvatar);
+        Invoke("LoopRandomFaces", 4);
     }
     void OnDestroy()
     {

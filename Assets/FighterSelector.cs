@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 public class FighterSelector : MonoBehaviour {
 
+    public GameObject NotLogged;
     public AvatarCustomizer characterCustomizer;
     public Camera CharacterCamera;
 
@@ -35,14 +36,23 @@ public class FighterSelector : MonoBehaviour {
         {
             userName.text = Data.Instance.playerSettings.heroData.nick;
             profilePicture.setPicture(SocialManager.Instance.userData.facebookID);
+            NotLogged.SetActive(false);
         }
         else
+        {
             userName.text = "Anónimo";
+            profilePicture.gameObject.SetActive(false);
+            NotLogged.SetActive(true);
+        }
 
         int score = Data.Instance.playerSettings.heroData.stats.score;
         category.text = Categories.GetCategorieByScore(score);
         heroScore.text = "" + score;
         LoadFighters();    
+    }
+    public void Register()
+    {
+        Events.OnRegisterPopup();
     }
     void LoadFighters()
     {

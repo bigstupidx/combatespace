@@ -4,6 +4,8 @@ using UnityEngine.UI;
 
 public class Home : MonoBehaviour
 {
+    public GameObject NotLogged;
+    public GameObject Logged;
 
     public ProfilePicture profilePicture;
     public Text usernameField;
@@ -20,6 +22,16 @@ public class Home : MonoBehaviour
 
     void Start()
     {
+        if (SocialManager.Instance.userData.logged)
+        {
+            NotLogged.SetActive(false);
+            Logged.SetActive(true);
+        }
+        else
+        {
+            NotLogged.SetActive(true);
+            Logged.SetActive(false);
+        }
         power.text = Data.Instance.playerSettings.heroData.stats.Power.ToString() ;
         defense.text = Data.Instance.playerSettings.heroData.stats.Defense.ToString();
         speed.text = Data.Instance.playerSettings.heroData.stats.Speed.ToString();
@@ -57,5 +69,9 @@ public class Home : MonoBehaviour
     {
         Events.OnTutorialReady(0);
         StartGame();
+    }
+    public void Register()
+    {
+        Events.OnRegisterPopup();
     }
 }

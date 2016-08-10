@@ -23,6 +23,7 @@ public static class Events
     public static System.Action OnRoundComplete = delegate { };
     public static System.Action OnAllRoundsComplete = delegate { };
 
+    public static System.Action<AvatarExpresiones.types, bool> OnAvatarExpresion = delegate { };
     public static System.Action<bool> OnAvatarFall = delegate { };
     public static System.Action<int> OnTutorialReady = delegate { };
 

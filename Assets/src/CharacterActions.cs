@@ -3,6 +3,8 @@ using System.Collections;
 
 public class CharacterActions : MonoBehaviour {
 
+    public AvatarCustomizer avatarCustomizer;
+    public Transform container;
    // public Animator animator;
     public Animation anim;
 
@@ -69,6 +71,12 @@ public class CharacterActions : MonoBehaviour {
     private IEnumerator defenseRoutine;    
     
 	void Start () {
+        AvatarCustomizer ac = Instantiate(avatarCustomizer);
+        ac.isMyAvatar = false;
+        ac.transform.SetParent(container);
+        ac.transform.localPosition = Vector3.zero;
+        ac.transform.localEulerAngles = Vector3.zero;
+        anim = ac.GetComponentInChildren<Animation>();
         character = GetComponent<Character>();
        // anim = GetComponent<Animator>();
 	}
@@ -218,6 +226,7 @@ public class CharacterActions : MonoBehaviour {
     public void OnCortito()
     {
         if (state == states.KO) return;
+        Events.OnAvatarExpresion(AvatarExpresiones.types.O, false);
         state = states.PUNCHED;
         action = actions.PUNCHED_CENTER;
         PlayAnim();
@@ -225,6 +234,7 @@ public class CharacterActions : MonoBehaviour {
     public void OnGanchoHitted(bool isLeft, bool isUp)
     {
         if (state == states.KO) return;
+        Events.OnAvatarExpresion(AvatarExpresiones.types.O, false);
         state = states.PUNCHED;
         if (isUp)
         {

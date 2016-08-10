@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Character : MonoBehaviour {
 
+   
+
     public bool DEFENSE_UP;
     public bool DEFENSE_UP_R;
     public bool DEFENSE_UP_L;

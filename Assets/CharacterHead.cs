@@ -28,6 +28,7 @@ public class CharacterHead : MonoBehaviour {
         SetContainer("cejas", cejas);
         SetContainer("orejas", orejas);
         SetContainer("pelos", pelos);
+        SetContainer("barbas", barbas);
     }
     public void SetMeshPart(int itemId, string part)
     {
@@ -70,7 +71,13 @@ public class CharacterHead : MonoBehaviour {
     {
        // print(partType + " - " + color);
         foreach (GameObject go in cabezas)
-            Change(go.GetComponent<SkinnedMeshRenderer>().material, partType, color);
+        {
+            GameObject expresiones = go.transform.Find("expresiones").gameObject;
+            foreach (MeshRenderer mr in expresiones.GetComponentsInChildren<MeshRenderer>())
+                Change(mr.material, partType, color);
+            foreach (SkinnedMeshRenderer mr in expresiones.GetComponentsInChildren<SkinnedMeshRenderer>())
+                Change(mr.material, partType, color);
+        }
         foreach (MeshRenderer mr in orejas.GetComponentsInChildren<MeshRenderer>())
             Change(mr.material, partType, color);
         foreach (MeshRenderer mr in narices.GetComponentsInChildren<MeshRenderer>())
@@ -81,6 +88,8 @@ public class CharacterHead : MonoBehaviour {
         foreach (MeshRenderer mr in pelos.GetComponentsInChildren<MeshRenderer>())
             Change(mr.material, partType, color);
         foreach (MeshRenderer mr in cejas.GetComponentsInChildren<MeshRenderer>())
+            Change(mr.material, partType, color);
+        foreach (MeshRenderer mr in barbas.GetComponentsInChildren<MeshRenderer>())
             Change(mr.material, partType, color);
     }
     void Change(Material material, string partType, Color color)
