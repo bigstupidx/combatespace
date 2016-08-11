@@ -52,7 +52,7 @@ public class SummaryRound : MonoBehaviour
 
         anim.Play("intro");
 
-        yield return new WaitForSeconds(9);
+        yield return new WaitForSeconds(11);
         StartGame();
     }
     public void StartGame()
@@ -78,7 +78,7 @@ public class SummaryRound : MonoBehaviour
         campana.GetComponent<Animation>().Stop();
         campana.SetActive(false);
 
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(12);
         NextRound();
     }
     public void NextRound()

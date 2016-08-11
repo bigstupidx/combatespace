@@ -97,7 +97,7 @@ public class Character : MonoBehaviour {
         if (characterActions.state == CharacterActions.states.KO) return;
 
        // if (Random.Range(0, 100) < 50)
-        if (Random.Range(0, 100) < 0)
+        if (Random.Range(0, 100) < 50 && !Data.Instance.settings.playingTutorial)
             Attack();
         else
             DefenseRandom();

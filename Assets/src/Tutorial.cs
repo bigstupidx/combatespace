@@ -9,6 +9,7 @@ public class Tutorial : MonoBehaviour {
 
     public GameObject barraEnergia;
     public GameObject barraPotencia;
+    public GameObject button;
 
     public GameObject defensePanel;
 
@@ -38,6 +39,7 @@ public class Tutorial : MonoBehaviour {
         {
             case HeroActions.actions.CORTITO_L:
             case HeroActions.actions.CORTITO_R:
+                print("cortito " + id);
                 if (id == 1) SetNextTutorial(); break;
             case HeroActions.actions.GANCHO_DOWN_L:
             case HeroActions.actions.GANCHO_DOWN_R:
@@ -51,24 +53,27 @@ public class Tutorial : MonoBehaviour {
     }
     public void SetNextTutorial()
     {
+        clicked = false;
         barraEnergia.SetActive(false);
         barraPotencia.SetActive(false);
 
         id++;
         switch (id)
         {
-            case 0: SetCartel("Aprendé los básicos"); break;
-            case 1: SetCartel("Primero, el JAB"); break;
-            case 2: SetCartel("Bien!, ahora el UPPERCUT al cuerpo"); break;
-            case 3: SetCartel("Perfecto! ahora el GANCHO"); break;
-            case 4: SetCartel("Bien! Ahora la defensa"); break;
-            case 5: barraEnergia.SetActive(true); SetCartel("Ahora... esta es la barra de tu energía"); break;
-            case 6: barraPotencia.SetActive(true); SetCartel("y esta es la potencia: si pegas mucho, esperá que se llene, sino el daño será muy bajo"); break;
-            case 7: SetCartel("Prefecto!, estás listo para boxear"); break;
+            case 0: SetCartel("Aprendé los básicos", true); break;
+            case 1: SetCartel("Primero, Aprende el JAB", false); break;
+            case 2: SetCartel("Bien!, ahora el UPPERCUT al cuerpo", false); break;
+            case 3: SetCartel("Perfecto! ahora el GANCHO", false); break;
+            case 4: SetCartel("Bien! Ahora la defensa", false); break;
+            case 5: barraEnergia.SetActive(true); SetCartel("Ahora... esta es la barra de tu energía", true); break;
+            case 6: barraPotencia.SetActive(true); SetCartel("y esta es la potencia: si pegás mucho, esperá que se llene, sino el daño será muy bajo", true); break;
+            case 7: SetCartel("Prefecto... ¡Ahora un poco de práctica!", true); break;
         }
     }
+    bool clicked;
     public void CartelClicked()
     {
+        clicked = true;
         if (id ==7)
         {
             Events.OnTutorialReady(1);
@@ -90,18 +95,31 @@ public class Tutorial : MonoBehaviour {
     {
         switch(id)
         {
-            case 1: anim.Play("cortito", 0,0); SetSignal(true, "Cortito", "(Swipe hacia el centro)"); break;
+            case 1: anim.Play("cortito", 0,0); SetSignal(true, "Jab", "(Tap en la pantalla)"); break;
             case 2: anim.Play("gancho_abajo", 0, 0); SetSignal(true, "Uppercut", "(Swipe Ascendente)"); break;
             case 3: anim.Play("gancho_arriba", 0, 0); SetSignal(true, "Gancho", "(Swipe descendente)"); break;
             case 4: anim.Play("defense", 0, 0); SetSignal(true, "Defensa", "(Mantener: Dos dedos)"); break;
         }        
     }
-    void SetCartel(string _text)
+    void SetCartel(string _text, bool ShowButton)
     {
         cartelON = true;
         defensePanel.SetActive(false);
         cartel_field.text = _text;
         Invoke("Dlay", 1);
+        if (!ShowButton)
+        {
+            button.SetActive(false);
+            cartelON = false;
+            Invoke("DelayNext", 3);
+        }
+        else
+            button.SetActive(true);
+    }
+    void DelayNext()
+    {
+        if (clicked) return;
+        CartelClicked();
     }
     void Dlay()
     {

@@ -107,7 +107,6 @@ public class CharacterActions : MonoBehaviour {
 
     public void Defense(actions defenseAction)
     {
-        print("Change defense: " + defenseAction);
         if (state == states.KO) return;
         action = defenseAction;
         state = states.DEFENDING;
