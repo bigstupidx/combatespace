@@ -20,8 +20,9 @@ public class AvatarCustomizer : MonoBehaviour {
             styles = Data.Instance.playerSettings.characterData.styles;
 
         string style = styles.style;
-        if (style.Length > 8)
-            ParseStyles(style);
+        if (style.Length < 8)
+            style = SetRandomStyle();
+        ParseStyles(style);
         Events.OnCustomizerChangePart += OnCustomizerChangePart;
         LoopRandomFaces();
     }
@@ -101,6 +102,23 @@ public class AvatarCustomizer : MonoBehaviour {
             case "pantalon": styles.pantalon = partID; break;
             case "botas": styles.botas = partID; break;
         }
+    }
+    public string SetRandomStyle()
+    {
+        string style = "";
+        style += UnityEngine.Random.Range(1, 4) + "-";
+        style += UnityEngine.Random.Range(1, 4) + "-";
+        style += UnityEngine.Random.Range(1, 4) + "-";
+        style += UnityEngine.Random.Range(1, 4) + "-";
+        style += UnityEngine.Random.Range(1, 4) + "-";
+        style += UnityEngine.Random.Range(1, 4) + "-";
+        style += UnityEngine.Random.Range(1, 4) + "-";
+        style += UnityEngine.Random.Range(1, 4) + "-";
+        style += UnityEngine.Random.Range(1, 4) + "-";
+        style += UnityEngine.Random.Range(1, 4) + "-";
+        style += UnityEngine.Random.Range(1, 4);
+
+        return style;
     }
     public void ParseStyles(string style)
     {

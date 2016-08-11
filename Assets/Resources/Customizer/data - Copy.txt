@@ -1,0 +1,113 @@
+{
+	cabezas:
+	[
+		{  id:"1" , thumb:"icons_head1"},
+		{  id:"2" , thumb:"icons_head2"},
+		{  id:"3" , thumb:"icons_head3"},
+		{  id:"4" , thumb:"icons_head4"}			
+	],
+	barbas:
+	[
+		{  id:"1" , thumb:"icons_genericColor_1"},
+		{  id:"2" , thumb:"icons_genericColor_1"},
+		{  id:"3" , thumb:"icons_genericColor_1"},
+		{  id:"4", thumb:"icons_genericColor_1" },
+		{  id:"5", thumb:"icons_genericColor_1" },
+		{  id:"6", thumb:"icons_genericColor_1"},
+		{  id:"7" , thumb:"icons_genericColor_1"},
+		{  id:"8" , thumb:"icons_genericColor_1"},
+		{  id:"9" , thumb:"icons_genericColor_1"},
+		{  id:"10", thumb:"icons_genericColor_1" }				
+	],
+	peinados:
+	[
+		{  id:"1" , thumb:"icons_genericColor_1"},
+		{  id:"2", thumb:"icons_genericColor_1" },
+		{  id:"3" , thumb:"icons_genericColor_1"},
+		{  id:"4" , thumb:"icons_genericColor_1"},
+		{  id:"5", thumb:"icons_genericColor_1" },
+		{  id:"6", thumb:"icons_genericColor_1" },
+		{  id:"7" , thumb:"icons_genericColor_1"},
+		{  id:"8", thumb:"icons_genericColor_1" },
+		{  id:"9", thumb:"icons_genericColor_1" }			
+	],
+	pelos:
+	[
+		{  color:"f7ba1e" , thumb:"icons_genericColor_1"},
+		{  color:"912626" , thumb:"icons_genericColor_1"},
+		{  color:"000000" , thumb:"icons_genericColor_1"},
+		{  color:"333333" , thumb:"icons_genericColor_1"},
+		{  color:"f15a24" , thumb:"icons_genericColor_1"},
+		{  color:"009245" , thumb:"icons_genericColor_1"},
+		{  color:"229cb8" , thumb:"icons_genericColor_1"},
+		{  color:"ff0000", thumb:"icons_genericColor_1" }
+	],
+	piel:
+	[
+		{  color:"e3c28d", thumb:"icons_skin1"},
+		{  color:"f0ba9a", thumb:"icons_skin2"},
+		{  color:"f0a67a", thumb:"icons_skin3"},
+		{  color:"db8065", thumb:"icons_skin4"},
+		{  color:"912626", thumb:"icons_skin5"}
+	],
+	narices:
+	[
+		{  id:"1" , thumb:"icons_genericColor_1"},
+		{  id:"2" , thumb:"icons_genericColor_1"},
+		{  id:"3" , thumb:"icons_genericColor_1"},
+		{  id:"4" , thumb:"icons_genericColor_1"},		
+		{  id:"5" , thumb:"icons_genericColor_1"}
+	],
+	cejas:
+	[
+		{  id:"1" , thumb:"icons_genericColor_1"},
+		{  id:"2" , thumb:"icons_genericColor_1"},
+		{  id:"3" , thumb:"icons_genericColor_1"},
+		{  id:"4" , thumb:"icons_genericColor_1"}
+	],
+	botas:
+	[
+		{  color:"ff0000" , thumb:"icons_genericColor_1"},
+		{  color:"f7931e", thumb:"icons_genericColor_1"},
+		{  color:"ffd600" , thumb:"icons_genericColor_1"},
+		{  color:"39b54a" , thumb:"icons_genericColor_1"},
+		{  color:"56c6c9" , thumb:"icons_genericColor_1"},
+		{  color:"2e3192" , thumb:"icons_genericColor_1"},
+		{  color:"783576", thumb:"icons_genericColor_1" },
+		{  color:"e063bb" , thumb:"icons_genericColor_1"},
+		{  color:"f5f5f5" , thumb:"icons_genericColor_1"},
+		{  color:"999999" , thumb:"icons_genericColor_1"},
+		{  color:"333333" , thumb:"icons_genericColor_1"},
+		{  color:"000000" , thumb:"icons_genericColor_1"}
+	],
+	guantes:
+	[
+		{  color:"ff0000" , thumb:"icons_genericColor_1"},
+		{  color:"f7931e", thumb:"icons_genericColor_1" },
+		{  color:"ffd600" , thumb:"icons_genericColor_1"},
+		{  color:"39b54a" , thumb:"icons_genericColor_1"},
+		{  color:"56c6c9" , thumb:"icons_genericColor_1"},
+		{  color:"2e3192" , thumb:"icons_genericColor_1"},
+		{  color:"783576", thumb:"icons_genericColor_1" },
+		{  color:"e063bb" , thumb:"icons_genericColor_1"},
+		{  color:"f5f5f5" , thumb:"icons_genericColor_1"},
+		{  color:"999999" , thumb:"icons_genericColor_1"},
+		{  color:"333333" , thumb:"icons_genericColor_1"},
+		{  color:"000000" , thumb:"icons_genericColor_1"}
+	],
+	pantalon:
+	[
+		{  color:"ff0000" , thumb:"icons_genericColor_1"},
+		{  color:"f7931e" , thumb:"icons_genericColor_1"},
+		{  color:"ffd600" , thumb:"icons_genericColor_1"},
+		{  color:"39b54a" , thumb:"icons_genericColor_1"},
+		{  color:"56c6c9" , thumb:"icons_genericColor_1"},
+		{  color:"2e3192" , thumb:"icons_genericColor_1"},
+		{  color:"783576", thumb:"icons_genericColor_1" },
+		{  color:"e063bb" , thumb:"icons_genericColor_1"},
+		{  color:"f5f5f5", thumb:"icons_genericColor_1" },
+		{  color:"999999", thumb:"icons_genericColor_1" },
+		{  color:"333333", thumb:"icons_genericColor_1" },
+		{  color:"000000", thumb:"icons_genericColor_1" }
+	],
+}

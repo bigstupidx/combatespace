@@ -46,7 +46,7 @@ public class CustomizerView : MonoBehaviour {
                 newPartButton.transform.SetParent(partContainer);
                // newPartButton.data = data;
                 newPartButton.transform.localScale = Vector3.one;
-                newPartButton.Init(id, part, this);
+                newPartButton.Init(id, part, data.thumb, this);
                 id++;
             }
         }

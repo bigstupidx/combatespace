@@ -23,15 +23,6 @@ public class CustomizerData : MonoBehaviour
     public void LoadSettings(string url)
     {
         var Json = SimpleJSON.JSON.Parse(url);
-        for (int a = 1; a < 4 + 1; a++)
-        {
-            CustomizerPartData cd = new CustomizerPartData();
-            cd.name = "cabezas";
-            cd.url = new List<string>();
-            cd.url.Add( a.ToString() );
-            cd.color.a = 0;
-            data.Add(cd);
-        }
         foreach (string part in parts)
         {
             for (int a = 0; a < Json[part].Count; a++)
@@ -40,6 +31,8 @@ public class CustomizerData : MonoBehaviour
                 cd.name = part;
 
                 cd.color.a = 0;
+
+                cd.thumb = Json[part][a]["thumb"];
 
                 if (Json[part][a]["color"] != null)
                     cd.color = hexToColor(Json[part][a]["color"]);

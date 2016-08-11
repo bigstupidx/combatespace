@@ -1,113 +1,115 @@
 {
 	cabezas:
 	[
-		{  id:"icons_head1.png" },
-		{  id:"icons_head2.png" },
-		{  id:"icons_head3.png" },
-		{  id:"icons_head4.png" },		
+		{  id:"1" , thumb:"icons_head1"},
+		{  id:"2" , thumb:"icons_head2"},
+		{  id:"3" , thumb:"icons_head3"},
+		{  id:"4" , thumb:"icons_head4"}
+
 	],
 	barbas:
 	[
-		{  id:"1" },
-		{  id:"2" },
-		{  id:"3" },
-		{  id:"4" },
-		{  id:"5" },
-		{  id:"6" },
-		{  id:"7" },
-		{  id:"8" },
-		{  id:"9" },
-		{  id:"10" }				
+		{  id:"1" , thumb:"icons_genericColor_1"},
+		{  id:"2" , thumb:"icons_genericColor_1"},
+		{  id:"3" , thumb:"icons_genericColor_1"},
+		{  id:"4", thumb:"icons_genericColor_1" },
+		{  id:"5", thumb:"icons_genericColor_1" },
+		{  id:"6", thumb:"icons_genericColor_1"},
+		{  id:"7" , thumb:"icons_genericColor_1"},
+		{  id:"8" , thumb:"icons_genericColor_1"},
+		{  id:"9" , thumb:"icons_genericColor_1"},
+		{  id:"10", thumb:"icons_genericColor_1" }				
 	],
 	peinados:
 	[
-		{  id:"icons_hair1.png" },
-		{  id:"icons_hair2.png" },
-		{  id:"icons_hair3.png" },
-		{  id:"icons_hair4.png" },
-		{  id:"icons_hair5.png" },
-		{  id:"icons_hair6.png" },
-		{  id:"icons_hair7.png" },
-		{  id:"icons_hair8.png" },
-		{  id:"icons_hair9.png" }			
-	],
+		{  id:"1" , thumb:"icons_hair1"},
+		{  id:"2", 	thumb:"icons_hair2" },
+		{  id:"3" , thumb:"icons_hair3"},
+		{  id:"4" , thumb:"icons_hair4"},
+		{  id:"5", 	thumb:"icons_hair5" },
+		{  id:"6", 	thumb:"icons_hair6" },
+		{  id:"7" , thumb:"icons_hair7"},
+		{  id:"8", 	thumb:"icons_hair8" },
+		{  id:"9", 	thumb:"icons_hair9" }			
+	],	
+		
 	pelos:
 	[
-		{  id:”icons_hairColor_1.png” color:"f7ba1e" },
-		{  id:”icons_hairColor_1.png” color:"912626" },
-		{  id:”icons_hairColor_1.png” color:"000000" },
-		{  id:”icons_hairColor_1.png” color:"333333" },
-		{  id:”icons_hairColor_1.png” color:"f15a24" },
-		{  id:”icons_hairColor_1.png” color:"009245" },
-		{  id:”icons_hairColor_1.png” color:"229cb8" },
-		{  id:”icons_hairColor_1.png” color:"ff0000" }
-	],
+		{  color:"f7ba1e" , thumb:"”icons_hairColor_1"},
+		{  color:"912626" , thumb:"”icons_hairColor_2"},
+		{  color:"000000" , thumb:"”icons_hairColor_3"},
+		{  color:"333333" , thumb:"”icons_hairColor_4"},
+		{  color:"f15a24" , thumb:"”icons_hairColor_5"},
+		{  color:"009245" , thumb:"”icons_hairColor_6"},
+		{  color:"229cb8" , thumb:"”icons_hairColor_7"},
+		{  color:"ff0000", 	thumb:"”icons_hairColor_8" }
+	],	
 	piel:
 	[
-		{  icons_skin1.png color:"e3c28d" },
-		{  icons_skin2.png color:"f0ba9a" },
-		{  icons_skin3.png color:"f0a67a" },
-		{  icons_skin4.png color:"db8065" },
-		{  icons_skin5.png color:"912626" }
+		{  color:"e3c28d", thumb:"icons_skin1"},
+		{  color:"f0ba9a", thumb:"icons_skin2"},
+		{  color:"f0a67a", thumb:"icons_skin3"},
+		{  color:"db8065", thumb:"icons_skin4"},
+		{  color:"912626", thumb:"icons_skin5"}
 	],
 	narices:
 	[
-		{  id:"icons_nose1.png" },
-		{  id:"icons_nose2.png" },
-		{  id:"icons_nose3.png" },
-		{  id:"icons_nose4.png" },		
-		{  id:"icons_nose5.png" }
+		{  id:"1" , thumb:"icons_nose1"},
+		{  id:"2" , thumb:"icons_nose2"},
+		{  id:"3" , thumb:"icons_nose3"},
+		{  id:"4" , thumb:"icons_nose4"},		
+		{  id:"5" , thumb:"icons_nose5"}
 	],
 	cejas:
 	[
-		{  id:"icons_eyebrows1.png" },
-		{  id:"icons_eyebrows2.png" },
-		{  id:"icons_eyebrows3.png" },
-		{  id:"icons_eyebrows4.png" }
+		{  id:"1" , thumb:"icons_eyebrows1"},
+		{  id:"2" , thumb:"icons_eyebrows2"},
+		{  id:"3" , thumb:"icons_eyebrows3"},
+		{  id:"4" , thumb:"icons_eyebrows4"}
 	],
 	botas:
 	[
-		{  id:”icons_genericColor_1.png” color:"ff0000" },
-		{  id:”icons_genericColor_2.png” color:"f7931e" },
-		{  id:”icons_genericColor_3.png” color:"ffd600" },
-		{  id:”icons_genericColor_4.png” color:"39b54a" },
-		{  id:”icons_genericColor_5.png” color:"56c6c9" },
-		{  id:”icons_genericColor_6.png” color:"2e3192" },
-		{  id:”icons_genericColor_7.png” color:"783576" },
-		{  id:”icons_genericColor_8.png” color:"e063bb" },
-		{  id:”icons_genericColor_9.png” color:"f5f5f5" },
-		{  id:”icons_genericColor_10.png” color:"999999" },
-		{  id:”icons_genericColor_11.png” color:"333333" },
-		{  id:”icons_genericColor_12.png” color:"000000" }
+		{  color:"ff0000" , thumb:”icons_genericColor_1"},
+		{  color:"f7931e", 	thumb:"icons_genericColor_2"},
+		{  color:"ffd600" , thumb:"icons_genericColor_3"},
+		{  color:"39b54a" , thumb:"icons_genericColor_4"},
+		{  color:"56c6c9" , thumb:"icons_genericColor_5"},
+		{  color:"2e3192" , thumb:"icons_genericColor_6"},
+		{  color:"783576", 	thumb:"icons_genericColor_7"},
+		{  color:"e063bb" , thumb:"icons_genericColor_8"},
+		{  color:"f5f5f5" , thumb:"icons_genericColor_9"},
+		{  color:"999999" , thumb:"icons_genericColor_10"},
+		{  color:"333333" , thumb:"icons_genericColor_11"},
+		{  color:"000000" , thumb:"icons_genericColor_12"}
 	],
 	guantes:
 	[
-		{  id:”icons_genericColor_1.png” color:"ff0000" },
-		{  id:”icons_genericColor_2.png” color:"f7931e" },
-		{  id:”icons_genericColor_3.png” color:"ffd600" },
-		{  id:”icons_genericColor_4.png” color:"39b54a" },
-		{  id:”icons_genericColor_5.png” color:"56c6c9" },
-		{  id:”icons_genericColor_6.png” color:"2e3192" },
-		{  id:”icons_genericColor_7.png” color:"783576" },
-		{  id:”icons_genericColor_8.png” color:"e063bb" },
-		{  id:”icons_genericColor_9.png” color:"f5f5f5" },
-		{  id:”icons_genericColor_10.png” color:"999999" },
-		{  id:”icons_genericColor_11.png” color:"333333" },
-		{  id:”icons_genericColor_12.png” color:"000000" }
+		{  color:"ff0000" , thumb:”icons_genericColor_1"},
+		{  color:"f7931e", 	thumb:"icons_genericColor_2"},
+		{  color:"ffd600" , thumb:"icons_genericColor_3"},
+		{  color:"39b54a" , thumb:"icons_genericColor_4"},
+		{  color:"56c6c9" , thumb:"icons_genericColor_5"},
+		{  color:"2e3192" , thumb:"icons_genericColor_6"},
+		{  color:"783576", 	thumb:"icons_genericColor_7"},
+		{  color:"e063bb" , thumb:"icons_genericColor_8"},
+		{  color:"f5f5f5" , thumb:"icons_genericColor_9"},
+		{  color:"999999" , thumb:"icons_genericColor_10"},
+		{  color:"333333" , thumb:"icons_genericColor_11"},
+		{  color:"000000" , thumb:"icons_genericColor_12"}
 	],
 	pantalon:
 	[
-		{  id:”icons_genericColor_1.png” color:"ff0000" },
-		{  id:”icons_genericColor_2.png” color:"f7931e" },
-		{  id:”icons_genericColor_3.png” color:"ffd600" },
-		{  id:”icons_genericColor_4.png” color:"39b54a" },
-		{  id:”icons_genericColor_5.png” color:"56c6c9" },
-		{  id:”icons_genericColor_6.png” color:"2e3192" },
-		{  id:”icons_genericColor_7.png” color:"783576" },
-		{  id:”icons_genericColor_8.png” color:"e063bb" },
-		{  id:”icons_genericColor_9.png” color:"f5f5f5" },
-		{  id:”icons_genericColor_10.png” color:"999999" },
-		{  id:”icons_genericColor_11.png” color:"333333" },
-		{  id:”icons_genericColor_12.png” color:"000000" }
+		{  color:"ff0000" , thumb:”icons_genericColor_1"},
+		{  color:"f7931e", 	thumb:"icons_genericColor_2"},
+		{  color:"ffd600" , thumb:"icons_genericColor_3"},
+		{  color:"39b54a" , thumb:"icons_genericColor_4"},
+		{  color:"56c6c9" , thumb:"icons_genericColor_5"},
+		{  color:"2e3192" , thumb:"icons_genericColor_6"},
+		{  color:"783576", 	thumb:"icons_genericColor_7"},
+		{  color:"e063bb" , thumb:"icons_genericColor_8"},
+		{  color:"f5f5f5" , thumb:"icons_genericColor_9"},
+		{  color:"999999" , thumb:"icons_genericColor_10"},
+		{  color:"333333" , thumb:"icons_genericColor_11"},
+		{  color:"000000" , thumb:"icons_genericColor_12"}
 	],
 }

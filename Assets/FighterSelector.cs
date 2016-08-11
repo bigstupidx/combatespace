@@ -69,7 +69,13 @@ public class FighterSelector : MonoBehaviour {
             fighters = Data.Instance.fightersManager.friends;
 
         if (fighters.Count < 1)
-            Invoke("LoopUntilReady", 1);
+        {
+            if (Data.Instance.fightersManager.filter == FightersManager.filters.ALL)
+                Data.Instance.fightersManager.LoadFighters(0,100);
+            else
+                Data.Instance.fightersManager.LoadFriends(0, 100);
+            Invoke("LoopUntilReady", 3);
+        }
         else
             AddFighters(fighters);
     }
