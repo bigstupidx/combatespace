@@ -1,4 +1,11 @@
 {
+	cabezas:
+	[
+		{  id:"icons_head1.png" },
+		{  id:"icons_head2.png" },
+		{  id:"icons_head3.png" },
+		{  id:"icons_head4.png" },		
+	],
 	barbas:
 	[
 		{  id:"1" },
@@ -14,93 +21,93 @@
 	],
 	peinados:
 	[
-		{  id:"1" },
-		{  id:"2" },
-		{  id:"3" },
-		{  id:"4" },
-		{  id:"5" },
-		{  id:"6" },
-		{  id:"7" },
-		{  id:"8" },
-		{  id:"9" }			
+		{  id:"icons_hair1.png" },
+		{  id:"icons_hair2.png" },
+		{  id:"icons_hair3.png" },
+		{  id:"icons_hair4.png" },
+		{  id:"icons_hair5.png" },
+		{  id:"icons_hair6.png" },
+		{  id:"icons_hair7.png" },
+		{  id:"icons_hair8.png" },
+		{  id:"icons_hair9.png" }			
 	],
 	pelos:
 	[
-		{  color:"f7ba1e" },
-		{  color:"912626" },
-		{  color:"000000" },
-		{  color:"333333" },
-		{  color:"f15a24" },
-		{  color:"009245" },
-		{  color:"229cb8" },
-		{  color:"ff0000" }
+		{  id:”icons_hairColor_1.png” color:"f7ba1e" },
+		{  id:”icons_hairColor_1.png” color:"912626" },
+		{  id:”icons_hairColor_1.png” color:"000000" },
+		{  id:”icons_hairColor_1.png” color:"333333" },
+		{  id:”icons_hairColor_1.png” color:"f15a24" },
+		{  id:”icons_hairColor_1.png” color:"009245" },
+		{  id:”icons_hairColor_1.png” color:"229cb8" },
+		{  id:”icons_hairColor_1.png” color:"ff0000" }
 	],
 	piel:
 	[
-		{  color:"e3c28d" },
-		{  color:"f0ba9a" },
-		{  color:"f0a67a" },
-		{  color:"db8065" },
-		{  color:"912626" }
+		{  icons_skin1.png color:"e3c28d" },
+		{  icons_skin2.png color:"f0ba9a" },
+		{  icons_skin3.png color:"f0a67a" },
+		{  icons_skin4.png color:"db8065" },
+		{  icons_skin5.png color:"912626" }
 	],
 	narices:
 	[
-		{  id:"1" },
-		{  id:"2" },
-		{  id:"3" },
-		{  id:"4" },		
-		{  id:"5" }
+		{  id:"icons_nose1.png" },
+		{  id:"icons_nose2.png" },
+		{  id:"icons_nose3.png" },
+		{  id:"icons_nose4.png" },		
+		{  id:"icons_nose5.png" }
 	],
 	cejas:
 	[
-		{  id:"1" },
-		{  id:"2" },
-		{  id:"3" },
-		{  id:"4" }
+		{  id:"icons_eyebrows1.png" },
+		{  id:"icons_eyebrows2.png" },
+		{  id:"icons_eyebrows3.png" },
+		{  id:"icons_eyebrows4.png" }
 	],
 	botas:
 	[
-		{  color:"ff0000" },
-		{  color:"f7931e" },
-		{  color:"ffd600" },
-		{  color:"39b54a" },
-		{  color:"56c6c9" },
-		{  color:"2e3192" },
-		{  color:"783576" },
-		{  color:"e063bb" },
-		{  color:"f5f5f5" },
-		{  color:"999999" },
-		{  color:"333333" },
-		{  color:"000000" }
+		{  id:”icons_genericColor_1.png” color:"ff0000" },
+		{  id:”icons_genericColor_2.png” color:"f7931e" },
+		{  id:”icons_genericColor_3.png” color:"ffd600" },
+		{  id:”icons_genericColor_4.png” color:"39b54a" },
+		{  id:”icons_genericColor_5.png” color:"56c6c9" },
+		{  id:”icons_genericColor_6.png” color:"2e3192" },
+		{  id:”icons_genericColor_7.png” color:"783576" },
+		{  id:”icons_genericColor_8.png” color:"e063bb" },
+		{  id:”icons_genericColor_9.png” color:"f5f5f5" },
+		{  id:”icons_genericColor_10.png” color:"999999" },
+		{  id:”icons_genericColor_11.png” color:"333333" },
+		{  id:”icons_genericColor_12.png” color:"000000" }
 	],
 	guantes:
 	[
-		{  color:"ff0000" },
-		{  color:"f7931e" },
-		{  color:"ffd600" },
-		{  color:"39b54a" },
-		{  color:"56c6c9" },
-		{  color:"2e3192" },
-		{  color:"783576" },
-		{  color:"e063bb" },
-		{  color:"f5f5f5" },
-		{  color:"999999" },
-		{  color:"333333" },
-		{  color:"000000" }
+		{  id:”icons_genericColor_1.png” color:"ff0000" },
+		{  id:”icons_genericColor_2.png” color:"f7931e" },
+		{  id:”icons_genericColor_3.png” color:"ffd600" },
+		{  id:”icons_genericColor_4.png” color:"39b54a" },
+		{  id:”icons_genericColor_5.png” color:"56c6c9" },
+		{  id:”icons_genericColor_6.png” color:"2e3192" },
+		{  id:”icons_genericColor_7.png” color:"783576" },
+		{  id:”icons_genericColor_8.png” color:"e063bb" },
+		{  id:”icons_genericColor_9.png” color:"f5f5f5" },
+		{  id:”icons_genericColor_10.png” color:"999999" },
+		{  id:”icons_genericColor_11.png” color:"333333" },
+		{  id:”icons_genericColor_12.png” color:"000000" }
 	],
 	pantalon:
 	[
-		{  color:"ff0000" },
-		{  color:"f7931e" },
-		{  color:"ffd600" },
-		{  color:"39b54a" },
-		{  color:"56c6c9" },
-		{  color:"2e3192" },
-		{  color:"783576" },
-		{  color:"e063bb" },
-		{  color:"f5f5f5" },
-		{  color:"999999" },
-		{  color:"333333" },
-		{  color:"000000" }
+		{  id:”icons_genericColor_1.png” color:"ff0000" },
+		{  id:”icons_genericColor_2.png” color:"f7931e" },
+		{  id:”icons_genericColor_3.png” color:"ffd600" },
+		{  id:”icons_genericColor_4.png” color:"39b54a" },
+		{  id:”icons_genericColor_5.png” color:"56c6c9" },
+		{  id:”icons_genericColor_6.png” color:"2e3192" },
+		{  id:”icons_genericColor_7.png” color:"783576" },
+		{  id:”icons_genericColor_8.png” color:"e063bb" },
+		{  id:”icons_genericColor_9.png” color:"f5f5f5" },
+		{  id:”icons_genericColor_10.png” color:"999999" },
+		{  id:”icons_genericColor_11.png” color:"333333" },
+		{  id:”icons_genericColor_12.png” color:"000000" }
 	],
 }
