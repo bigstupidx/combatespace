@@ -85,14 +85,14 @@ public class HeroActions : MonoBehaviour
             case actions.DEFENSE: CrossFadeTime = 0.05f;  animName = anim_defense; break;
             case actions.DEFENSE_L: animName = anim_defense_l; break;
             case actions.DEFENSE_R: animName = anim_defense_r; break;
-            case actions.GANCHO_UP_R: animName = anim_gancho_up_r; hitRoutine = HitRoutine(0.3f, 0.5f); StartCoroutine(hitRoutine); break;
-            case actions.GANCHO_UP_L: animName = anim_gancho_up_l; hitRoutine = HitRoutine(0.3f, 0.5f); StartCoroutine(hitRoutine); break;
+            case actions.GANCHO_UP_R: animName = anim_gancho_up_r; hitRoutine = HitRoutine(0.23f, 0.5f); StartCoroutine(hitRoutine); break;
+            case actions.GANCHO_UP_L: animName = anim_gancho_up_l; hitRoutine = HitRoutine(0.23f, 0.5f); StartCoroutine(hitRoutine); break;
 
-            case actions.GANCHO_DOWN_R: animName = anim_gancho_down_r; hitRoutine = HitRoutine(0.2f, 0.5f); StartCoroutine(hitRoutine); break;
-            case actions.GANCHO_DOWN_L: animName = anim_gancho_down_l; hitRoutine = HitRoutine(0.2f, 0.5f); StartCoroutine(hitRoutine); break;
+            case actions.GANCHO_DOWN_R: animName = anim_gancho_down_r; hitRoutine = HitRoutine(0.22f, 0.5f); StartCoroutine(hitRoutine); break;
+            case actions.GANCHO_DOWN_L: animName = anim_gancho_down_l; hitRoutine = HitRoutine(0.22f, 0.5f); StartCoroutine(hitRoutine); break;
 
-            case actions.CORTITO_L: animName = anim_cortito_l; hitRoutine = HitRoutine(0.15f, 0.4f); StartCoroutine(hitRoutine); break;
-            case actions.CORTITO_R: animName = anim_cortito_r; hitRoutine = HitRoutine(0.15f, 0.4f); StartCoroutine(hitRoutine); break;
+            case actions.CORTITO_L: animName = anim_cortito_l; hitRoutine = HitRoutine(0.12f, 0.35f); StartCoroutine(hitRoutine); break;
+            case actions.CORTITO_R: animName = anim_cortito_r; hitRoutine = HitRoutine(0.12f, 0.35f); StartCoroutine(hitRoutine); break;
 
             case actions.PUNCHED_L: animName = anim_punched_l; punchedRoutine = PunchedRoutine(0.5f); StartCoroutine(punchedRoutine); break;
             case actions.PUNCHED_R: animName = anim_punched_r; punchedRoutine = PunchedRoutine(0.5f); StartCoroutine(punchedRoutine); break;

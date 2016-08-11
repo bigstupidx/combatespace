@@ -90,7 +90,8 @@ public class DataController : MonoBehaviour
     {
        // username = username.Replace(" ", "_");
         string hash = Md5Test.Md5Sum(_facebookID + _username  + secretKey);
-        string post_url = createUser_URL + "username=" + WWW.EscapeURL(_username) + "&facebookID=" + WWW.EscapeURL(_facebookID) + "&hash=" + hash;
+        string style = Data.Instance.playerSettings.heroData.styles.style;
+        string post_url = createUser_URL + "username=" + WWW.EscapeURL(_username) + "&facebookID=" + WWW.EscapeURL(_facebookID) + "&style=" + style + "&hash=" + hash;
         print("CreateUser : " + post_url);
         WWW hs_post = new WWW(post_url);
         yield return hs_post;
@@ -177,7 +178,7 @@ public class DataController : MonoBehaviour
         hash = Md5Test.Md5Sum(hash + secretKey);
         string post_url = saveNewPelea_URL + "retador_username=" + WWW.EscapeURL(fight.retador_username) + "&retado_username=" + WWW.EscapeURL(fight.retado_username) + "&retador_facebookID=" + fight.retador_facebookID + "&retado_facebookID=" + fight.retado_facebookID + "&winner=" + fight.winner + "&hash=" + hash;
         print("OnSaveNewPelea : " + post_url);
-        WWW hs_post = new WWW(post_url);
+        StartCoroutine(OnSaveData(post_url));
     }
 
     public void OnSaveStats(Stats stats)
@@ -193,7 +194,7 @@ public class DataController : MonoBehaviour
         hash = Md5Test.Md5Sum(hash + secretKey);
         string post_url = saveStats_URL + "facebookID=" + facebookID + "&score=" + score + "&stat1=" + stat1 + "&stat2=" + stat2 + "&stat3=" + stat3 + "&stat4=" + stat4 + "&hash=" + hash;
         print("OnSaveStats : " + post_url);
-        WWW hs_post = new WWW(post_url);
+        StartCoroutine(OnSaveData(post_url));
     }
     public void OnSaveStyles(string myStyles)
     {
@@ -203,7 +204,13 @@ public class DataController : MonoBehaviour
         hash = Md5Test.Md5Sum(hash + secretKey);
         string post_url = saveStyles_URL + "facebookID=" + facebookID + "&style=" + styles + "&hash=" + hash;
         print("onSaveStyles_URL : " + post_url);
+        StartCoroutine(OnSaveData(post_url));
+    }
+    IEnumerator OnSaveData(string post_url)
+    {
         WWW hs_post = new WWW(post_url);
+        yield return hs_post;
+        if (hs_post.error != null) print("Error!" + hs_post.error); else { Debug.Log("SAVED!"); }
     }
     private System.Action<string> OnGetFightsListener;
     public void OnGetFights(System.Action<string> OnGetFightsListener)

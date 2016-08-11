@@ -25,7 +25,7 @@ public class Styles {
         this.style = style;
         if (style == "") return;
 
-        Debug.Log("content: " + style);
+     //   Debug.Log("content: " + style);
 
         string[] allData = Regex.Split(style, "-");
 
@@ -58,7 +58,8 @@ public class Styles {
         style += botas + "-";
         style += tatoo;
         PlayerPrefs.SetString("styles", style);
-        Events.OnSaveStyles(style);
+        if(SocialManager.Instance.userData.logged)
+            Events.OnSaveStyles(style);
     }
 
 

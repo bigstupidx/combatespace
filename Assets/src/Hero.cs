@@ -112,8 +112,11 @@ public class Hero : MonoBehaviour
         if (Game.Instance.fightStatus.state != FightStatus.states.FIGHTING) return;
         switch (action)
         {
-            case HeroActions.actions.GANCHO_UP_R: actions.OnHeroActionWithCrossFade(HeroActions.actions.IDLE, 0); break;
-            case HeroActions.actions.GANCHO_UP_L: actions.OnHeroActionWithCrossFade(HeroActions.actions.IDLE, 0); break;
+            case HeroActions.actions.GANCHO_UP_R: actions.OnHeroActionWithCrossFade(HeroActions.actions.IDLE, 0.05f); break;
+            case HeroActions.actions.GANCHO_UP_L: actions.OnHeroActionWithCrossFade(HeroActions.actions.IDLE, 0.05f); break;
+
+            case HeroActions.actions.GANCHO_DOWN_L: actions.OnHeroActionWithCrossFade(HeroActions.actions.IDLE, 0.05f); break;
+            case HeroActions.actions.GANCHO_DOWN_R: actions.OnHeroActionWithCrossFade(HeroActions.actions.IDLE, 0.05f); break;
         }
     }
     float lastAttackTime;

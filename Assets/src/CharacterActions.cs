@@ -62,7 +62,9 @@ public class CharacterActions : MonoBehaviour {
     public string anim_punched_down_r;
     public string anim_punched_center;
     public string anim_ko;
+    public string anim_ko2;
     public string anim_levanta;
+    public string anim_levanta2;
 
     private Character character;
 
@@ -154,16 +156,25 @@ public class CharacterActions : MonoBehaviour {
         Reset();
         state = states.KO;
         //animator.CrossFade(anim_ko, 0.1f);
-        anim.Play(anim_ko);
-        anim[anim_ko].speed = 1;
+        string animName = anim_ko;
+        if(Game.Instance.fightStatus.caidas_character>1)
+            animName = anim_ko2;
+        
+        anim.Play(animName);
+        anim[animName].speed = 1;
     }
     public void Levanta()
     {
         Reset();
         state = states.LEVANTA;
-       // animator.CrossFade(anim_levanta, 0.1f);
-        anim.Play(anim_levanta);
-        anim[anim_levanta].speed = 1;
+
+        string animName = anim_levanta;
+        if(Game.Instance.fightStatus.caidas_character>1)
+            animName = anim_levanta2;
+        
+        anim.Play(animName);
+        anim[animName].speed = 1;
+
         levantaRoutine = LevantaRoutine(); StartCoroutine(levantaRoutine); 
     }
     IEnumerator LevantaRoutine()

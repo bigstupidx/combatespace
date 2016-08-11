@@ -5,8 +5,7 @@ public class GameSettingsPopup : MonoBehaviour
 {
     public GameObject canvas;
     public GameObject panel;
-    public GameObject mode360On;
-    public GameObject modeVolanteOn;
+    public SwitchButton modeSwitchButton;
 
     void Start()
     {
@@ -23,6 +22,13 @@ public class GameSettingsPopup : MonoBehaviour
         canvas.SetActive(true);
         Time.timeScale = 0;
         SetActive();
+    }
+    public void SwitchMode()
+    {
+        if (Data.Instance.playerSettings.control == PlayerSettings.controls.CONTROL_360)
+            Mode_Volante();
+        else
+            Mode_360();
     }
     public void Mode_360()
     {
@@ -52,13 +58,11 @@ public class GameSettingsPopup : MonoBehaviour
     {
         if (Data.Instance.playerSettings.control == PlayerSettings.controls.CONTROL_360)
         {
-            mode360On.SetActive(true);
-            modeVolanteOn.SetActive(false);
+            modeSwitchButton.Init(2);
         }
         else
         {
-            mode360On.SetActive(false);
-            modeVolanteOn.SetActive(true);
+            modeSwitchButton.Init(1);
         }
     }
 }
