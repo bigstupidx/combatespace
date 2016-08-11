@@ -35,14 +35,14 @@
 		
 	pelos:
 	[
-		{  color:"f7ba1e" , thumb:"”icons_hairColor_1"},
-		{  color:"912626" , thumb:"”icons_hairColor_2"},
-		{  color:"000000" , thumb:"”icons_hairColor_3"},
-		{  color:"333333" , thumb:"”icons_hairColor_4"},
-		{  color:"f15a24" , thumb:"”icons_hairColor_5"},
-		{  color:"009245" , thumb:"”icons_hairColor_6"},
-		{  color:"229cb8" , thumb:"”icons_hairColor_7"},
-		{  color:"ff0000", 	thumb:"”icons_hairColor_8" }
+		{  color:"f7ba1e" , thumb:"icons_hairColor_1"},
+		{  color:"912626" , thumb:"icons_hairColor_2"},
+		{  color:"000000" , thumb:"icons_hairColor_3"},
+		{  color:"333333" , thumb:"icons_hairColor_4"},
+		{  color:"f15a24" , thumb:"icons_hairColor_5"},
+		{  color:"009245" , thumb:"icons_hairColor_6"},
+		{  color:"229cb8" , thumb:"icons_hairColor_7"},
+		{  color:"ff0000", 	thumb:"icons_hairColor_8" }
 	],	
 	piel:
 	[
@@ -69,7 +69,7 @@
 	],
 	botas:
 	[
-		{  color:"ff0000" , thumb:”icons_genericColor_1"},
+		{  color:"ff0000" , thumb:"icons_genericColor_1"},
 		{  color:"f7931e", 	thumb:"icons_genericColor_2"},
 		{  color:"ffd600" , thumb:"icons_genericColor_3"},
 		{  color:"39b54a" , thumb:"icons_genericColor_4"},
@@ -84,7 +84,7 @@
 	],
 	guantes:
 	[
-		{  color:"ff0000" , thumb:”icons_genericColor_1"},
+		{  color:"ff0000" , thumb:"icons_genericColor_1"},
 		{  color:"f7931e", 	thumb:"icons_genericColor_2"},
 		{  color:"ffd600" , thumb:"icons_genericColor_3"},
 		{  color:"39b54a" , thumb:"icons_genericColor_4"},
@@ -99,7 +99,7 @@
 	],
 	pantalon:
 	[
-		{  color:"ff0000" , thumb:”icons_genericColor_1"},
+		{  color:"ff0000" , thumb:"icons_genericColor_1"},
 		{  color:"f7931e", 	thumb:"icons_genericColor_2"},
 		{  color:"ffd600" , thumb:"icons_genericColor_3"},
 		{  color:"39b54a" , thumb:"icons_genericColor_4"},

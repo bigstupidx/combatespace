@@ -14,17 +14,20 @@ public class AvatarCustomizer : MonoBehaviour {
 
     void Start()
     {
-        if (isMyAvatar)
-            styles = Data.Instance.playerSettings.heroData.styles;
-        else
-            styles = Data.Instance.playerSettings.characterData.styles;
+        if (Data.Instance.customizerData.data != null)
+        {
+            if (isMyAvatar)
+                styles = Data.Instance.playerSettings.heroData.styles;
+            else
+                styles = Data.Instance.playerSettings.characterData.styles;
 
-        string style = styles.style;
-        if (style.Length < 8)
-            style = SetRandomStyle();
-        ParseStyles(style);
-        Events.OnCustomizerChangePart += OnCustomizerChangePart;
-        LoopRandomFaces();
+            string style = styles.style;
+            if (style.Length < 8)
+                style = SetRandomStyle();
+            ParseStyles(style);
+            LoopRandomFaces();
+        }
+        Events.OnCustomizerChangePart += OnCustomizerChangePart;        
     }
     void LoopRandomFaces()
     {
