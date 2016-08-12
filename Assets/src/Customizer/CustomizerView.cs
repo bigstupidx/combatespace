@@ -32,10 +32,19 @@ public class CustomizerView : MonoBehaviour {
             newPartsButton.transform.SetParent(partsContainer);
             newPartsButton.Init(part);
             newPartsButton.transform.localScale = Vector3.one;
+            newPartsButton.SetOff();
         }
     }
     void OnCustomizerRefresh(string part)
     {
+        foreach (CustomizerPartsButton button in partsContainer.GetComponentsInChildren<CustomizerPartsButton>())
+        {
+            if (button.partName == part)
+                button.SetOn();
+            else
+                button.SetOff();
+        }
+
         Utils.RemoveAllChildsIn(partContainer);
         int id = 0;
         foreach (CustomizerPartData data in Data.Instance.customizerData.data)
@@ -53,6 +62,7 @@ public class CustomizerView : MonoBehaviour {
     }
     public void Selected(string part, int partID)
     {
+        
         Events.OnCustomizerChangePart(part, partID);       
     }
 }

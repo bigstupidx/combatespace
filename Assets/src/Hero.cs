@@ -41,6 +41,7 @@ public class Hero : MonoBehaviour
     }
     void Update()
     {
+        if (Data.Instance.settings.gamePaused) return;
         if (Game.Instance.fightStatus == null) return;
         if (Game.Instance.inputManager == null) return;
         if (Game.Instance.fightStatus.state == FightStatus.states.BETWEEN_ROUNDS) return;

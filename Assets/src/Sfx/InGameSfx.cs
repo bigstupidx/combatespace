@@ -12,9 +12,8 @@ public class InGameSfx : MonoBehaviour {
 	private Character character;
 	private FightStatus fStatus;
 
-	// Use this for initialization
+    
 	void Start () {
-
 		source = GetComponent<AudioSource> ();
 
 		Events.OnComputeCharacterPunched += OnComputeCharacterPunched;
@@ -30,9 +29,15 @@ public class InGameSfx : MonoBehaviour {
 
 		fStatus = Game.Instance.GetComponent<FightStatus> ();
 		source.Play ();
+
+        Events.OnAudioEnable += OnAudioEnable;
+        OnAudioEnable(Data.Instance.settings.volume);
 	}
 
+
+
 	void OnDestroy(){
+        Events.OnAudioEnable -= OnAudioEnable;
 		Events.OnComputeCharacterPunched -= OnComputeCharacterPunched;
 		Events.OnComputeHeroPunched -= OnComputeHeroPunched;
 		Events.OnAvatarFall -= OnAvatarFall;
@@ -41,11 +46,11 @@ public class InGameSfx : MonoBehaviour {
 		Events.OnRoundComplete -= OnRoundComplete;
 		Events.OnRoundStart -= OnRoundStart;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+
+    void OnAudioEnable(float volume)
+    {
+        source.volume = volume;
+    }
 
 	void OnComputeCharacterPunched(HeroActions.actions action){		
 		if (hero.combo > 1) {

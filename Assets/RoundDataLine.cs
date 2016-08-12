@@ -8,19 +8,21 @@ public class RoundDataLine : MonoBehaviour {
     public Text characterField;
     public Text title;
 
-	void Start () {
-        title.text = "";
-        heroField.text = "";
-        characterField.text = "";
-	}
     public void Init(int roundID, int heroScore, int characterScore)
     {
         if (roundID > 0)
             title.text = "ROUND " + roundID;
         else
-            title.text = "";
+            title.text = "---";
 
-        heroField.text = heroScore.ToString();
-        characterField.text = characterScore.ToString();
+        if (heroScore == 0)
+            heroField.text = "-";
+        else
+            heroField.text = heroScore.ToString();
+
+        if (characterScore == 0)
+            characterField.text = "-";
+        else
+            characterField.text = characterScore.ToString();
     }
 }

@@ -16,19 +16,36 @@ public class CharacterSounds : MonoBehaviour {
 	private float pitchHighRange = 1.2f;
 
 
-	// Use this for initialization
-	void Start () {
-		//receiveSource = GetComponent<AudioSource> ();
-		Events.OnComputeCharacterPunched += OnComputeCharacterPunched;
-		Events.OnCharacterBlockPunch += OnCharacterBlockPunch;
-		Events.OnAvatarFall += OnAvatarFall;
-	}
+    void Start()
+    {
+        Events.OnAudioEnable += OnAudioEnable;
+        OnAudioEnable(Data.Instance.settings.volume);
+    }
 
-	void OnDestroy(){
-		Events.OnComputeCharacterPunched -= OnComputeCharacterPunched;
-		Events.OnCharacterBlockPunch -= OnCharacterBlockPunch;
-		Events.OnAvatarFall -= OnAvatarFall;
-	}
+    void OnDestroy()
+    {
+        Events.OnAudioEnable -= OnAudioEnable;
+        Events.OnComputeCharacterPunched -= OnComputeCharacterPunched;
+        Events.OnCharacterBlockPunch -= OnCharacterBlockPunch;
+        Events.OnAvatarFall -= OnAvatarFall;
+    }
+    void OnAudioEnable(float volume)
+    {
+        if (volume == 1)
+        {
+            Events.OnComputeCharacterPunched += OnComputeCharacterPunched;
+            Events.OnCharacterBlockPunch += OnCharacterBlockPunch;
+            Events.OnAvatarFall += OnAvatarFall;
+        }
+        else
+        {
+            Events.OnComputeCharacterPunched -= OnComputeCharacterPunched;
+            Events.OnCharacterBlockPunch -= OnCharacterBlockPunch;
+            Events.OnAvatarFall -= OnAvatarFall;
+        }
+    }
+
+
 
 	void OnAvatarFall(bool isHero)
 	{

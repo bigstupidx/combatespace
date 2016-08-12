@@ -20,7 +20,7 @@ public class TopMenu : MonoBehaviour {
     }
     public void Settings()
     {
-        Events.OnGameSettings();
+        Events.OnSettings();
     }
     public void Tutorial()
     {

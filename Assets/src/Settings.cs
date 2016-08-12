@@ -14,6 +14,8 @@ public class Settings : MonoBehaviour {
 
     public DefaultPower defaultPower;
     public DefaultSpeed defaultSpeed;
+    public float volume;
+    public bool gamePaused;
 
     [Serializable]
     public class DefaultPower

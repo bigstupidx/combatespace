@@ -3,6 +3,7 @@ using System.Collections;
 
 public static class Events
 {
+    public static System.Action OnSettings = delegate { };
     public static System.Action OnGameSettings = delegate { };
     public static System.Action<PlayerData> OnUpdatePlayerData = delegate { };
     public static System.Action<bool> OnLoadingShow = delegate { };
@@ -35,6 +36,7 @@ public static class Events
     public static System.Action<CharacterActions.actions> OnAICharacterAttack = delegate { };
     public static System.Action<CharacterActions.actions> OnCheckHeroHitted = delegate { };
 
+    public static System.Action<float> OnAudioEnable = delegate { };
     public static System.Action<HeroActions.actions> OnHeroAction = delegate { };
     public static System.Action<HeroActions.actions> OnHeroSound = delegate { };
     public static System.Action<HeroActions.actions> OnCheckCharacterHitted = delegate { };    

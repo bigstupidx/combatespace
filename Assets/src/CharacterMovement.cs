@@ -43,7 +43,7 @@ public class CharacterMovement : MonoBehaviour {
         Invoke("Loop", 2);
     }
 	void Update () {
-
+        if (Data.Instance.settings.gamePaused) return;
         if (Game.Instance.fightStatus.state == FightStatus.states.KO) return;
         if (Game.Instance.fightStatus.state == FightStatus.states.BETWEEN_ROUNDS) return;
 

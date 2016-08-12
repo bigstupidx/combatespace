@@ -21,11 +21,13 @@ public class VoiceManager : MonoBehaviour {
 		Events.OnAvatarFall += OnAvatarFall;
 		Events.OnAvatarStandUp += OnAvatarStandUp;
 		Events.OnKO += OnKO;
+        Events.OnAudioEnable += OnAudioEnable;
 	
 		hero = Game.Instance.GetComponent<ComputeFight> ().hero;
 		character = Game.Instance.GetComponent<ComputeFight> ().character;
 
 		fStatus = Game.Instance.GetComponent<FightStatus> ();
+        OnAudioEnable(Data.Instance.settings.volume);
 	}
 
 	void OnDestroy(){
@@ -34,7 +36,12 @@ public class VoiceManager : MonoBehaviour {
 		Events.OnAvatarFall -= OnAvatarFall;
 		Events.OnAvatarStandUp -= OnAvatarStandUp;
 		Events.OnKO -= OnKO;
+        Events.OnAudioEnable -= OnAudioEnable;
 	}
+    void OnAudioEnable(float vol)
+    {
+        voice.volume = vol;
+    }
 
 
 	void OnComputeCharacterPunched(HeroActions.actions action){		

@@ -7,6 +7,9 @@ public class Summary : MonoBehaviour
     public RoundDataLine[] RoundDataLine;
     public RoundDataLine TotalRoundDataLine;
 
+    public ProfilePicture profileYou;
+    public ProfilePicture profileOther;
+
     public GameObject panel;
     public Text field;
     private bool heroWin;
@@ -43,6 +46,13 @@ public class Summary : MonoBehaviour
     {
         Events.OnFightEnd(heroWin);
 
+        if (SocialManager.Instance.userData.logged)
+            profileYou.setPicture(SocialManager.Instance.userData.facebookID);
+        else
+            profileYou.gameObject.SetActive(false);
+
+        profileOther.setPicture(Data.Instance.playerSettings.characterData.facebookID);
+
         panel.SetActive(true);
         if (heroWin)
             field.text = "Ganaste\n";
@@ -56,11 +66,12 @@ public class Summary : MonoBehaviour
         int totalCharacter = 0;
         foreach (FightStatus.RoundData roundData in Game.Instance.fightStatus.roundsData)
         {
+            print(id + " __________________ hero_punches: " + roundData.hero_punches + " - character_punches: " + roundData.character_punches);
+
             totalHero += roundData.hero_punches;
             totalCharacter += roundData.character_punches;
             RoundDataLine[id].Init(id + 1, roundData.hero_punches, roundData.character_punches);
-            if (id < 6)
-                id++;
+            id++;
         }
         print( totalHero + " + " + totalCharacter);
         TotalRoundDataLine.Init(0, totalHero, totalCharacter);

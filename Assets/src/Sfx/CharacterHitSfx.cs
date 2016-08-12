@@ -17,16 +17,33 @@ public class CharacterHitSfx : MonoBehaviour {
 	private float pitchHighRange = 1.2f;
 
 	private AudioSource source;
-	// Use this for initialization
+
+
+    void OnAudioEnable(float volume)
+    {
+        if (volume == 1)
+        {
+            Events.OnComputeCharacterPunched += OnComputeCharacterPunched;
+            Events.OnCharacterBlockPunch += OnCharacterBlockPunch;
+        }
+        else
+        {
+            Events.OnComputeCharacterPunched -= OnComputeCharacterPunched;
+            Events.OnCharacterBlockPunch -= OnCharacterBlockPunch;
+        }
+    }
+
+
 	void Start () {
+        Events.OnAudioEnable += OnAudioEnable;        
 		source = GetComponent<AudioSource> ();
-		Events.OnComputeCharacterPunched += OnComputeCharacterPunched;
-		Events.OnCharacterBlockPunch += OnCharacterBlockPunch;
+        OnAudioEnable(Data.Instance.settings.volume);
 	}
 
 	void OnDestroy(){
-		Events.OnComputeCharacterPunched -= OnComputeCharacterPunched;
-		Events.OnCharacterBlockPunch -= OnCharacterBlockPunch;
+        Events.OnAudioEnable -= OnAudioEnable;
+        Events.OnComputeCharacterPunched -= OnComputeCharacterPunched;
+        Events.OnCharacterBlockPunch -= OnCharacterBlockPunch;
 	}
 
 	void OnComputeCharacterPunched(HeroActions.actions action){

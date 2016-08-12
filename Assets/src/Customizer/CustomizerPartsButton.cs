@@ -4,8 +4,9 @@ using System.Collections;
 
 public class CustomizerPartsButton : MonoBehaviour
 {
-    private string partName;
-    public Image thumb; 
+    public string partName;
+    public Image thumb;
+    public Image Selector;
 
     public void Init(string partName)
     {
@@ -31,5 +32,13 @@ public class CustomizerPartsButton : MonoBehaviour
     public void OnClicked()
     {
         Events.OnCustomizerRefresh(partName);
+    }
+    public void SetOn()
+    {
+        Selector.enabled = true;
+    }
+    public void SetOff()
+    {
+        Selector.enabled = false;
     }
 }

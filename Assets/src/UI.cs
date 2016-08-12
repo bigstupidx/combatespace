@@ -8,6 +8,9 @@ public class UI : MonoBehaviour {
     public Text heroUsernameField;
     public Text characterUsernameField;
 
+    public ProfilePicture profileYou;
+    public ProfilePicture profileOther;
+
 
     public static UI Instance
     {
@@ -25,5 +28,12 @@ public class UI : MonoBehaviour {
     {
         heroUsernameField.text = Data.Instance.playerSettings.heroData.nick;
         characterUsernameField.text = Data.Instance.playerSettings.characterData.nick;
+
+        if (SocialManager.Instance.userData.logged)
+            profileYou.setPicture(Data.Instance.playerSettings.heroData.facebookID);
+        else
+            profileYou.gameObject.SetActive(false);
+
+        profileOther.setPicture(Data.Instance.playerSettings.characterData.facebookID);
     }
 }
