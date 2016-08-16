@@ -13,6 +13,7 @@ public class LoginManager : MonoBehaviour {
     void Awake()
     {
         FB.Init(SetInit, OnHideUnity);
+        SocialEvents.OnFacebookLogout += OnFacebookLogout;
     }
     void Start()
     {
@@ -21,15 +22,26 @@ public class LoginManager : MonoBehaviour {
             SocialEvents.OnFacebookLoginPressed += OnFacebookLoginPressed;
         }
     }
+    void OnFacebookLogout()
+    {
+        FB.LogOut();
+    }
     void SetInit()
     {
         if (FB.IsLoggedIn) {
             Debug.Log ("FB is logged in");
             FB.API("/me?fields=name", HttpMethod.GET, LogInDone);
-            SocialManager.Instance.facebookFriends.GetFriends();
+            Invoke("Delay", 0.1f);
         } else {
             Debug.Log ("FB is not logged in");
         }
+    }
+    bool friendsLogged;
+    void Delay()
+    {
+        if (friendsLogged) return;
+        friendsLogged = true;
+        SocialManager.Instance.facebookFriends.GetFriends();
     }
 
     void OnHideUnity(bool isGameShown)

@@ -1,52 +1,38 @@
-﻿Shader "Custom/CustomizerShader" {
-	Properties {
-		_Color ("Color", Color) = (1,1,1,1)
-		_MainTex ("Albedo (RGB)", 2D) = "white" {}
-		_MainTex2 ("Albedo (RGB)", 2D) = "white" {}
-		_Glossiness ("Smoothness", Range(0,1)) = 0.5
-		_Metallic ("Metallic", Range(0,1)) = 0.0
-	}
-	SubShader {
-		Tags { "RenderType"="Opaque" }
-		LOD 200
-		
-		CGPROGRAM
-		// Physically based Standard lighting model, and enable shadows on all light types
-		#pragma surface surf Standard fullforwardshadows
+﻿Shader "Example/Detail" {
+    Properties {
+	_Color ("Color", Color) = (1,1,1,1)
+      _MainTex ("Texture", 2D) = "white" {}
+     // _BumpMap ("Bumpmap", 2D) = "bump" {}
+     // _Detail ("Detail", 2D) = "gray" {}
+    }
+    SubShader {
+      Tags { "RenderType" = "Opaque" }
+      CGPROGRAM
+      #pragma surface surf Lambert
+      struct Input {
+          float2 uv_MainTex;
+          float2 uv_BumpMap;
+          float2 uv_Detail;
+      };
 
-		// Use shader model 3.0 target, to get nicer looking lighting
-		//#pragma target 3.0
+	  fixed4 _Color;
+      sampler2D _MainTex;
+     // sampler2D _BumpMap;
+     // sampler2D _Detail;
 
-		sampler2D _MainTex;
-		sampler2D _MainTex2;
-
-		struct Input {
-			float2 uv_MainTex;
-		};
-
-		half _Glossiness;
-		half _Metallic;
-		fixed4 _Color;
-
-		void surf (Input IN, inout SurfaceOutputStandard o) {
-
+      void surf (Input IN, inout SurfaceOutput o) {
 			fixed4 color = _Color; 
 			fixed4 c = tex2D (_MainTex, IN.uv_MainTex);
-			fixed4 c2 = tex2D (_MainTex2, IN.uv_MainTex);
 
 			if(c.a > 0.0 && ((c.r!=1) || (c.g!=1) || (c.b!=1)))
 				o.Albedo =  c.rgba;
-			else if(c2.a > 0.0 && ((c2.r!=1) || (c2.g!=1) || (c2.b!=1)))
-				o.Albedo =  c2.rgba;
-			else
+				else
 				o.Albedo = _Color.rgb;
-
-			// Metallic and smoothness come from slider variables
-			//o.Metallic = _Metallic;
-		//	o.Smoothness = _Glossiness;
-			o.Alpha = 1;
-		}
-		ENDCG
-	}
-	FallBack "Diffuse"
-}
+         // o.Albedo = tex2D (_MainTex, IN.uv_MainTex).rgb;
+         // o.Albedo *= tex2D (_Detail, IN.uv_Detail).rgb * 2;
+         // o.Normal = UnpackNormal (tex2D (_BumpMap, IN.uv_BumpMap));
+      }
+      ENDCG
+    } 
+    Fallback "Diffuse"
+  }

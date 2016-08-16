@@ -18,15 +18,17 @@ public class FacebookFriends : MonoBehaviour {
 
     public List<Friend> notFriends;
 
-	void Start () {
+	void Awake () {
         ids = new List<string>();
         SocialEvents.AddFacebookFriend += AddFacebookFriend;
         SocialEvents.OnFacebookInviteFriends += OnFacebookInviteFriends;
 	}
     public void GetFriends()
     {
+        Debug.Log("GET FRIENDS");
         //  print("GetFriendsGetFriendsGetFriendsGetFriendsGetFriendsGetFriends");
-        var perms = new List<string>() { "public_profile", "email", "user_friends" };
+       // var perms = new List<string>() { "public_profile", "email", "user_friends" };
+        var perms = new List<string>() { "user_friends" };
         FB.API("/me?fields=id,name,friends.limit(100).fields(name,id)", Facebook.Unity.HttpMethod.GET, FBFriendsCallback);
     }
     public string GetAllFriendsString()
@@ -45,7 +47,7 @@ public class FacebookFriends : MonoBehaviour {
     {
         if (result.Error != null)
         {
-            Debug.LogError(result.Error);
+            Debug.LogError("_______FBFriendsCallback " + result.Error);
             // Let's just try again
             FB.API("/me?fields=id,name,friends.limit(100).fields(name,id)", Facebook.Unity.HttpMethod.GET, FBFriendsCallback);
             return;
@@ -56,6 +58,7 @@ public class FacebookFriends : MonoBehaviour {
         var friends = dict["friends"] as Dictionary<string, object>;
         System.Collections.Generic.List<object> ff = friends["data"] as System.Collections.Generic.List<object>;
 
+        Debug.Log("___________ ff Count: " + ff.Count);
         foreach (var obj in ff)
         {
             Dictionary<string, object> facebookFriendData = obj as Dictionary<string, object>;
@@ -88,6 +91,7 @@ public class FacebookFriends : MonoBehaviour {
         friend.username = username;
         all.Add(friend);
         StartCoroutine(GetPicture(id));
+        Debug.Log("_______________ add: total amigos: " + all.Count);
     }
     IEnumerator GetPicture(string facebookID)
     {

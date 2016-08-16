@@ -19,6 +19,7 @@ public static class SocialEvents {
     public static System.Action OnFacebookFriends = delegate { };
     public static System.Action OnFacebookInviteFriends = delegate { };
 
+    public static System.Action OnFacebookLogout = delegate { };
     public static System.Action<string, string, string> OnFacebookLogin = delegate { };
     public static System.Action<string, string> AddFacebookFriend = delegate { }; 
 

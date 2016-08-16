@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using Facebook.Unity;
 
 public class SettingsPopup : MonoBehaviour
 {
@@ -24,6 +25,13 @@ public class SettingsPopup : MonoBehaviour
         canvas.SetActive(true);
         SetActiveMode();
         SetActiveSoundMode();
+    }
+    public void ResetApp()
+    {
+        SocialEvents.OnFacebookLogout();
+        SocialEvents.ResetApp();
+        PlayerPrefs.DeleteAll();
+        Data.Instance.LoadLevel("01_Register");
     }
     public void SwitchSoundMode()
     {
