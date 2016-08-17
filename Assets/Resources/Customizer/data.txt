@@ -9,16 +9,16 @@
 	],
 	barbas:
 	[
-		{  id:"1" , thumb:"icons_genericColor_1"},
-		{  id:"2" , thumb:"icons_genericColor_1"},
-		{  id:"3" , thumb:"icons_genericColor_1"},
-		{  id:"4", thumb:"icons_genericColor_1" },
-		{  id:"5", thumb:"icons_genericColor_1" },
-		{  id:"6", thumb:"icons_genericColor_1"},
-		{  id:"7" , thumb:"icons_genericColor_1"},
-		{  id:"8" , thumb:"icons_genericColor_1"},
-		{  id:"9" , thumb:"icons_genericColor_1"},
-		{  id:"10", thumb:"icons_genericColor_1" }				
+		{  id:"1" , thumb:"icons_moustache1"},
+		{  id:"2" , thumb:"icons_moustache2"},
+		{  id:"3" , thumb:"icons_moustache3"},
+		{  id:"4", thumb:"icons_moustache4" },
+		{  id:"5", thumb:"icons_moustache5" },
+		{  id:"6", thumb:"icons_moustache6"},
+		{  id:"7" , thumb:"icons_moustache7"},
+		{  id:"8" , thumb:"icons_moustache8"},
+		{  id:"9" , thumb:"icons_moustache9"},
+		{  id:"10", thumb:"icons_moustache10" }				
 	],
 	peinados:
 	[
@@ -112,4 +112,6 @@
 		{  color:"333333" , thumb:"icons_genericColor_11"},
 		{  color:"000000" , thumb:"icons_genericColor_12"}
 	],
+
+
 }
