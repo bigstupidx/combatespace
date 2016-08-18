@@ -26,9 +26,8 @@ public class FacebookFriends : MonoBehaviour {
     public void GetFriends()
     {
         Debug.Log("GET FRIENDS");
-        //  print("GetFriendsGetFriendsGetFriendsGetFriendsGetFriendsGetFriends");
-       // var perms = new List<string>() { "public_profile", "email", "user_friends" };
-        var perms = new List<string>() { "user_friends" };
+        var perms = new List<string>() { "public_profile", "email", "user_friends" };
+       // var perms = new List<string>() { "user_friends" };
         FB.API("/me?fields=id,name,friends.limit(100).fields(name,id)", Facebook.Unity.HttpMethod.GET, FBFriendsCallback);
     }
     public string GetAllFriendsString()
@@ -45,6 +44,8 @@ public class FacebookFriends : MonoBehaviour {
     }
     void FBFriendsCallback(IGraphResult result)
     {
+        Debug.Log("FB Friends CallBack");
+
         if (result.Error != null)
         {
             Debug.LogError("_______FBFriendsCallback " + result.Error);
@@ -64,6 +65,10 @@ public class FacebookFriends : MonoBehaviour {
             Dictionary<string, object> facebookFriendData = obj as Dictionary<string, object>;
             SocialEvents.AddFacebookFriend(facebookFriendData["id"].ToString(), facebookFriendData["name"].ToString());
         }
+        Invoke("Delay", 2);
+    }
+    void Delay()
+    {
         SocialEvents.OnFacebookFriends();
     }
 

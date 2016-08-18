@@ -36,9 +36,7 @@ public class Home : MonoBehaviour
         defense.text = Data.Instance.playerSettings.heroData.stats.Defense.ToString();
         speed.text = Data.Instance.playerSettings.heroData.stats.Speed.ToString();
         resistence.text = Data.Instance.playerSettings.heroData.stats.Resistence.ToString();
-
         
-
         if (SocialManager.Instance.userData.logged)
         {
             profilePicture.setPicture(SocialManager.Instance.userData.facebookID);

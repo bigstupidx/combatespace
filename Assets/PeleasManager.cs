@@ -23,15 +23,15 @@ public class PeleasManager : MonoBehaviour {
         Data.Instance.playerSettings.heroData.peleas.retos_g = PlayerPrefs.GetInt("retos_g", 0);
         Data.Instance.playerSettings.heroData.peleas.retos_p = PlayerPrefs.GetInt("retos_p", 0);
 
-        SocialEvents.OnFacebookFriends += OnFacebookFriends;        
+        SocialEvents.OnFacebookLogin += OnFacebookLogin;        
 	}
     void OnDestroy()
     {
         Events.OnFightEnd -= OnFightEnd;
     }
-    void OnFacebookFriends()
+    void OnFacebookLogin(string facebookID, string username, string other)
     {
-        Invoke("Init", 2);
+        Init();
     }
     public void Init()
     {

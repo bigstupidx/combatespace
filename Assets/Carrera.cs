@@ -12,11 +12,18 @@ public class Carrera : MonoBehaviour {
     public Transform content;
     public bool dataLoaded;
     private List<Fight> arr;
+    private float timeOut = 5;
+    private float timeNow;
 
     void Start()
     {
         Events.OnLoadingShow(true);
         Events.OnBackButtonPressed += OnBackButtonPressed;
+        timeNow = Time.time;
+
+        if (!Data.Instance.peleasManager.loaded)
+            Data.Instance.peleasManager.Init();
+
     }
     void OnDestroy()
     {
@@ -27,8 +34,18 @@ public class Carrera : MonoBehaviour {
         Data.Instance.LoadLevel("03_Home");
     }
 	void Update () {
+       
         if (dataLoaded) return;
+
+        if (Time.time > timeNow + timeOut)
+        {
+            Events.OnLoadingShow(false);
+            Events.OnGenericPopup("ERROR", "Hubo un error de conexión");
+            return;
+        }
+
         if (!Data.Instance.peleasManager.loaded) return;
+
 
         if (Data.Instance.peleasManager.showRetos)
         {
@@ -45,7 +62,6 @@ public class Carrera : MonoBehaviour {
 	}
     void Loaded()
     {
-        print("arr.length: " + arr.Count);
         Events.OnLoadingShow(false);
         dataLoaded = true;
         Init();
@@ -65,11 +81,13 @@ public class Carrera : MonoBehaviour {
     }
     public void Peleas()
     {
+        timeNow = Time.time;
         Data.Instance.peleasManager.showRetos = false;
         dataLoaded = false;
     }
     public void Retos()
     {
+        timeNow = Time.time;
         Data.Instance.peleasManager.showRetos = true;
         dataLoaded = false;
     }

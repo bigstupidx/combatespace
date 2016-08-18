@@ -12,6 +12,7 @@ public class LoginManager : MonoBehaviour {
 
     void Awake()
     {
+        Debug.Log("Login Manager AWAKE");
         FB.Init(SetInit, OnHideUnity);
         SocialEvents.OnFacebookLogout += OnFacebookLogout;
     }
@@ -30,20 +31,11 @@ public class LoginManager : MonoBehaviour {
     {
         if (FB.IsLoggedIn) {
             Debug.Log ("FB is logged in");
-            FB.API("/me?fields=name", HttpMethod.GET, LogInDone);
-            Invoke("Delay", 0.1f);
+            FB.API("/me?fields=name", HttpMethod.GET, LogInDone);           
         } else {
             Debug.Log ("FB is not logged in");
         }
     }
-    bool friendsLogged;
-    void Delay()
-    {
-        if (friendsLogged) return;
-        friendsLogged = true;
-        SocialManager.Instance.facebookFriends.GetFriends();
-    }
-
     void OnHideUnity(bool isGameShown)
     {
         if (!isGameShown) {
@@ -57,8 +49,7 @@ public class LoginManager : MonoBehaviour {
     {
         if (FB.IsLoggedIn) return;
 
-        List<string> permissions = new List<string> ();
-        permissions.Add ("public_profile");
+        List<string> permissions = new List<string>() { "public_profile", "email", "user_friends" };
 
         FB.LogInWithReadPermissions (permissions, AuthCallBack);
     }
@@ -77,5 +68,13 @@ public class LoginManager : MonoBehaviour {
         username = result.ResultDictionary["name"].ToString();
         Debug.Log("facebookID: " + facebookID + " username:" + username  );
         SocialEvents.OnFacebookLogin(facebookID, username, "");
+        Invoke("Delay", 2);
+    }
+    bool friendsLogged;
+    void Delay()
+    {
+        if (friendsLogged) return;
+        friendsLogged = true;
+        SocialManager.Instance.facebookFriends.GetFriends();
     }
 }
