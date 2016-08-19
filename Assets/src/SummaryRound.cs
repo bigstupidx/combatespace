@@ -28,16 +28,29 @@ public class SummaryRound : MonoBehaviour
         minaCamera.enabled = false;
         SetOff();
         Events.OnRoundComplete += OnRoundComplete;
+        Events.OnAllRoundsComplete += OnAllRoundsComplete;
         startFightCoroutine = AnimatedIntro();
         StartCoroutine(startFightCoroutine);
     }
     void OnDestroy()
     {
         Events.OnRoundComplete -= OnRoundComplete;
+        Events.OnAllRoundsComplete -= OnAllRoundsComplete;
     }
     void SetOff()
     {
         panel.SetActive(false);
+    }
+    void OnAllRoundsComplete()
+    {
+        campana.SetActive(true);
+        campana.GetComponent<Animation>().Play("campana");
+        StartCoroutine(AnimatedFinish());
+    }
+    IEnumerator AnimatedFinish()
+    {
+        yield return new WaitForSeconds(2);
+        SetOff();
     }
     void OnRoundComplete()
     {
@@ -66,10 +79,7 @@ public class SummaryRound : MonoBehaviour
     {
         SetNumbers();
 
-        anim.Play("mina");        
-
-        if (Game.Instance.fightStatus.Round >= 6)
-            Events.OnAllRoundsComplete();
+        anim.Play("mina");
 
         panel.SetActive(true);
 

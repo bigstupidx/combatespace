@@ -12,17 +12,9 @@ public class RoundDataLine : MonoBehaviour {
     {
         if (roundID > 0)
             title.text = "ROUND " + roundID;
-        else
-            title.text = "---";
 
-        if (heroScore == 0)
-            heroField.text = "-";
-        else
-            heroField.text = heroScore.ToString();
+        heroField.text = heroScore.ToString();
+        characterField.text = characterScore.ToString();
 
-        if (characterScore == 0)
-            characterField.text = "-";
-        else
-            characterField.text = characterScore.ToString();
     }
 }

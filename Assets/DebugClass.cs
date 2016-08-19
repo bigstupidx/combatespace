@@ -45,6 +45,17 @@ public class DebugClass : MonoBehaviour {
             anim.CrossFade("punchedDown_L", 0.15f);
         else if (Input.GetKeyDown(KeyCode.Y))
             anim.CrossFade("punchedDown_R", 0.15f);
+
+        else if (Input.GetKeyDown(KeyCode.Alpha1))
+            anim.CrossFade("festeja", 0.15f);
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+            anim.CrossFade("derrota", 0.15f);
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+            anim.CrossFade("start1", 0.15f);
+        else if (Input.GetKeyDown(KeyCode.Alpha4))
+            anim.CrossFade("roundStart", 0.15f);
+        else if (Input.GetKeyDown(KeyCode.Alpha5))
+            anim.CrossFade("canchero", 0.15f);
     }
   
 }

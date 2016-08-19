@@ -35,6 +35,7 @@ public class Character : MonoBehaviour {
         Events.OnAvatarFall += OnAvatarFall;
         Events.OnRoundComplete += OnRoundComplete;
         Events.OnAvatarStandUp += OnAvatarStandUp;
+        Events.OnAllRoundsComplete += OnAllRoundsComplete;
 	}
     void OnDestroy()
     {
@@ -46,7 +47,13 @@ public class Character : MonoBehaviour {
         Events.OnHeroBlockPunch -= OnHeroBlockPunch;
         Events.OnAvatarFall -= OnAvatarFall;
         Events.OnRoundComplete -= OnRoundComplete;
-        Events.OnAvatarStandUp -= OnAvatarStandUp; 
+        Events.OnAvatarStandUp -= OnAvatarStandUp;
+        Events.OnAllRoundsComplete -= OnAllRoundsComplete;
+    }
+    void OnAllRoundsComplete()
+    {
+        OnDestroy();
+        gameObject.SetActive(false);
     }
     void OnAvatarStandUp(bool isHero)
     {
@@ -60,6 +67,11 @@ public class Character : MonoBehaviour {
     }
     void Update()
     {
+        if (Game.Instance.fightStatus.state == FightStatus.states.DONE)
+        {
+            OnAllRoundsComplete();
+            return;
+        }
         if (Game.Instance.fightStatus.state == FightStatus.states.BETWEEN_ROUNDS) return;
         if (characterActions.state == CharacterActions.states.KO) return;
         if (timer > state_speed && characterActions.state == CharacterActions.states.DEFENDING)
@@ -71,12 +83,8 @@ public class Character : MonoBehaviour {
     }
     void OnAvatarFall(bool isHero)
     {
-        print("OnAvatarFall__________" + isHero);
         if (!isHero)
-        {
             characterActions.KO();
-        }
-        //ai.Reset();
     }
     void OnHeroBlockPunch(CharacterActions.actions action)
     {
@@ -119,6 +127,7 @@ public class Character : MonoBehaviour {
     }
     void OnAICharacterAttack(CharacterActions.actions action)
     {
+        if (Data.Instance.settings.playingTutorial) return;
         if (characterActions.state == CharacterActions.states.KO) return;
        // if (characterActions.state == CharacterActions.states.ATTACKING) return;
         characterActions.AttackSpecificAction(action);

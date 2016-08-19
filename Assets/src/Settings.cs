@@ -8,6 +8,7 @@ using SimpleJSON;
 
 public class Settings : MonoBehaviour {
 
+    public Color standardUIColor;
     public bool playingTutorial;
     public int ToturialReady;
     string json_settings = "settings";
@@ -16,6 +17,8 @@ public class Settings : MonoBehaviour {
     public DefaultSpeed defaultSpeed;
     public float volume;
     public bool gamePaused;
+    public int totalRounds;
+    public int totalSecsForRound;
 
     [Serializable]
     public class DefaultPower

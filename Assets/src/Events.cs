@@ -18,8 +18,7 @@ public static class Events
     public static System.Action<Fight> OnSaveNewPelea = delegate { };
     public static System.Action<string, Peleas> OnSavePelea = delegate { };
     public static System.Action<Stats> OnSaveStats = delegate { };
-    public static System.Action<bool> OnFightEnd = delegate { };   
-    
+    public static System.Action<bool> OnFightEnd = delegate { };
 
     public static System.Action OnRoundComplete = delegate { };
     public static System.Action OnAllRoundsComplete = delegate { };

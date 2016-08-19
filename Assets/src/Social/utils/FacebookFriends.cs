@@ -54,6 +54,7 @@ public class FacebookFriends : MonoBehaviour {
             return;
         }
 
+
         var data = Facebook.MiniJSON.Json.Deserialize(result.RawResult) as Dictionary<string, object>;
         IDictionary dict = Facebook.MiniJSON.Json.Deserialize(result.RawResult) as IDictionary;
         var friends = dict["friends"] as Dictionary<string, object>;

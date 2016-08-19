@@ -139,22 +139,40 @@ public class FighterSelector : MonoBehaviour {
 
        PlayerSettings playerSettings = Data.Instance.playerSettings;
 
-       compareStatsLine[0].Init("FUERZA", playerSettings.heroData.stats.Power.ToString(), playerData.stats.Power.ToString());
-       compareStatsLine[1].Init("RESISTENCIA", playerSettings.heroData.stats.Resistence.ToString(), playerData.stats.Resistence.ToString());
-       compareStatsLine[2].Init("DEFENSA", playerSettings.heroData.stats.Defense.ToString(), playerData.stats.Defense.ToString());
-       compareStatsLine[3].Init("VELOCIDAD", playerSettings.heroData.stats.Speed.ToString(), playerData.stats.Speed.ToString());
+        int Power = playerSettings.heroData.stats.Power;
+        int Resistence = playerSettings.heroData.stats.Resistence;
+        int Defense = playerSettings.heroData.stats.Defense;
+        int Speed = playerSettings.heroData.stats.Speed;
+
+        int Power2 = playerData.stats.Power;
+        int Resistence2 = playerData.stats.Resistence;
+        int Defense2 = playerData.stats.Defense;
+        int Speed2 = playerData.stats.Speed;        
+
+        compareStatsLine[0].Init("FUERZA", Power.ToString(), Power2.ToString(), Power-Power2);
+        compareStatsLine[1].Init("RESISTENCIA", Resistence.ToString(), Resistence2.ToString(), Resistence - Resistence2);
+        compareStatsLine[2].Init("DEFENSA", Defense.ToString(), Defense2.ToString(), Defense - Defense2);
+        compareStatsLine[3].Init("VELOCIDAD", Speed.ToString(), Speed2.ToString(), Speed - Speed2);
 
         string hero_p_g = "";
         string hero_r_g = "";
 
+        //por default empatan:
+        int peleas_quien_gana = 0;
+        int retos_quien_gana = 0;
         if (SocialManager.Instance.userData.logged)
         {
             hero_p_g = playerSettings.heroData.peleas.peleas_g + "/" + playerSettings.heroData.peleas.peleas_p;
             hero_r_g = playerSettings.heroData.peleas.retos_g + "/" + playerSettings.heroData.peleas.retos_p;
-        }
 
-        compareStatsLine[4].Init("PELEAS G.", hero_p_g, playerSettings.characterData.peleas.peleas_g + "/" + playerData.peleas.peleas_p);
-        compareStatsLine[5].Init("RETOS G.", hero_r_g, playerSettings.characterData.peleas.retos_g + "/" + playerData.peleas.retos_p);
+            peleas_quien_gana = playerSettings.heroData.peleas.peleas_g - playerSettings.characterData.peleas.peleas_g;
+            retos_quien_gana = playerSettings.heroData.peleas.retos_g - playerSettings.characterData.peleas.retos_g;
+        }
+        string character_p = playerSettings.characterData.peleas.peleas_g + "/" + playerData.peleas.peleas_p;
+        string character_r = playerSettings.characterData.peleas.retos_g + "/" + playerData.peleas.retos_p;
+
+        compareStatsLine[4].Init("PELEAS G.", hero_p_g, character_p, peleas_quien_gana);
+        compareStatsLine[5].Init("RETOS G.", hero_r_g, character_r, retos_quien_gana);
     }
     void DelayToCharacterAppear()
     {

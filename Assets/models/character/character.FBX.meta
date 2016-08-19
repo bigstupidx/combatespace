@@ -335,6 +335,7 @@ ModelImporter:
     7400028: attack_l_cortito
     7400030: ko
     7400032: levanta
+    7400034: festeja
     9500000: //RootNode
     11100000: //RootNode
     13700000: cabeza1
@@ -4722,6 +4723,278 @@ ModelImporter:
       takeName: Take 001
       firstFrame: 1601
       lastFrame: 1700
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: cabeza1_cerrada
+        weight: 1
+      - path: cabeza1_O
+        weight: 1
+      - path: cabeza2_cerrada
+        weight: 1
+      - path: cabeza2_O
+        weight: 1
+      - path: cabeza3_cerrada
+        weight: 1
+      - path: cabeza3_O
+        weight: 1
+      - path: cabeza4_cerrada
+        weight: 1
+      - path: cabeza4_O
+        weight: 1
+      - path: Camera01
+        weight: 1
+      - path: Camera01.Target
+        weight: 1
+      - path: Circle09
+        weight: 1
+      - path: Circle09/Circle03
+        weight: 1
+      - path: Circle09/Circle03/Bone01
+        weight: 1
+      - path: Circle09/Circle03/Circle02
+        weight: 1
+      - path: Circle09/Circle03/Circle02/Bone02
+        weight: 1
+      - path: Circle09/Circle03/Circle02/Circle04
+        weight: 1
+      - path: Circle09/Circle03/Circle02/Circle04/Bone06
+        weight: 1
+      - path: Circle09/Circle03/Circle02/Circle04/Bone07
+        weight: 1
+      - path: Circle09/Circle03/Circle02/Circle04/Bone07/Bone08
+        weight: 1
+      - path: Circle09/Circle03/Circle02/Circle04/Bone07/Bone09
+        weight: 1
+      - path: Circle09/Circle03/Circle02/Circle04/Bone07/Bone09/Bone10
+        weight: 1
+      - path: Circle09/Circle03/Circle02/Circle04/Bone07/Bone09/Bone10/Bone11
+        weight: 1
+      - path: Circle09/Circle03/Circle02/Circle04/Bone07/Bone09/Bone10/Circle10
+        weight: 1
+      - path: Circle09/Circle03/Circle02/Circle04/Bone07/Bone09/Bone10/Circle10/Bone05
+        weight: 1
+      - path: Circle09/Circle03/Circle02/Circle04/Bone07/Bone09/Circle11
+        weight: 1
+      - path: Circle09/Circle03/Circle02/Circle04/Bone07/Bone09/Circle11/Bone25
+        weight: 1
+      - path: Circle09/Circle03/Circle02/Circle04/Bone40
+        weight: 1
+      - path: Circle09/Circle03/Circle02/Circle04/Bone40/Bone28
+        weight: 1
+      - path: Circle09/Circle03/Circle02/Circle04/Bone40/Bone29
+        weight: 1
+      - path: Circle09/Circle03/Circle02/Circle04/Bone40/Bone29/Bone30
+        weight: 1
+      - path: Circle09/Circle03/Circle02/Circle04/Bone40/Bone29/Bone30/Bone31
+        weight: 1
+      - path: Circle09/Circle03/Circle02/Circle04/Bone40/Bone29/Bone30/Circle12
+        weight: 1
+      - path: Circle09/Circle03/Circle02/Circle04/Bone40/Bone29/Bone30/Circle12/Bone32
+        weight: 1
+      - path: Circle09/Circle03/Circle02/Circle04/Bone40/Bone29/Circle13
+        weight: 1
+      - path: Circle09/Circle03/Circle02/Circle04/Bone40/Bone29/Circle13/Bone33
+        weight: 1
+      - path: Circle09/Circle03/Circle02/Circle04/Circle05
+        weight: 1
+      - path: Circle09/Circle03/Circle02/Circle04/Circle05/Bone03
+        weight: 1
+      - path: Circle09/Circle03/Circle02/Circle04/Circle05/Circle01
+        weight: 1
+      - path: Circle09/Circle03/Circle02/Circle04/Circle05/Circle01/Bone04
+        weight: 1
+      - path: Circle09/Circle03/Circle02/Circle04/Circle05/Circle01/Box01
+        weight: 1
+      - path: Circle09/Circle03/Circle02/Circle04/Circle05/Circle01/Box02
+        weight: 1
+      - path: Circle09/Circle03/Circle02/Circle04/Circle05/Circle01/cabeza1
+        weight: 1
+      - path: Circle09/Circle03/Circle02/Circle04/Circle05/Circle01/cabeza2
+        weight: 1
+      - path: Circle09/Circle03/Circle02/Circle04/Circle05/Circle01/cabeza3
+        weight: 1
+      - path: Circle09/Circle03/Circle02/Circle04/Circle05/Circle01/cabeza4
+        weight: 1
+      - path: Circle09/Circle03/Circle02/Circle04/Circle05/Circle01/cejas2
+        weight: 1
+      - path: Circle09/Circle03/Circle02/Circle04/Circle05/Circle01/dientes1
+        weight: 1
+      - path: Circle09/Circle03/Circle02/Circle04/Circle05/Circle01/dientes2
+        weight: 1
+      - path: Circle09/Circle03/Circle02/Circle04/Circle05/Circle01/dientes3
+        weight: 1
+      - path: Circle09/Circle03/Circle02/Circle04/Circle05/Circle01/dientes4
+        weight: 1
+      - path: Circle09/Circle03/Circle02/Circle04/Circle05/Circle01/Object02
+        weight: 1
+      - path: Circle09/Circle03/Circle02/Circle04/Circle05/Rectangle05
+        weight: 1
+      - path: Circle09/Circle03/Circle02/Circle04/Circle05/Rectangle11
+        weight: 1
+      - path: Circle09/Circle03/Circle02/Circle04/Circle06
+        weight: 1
+      - path: Circle09/Circle03/Circle02/Circle04/Circle06/Bone23
+        weight: 1
+      - path: Circle09/Circle03/Circle02/Circle04/Circle06/Circle07
+        weight: 1
+      - path: Circle09/Circle03/Circle02/Circle04/Circle06/Circle07/Bone24
+        weight: 1
+      - path: Circle09/Circle03/Circle02/Circle04/Circle06/IK Chain02
+        weight: 1
+      - path: Circle09/Circle03/Circle02/Circle04/Circle14
+        weight: 1
+      - path: Circle09/Circle03/Circle02/Circle04/Circle14/Bone34
+        weight: 1
+      - path: Circle09/Circle03/Circle02/Circle04/Circle14/Circle15
+        weight: 1
+      - path: Circle09/Circle03/Circle02/Circle04/Circle14/Circle15/Bone35
+        weight: 1
+      - path: Circle09/Circle03/Circle02/Circle04/Circle14/IK Chain06
+        weight: 1
+      - path: Circle09/Circle03/Circle02/Circle04/Line01
+        weight: 1
+      - path: Circle09/Circle03/Circle02/Circle04/Line01/IK Chain01
+        weight: 1
+      - path: Circle09/Circle03/Circle02/Circle04/Line04
+        weight: 1
+      - path: Circle09/Circle03/Circle02/Circle04/Line04/IK Chain05
+        weight: 1
+      - path: Circle09/Circle03/Circle02/Circle04/Rectangle01
+        weight: 1
+      - path: Circle09/Circle03/Circle02/Circle04/Rectangle07
+        weight: 1
+      - path: Circle09/Circle03/Circle08
+        weight: 1
+      - path: Circle09/Circle03/Circle08/Bone12
+        weight: 1
+      - path: Circle09/Circle03/Circle08/Bone12/Bone13
+        weight: 1
+      - path: Circle09/Circle03/Circle08/Bone12/Bone26
+        weight: 1
+      - path: Circle09/Circle03/Circle08/Bone12/Bone26/Bone14
+        weight: 1
+      - path: Circle09/Circle03/Circle08/Bone12/Bone26/Bone14/Bone15
+        weight: 1
+      - path: Circle09/Circle03/Circle08/Bone12/Bone26/Bone14/Bone15/Bone16
+        weight: 1
+      - path: Circle09/Circle03/Circle08/Bone12/Bone26/Bone14/Circle16
+        weight: 1
+      - path: Circle09/Circle03/Circle08/Bone12/Bone26/Bone14/Circle16/Bone22
+        weight: 1
+      - path: Circle09/Circle03/Circle08/Bone12/Bone26/Bone14/Circle16/Bone50
+        weight: 1
+      - path: Circle09/Circle03/Circle08/Bone12/Bone26/Bone14/Circle16/Bone51
+        weight: 1
+      - path: Circle09/Circle03/Circle08/Bone12/Bone26/Bone14/Circle16/Bone52
+        weight: 1
+      - path: Circle09/Circle03/Circle08/Bone12/Bone26/Bone14/Circle16/Bone53
+        weight: 1
+      - path: Circle09/Circle03/Circle08/Bone12/Bone26/Bone14/Circle16/Bone54
+        weight: 1
+      - path: Circle09/Circle03/Circle08/Bone12/Bone26/Bone14/Circle16/Bone55
+        weight: 1
+      - path: Circle09/Circle03/Circle08/Bone12/Bone41
+        weight: 1
+      - path: Circle09/Circle03/Circle08/Bone12/Bone41/Bone49
+        weight: 1
+      - path: Circle09/Circle03/Circle08/Bone12/Bone41/Bone49/Bone43
+        weight: 1
+      - path: Circle09/Circle03/Circle08/Bone12/Bone41/Bone49/Bone43/Bone44
+        weight: 1
+      - path: Circle09/Circle03/Circle08/Bone12/Bone41/Bone49/Circle17
+        weight: 1
+      - path: Circle09/Circle03/Circle08/Bone12/Bone41/Bone49/Circle17/Bone56
+        weight: 1
+      - path: Circle09/Circle03/Circle08/Bone12/Bone41/Bone49/Circle17/Bone57
+        weight: 1
+      - path: Circle09/Circle03/Circle08/Bone12/Bone41/Bone49/Circle17/Bone58
+        weight: 1
+      - path: Circle09/Circle03/Circle08/Bone12/Bone41/Bone49/Circle17/Bone59
+        weight: 1
+      - path: Circle09/Circle03/Circle08/Bone12/Bone41/Bone49/Circle17/Bone60
+        weight: 1
+      - path: Circle09/Circle03/Circle08/Bone12/Bone41/Bone49/Circle17/Bone61
+        weight: 1
+      - path: Circle09/Circle03/Circle08/Bone12/Bone41/Bone49/Circle17/Bone62
+        weight: 1
+      - path: Circle09/Rectangle02
+        weight: 1
+      - path: Circle09/Rectangle02/Bone17
+        weight: 1
+      - path: Circle09/Rectangle02/Bone17/Bone18
+        weight: 1
+      - path: Circle09/Rectangle02/Bone17/Bone18/Bone19
+        weight: 1
+      - path: Circle09/Rectangle02/Bone17/Bone18/Bone19/Bone20
+        weight: 1
+      - path: Circle09/Rectangle02/Bone17/Bone18/Bone19/Bone20/IK Chain03
+        weight: 1
+      - path: Circle09/Rectangle02/Line02
+        weight: 1
+      - path: Circle09/Rectangle02/Line02/Bone21
+        weight: 1
+      - path: Circle09/Rectangle02/Rectangle03
+        weight: 1
+      - path: Circle09/Rectangle02/Rectangle04
+        weight: 1
+      - path: Circle09/Rectangle02/Rectangle04/IK Chain04
+        weight: 1
+      - path: Circle09/Rectangle10
+        weight: 1
+      - path: Circle09/Rectangle10/Bone45
+        weight: 1
+      - path: Circle09/Rectangle10/Bone45/Bone46
+        weight: 1
+      - path: Circle09/Rectangle10/Bone45/Bone46/Bone47
+        weight: 1
+      - path: Circle09/Rectangle10/Bone45/Bone46/Bone47/Bone42
+        weight: 1
+      - path: Circle09/Rectangle10/Bone45/Bone46/Bone47/Bone42/IK Chain08
+        weight: 1
+      - path: Circle09/Rectangle10/Line05
+        weight: 1
+      - path: Circle09/Rectangle10/Line05/Bone48
+        weight: 1
+      - path: Circle09/Rectangle10/Rectangle08
+        weight: 1
+      - path: Circle09/Rectangle10/Rectangle08/IK Chain07
+        weight: 1
+      - path: Circle09/Rectangle10/Rectangle09
+        weight: 1
+      - path: MEDIO_UV
+        weight: 1
+      - path: zapatilla02
+        weight: 1
+      - path: zapatilla03
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: festeja
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 2200
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

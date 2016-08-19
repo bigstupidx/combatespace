@@ -57,6 +57,7 @@ public class FightStatus : MonoBehaviour {
     public float cansancio_hero;
     public float cansancio_character;
 
+    
     void Start()
     {
         Round = 0;
@@ -73,6 +74,7 @@ public class FightStatus : MonoBehaviour {
         Events.OnHeroAction += OnHeroAction;
         Events.OnCharacterChangeAction += OnCharacterChangeAction;
         Events.OnRoundComplete += OnRoundComplete;
+        Events.OnAllRoundsComplete += OnAllRoundsComplete;
         Events.OnRoundStart += OnRoundStart;
         Events.OnAvatarStandUp += OnAvatarStandUp;
         Events.OnKO += OnKO;
@@ -90,11 +92,18 @@ public class FightStatus : MonoBehaviour {
         Events.OnHeroAction -= OnHeroAction;
         Events.OnCharacterChangeAction -= OnCharacterChangeAction;
         Events.OnRoundComplete -= OnRoundComplete;
+        Events.OnAllRoundsComplete -= OnAllRoundsComplete;
         Events.OnRoundStart -= OnRoundStart;
         Events.OnAvatarStandUp -= OnAvatarStandUp;
         Events.OnKO -= OnKO;
         Events.OnComputeCharacterPunched -= OnComputeCharacterPunched;
         Events.OnComputeHeroPunched -= OnComputeHeroPunched;
+    }
+    public bool IsLastRound()
+    {
+        if (roundsData.Count == Data.Instance.settings.totalRounds)
+            return true;
+        return false;
     }
     void OnKO(bool isHero)
     {
@@ -108,6 +117,7 @@ public class FightStatus : MonoBehaviour {
     }
     void OnRoundStart()
     {
+        print("_____________OnRoundStart");
         roundsData.Add(new RoundData());
         state = states.FIGHTING;
         Round++;
@@ -115,6 +125,10 @@ public class FightStatus : MonoBehaviour {
     RoundData GetActiveRound()
     {
         return roundsData[roundsData.Count - 1];
+    }
+    void OnAllRoundsComplete()
+    {
+        state = states.DONE;
     }
     void OnRoundComplete()
     {

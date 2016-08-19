@@ -19,7 +19,7 @@ public class InGameSfx : MonoBehaviour {
 		Events.OnComputeCharacterPunched += OnComputeCharacterPunched;
 		Events.OnComputeHeroPunched += OnComputeHeroPunched;
 		Events.OnAvatarFall += OnAvatarFall;
-		//Events.OnAvatarStandUp += OnAvatarStandUp;
+        Events.OnAllRoundsComplete += OnAllRoundsComplete;
 		Events.OnKO += OnKO;
 		Events.OnRoundComplete += OnRoundComplete;
 		Events.OnRoundStart += OnRoundStart;
@@ -41,7 +41,7 @@ public class InGameSfx : MonoBehaviour {
 		Events.OnComputeCharacterPunched -= OnComputeCharacterPunched;
 		Events.OnComputeHeroPunched -= OnComputeHeroPunched;
 		Events.OnAvatarFall -= OnAvatarFall;
-		//Events.OnAvatarStandUp -= OnAvatarStandUp;
+        Events.OnAllRoundsComplete -= OnAllRoundsComplete;
 		Events.OnKO -= OnKO;
 		Events.OnRoundComplete -= OnRoundComplete;
 		Events.OnRoundStart -= OnRoundStart;
@@ -77,6 +77,10 @@ public class InGameSfx : MonoBehaviour {
 		source.PlayOneShot(bell);
 		source.Play ();
 	}
+    void OnAllRoundsComplete()
+    {
+        OnRoundComplete();
+    }
 	void OnRoundComplete()
 	{
 		source.Stop ();

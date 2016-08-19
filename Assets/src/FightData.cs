@@ -7,12 +7,16 @@ public class FightData : MonoBehaviour {
     public Text ChronometerField;
     public Text RoundField;
     public int sec;
-    private IEnumerator timeLoop;
+    private bool ready;
 
 	void Awake () {        
         Events.OnRoundStart += OnRoundStart;
         Events.OnRoundComplete += OnRoundComplete;
 	}
+    void Start()
+    {
+        LoopTime();
+    }
     void OnDestroy()
     {
         Events.OnRoundStart -= OnRoundStart;
@@ -20,28 +24,23 @@ public class FightData : MonoBehaviour {
     }
     void OnRoundComplete()
     {
-        StopCoroutine(timeLoop);
+        sec = Data.Instance.settings.totalSecsForRound;
     }
     void OnRoundStart()
     {
+        ready = false;
         RoundField.text = "ROUND " + Game.Instance.fightStatus.Round.ToString();
-        sec = 45;
-        StartRoutine();
+        sec = Data.Instance.settings.totalSecsForRound;
+        SetField();
     }
-    void StartRoutine()
+    void LoopTime()
     {
-        timeLoop = Loop();
-        StartCoroutine(timeLoop);
-    }
-    IEnumerator Loop()
-    {
-        yield return new WaitForSeconds(1);
-        if (Game.Instance.fightStatus.state == FightStatus.states.FIGHTING)
+        if (!ready && Game.Instance.fightStatus.state == FightStatus.states.FIGHTING)
         {
-            sec--;
             SetField();
+            sec--;
         }
-        StartRoutine();
+        Invoke("LoopTime", 1);
     }
     void SetField()
     {
@@ -51,7 +50,11 @@ public class FightData : MonoBehaviour {
         ChronometerField.text = "0:" + secs;
         if (sec == 0)
         {
-            Events.OnRoundComplete();
+            ready = true;
+            if (Game.Instance.fightStatus.IsLastRound())
+                Events.OnAllRoundsComplete();
+            else
+                Events.OnRoundComplete();
         }
     }
 }

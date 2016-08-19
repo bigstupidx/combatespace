@@ -23,9 +23,10 @@ public class Hero : MonoBehaviour
         Events.OnComputeCharacterPunched += OnComputeCharacterPunched;
         Events.OnAvatarStandUp += OnAvatarStandUp;
         Events.OnRoundStart += OnRoundStart;
+        Events.OnAllRoundsComplete += OnAllRoundsComplete;
     }
     void OnDestroy()
-    {
+    {        
         Events.OnHeroAction -= OnHeroAction;
         Events.OnCheckHeroHitted -= OnCheckHeroHitted;
         Events.OnCharacterBlockPunch -= OnCharacterBlockPunch;
@@ -33,14 +34,26 @@ public class Hero : MonoBehaviour
         Events.OnComputeCharacterPunched -= OnComputeCharacterPunched;
         Events.OnAvatarStandUp -= OnAvatarStandUp;
         Events.OnRoundStart -= OnRoundStart;
+        Events.OnAllRoundsComplete -= OnAllRoundsComplete;
     }
 
     void OnRoundStart()
-    {
+    {        
         transform.localEulerAngles = Vector3.zero;
+    }
+    void OnAllRoundsComplete()
+    {
+        OnDestroy();
+        //gameObject.SetActive(false);
     }
     void Update()
     {
+        if (Game.Instance.fightStatus.state == FightStatus.states.DONE)
+        {
+            OnDestroy();
+            return;
+        }
+        if (Game.Instance.fightStatus.state == FightStatus.states.IDLE) return;
         if (Data.Instance.settings.gamePaused) return;
         if (Game.Instance.fightStatus == null) return;
         if (Game.Instance.inputManager == null) return;
@@ -75,6 +88,9 @@ public class Hero : MonoBehaviour
     
     void OnHeroAction(HeroActions.actions action)
     {
+        if (!gameObject.activeSelf) return;
+        if (Game.Instance.fightStatus.state == FightStatus.states.DONE) return;
+        if (Game.Instance.fightStatus.state == FightStatus.states.IDLE) return;
         if (Game.Instance.fightStatus.state == FightStatus.states.BETWEEN_ROUNDS) return;
         if (actions.isPunched())
         {
