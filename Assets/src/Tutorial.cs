@@ -87,7 +87,9 @@ public class Tutorial : MonoBehaviour {
         else
         {
             if (id == 0)
-                id++;
+            {
+                Invoke("DelayToNExt", 2);
+            }
 
             cartelON = false;
             defensePanel.SetActive(true);
@@ -95,11 +97,15 @@ public class Tutorial : MonoBehaviour {
             cartel.SetActive(false);            
         }
     }
+    void DelayToNExt()
+    {
+        id = 1;
+    }
     void NextSignal()
     {
         switch(id)
         {
-            case 1: anim.Play("cortito", 0,0); SetSignal(true, "Golpe Directo", "(Tap en la pantalla)"); 
+            case 0: anim.Play("cortito", 0,0); SetSignal(true, "Golpe Directo", "(Tap en la pantalla)"); 
                 break;
             case 2: anim.Play("gancho_abajo", 0, 0); SetSignal(true, "Uppercut", "(Swipe Ascendente)"); break;
             case 3: anim.Play("gancho_arriba", 0, 0); SetSignal(true, "Gancho", "(Swipe descendente)"); break;
