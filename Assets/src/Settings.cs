@@ -9,6 +9,8 @@ using SimpleJSON;
 public class Settings : MonoBehaviour {
 
     public Color standardUIColor;
+	public Color standardWINColor;
+	public Color standardLOSEColor;
     public bool playingTutorial;
     public int ToturialReady;
     string json_settings = "settings";
