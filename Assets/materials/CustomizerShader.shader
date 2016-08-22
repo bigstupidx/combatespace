@@ -24,10 +24,10 @@
 			fixed4 color = _Color; 
 			fixed4 c = tex2D (_MainTex, IN.uv_MainTex);
 
-			if(c.a > 0.0 && ((c.r!=1) || (c.g!=1) || (c.b!=1)))
-				o.Albedo =  c.rgba;
-			else if(c.a < 1)
-				o.Albedo = fixed4(_Color.r,_Color.g,_Color.b, c.a);
+			if(c.a == 1 && ((c.r!=1) || (c.g!=1) || (c.b!=1)))
+				o.Albedo =  c.rgba;	
+			else if(c.a > 0.0 && ((c.r!=1) || (c.g!=1) || (c.b!=1)))
+				o.Albedo =  (c.rgba + _Color.rgb)/2;		
 			else
 				o.Albedo = _Color.rgb;
 
