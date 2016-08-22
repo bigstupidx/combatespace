@@ -44,7 +44,7 @@ public class CustomizerView : MonoBehaviour {
             else
                 button.SetOff();
         }
-
+        Events.OnCustomizerChangeParts(part);
         Utils.RemoveAllChildsIn(partContainer);
         int id = 0;
         foreach (CustomizerPartData data in Data.Instance.customizerData.data)

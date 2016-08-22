@@ -62,6 +62,7 @@ public static class Events
     public static System.Action<int> SetFighter = delegate { };
 
     public static System.Action<string> OnCustomizerRefresh = delegate { };
+    public static System.Action<string> OnCustomizerChangeParts = delegate { };    
     public static System.Action<string, int> OnCustomizerChangePart = delegate { };
     
     

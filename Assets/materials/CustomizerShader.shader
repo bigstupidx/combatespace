@@ -26,8 +26,11 @@
 
 			if(c.a > 0.0 && ((c.r!=1) || (c.g!=1) || (c.b!=1)))
 				o.Albedo =  c.rgba;
-				else
+			else if(c.a < 1)
+				o.Albedo = fixed4(_Color.r,_Color.g,_Color.b, c.a);
+			else
 				o.Albedo = _Color.rgb;
+
          // o.Albedo = tex2D (_MainTex, IN.uv_MainTex).rgb;
          // o.Albedo *= tex2D (_Detail, IN.uv_Detail).rgb * 2;
          // o.Normal = UnpackNormal (tex2D (_BumpMap, IN.uv_BumpMap));
