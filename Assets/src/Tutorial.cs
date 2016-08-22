@@ -61,7 +61,7 @@ public class Tutorial : MonoBehaviour {
         switch (id)
         {
             case 0: SetCartel("Aprendé los básicos", true); break;
-            case 1: SetCartel("Primero, Aprende el JAB", false); break;
+            case 1: cartel.SetActive(true); break;
             case 2: SetCartel("Bien!, ahora el UPPERCUT al cuerpo", false); break;
             case 3: SetCartel("Perfecto! ahora el GANCHO", false); break;
             case 4: SetCartel("Bien! Ahora la defensa", false); break;
@@ -73,18 +73,22 @@ public class Tutorial : MonoBehaviour {
     bool clicked;
     public void CartelClicked()
     {
+        print("CartelClicked" + id);
         clicked = true;
         if (id ==7)
         {
             Events.OnTutorialReady(1);
             Data.Instance.LoadLevel("Game");
         }
-        else if (id==0 || id >4)
+        else if(id >4)
         {
             SetNextTutorial();
         }
         else
         {
+            if (id == 0)
+                id++;
+
             cartelON = false;
             defensePanel.SetActive(true);
             NextSignal();
@@ -95,7 +99,8 @@ public class Tutorial : MonoBehaviour {
     {
         switch(id)
         {
-            case 1: anim.Play("cortito", 0,0); SetSignal(true, "Jab", "(Tap en la pantalla)"); break;
+            case 1: anim.Play("cortito", 0,0); SetSignal(true, "Golpe Directo", "(Tap en la pantalla)"); 
+                break;
             case 2: anim.Play("gancho_abajo", 0, 0); SetSignal(true, "Uppercut", "(Swipe Ascendente)"); break;
             case 3: anim.Play("gancho_arriba", 0, 0); SetSignal(true, "Gancho", "(Swipe descendente)"); break;
             case 4: anim.Play("defense", 0, 0); SetSignal(true, "Defensa", "(Mantener: Dos dedos)"); break;
