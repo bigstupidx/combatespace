@@ -32,7 +32,7 @@ public class ComputeFight : MonoBehaviour {
         }
         Events.OnChangeStatusHero(damage);
 
-        print("HERO damage: " + damage + " combo: " + character.combo);
+       // print("HERO damage: " + damage + " combo: " + character.combo);
 	}
     void OnComputeCharacterPunched(HeroActions.actions action)
     {

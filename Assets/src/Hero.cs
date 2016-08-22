@@ -9,7 +9,9 @@ public class Hero : MonoBehaviour
     public GameObject herocamera;
     public ParticleSystem particles_left;
     public ParticleSystem particles_right;
- 
+
+    public MeshRenderer[] AvatarCustomizerArms;
+    public MeshRenderer[] AvatarCustomizerGuantes;
 
     void Start()
     {
@@ -24,6 +26,30 @@ public class Hero : MonoBehaviour
         Events.OnAvatarStandUp += OnAvatarStandUp;
         Events.OnRoundStart += OnRoundStart;
         Events.OnAllRoundsComplete += OnAllRoundsComplete;
+        Events.OnGameOver += OnGameOver;
+
+        foreach (MeshRenderer ac in AvatarCustomizerArms)
+            ac.material.color = GetCustomizerPartData("piel", Data.Instance.playerSettings.heroData.styles.piel).color;
+
+        foreach (MeshRenderer ac in AvatarCustomizerGuantes)
+        {
+            ac.materials[1].color = GetCustomizerPartData("guantes", Data.Instance.playerSettings.heroData.styles.guantes).color;
+            ac.materials[0].color = GetCustomizerPartData("pantalon", Data.Instance.playerSettings.heroData.styles.pantalon).color;
+        }
+    }
+    CustomizerPartData GetCustomizerPartData(string partName, int partID)
+    {
+        int id = 0;
+        foreach (CustomizerPartData data in Data.Instance.customizerData.data)
+        {
+            if (data.name == partName)
+            {
+                if (id == partID)
+                    return data;
+                id++;
+            }
+        }
+        return null;
     }
     void OnDestroy()
     {        
@@ -35,8 +61,12 @@ public class Hero : MonoBehaviour
         Events.OnAvatarStandUp -= OnAvatarStandUp;
         Events.OnRoundStart -= OnRoundStart;
         Events.OnAllRoundsComplete -= OnAllRoundsComplete;
+        Events.OnGameOver -= OnGameOver;
     }
-
+    void OnGameOver()
+    {
+        OnDestroy();
+    }
     void OnRoundStart()
     {        
         transform.localEulerAngles = Vector3.zero;
@@ -53,7 +83,6 @@ public class Hero : MonoBehaviour
             OnDestroy();
             return;
         }
-        if (Game.Instance.fightStatus.state == FightStatus.states.IDLE) return;
         if (Data.Instance.settings.gamePaused) return;
         if (Game.Instance.fightStatus == null) return;
         if (Game.Instance.inputManager == null) return;
@@ -90,7 +119,6 @@ public class Hero : MonoBehaviour
     {
         if (!gameObject.activeSelf) return;
         if (Game.Instance.fightStatus.state == FightStatus.states.DONE) return;
-        if (Game.Instance.fightStatus.state == FightStatus.states.IDLE) return;
         if (Game.Instance.fightStatus.state == FightStatus.states.BETWEEN_ROUNDS) return;
         if (actions.isPunched())
         {
@@ -108,6 +136,7 @@ public class Hero : MonoBehaviour
         if (Game.Instance.fightStatus.state != FightStatus.states.FIGHTING) return;
 		if (actions.action == HeroActions.actions.DEFENSE && actions.GetAngleBetweenFighters () < 25) {
 			Events.OnHeroBlockPunch (characterAction);
+            actions.DefensePunched();
 			return;
 		}
         switch (characterAction)

@@ -18,7 +18,7 @@ public class Loading : ScreenBase
     }
     void OnLoadingShow(bool show)
     {
-        print("OnLoadingShow " + show);
+       // print("OnLoadingShow " + show);
         canvas.SetActive(show);
         panel.SetActive(show);
     }

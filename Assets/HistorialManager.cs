@@ -16,7 +16,7 @@ public class HistorialManager : MonoBehaviour {
     void LoadReady(string result)
     {
         loaded = true;
-        print("HistorialManager Loaded" + result);
+       // print("HistorialManager Loaded" + result);
         string[] allData = Regex.Split(result, "_");
         if (allData.Length > 0)
         {

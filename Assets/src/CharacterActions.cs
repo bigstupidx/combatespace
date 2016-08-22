@@ -65,6 +65,8 @@ public class CharacterActions : MonoBehaviour {
     public string anim_ko2;
     public string anim_levanta;
     public string anim_levanta2;
+    public string anim_walk;
+    public string anim_canchero;
 
     private Character character;
 
@@ -82,7 +84,15 @@ public class CharacterActions : MonoBehaviour {
         character = GetComponent<Character>();
        // anim = GetComponent<Animator>();
 	}
-
+    public void Walk()
+    {
+        print("WALK");
+        anim.Play(anim_walk);
+    }
+    public void Canchero()
+    {
+        anim.Play(anim_canchero);
+    }
     int randomDefense;
     public void ChangeRandomDefense()
     {
@@ -96,7 +106,7 @@ public class CharacterActions : MonoBehaviour {
 
         switch (randomDefense)
         {
-            case 1: Defense(actions.DEFENSE_DOWN); break;
+            //case 1: Defense(actions.DEFENSE_DOWN); break;
             case 2: Defense( actions.IDLE); break;
             case 3: Defense(actions.DEFENSE_UP); break;
             case 4: Defense( actions.DEFENSE_UP_R_DOWN_L); break;
@@ -205,8 +215,8 @@ public class CharacterActions : MonoBehaviour {
             case actions.DEFENSE_UP_L_DOWN_R: actionName = anim_defense_up_l_down_r; break;
             case actions.DEFENSE_UP_R_DOWN_L: actionName = anim_defense_up_r_down_l; break;
             case actions.IDLE: actionName = anim_idle; break;
-            case actions.PUNCHED_UP_L: actionName = anim_punched_up_l; defenseRoutine = ResetActions(0.4f); StartCoroutine(defenseRoutine);  break;
-            case actions.PUNCHED_UP_R: actionName = anim_punched_up_r; defenseRoutine = ResetActions(0.4f); StartCoroutine(defenseRoutine); break;
+            case actions.PUNCHED_UP_L: actionName = anim_punched_up_r; defenseRoutine = ResetActions(0.4f); StartCoroutine(defenseRoutine);  break;
+            case actions.PUNCHED_UP_R: actionName = anim_punched_up_l; defenseRoutine = ResetActions(0.4f); StartCoroutine(defenseRoutine); break;
             case actions.PUNCHED_DOWN_L: actionName = anim_punched_down_l; defenseRoutine =ResetActions(0.4f); StartCoroutine(defenseRoutine); break;
             case actions.PUNCHED_DOWN_R: actionName = anim_punched_down_r; defenseRoutine = ResetActions(0.4f); StartCoroutine(defenseRoutine); break;
             case actions.PUNCHED_CENTER: actionName = anim_punched_center; defenseRoutine = ResetActions(0.3f); StartCoroutine(defenseRoutine); break;

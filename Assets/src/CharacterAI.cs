@@ -36,7 +36,7 @@ public class CharacterAI : MonoBehaviour {
     {
         bool reaccionaAnteAttak = GetPrecentProbability(intelligence);
 
-      //  print("_________reaccionaAnteAttak: " + reaccionaAnteAttak + " intelligence: " + intelligence);
+        print("_________reaccionaAnteAttak: " + reaccionaAnteAttak + " intelligence: " + intelligence);
 
         if (!reaccionaAnteAttak) return;
 
@@ -44,14 +44,17 @@ public class CharacterAI : MonoBehaviour {
         {
             case HeroActions.actions.CORTITO_L:
             case HeroActions.actions.CORTITO_R:
-                Events.OnAICharacterDefense(CharacterActions.actions.DEFENSE_UP_CENTER);
+                if (GetPrecentProbability(50))
+                    Events.OnAICharacterDefense(CharacterActions.actions.DEFENSE_UP_CENTER);
+                else
+                    Events.OnAICharacterDefense(CharacterActions.actions.DEFENSE_DOWN);                
                 break;
             case HeroActions.actions.GANCHO_DOWN_L:
                 if (AttackOverDefense())
                     Events.OnAICharacterAttack(CharacterActions.actions.ATTACK_L_CORTITO);
                 else
                 {
-                    if(GetPrecentProbability(70))
+                    if(GetPrecentProbability(50))
                         Events.OnAICharacterDefense(CharacterActions.actions.DEFENSE_UP_R_DOWN_L);
                     else
                         Events.OnAICharacterDefense(CharacterActions.actions.DEFENSE_DOWN);
@@ -61,7 +64,7 @@ public class CharacterAI : MonoBehaviour {
                 if (AttackOverDefense())
                     Events.OnAICharacterAttack(CharacterActions.actions.ATTACK_R_CORTITO);
                 else
-                    if(GetPrecentProbability(70))
+                    if (GetPrecentProbability(50))
                         Events.OnAICharacterDefense(CharacterActions.actions.DEFENSE_UP_L_DOWN_R);
                     else
                         Events.OnAICharacterDefense(CharacterActions.actions.DEFENSE_DOWN);
@@ -70,13 +73,20 @@ public class CharacterAI : MonoBehaviour {
                 if (AttackOverDefense())
                     Events.OnAICharacterAttack(CharacterActions.actions.ATTACK_L_CORTITO);
                 else
-                    Events.OnAICharacterDefense(CharacterActions.actions.DEFENSE_UP_R_DOWN_L);
+                    if (GetPrecentProbability(50))
+                        Events.OnAICharacterDefense(CharacterActions.actions.DEFENSE_UP_R_DOWN_L);
+                    else
+                        Events.OnAICharacterDefense(CharacterActions.actions.DEFENSE_DOWN);
+                    
                 break;
             case HeroActions.actions.GANCHO_UP_L:
                 if (AttackOverDefense())
                     Events.OnAICharacterAttack(CharacterActions.actions.ATTACK_R_CORTITO);
                 else
-                    Events.OnAICharacterDefense(CharacterActions.actions.DEFENSE_UP_L_DOWN_R);
+                    if (GetPrecentProbability(50))
+                        Events.OnAICharacterDefense(CharacterActions.actions.DEFENSE_UP_R_DOWN_L);
+                    else
+                        Events.OnAICharacterDefense(CharacterActions.actions.DEFENSE_DOWN);
                 break;
         }
     }

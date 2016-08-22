@@ -16,13 +16,12 @@ public class CharacterHead : MonoBehaviour {
 
     public void SetCabeza(int cabezaID)
     {
-        print("cabezaID " + cabezaID);
         this.cabezaID = cabezaID;
         foreach (GameObject cabeza in cabezas)
                 cabeza.SetActive(false);
 
         GetCabeza(cabezaID).SetActive(true);
-        print("GetCabeza " + GetCabeza(cabezaID).name);
+       // print("GetCabeza " + GetCabeza(cabezaID).name);
 
         SetContainer("nariz", narices);
         SetContainer("cejas", cejas);

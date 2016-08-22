@@ -22,11 +22,13 @@ public static class Events
 
     public static System.Action OnRoundComplete = delegate { };
     public static System.Action OnAllRoundsComplete = delegate { };
+    public static System.Action OnGameOver = delegate { };
 
     public static System.Action<AvatarExpresiones.types, bool> OnAvatarExpresion = delegate { };
     public static System.Action<bool> OnAvatarFall = delegate { };
     public static System.Action<int> OnTutorialReady = delegate { };
 
+    public static System.Action OnCharactersStartedFight = delegate { };
     public static System.Action<bool> OnKO = delegate { };
     public static System.Action<bool> OnAvatarStandUp = delegate { };
 

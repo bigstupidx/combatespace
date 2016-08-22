@@ -127,7 +127,7 @@ public class AvatarCustomizer : MonoBehaviour {
     {
         if (style == "") return;
 
-        Debug.Log("content: " + style);
+       // Debug.Log("content: " + style);
 
         string[] allData = Regex.Split(style, "-");
 

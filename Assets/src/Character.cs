@@ -26,6 +26,8 @@ public class Character : MonoBehaviour {
         state_speed = speed - (speed * (characterSettingsSpeed / 150));
 
         characterActions = GetComponent<CharacterActions>();
+        Events.OnRoundStart += OnRoundStart;
+        Events.OnCharactersStartedFight += OnCharactersStartedFight;
         Events.OnCharacterChangeAction += OnCharacterChangeAction;
         Events.OnCheckCharacterHitted += OnCheckCharacterHitted;
         Events.OnCharacterBlockPunch += OnCharacterBlockPunch;
@@ -35,10 +37,12 @@ public class Character : MonoBehaviour {
         Events.OnAvatarFall += OnAvatarFall;
         Events.OnRoundComplete += OnRoundComplete;
         Events.OnAvatarStandUp += OnAvatarStandUp;
-        Events.OnAllRoundsComplete += OnAllRoundsComplete;
+        Events.OnGameOver += OnGameOver;
 	}
     void OnDestroy()
     {
+        Events.OnRoundStart -= OnRoundStart;
+        Events.OnCharactersStartedFight -= OnCharactersStartedFight;
         Events.OnCharacterChangeAction -= OnCharacterChangeAction;
         Events.OnCheckCharacterHitted -= OnCheckCharacterHitted;
         Events.OnCharacterBlockPunch -= OnCharacterBlockPunch;
@@ -48,9 +52,19 @@ public class Character : MonoBehaviour {
         Events.OnAvatarFall -= OnAvatarFall;
         Events.OnRoundComplete -= OnRoundComplete;
         Events.OnAvatarStandUp -= OnAvatarStandUp;
-        Events.OnAllRoundsComplete -= OnAllRoundsComplete;
+        Events.OnGameOver -= OnGameOver;
     }
-    void OnAllRoundsComplete()
+    void OnCharactersStartedFight()
+    {
+        print("OnCharactersStartedFight");
+        ChangeState();
+    }
+    void OnRoundStart()
+    {
+        print("OnRoundStart");
+        characterActions.Walk();
+    }
+    void OnGameOver()
     {
         OnDestroy();
         gameObject.SetActive(false);
@@ -67,11 +81,8 @@ public class Character : MonoBehaviour {
     }
     void Update()
     {
-        if (Game.Instance.fightStatus.state == FightStatus.states.DONE)
-        {
-            OnAllRoundsComplete();
-            return;
-        }
+        if (Game.Instance.fightStatus.state == FightStatus.states.IDLE) return;
+        if (Game.Instance.fightStatus.state == FightStatus.states.DONE)  return;
         if (Game.Instance.fightStatus.state == FightStatus.states.BETWEEN_ROUNDS) return;
         if (characterActions.state == CharacterActions.states.KO) return;
         if (timer > state_speed && characterActions.state == CharacterActions.states.DEFENDING)
@@ -104,7 +115,6 @@ public class Character : MonoBehaviour {
     {
         if (characterActions.state == CharacterActions.states.KO) return;
 
-       // if (Random.Range(0, 100) < 50)
         if (Random.Range(0, 100) < 50 && !Data.Instance.settings.playingTutorial)
             Attack();
         else
@@ -138,7 +148,11 @@ public class Character : MonoBehaviour {
         if (characterActions.state == CharacterActions.states.KO) return;        
         if (characterActions.state == CharacterActions.states.ATTACKING) return;
         characterActions.Defense(action);
-        timer -= 0.5f;
+
+        if (action == CharacterActions.actions.DEFENSE_DOWN)
+            timer -= 0.2f;
+        else
+            timer -= 0.5f;
     }
     void OnCharacterChangeAction(CharacterActions.actions action)
     {

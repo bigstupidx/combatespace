@@ -33,6 +33,7 @@ public class Summary : MonoBehaviour
     }
     void TimeOut1()
     {
+        Events.OnGameOver();
         cutscenes.gameObject.SetActive(true);
         if (heroWin)
             cutscenes.Play("RoundCompleteYouWinByKO");
@@ -50,6 +51,7 @@ public class Summary : MonoBehaviour
     }
     void TimeOut()
     {
+        Events.OnGameOver();
         cutscenes.gameObject.SetActive(true);
         if (Game.Instance.fightStatus.heroStatus > Game.Instance.fightStatus.characterStatus)
         {

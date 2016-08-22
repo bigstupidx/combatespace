@@ -80,6 +80,7 @@ public class FightStatus : MonoBehaviour {
         Events.OnKO += OnKO;
         Events.OnComputeCharacterPunched += OnComputeCharacterPunched;
         Events.OnComputeHeroPunched += OnComputeHeroPunched;
+        Events.OnCharactersStartedFight += OnCharactersStartedFight;
         Loop();
         //if(state != states.KO)
         //Events.OnRoundStart();
@@ -98,6 +99,7 @@ public class FightStatus : MonoBehaviour {
         Events.OnKO -= OnKO;
         Events.OnComputeCharacterPunched -= OnComputeCharacterPunched;
         Events.OnComputeHeroPunched -= OnComputeHeroPunched;
+        Events.OnCharactersStartedFight -= OnCharactersStartedFight;
     }
     public bool IsLastRound()
     {
@@ -117,10 +119,13 @@ public class FightStatus : MonoBehaviour {
     }
     void OnRoundStart()
     {
-        print("_____________OnRoundStart");
         roundsData.Add(new RoundData());
-        state = states.FIGHTING;
+        state = states.IDLE;
         Round++;
+    }
+    void OnCharactersStartedFight()
+    {
+        state = states.FIGHTING;
     }
     RoundData GetActiveRound()
     {
@@ -151,9 +156,7 @@ public class FightStatus : MonoBehaviour {
     }
     void Loop()
     {
-        //Recupera más rapido:
-        if (state == states.DONE)
-            return;
+        Invoke("Loop", 0.1f);
         if (state == states.KO)
         {
             heroStatus += ((1 - cansancio_character) * Time.deltaTime) / 3.2f;
@@ -189,7 +192,7 @@ public class FightStatus : MonoBehaviour {
 
 		Events.OnHeroAguanteStatus (heroAguanteStatus);
 
-        Invoke("Loop", 0.1f);
+        
     }
     void OnChangeStatusHero(float damage)
     {
