@@ -112,6 +112,21 @@
 		{  color:"333333" , thumb:"icons_genericColor_11"},
 		{  color:"000000" , thumb:"icons_genericColor_12"}
 	],
+	pantalon_tela:
+	[
+		{  thumb:"icons_genericColor_1", texture:"custom_set1"},
+		{  thumb:"icons_genericColor_2", texture:"custom_set1"}
+	],
+	guantes_tela:
+	[
+		{  thumb:"icons_genericColor_1", texture:"custom_set1"},
+		{  thumb:"icons_genericColor_2", texture:"custom_set1"}
+	],
+	tatoo:
+	[
+		{  thumb:"icons_genericColor_1", texture:"custom_set1"},
+		{  thumb:"icons_genericColor_2", texture:"custom_set1"}
+	]
 
 
 }

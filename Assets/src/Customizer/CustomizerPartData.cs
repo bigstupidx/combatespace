@@ -10,5 +10,6 @@ public class CustomizerPartData{
     public List<string> url;
     public Color color;
     public string thumb;
+    public string texture;
 
 }

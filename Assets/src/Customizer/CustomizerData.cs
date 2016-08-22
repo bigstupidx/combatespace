@@ -36,7 +36,9 @@ public class CustomizerData : MonoBehaviour
 
                 if (Json[part][a]["color"] != null)
                     cd.color = hexToColor(Json[part][a]["color"]);
-               
+
+                if (Json[part][a]["texture"] != null)
+                    cd.texture = Json[part][a]["texture"];
 
                 cd.url = new List<string>();
                 for (int b = 1; b < 4; b++)

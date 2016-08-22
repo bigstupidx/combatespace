@@ -19,6 +19,8 @@ public class Styles {
     public int pantalon;
     public int botas;
     public int tatoo;
+    public int pantalon_tela;
+    public int guantes_tela;
 
     public void Parse(string style)
     {
@@ -42,6 +44,10 @@ public class Styles {
              pantalon = int.Parse(allData[8]);
              botas = int.Parse(allData[9]);
              tatoo = int.Parse(allData[10]);
+             //if(allData.Length>10)
+             //   pantalon_tela = int.Parse(allData[11]);
+             //if (allData.Length > 11)
+             //    guantes_tela = int.Parse(allData[12]);
          }
     }
     public void Save()
@@ -56,8 +62,12 @@ public class Styles {
         style += guantes + "-";
         style += pantalon + "-";
         style += botas + "-";
-        style += tatoo;
+        style += tatoo + "-";
+        style += pantalon_tela + "-";
+        style += guantes_tela;
+
         PlayerPrefs.SetString("styles", style);
+
         if(SocialManager.Instance.userData.logged)
             Events.OnSaveStyles(style);
     }

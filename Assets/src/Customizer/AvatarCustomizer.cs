@@ -54,8 +54,13 @@ public class AvatarCustomizer : MonoBehaviour {
             {
                 if (id == partID)
                 {
+                    if (partName == "pantalon_tela" || partName == "guantes_tela" || partName == "tatoo")
+                    {
+                        ChangeTexture(data.name, data.texture);
+                    } else
                     if (data.color.a > 0)
                         ChangePart(data.name, "", data.color, 0);
+
                     for (int a = 0; a < data.url.Count; a++)
                         ChangePart(data.name, data.url[a], data.color, a);
                     return;
@@ -89,13 +94,24 @@ public class AvatarCustomizer : MonoBehaviour {
                 part.ChangeTexture(partName, partType, color);
         }
     }
+    void ChangeTexture(string partName, string partTexture)
+    {
+        foreach (AvatarCustomizerPart part in avatarCustomizerParts)
+        {
+            if (part.data.name == "pantalon1" && partName == "pantalon_tela")
+                part.ChangeTexture(partName, partTexture);
+            else if (part.data.name == "guantes1" && partName == "guantes_tela")
+                part.ChangeTexture(partName, partTexture);
+            else if (part.data.name == "piel1" && partName == "tatoo")
+                part.ChangeTexture(partName, partTexture);
+        }
+    }
     void SetStyle(string partName, int partID)
     {
         switch (partName)
         {
             case "cabezas": styles.cabezas = partID; break;
-            case "piel": styles.piel = partID; break;
-            case "tatoo": styles.tatoo = partID; break;
+            case "piel": styles.piel = partID; break;            
             case "pelos": styles.pelos = partID; break;
             case "peinados": styles.peinados = partID; break;
             case "cejas": styles.cejas = partID; break;
@@ -104,6 +120,9 @@ public class AvatarCustomizer : MonoBehaviour {
             case "guantes": styles.guantes = partID; break;
             case "pantalon": styles.pantalon = partID; break;
             case "botas": styles.botas = partID; break;
+            case "pantalon_tela": styles.pantalon_tela = partID; break;
+            case "guantes_tela": styles.guantes_tela = partID; break;
+            case "tatoo": styles.tatoo = partID; break;
         }
     }
     public string SetRandomStyle()
