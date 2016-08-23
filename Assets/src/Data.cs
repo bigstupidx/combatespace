@@ -15,6 +15,7 @@ public class Data : MonoBehaviour
     public HistorialManager hostorialManager;
     public CustomizerData customizerData;
     public string lastScene;
+	public MusicManager music;
 
     public static Data Instance
     {
@@ -33,6 +34,7 @@ public class Data : MonoBehaviour
     public void LoadLevel(string aLevelName)
     {
         lastScene = SceneManager.GetActiveScene().name;
+		music.MusicChange (aLevelName);
         SceneManager.LoadScene(aLevelName);
     }
     void Awake()
@@ -55,7 +57,7 @@ public class Data : MonoBehaviour
         peleasManager = GetComponent<PeleasManager>();
         hostorialManager = GetComponent<HistorialManager>();
         customizerData = GetComponent<CustomizerData>();
-        Invoke("StartLoadingFromServer", 1);
+        Invoke("Star\ttLoadingFromServer", 1);
     }
     void StartLoadingFromServer()
     {

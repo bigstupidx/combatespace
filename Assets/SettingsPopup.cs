@@ -43,6 +43,8 @@ public class SettingsPopup : MonoBehaviour
         {
             Data.Instance.settings.volume = 0;
         }
+
+		Events.OnAudioEnable(Data.Instance.settings.volume);
         SetActiveSoundMode();
     }
     public void SwitchMode()
