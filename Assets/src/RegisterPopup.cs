@@ -24,6 +24,7 @@ public class RegisterPopup : ScreenBase
     }
     public void ClickedRegister()
     {
+		Data.Instance.interfaceSfx.PlaySfx (Data.Instance.interfaceSfx.click1);
         Events.OnLoadingShow(true);
         SocialEvents.OnFacebookLoginPressed();
         panel.SetActive(false);
@@ -33,12 +34,14 @@ public class RegisterPopup : ScreenBase
         Events.OnLoadingShow(false);
     }
 	public void ClickedLater () {
+		Data.Instance.interfaceSfx.PlaySfx (Data.Instance.interfaceSfx.click1);
         SetOff();
         Data.Instance.playerSettings.SetAnonimo();
         Data.Instance.LoadLevel("03_Home");
 	}
     public override void OnBackButtonPressed() 
     {
+		Data.Instance.interfaceSfx.PlaySfx (Data.Instance.interfaceSfx.click2);
         SetOff();
     }
 }

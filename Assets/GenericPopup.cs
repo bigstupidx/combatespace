@@ -31,6 +31,7 @@ public class GenericPopup : ScreenBase
     }
     public override void OnBackButtonPressed() 
     {
+		Data.Instance.interfaceSfx.PlaySfx (Data.Instance.interfaceSfx.click2);
         SetOff();
     }
 }

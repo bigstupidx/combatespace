@@ -58,6 +58,7 @@ public class Home : MonoBehaviour
     }
     public void StartGame()
     {
+		Data.Instance.interfaceSfx.PlaySfx (Data.Instance.interfaceSfx.click1);
         if (Data.Instance.settings.ToturialReady == 0)
             Data.Instance.LoadLevel("Tutorial");
         else
@@ -70,6 +71,7 @@ public class Home : MonoBehaviour
     }
     public void Register()
     {
+		Data.Instance.interfaceSfx.PlaySfx (Data.Instance.interfaceSfx.click1);
         Events.OnRegisterPopup();
     }
 }
