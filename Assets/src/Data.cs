@@ -16,6 +16,7 @@ public class Data : MonoBehaviour
     public CustomizerData customizerData;
     public string lastScene;
 	public MusicManager music;
+	public InterfaceSfx interfaceSfx;
 
     public static Data Instance
     {
