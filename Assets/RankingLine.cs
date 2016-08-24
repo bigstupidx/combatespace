@@ -22,8 +22,8 @@ public class RankingLine : MonoBehaviour {
         profilePicture.setPicture(data.facebookID);
         nickField.text = data.nick;
         resultField.color = Data.Instance.settings.standardWINColor;     
-        pgField.text = data.peleas.peleas_g + "/" + data.peleas.peleas_p;
-        pgField.text = data.peleas.retos_g + "/" + data.peleas.retos_p;
+        pgField.text = "P.G/P: " + data.peleas.peleas_g + "/" + data.peleas.peleas_p;
+        rgField.text = "R.G/P: " + data.peleas.retos_g + "/" + data.peleas.retos_p;
 	}
     public void More()
     {

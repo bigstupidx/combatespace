@@ -83,6 +83,7 @@ public class FightersManager : MonoBehaviour {
     }
     void RankingReady(string result)
     {
+        RankingLoaded = true;
         ranking.Clear();
         string[] allData = Regex.Split(result, "</n>");
         for (var i = 0; i < allData.Length - 1; i++)

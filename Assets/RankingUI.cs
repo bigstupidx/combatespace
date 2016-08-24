@@ -13,7 +13,7 @@ public class RankingUI : MonoBehaviour
     public Transform content;
     public bool dataLoaded;
     private List<PlayerData> arr;
-    private float timeOut = 5;
+    private float timeOut = 8;
     private float timeNow;
 
     private bool onlyFriends;
@@ -43,6 +43,7 @@ public class RankingUI : MonoBehaviour
 
         if (Time.time > timeNow + timeOut)
         {
+            dataLoaded = true;
             Events.OnLoadingShow(false);
             Events.OnGenericPopup("ERROR", "Hubo un error de conexión");
             return;
