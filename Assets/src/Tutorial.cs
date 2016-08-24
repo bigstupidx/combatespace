@@ -73,6 +73,7 @@ public class Tutorial : MonoBehaviour {
     bool clicked;
     public void CartelClicked()
     {
+		Data.Instance.interfaceSfx.PlaySfx (Data.Instance.interfaceSfx.click2);
         print("CartelClicked" + id);
         clicked = true;
         if (id ==7)
@@ -148,6 +149,7 @@ public class Tutorial : MonoBehaviour {
     }
     public void Exit()
     {
+		Data.Instance.interfaceSfx.PlaySfx (Data.Instance.interfaceSfx.click1);
         Data.Instance.LoadLevel("03_Home");
     }
 }
