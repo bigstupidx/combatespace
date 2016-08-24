@@ -49,13 +49,19 @@ public class Carrera : MonoBehaviour {
 
         if (Data.Instance.peleasManager.showRetos)
         {
-            RetosButton.Select();
+            PeleasButton.interactable = true;
+            RetosButton.interactable = false;
+            PeleasButton.GetComponentInChildren<Text>().color = Data.Instance.settings.standardUIColor;
+            RetosButton.GetComponentInChildren<Text>().color = Color.white;
             arr = Data.Instance.peleasManager.retos;
             Loaded();
         }
         else
         {
-            PeleasButton.Select();
+            PeleasButton.interactable = false;
+            RetosButton.interactable = true;
+            PeleasButton.GetComponentInChildren<Text>().color = Color.white;
+            RetosButton.GetComponentInChildren<Text>().color = Data.Instance.settings.standardUIColor;
             arr = Data.Instance.peleasManager.peleas;
             Loaded();
         }

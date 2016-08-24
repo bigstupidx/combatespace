@@ -13,9 +13,11 @@ public class FightersManager : MonoBehaviour {
     }
 
     public List<PlayerData> all;
+    public List<PlayerData> ranking;
     public List<PlayerData> friends;
 
     public bool FriendsLoaded;
+    public bool RankingLoaded;
 
     public int activeID;
 
@@ -28,8 +30,12 @@ public class FightersManager : MonoBehaviour {
 	}
     public void LoadFriends(int min, int max)
     {
-        FriendsLoaded = true;
         SocialEvents.OnGetUsersByScore(UsersFriendsReady, min, max, true);
+    }
+    public void LoadRanking()
+    {
+        //GetRanking
+        SocialEvents.OnGetUsersByScore(RankingReady, -1, 0, true);
     }
     public List<PlayerData> GetActualFighters()
     {
@@ -75,8 +81,19 @@ public class FightersManager : MonoBehaviour {
                 all.Add(playerData);
         }
     }
+    void RankingReady(string result)
+    {
+        ranking.Clear();
+        string[] allData = Regex.Split(result, "</n>");
+        for (var i = 0; i < allData.Length - 1; i++)
+        {
+            PlayerData playerData = SetPlayerData(allData[i]);
+            ranking.Add(playerData);
+        }
+    }
     void UsersFriendsReady(string result)
     {
+        FriendsLoaded = true;
         friends.Clear();
         string[] allData = Regex.Split(result, "</n>");
         for (var i = 0; i < allData.Length - 1; i++)

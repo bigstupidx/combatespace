@@ -74,4 +74,8 @@ public class Home : MonoBehaviour
 		Data.Instance.interfaceSfx.PlaySfx (Data.Instance.interfaceSfx.click1);
         Events.OnRegisterPopup();
     }
+    public void Ranking()
+    {
+        Data.Instance.LoadLevel("08_Ranking");
+    }
 }

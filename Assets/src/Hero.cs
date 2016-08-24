@@ -103,7 +103,7 @@ public class Hero : MonoBehaviour
             Vector3 myRot = herocamera.transform.localEulerAngles;
 
             float _x = myRot.x + (gyroRot.x*1.2f);
-            float angle_x = Mathf.LerpAngle(_x,0, 2 * Time.deltaTime);
+            float angle_x = Mathf.LerpAngle(_x,0, 4 * Time.deltaTime);
             herocamera.transform.localEulerAngles = new Vector3(angle_x,0,0);
 
             transform.Rotate(0, -gyroRot.y*2, 0);
@@ -163,6 +163,9 @@ public class Hero : MonoBehaviour
 
             case HeroActions.actions.GANCHO_DOWN_L: actions.OnHeroActionWithCrossFade(HeroActions.actions.IDLE, 0.05f); break;
             case HeroActions.actions.GANCHO_DOWN_R: actions.OnHeroActionWithCrossFade(HeroActions.actions.IDLE, 0.05f); break;
+
+            case HeroActions.actions.CORTITO_L: actions.OnHeroActionWithCrossFade(HeroActions.actions.IDLE, 0.03f); break;
+            case HeroActions.actions.CORTITO_R: actions.OnHeroActionWithCrossFade(HeroActions.actions.IDLE, 0.03f); break;
         }
     }
     float lastAttackTime;

@@ -31,7 +31,7 @@ public class PeleasManager : MonoBehaviour {
     }
     void OnFacebookLogin(string facebookID, string username, string other)
     {
-        Init();
+        Invoke("Init", 1);
     }
     public void Init()
     {
@@ -81,7 +81,7 @@ public class PeleasManager : MonoBehaviour {
                 }
             }
             else
-                fight.timestamp = fightTimestamp + " - " + lastTimeViewed;
+                fight.timestamp = "";// fightTimestamp + " - " + lastTimeViewed;
 
             if (fight.retador_facebookID == SocialManager.Instance.userData.facebookID)
                 peleas.Add(fight);

@@ -15,6 +15,7 @@ public class DataController : MonoBehaviour
     private string saveStyles_URL = URL + "saveStyles.php?";
     private string saveNewPelea_URL = URL + "saveNewPelea.php?";
     private string getPeleas_URL = URL + "getPeleasByFacebookID.php?";
+    private string getRanking_URL = URL + "getRanking.php";
     private string getHistorialPeleas_URL = URL + "getHistorialPeleas.php?";
     
     void Start()
@@ -151,10 +152,19 @@ public class DataController : MonoBehaviour
 
 
     private System.Action<string> OnGetUsersByScoreListener;
+    private System.Action<string> OnGetRankingListener;
     public void OnGetUsersByScore(System.Action<string> OnGetUsersByScoreListener, int min, int max, bool onlyFriends)
     {
-        this.OnGetUsersByScoreListener = OnGetUsersByScoreListener;
-        StartCoroutine(GetUsersByScoreRoutine(min, max, onlyFriends));
+        if (min == -1)
+        {
+            OnGetRankingListener = OnGetUsersByScoreListener;
+            StartCoroutine(GetRankingRoutine());
+        }
+        else
+        {
+            this.OnGetUsersByScoreListener = OnGetUsersByScoreListener;
+            StartCoroutine(GetUsersByScoreRoutine(min, max, onlyFriends));
+        }
     }
     IEnumerator GetUsersByScoreRoutine(int min, int max, bool onlyFriends)
     {
@@ -171,6 +181,15 @@ public class DataController : MonoBehaviour
         WWW hs_post = new WWW(post_url);
         yield return hs_post;
         if (hs_post.error != null) print("Error con: GetUsersByScoreRoutine: " + hs_post.error); else {OnGetUsersByScoreListener(hs_post.text);}
+    }
+    IEnumerator GetRankingRoutine()
+    {
+        string post_url = getRanking_URL;
+
+        print("GetRankingRoutine : " + post_url);
+        WWW hs_post = new WWW(post_url);
+        yield return hs_post;
+        if (hs_post.error != null) print("Error con: GetRankingRoutine: " + hs_post.error); else { OnGetRankingListener(hs_post.text); }
     }
     private void OnSaveNewPelea(Fight fight)
     {
