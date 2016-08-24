@@ -115,17 +115,20 @@
 	pantalon_tela:
 	[
 		{  thumb:"icons_genericColor_1", texture:"custom_set1"},
-		{  thumb:"icons_genericColor_2", texture:"custom_set1"}
+		{  thumb:"icons_genericColor_2", texture:"custom_set2"},
+		{  thumb:"icons_genericColor_2", texture:"custom_set3"}
 	],
 	guantes_tela:
 	[
 		{  thumb:"icons_genericColor_1", texture:"custom_set1"},
-		{  thumb:"icons_genericColor_2", texture:"custom_set1"}
+		{  thumb:"icons_genericColor_2", texture:"custom_set2"},
+		{  thumb:"icons_genericColor_2", texture:"custom_set3"}
 	],
 	tatoo:
 	[
 		{  thumb:"icons_genericColor_1", texture:"custom_set1"},
-		{  thumb:"icons_genericColor_2", texture:"custom_set1"}
+		{  thumb:"icons_genericColor_2", texture:"custom_set2"},
+		{  thumb:"icons_genericColor_2", texture:"custom_set3"}
 	]
 
 

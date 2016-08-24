@@ -24,19 +24,32 @@ public class CarreraLine : MonoBehaviour {
         {
             profilePicture.setPicture(fight.retado_facebookID);
             nickField.text = fight.retado_username;
+            resultField.color = Data.Instance.settings.standardWINColor;
             if (ganaste)
-                resultField.text = "PELEA GANADA";
+            {
+                resultField.text = "GANADA";
+            }
             else
-                resultField.text = "PELEA PERDIDA";
+            {
+                resultField.text = "PERDIDA";
+                resultField.color = Data.Instance.settings.standardLOSEColor;
+            }
+
         }
         else
         {
             profilePicture.setPicture(fight.retador_facebookID);
             nickField.text = fight.retador_username;
+            resultField.color = Data.Instance.settings.standardWINColor;
             if (ganaste)
-                resultField.text = "RETO GANADO";
+            {
+                resultField.text = "GANADO";
+            }
             else
-                resultField.text = "RETO PERDIDO";
+            {
+                resultField.text = "PERDIDO";
+                resultField.color = Data.Instance.settings.standardLOSEColor;
+            }
         }
 	}
     public void More()

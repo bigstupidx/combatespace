@@ -11,13 +11,23 @@ public class FightIntro : MonoBehaviour {
     public Text historialCharacter;
 
     public GameObject loadingAsset;
+    public GameObject NotLogged;
     private bool loaded;
 
 	void Start () {
-        loadingAsset.SetActive(true);
         Invoke("StartFight", 4);
-        username.text = Data.Instance.playerSettings.heroData.nick;
+
         characterName.text = Data.Instance.playerSettings.characterData.nick;
+        username.text = "Anónimo";
+
+        if (SocialManager.Instance.userData.facebookID == "")
+            NotLogged.SetActive(true);
+        else
+        {
+            loadingAsset.SetActive(true);
+            NotLogged.SetActive(false);
+            username.text = Data.Instance.playerSettings.heroData.nick;            
+        }
 	}
     void StartFight()
     {
@@ -26,6 +36,7 @@ public class FightIntro : MonoBehaviour {
     void Update()
     {
         if (loaded) return;
+        if (SocialManager.Instance.userData.facebookID == "") return;
         if (Data.Instance.hostorialManager.loaded)
         {
             loaded = true;
