@@ -34,7 +34,7 @@ public class RegisterPopup : ScreenBase
         Events.OnLoadingShow(false);
     }
 	public void ClickedLater () {
-		Data.Instance.interfaceSfx.PlaySfx (Data.Instance.interfaceSfx.click1);
+		Data.Instance.interfaceSfx.PlaySfx (Data.Instance.interfaceSfx.click2);
         SetOff();
         Data.Instance.playerSettings.SetAnonimo();
         Data.Instance.LoadLevel("03_Home");

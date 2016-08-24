@@ -20,6 +20,7 @@ public class CustomizerPartButton : MonoBehaviour {
         thumb.sprite = Sprite.Create(texture, new Rect(0, 0, 512, 512), Vector2.zero);
     }
 	public void OnClicked () {
+		Data.Instance.interfaceSfx.PlaySfx (Data.Instance.interfaceSfx.click2);
         view.Selected(part, id);
 	}
 }

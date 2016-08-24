@@ -49,6 +49,7 @@ public class SettingsPopup : MonoBehaviour
     }
     public void SwitchMode()
     {
+		Data.Instance.interfaceSfx.PlaySfx (Data.Instance.interfaceSfx.button);
         if (Data.Instance.playerSettings.control == PlayerSettings.controls.CONTROL_360)
         {
             Data.Instance.playerSettings.control = PlayerSettings.controls.CONTROL_JOYSTICK;
@@ -61,6 +62,7 @@ public class SettingsPopup : MonoBehaviour
     }
     public void Close()
     {
+		Data.Instance.interfaceSfx.PlaySfx (Data.Instance.interfaceSfx.click2);
         panel.SetActive(false);
         canvas.SetActive(false);
     }

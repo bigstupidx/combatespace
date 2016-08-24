@@ -32,6 +32,7 @@ public class CustomizerPartsButton : MonoBehaviour
     }
     public void OnClicked()
     {
+		Data.Instance.interfaceSfx.PlaySfx (Data.Instance.interfaceSfx.click3);
         Events.OnCustomizerRefresh(partName);
     }
     public void SetOn()

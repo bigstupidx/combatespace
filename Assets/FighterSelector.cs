@@ -52,6 +52,7 @@ public class FighterSelector : MonoBehaviour {
     }
     public void Register()
     {
+		Data.Instance.interfaceSfx.PlaySfx (Data.Instance.interfaceSfx.click1);
         Events.OnRegisterPopup();
     }
     void LoadFighters()
@@ -190,6 +191,7 @@ public class FighterSelector : MonoBehaviour {
     }
     public void StartGame()
     {
+		Data.Instance.interfaceSfx.PlaySfx (Data.Instance.interfaceSfx.click1);
         if (Data.Instance.settings.ToturialReady == 0)
         {
             Data.Instance.settings.playingTutorial = true;

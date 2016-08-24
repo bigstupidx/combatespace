@@ -25,10 +25,12 @@ public class FighterSelectorButton : MonoBehaviour {
 	}
     public void Clicked()
     {
+		Data.Instance.interfaceSfx.PlaySfx (Data.Instance.interfaceSfx.swap1);
         Events.OnVerticalScrollSnapChanged(id);
     }
     public void SetOn()
     {
+		Data.Instance.interfaceSfx.PlaySfx (Data.Instance.interfaceSfx.swap2);
         rawImage.enabled = true;
     }
     public void SetOff()
