@@ -9,6 +9,7 @@ public class SettingsPopup : MonoBehaviour
     public GameObject panel;
     public SwitchButton soundsSwitchButton;
     public SwitchButton modeSwitchButton;
+    public GameObject[] toInactive;
 
     void Start()
     {
@@ -21,6 +22,9 @@ public class SettingsPopup : MonoBehaviour
     }
     void OnSettings()
     {
+        foreach (GameObject go in toInactive)
+            go.SetActive(false);
+
         panel.SetActive(true);
         canvas.SetActive(true);
         SetActiveMode();
@@ -49,6 +53,11 @@ public class SettingsPopup : MonoBehaviour
     }
     public void SwitchMode()
     {
+        if (Input.gyro.enabled)
+        {
+            Events.OnGenericPopup("Modo inhabilitado", "Tu dispositivo no acepta el modo 360 grados");
+            return;
+        }
 		Data.Instance.interfaceSfx.PlaySfx (Data.Instance.interfaceSfx.button);
         if (Data.Instance.playerSettings.control == PlayerSettings.controls.CONTROL_360)
         {

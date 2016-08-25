@@ -20,6 +20,12 @@ public class PlayerSettings : MonoBehaviour {
         {
             heroData.styles.Parse(styles);
         }
+        Invoke("DelayToEnableGyros", 1);
+    }
+    void DelayToEnableGyros()
+    {
+        if (!Input.gyro.enabled)
+            control = controls.CONTROL_JOYSTICK;
     }
     public void SetAnonimo()
     {        

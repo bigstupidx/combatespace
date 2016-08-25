@@ -29,7 +29,7 @@ public class CustomizerCamera : MonoBehaviour {
 
     void Start()
     {
-        activeSet = defaultSet;
+        activeSet = cabeza;
         Events.OnCustomizerChangeParts += OnCustomizerChangeParts;
     }
     void OnDestroy()

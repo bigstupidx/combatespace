@@ -15,7 +15,6 @@ public class Hero : MonoBehaviour
 
     void Start()
     {
-        Input.gyro.enabled = true;
         actions = GetComponent<HeroActions>();
 
         Events.OnHeroAction += OnHeroAction;

@@ -4,6 +4,7 @@ using System.Collections;
 
 public class Summary : MonoBehaviour
 {
+    public Camera cutscenesCamera;
     public RoundDataLine[] RoundDataLine;
     public RoundDataLine TotalRoundDataLine;
     public Animation cutscenes;
@@ -35,6 +36,7 @@ public class Summary : MonoBehaviour
     {
         Events.OnGameOver();
         cutscenes.gameObject.SetActive(true);
+        cutscenesCamera.enabled = true;
         if (heroWin)
             cutscenes.Play("RoundCompleteYouWinByKO");
         else
