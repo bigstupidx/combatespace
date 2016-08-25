@@ -15,6 +15,17 @@ public class InterfaceSfx : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		source = gameObject.GetComponent<AudioSource> ();
+		Events.OnAudioEnable += OnAudioEnable;
+		OnAudioEnable(Data.Instance.settings.volume);
+	}
+
+	void OnDestroy(){
+		Events.OnAudioEnable -= OnAudioEnable;
+	}
+
+	void OnAudioEnable(float volume)
+	{
+		source.volume = volume;
 	}
 
 	public void PlaySfx(AudioClip ac){

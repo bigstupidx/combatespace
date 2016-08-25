@@ -68,7 +68,7 @@ public class VoiceClips : MonoBehaviour {
 			RandomizeArray (ac);
 			clips.Add (key, ac);
 			count.Add (key, 0);
-			Debug.Log (key + " count: " + count [key]);
+			//Debug.Log (key + " count: " + count [key]);
 		}
 
 		public AudioClip GetNext(string key){
