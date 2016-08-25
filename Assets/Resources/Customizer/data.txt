@@ -114,21 +114,21 @@
 	],
 	pantalon_tela:
 	[
-		{  thumb:"icons_genericColor_1", texture:"custom_set1"},
-		{  thumb:"icons_genericColor_2", texture:"custom_set2"},
-		{  thumb:"icons_genericColor_2", texture:"custom_set3"}
+		{  thumb:"icons_pantalontela_1", texture:"custom_set1"},
+		{  thumb:"icons_pantalontela_2", texture:"custom_set2"},
+		{  thumb:"icons_pantalontela_3", texture:"custom_set3"}
 	],
 	guantes_tela:
 	[
-		{  thumb:"icons_genericColor_1", texture:"custom_set1"},
-		{  thumb:"icons_genericColor_2", texture:"custom_set2"},
-		{  thumb:"icons_genericColor_2", texture:"custom_set3"}
+		{  thumb:"icons_guantetela_1", texture:"custom_set1"},
+		{  thumb:"icons_guantetela_2", texture:"custom_set2"},
+		{  thumb:"icons_guantetela_3", texture:"custom_set3"}
 	],
 	tatoo:
 	[
-		{  thumb:"icons_genericColor_1", texture:"custom_set1"},
-		{  thumb:"icons_genericColor_2", texture:"custom_set2"},
-		{  thumb:"icons_genericColor_2", texture:"custom_set3"}
+		{  thumb:"icons_tatoo_1", texture:"custom_set1"},
+		{  thumb:"icons_tatoo_2", texture:"custom_set2"},
+		{  thumb:"icons_tatoo_3", texture:"custom_set3"}
 	]
 
 
