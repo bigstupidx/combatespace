@@ -58,7 +58,7 @@ public class Data : MonoBehaviour
         peleasManager = GetComponent<PeleasManager>();
         hostorialManager = GetComponent<HistorialManager>();
         customizerData = GetComponent<CustomizerData>();
-        Invoke("Star\ttLoadingFromServer", 1);
+        Invoke("StartLoadingFromServer", 1);
     }
     void StartLoadingFromServer()
     {
@@ -66,7 +66,7 @@ public class Data : MonoBehaviour
     }
     void OnUserReady(string a, string b, string c)
     {
-        if(playerSettings.heroData.nick == "")
+        if (playerSettings.heroData.nick == null || playerSettings.heroData.nick == "" || playerSettings.heroData.nick == "Anónimo")
             LoadLevel("04_Names");
         else
             LoadLevel("03_Home");

@@ -147,6 +147,8 @@ public class PeleasManager : MonoBehaviour {
 
         fight.retador_username = Data.Instance.playerSettings.heroData.nick;
         fight.retado_username = Data.Instance.playerSettings.characterData.nick;
+
+        peleas.Add(fight);
         
         Events.OnSaveNewPelea(fight);
     }
