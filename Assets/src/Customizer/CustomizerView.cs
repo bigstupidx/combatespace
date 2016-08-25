@@ -12,7 +12,12 @@ public class CustomizerView : MonoBehaviour {
 	void Start () {
         Events.OnCustomizerRefresh += OnCustomizerRefresh;
         LoppUntikLoad();
+        Invoke("Delay", 0.2f);
 	}
+    void Delay()
+    {
+        OnCustomizerRefresh("cabezas");
+    }
     void OnDestroy()
     {
         Events.OnCustomizerRefresh -= OnCustomizerRefresh;
