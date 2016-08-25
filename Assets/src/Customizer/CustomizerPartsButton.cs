@@ -25,6 +25,9 @@ public class CustomizerPartsButton : MonoBehaviour
             case "pantalon": thumbName = "icons_menu_shorts"; break;
             case "piel": thumbName = "icons_menu_skin"; break;
             case "barbas": thumbName = "icons_menu_moustache"; break;
+            case "pantalon_tela": thumbName = "icons_menu_pantalontela"; break;
+            case "guantes_tela": thumbName = "icons_menu_guantetela"; break;
+            case "tatoo": thumbName = "icons_menu_tatoo"; break;
             default: thumbName = "icons_menu_moustache"; break;
         }
         Texture2D texture = Resources.Load("Customizer/icons/" + thumbName) as Texture2D;

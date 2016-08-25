@@ -49,29 +49,11 @@ public class Summary : MonoBehaviour
     void OnAllRoundsComplete()
     {
         FightEnd();
-        Invoke("TimeOut", 3);
     }
-    void TimeOut()
-    {
-        Events.OnGameOver();
-        cutscenes.gameObject.SetActive(true);
-        if (Game.Instance.fightStatus.heroStatus > Game.Instance.fightStatus.characterStatus)
-        {
-            this.heroWin = true;
-            cutscenes.Play("RoundCompleteYouWin");
-        }
-        else
-        {
-            this.heroWin = false;
-            cutscenes.Play("RoundCompleteYouLose");
-        }
-    }
+
     void FightEnd()
     {
         panel.SetActive(true);
-
-        Events.OnFightEnd(heroWin);
-
         if (SocialManager.Instance.userData.logged)
             profileYou.setPicture(SocialManager.Instance.userData.facebookID);
         else
@@ -79,8 +61,6 @@ public class Summary : MonoBehaviour
 
         profileOther.setPicture(Data.Instance.playerSettings.characterData.facebookID);
 
-        panel.SetActive(true);
-        
 
         int id = 0;
         int totalHero = 0;
@@ -97,7 +77,7 @@ public class Summary : MonoBehaviour
             if (roundData.hero_punches > roundData.character_punches)
             {
                 heroScore = 10;
-                characterScore = 9 - Random.Range(0,1);
+                characterScore = 9 - Random.Range(0, 1);
             }
             else
             {
@@ -116,7 +96,7 @@ public class Summary : MonoBehaviour
 
             id++;
         }
-        
+
         int roundsPlayed = (Game.Instance.fightStatus.roundsData.Count);
 
         totalHero /= roundsPlayed;
@@ -137,14 +117,37 @@ public class Summary : MonoBehaviour
                 characterScore--;
                 totalCharacter--;
             }
-            RoundDataLine[Game.Instance.fightStatus.roundsData.Count-1].Init(id + 1, heroScore, characterScore);
-        } 
+            RoundDataLine[Game.Instance.fightStatus.roundsData.Count - 1].Init(id + 1, heroScore, characterScore);
+        }
         if (totalHero > totalCharacter)
+        {
+            this.heroWin = true;
             field.text = "Ganaste\n";
+        }
         else
+        {
+            this.heroWin = false;
             field.text = "Perdiste\n";
+        }
+        
 
         TotalRoundDataLine.Init(0, totalHero, totalCharacter);
+        Invoke("TimeOut", 3);
+    }
+    void TimeOut()
+    {
+        
+        cutscenes.gameObject.SetActive(true);
+        if (heroWin)
+        {
+            cutscenes.Play("RoundCompleteYouWin");
+        }
+        else
+        {
+            cutscenes.Play("RoundCompleteYouLose");
+        }
+
+        Events.OnGameOver();
     }
     public void Restart()
     {

@@ -45,7 +45,16 @@ public class FightData : MonoBehaviour {
     void SetField()
     {
         string secs = sec.ToString();
-        if (sec < 10) secs = "0" + sec;
+        if (sec < 10)
+        {
+            Data.Instance.interfaceSfx.PlaySfx(Data.Instance.interfaceSfx.click1);
+            ChronometerField.color = Color.red;
+            secs = "0" + sec;
+        }
+        else
+        {
+            ChronometerField.color = Color.white;
+        }
 
         ChronometerField.text = "0:" + secs;
         if (sec == 0)

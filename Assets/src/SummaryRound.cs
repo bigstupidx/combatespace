@@ -4,6 +4,9 @@ using System.Collections;
 
 public class SummaryRound : MonoBehaviour
 {
+    public GameObject newRound;
+    public Text newRoundField;
+
     public Camera heroCamera;
     public Camera minaCamera;
 
@@ -24,6 +27,7 @@ public class SummaryRound : MonoBehaviour
 
     void Start()
     {
+        newRound.SetActive(false);
         anim.gameObject.SetActive(false);
         minaCamera.enabled = false;
         SetOff();
@@ -65,7 +69,7 @@ public class SummaryRound : MonoBehaviour
 
         anim.Play("intro");
 
-        yield return new WaitForSeconds(11);
+        yield return new WaitForSeconds(10);
         StartGame();
     }
     public void StartGame()
@@ -88,7 +92,8 @@ public class SummaryRound : MonoBehaviour
         campana.GetComponent<Animation>().Stop();
         campana.SetActive(false);
 
-        yield return new WaitForSeconds(12);
+        yield return new WaitForSeconds(11);
+       
         NextRound();
     }
     public void NextRound()
@@ -103,6 +108,11 @@ public class SummaryRound : MonoBehaviour
     }
     IEnumerator FinishedCoroutine()
     {
+        newRound.SetActive(true);
+        newRoundField.text = (Game.Instance.fightStatus.Round + 1).ToString();
+        yield return new WaitForSeconds(1);
+        newRound.SetActive(false);
+
         panel.SetActive(true);
         Events.OnRoundStart();
         campana.SetActive(true);

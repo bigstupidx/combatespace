@@ -67,7 +67,8 @@ public class Hero : MonoBehaviour
         OnDestroy();
     }
     void OnRoundStart()
-    {        
+    {
+        actions.OnHeroActionWithCrossFade(HeroActions.actions.IDLE, 0);
         transform.localEulerAngles = Vector3.zero;
     }
     void OnAllRoundsComplete()
