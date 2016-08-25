@@ -14,6 +14,7 @@ public class Carrera : MonoBehaviour {
     private List<Fight> arr;
     private float timeOut = 8;
     private float timeNow;
+    public Text field;
 
     void Start()
     {
@@ -50,6 +51,10 @@ public class Carrera : MonoBehaviour {
 
         if (Data.Instance.peleasManager.showRetos)
         {
+            if (Data.Instance.peleasManager.retos.Count == 0)
+                field.text = "Nadie te retó todavía.";
+            else
+                field.text = "";
             PeleasButton.interactable = true;
             RetosButton.interactable = false;
             PeleasButton.GetComponentInChildren<Text>().color = Data.Instance.settings.standardUIColor;
@@ -59,6 +64,10 @@ public class Carrera : MonoBehaviour {
         }
         else
         {
+            if (Data.Instance.peleasManager.peleas.Count == 0)
+                field.text = "Todavía no registras peleas.";
+            else
+                field.text = "";
             PeleasButton.interactable = false;
             RetosButton.interactable = true;
             PeleasButton.GetComponentInChildren<Text>().color = Color.white;

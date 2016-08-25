@@ -89,13 +89,16 @@ public class FighterSelector : MonoBehaviour {
             FighterSelectorButton newButton = Instantiate(button);
             newButton.transform.SetParent(Content);
             newButton.transform.localScale = Vector3.one;
-            newButton.Init(id, playerData);
+            newButton.Init(id, playerData);            
             id++;
+            if (Data.Instance.playerSettings.heroData.stats.score >= playerData.stats.score)
+                FighterID = id; 
         }
+        print(FighterID);
 
         SetFighter(Data.Instance.fightersManager.GetActualFighter());
 
-        FighterID = (int)(id / 2);
+       // FighterID = (int)(id / 2);
 
         verticalScrollSnap.Init(FighterID);
 

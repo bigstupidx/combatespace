@@ -48,7 +48,7 @@ public class VoiceClips : MonoBehaviour {
 		}
 
 		public AudioClip GetNext(string key){
-			Debug.Log (key + " count: " + count [key]);
+			//Debug.Log (key + " count: " + count [key]);
 			AudioClip next = null;
 			if (clips.ContainsKey (key)) {
 				AudioClip[] ac = clips [key];
