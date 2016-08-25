@@ -6,6 +6,8 @@ public class CutScenesInGame : MonoBehaviour {
     public Animation heroAnimations;
     public Animation characterAnimations;
     public Hero hero;
+	public VoiceClips vclips;
+	public AudioSource voice;
 
     void OnEnable()
     {
@@ -73,4 +75,12 @@ public class CutScenesInGame : MonoBehaviour {
     {
         characterAnimations.Play("derrota");
     }
+
+	public void VoiceBienvenida(){
+		voice.PlayOneShot (vclips.bienvenida.GetNext ("Bienvenida"));
+	}
+
+	void VoiceIntro(){		
+		voice.PlayOneShot (vclips.intro.GetNext ("Intro"));
+	}
 }
