@@ -36,7 +36,7 @@ public class CharacterAI : MonoBehaviour {
     {
         bool reaccionaAnteAttak = GetPrecentProbability(intelligence);
 
-        print("_________reaccionaAnteAttak: " + reaccionaAnteAttak + " intelligence: " + intelligence);
+     //   print("_________reaccionaAnteAttak: " + reaccionaAnteAttak + " intelligence: " + intelligence);
 
         if (!reaccionaAnteAttak) return;
 

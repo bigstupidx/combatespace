@@ -66,6 +66,7 @@ public class Home : MonoBehaviour
     }
     public void PlayTutorial()
     {
+        Data.Instance.interfaceSfx.PlaySfx(Data.Instance.interfaceSfx.click1);
         Events.OnTutorialReady(0);
         StartGame();
     }
@@ -76,6 +77,7 @@ public class Home : MonoBehaviour
     }
     public void Ranking()
     {
+        Data.Instance.interfaceSfx.PlaySfx(Data.Instance.interfaceSfx.click1);
         Data.Instance.LoadLevel("08_Ranking");
     }
 }

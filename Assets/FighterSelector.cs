@@ -3,7 +3,8 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
-public class FighterSelector : MonoBehaviour {
+public class FighterSelector : MonoBehaviour
+{
 
     public GameObject NotLogged;
     public AvatarCustomizer characterCustomizer;
@@ -21,11 +22,12 @@ public class FighterSelector : MonoBehaviour {
     public Text characterCategory;
     public SwitchButton switchButtons;
     public VerticalScrollSnap verticalScrollSnap;
-    
 
+    public int FighterID;
 
     void Start()
     {
+
         Events.OnLoadingShow(true);
         Data.Instance.settings.playingTutorial = false;
 
@@ -48,16 +50,21 @@ public class FighterSelector : MonoBehaviour {
         int score = Data.Instance.playerSettings.heroData.stats.score;
         category.text = Categories.GetCategorieByScore(score);
         heroScore.text = "" + score;
-        LoadFighters();    
+        LoadFighters();
     }
     public void Register()
     {
-		Data.Instance.interfaceSfx.PlaySfx (Data.Instance.interfaceSfx.click1);
+        Data.Instance.interfaceSfx.PlaySfx(Data.Instance.interfaceSfx.click1);
         Events.OnRegisterPopup();
     }
     void LoadFighters()
     {
-        if (Data.Instance.fightersManager.filter == FightersManager.filters.ONLY_FRIENDS && !Data.Instance.fightersManager.FriendsLoaded)
+        //hay uno seleccionado:
+        if (Data.Instance.fightersManager.activeID > 0)
+        {
+
+        }
+        else if (Data.Instance.fightersManager.filter == FightersManager.filters.ONLY_FRIENDS && !Data.Instance.fightersManager.FriendsLoaded)
             Data.Instance.fightersManager.LoadFriends(0, 100);
         LoopUntilReady();
     }
@@ -72,7 +79,7 @@ public class FighterSelector : MonoBehaviour {
         if (fighters.Count < 1)
         {
             if (Data.Instance.fightersManager.filter == FightersManager.filters.ALL)
-                Data.Instance.fightersManager.LoadFighters(0,100);
+                Data.Instance.fightersManager.LoadFighters(0, 100);
             else
                 Data.Instance.fightersManager.LoadFriends(0, 100);
             Invoke("LoopUntilReady", 3);
@@ -89,16 +96,17 @@ public class FighterSelector : MonoBehaviour {
             FighterSelectorButton newButton = Instantiate(button);
             newButton.transform.SetParent(Content);
             newButton.transform.localScale = Vector3.one;
-            newButton.Init(id, playerData);            
+            newButton.Init(id, playerData);
             id++;
             if (Data.Instance.playerSettings.heroData.stats.score >= playerData.stats.score)
-                FighterID = id; 
+                FighterID = id;
         }
-        print(FighterID);
+        if (Data.Instance.fightersManager.activeID > 0)
+            FighterID = Data.Instance.fightersManager.activeID;
 
         SetFighter(Data.Instance.fightersManager.GetActualFighter());
 
-       // FighterID = (int)(id / 2);
+        // FighterID = (int)(id / 2);
 
         verticalScrollSnap.Init(FighterID);
 
@@ -114,7 +122,7 @@ public class FighterSelector : MonoBehaviour {
     }
     void OnBackButtonPressed()
     {
-        Data.Instance.LoadLevel("03_Home");
+        Data.Instance.LoadLevel(Data.Instance.lastScene);
     }
     //public void Next(PlayerData playerData)
     //{
@@ -126,7 +134,7 @@ public class FighterSelector : MonoBehaviour {
     //    //PlayerData playerData = Data.Instance.fightersManager.GetFighter(false);
     //    SetFighter(playerData);
     //}
-    int FighterID;
+
     void SetFighter(int playerID)
     {
         FighterID = playerID;
@@ -138,10 +146,10 @@ public class FighterSelector : MonoBehaviour {
         Invoke("DelayToCharacterAppear", 0.2f);
 
         int score = playerData.stats.score;
-        
+
         characterCategory.text = Categories.GetCategorieByScore(score).ToUpper();
 
-       PlayerSettings playerSettings = Data.Instance.playerSettings;
+        PlayerSettings playerSettings = Data.Instance.playerSettings;
 
         int Power = playerSettings.heroData.stats.Power;
         int Resistence = playerSettings.heroData.stats.Resistence;
@@ -151,9 +159,9 @@ public class FighterSelector : MonoBehaviour {
         int Power2 = playerData.stats.Power;
         int Resistence2 = playerData.stats.Resistence;
         int Defense2 = playerData.stats.Defense;
-        int Speed2 = playerData.stats.Speed;        
+        int Speed2 = playerData.stats.Speed;
 
-        compareStatsLine[0].Init("FUERZA", Power.ToString(), Power2.ToString(), Power-Power2);
+        compareStatsLine[0].Init("FUERZA", Power.ToString(), Power2.ToString(), Power - Power2);
         compareStatsLine[1].Init("RESISTENCIA", Resistence.ToString(), Resistence2.ToString(), Resistence - Resistence2);
         compareStatsLine[2].Init("DEFENSA", Defense.ToString(), Defense2.ToString(), Defense - Defense2);
         compareStatsLine[3].Init("VELOCIDAD", Speed.ToString(), Speed2.ToString(), Speed - Speed2);
@@ -194,8 +202,8 @@ public class FighterSelector : MonoBehaviour {
     }
     public void StartGame()
     {
-		Data.Instance.interfaceSfx.PlaySfx (Data.Instance.interfaceSfx.click1);
-		Data.Instance.music.FadeOut (4f);
+        Data.Instance.interfaceSfx.PlaySfx(Data.Instance.interfaceSfx.click1);
+        Data.Instance.music.FadeOut(4f);
         if (Data.Instance.settings.ToturialReady == 0)
         {
             Data.Instance.settings.playingTutorial = true;
@@ -209,7 +217,7 @@ public class FighterSelector : MonoBehaviour {
     }
     public void PlayTutorial()
     {
-        
+
         Events.OnTutorialReady(0);
         StartGame();
     }

@@ -16,7 +16,7 @@ public class InterfaceSfx : MonoBehaviour {
 	void Start () {
 		source = gameObject.GetComponent<AudioSource> ();
 		Events.OnAudioEnable += OnAudioEnable;
-		OnAudioEnable(Data.Instance.settings.volume);
+		//OnAudioEnable(Data.Instance.settings.volume);
 	}
 
 	void OnDestroy(){

@@ -4,6 +4,7 @@ using System.Collections;
 
 public class Summary : MonoBehaviour
 {
+    public GameObject[] toDisable;
     public Camera cutscenesCamera;
     public RoundDataLine[] RoundDataLine;
     public RoundDataLine TotalRoundDataLine;
@@ -53,6 +54,9 @@ public class Summary : MonoBehaviour
 
     void FightEnd()
     {
+        foreach (GameObject go in toDisable)
+            go.SetActive(false);
+
         panel.SetActive(true);
         if (SocialManager.Instance.userData.logged)
             profileYou.setPicture(SocialManager.Instance.userData.facebookID);

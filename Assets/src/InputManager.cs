@@ -47,7 +47,8 @@ public class InputManager:MonoBehaviour  {
 #if UNITY_EDITOR
         gyro_enable = false;
 #elif  UNITY_IPHONE || UNITY_ANDROID
-         if (Input.gyro.enabled)
+        Input.gyro.enabled = true;
+        if (SystemInfo.supportsGyroscope)
             gyro_enable = true;
 #endif
     }

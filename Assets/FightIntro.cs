@@ -15,7 +15,7 @@ public class FightIntro : MonoBehaviour {
     private bool loaded;
 
 	void Start () {
-        Invoke("StartFight", 4);
+        
 
         characterName.text = Data.Instance.playerSettings.characterData.nick;
         username.text = "Anónimo";
@@ -28,8 +28,14 @@ public class FightIntro : MonoBehaviour {
             NotLogged.SetActive(false);
             username.text = Data.Instance.playerSettings.heroData.nick;            
         }
+        Invoke("StartFight", 3.5f);
 	}
     void StartFight()
+    {
+        Events.OnLoadingFade(true);
+        Invoke("Go", 1);      
+    }
+    void Go()
     {
         Data.Instance.LoadLevel("Game");
     }

@@ -37,6 +37,7 @@ public class Data : MonoBehaviour
         lastScene = SceneManager.GetActiveScene().name;
 		music.MusicChange (aLevelName);
         SceneManager.LoadScene(aLevelName);
+        GetComponent<Loading>().SceneChanged();
     }
     void Awake()
     {
@@ -58,6 +59,7 @@ public class Data : MonoBehaviour
         peleasManager = GetComponent<PeleasManager>();
         hostorialManager = GetComponent<HistorialManager>();
         customizerData = GetComponent<CustomizerData>();
+        settings = GetComponent<Settings>();
         Invoke("StartLoadingFromServer", 1);
     }
     void StartLoadingFromServer()

@@ -21,7 +21,8 @@ public class StatsManager : MonoBehaviour {
         int Defense = Data.Instance.playerSettings.heroData.stats.Defense;
         int Speed = Data.Instance.playerSettings.heroData.stats.Speed;
         
-        Events.OnSaveStats(Data.Instance.playerSettings.heroData.stats);
+        if(SocialManager.Instance.userData.logged)
+            Events.OnSaveStats(Data.Instance.playerSettings.heroData.stats);
 
         PlayerPrefs.SetInt("Score", score);
         PlayerPrefs.SetInt("Power", Power);

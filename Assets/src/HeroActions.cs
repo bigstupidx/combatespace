@@ -71,8 +71,9 @@ public class HeroActions : MonoBehaviour
     }
     public void StandUp()
     {
-        action = actions.DEFENSE;
-        OnHeroActionWithCrossFade(actions.IDLE, 0.3f);
+        state = states.IDLE;
+        action = actions.IDLE;
+        anim.CrossFade(anim_idle, 0.1f, 0, 0);
     }
     public void DefensePunched()
     {
@@ -183,6 +184,16 @@ public class HeroActions : MonoBehaviour
     {
         Reset();
         OnHeroActionWithCrossFade(actions.KO);
+    }
+    public void TryToRaise()
+    {
+        print("TryToRaise");
+        anim.Play("intentaLevanta1");
+    }
+    public void TryToRaiseButFails()
+    {
+        print("TryToRaiseButFailsTryToRaiseButFailsTryToRaiseButFails");
+        anim.Play("intentaLevantaFail");
     }
 
 }

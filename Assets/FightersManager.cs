@@ -21,6 +21,25 @@ public class FightersManager : MonoBehaviour {
 
     public int activeID;
 
+    void Start()
+    {
+        Events.SetNewFighter += SetNewFighter;
+    }
+    void SetNewFighter(PlayerData newData)
+    {
+        int id = 0;
+        foreach (PlayerData pData in all)
+        {
+            if (pData.facebookID == newData.facebookID)
+            {
+                activeID = id;
+                return;
+            } else
+                id++;
+        }
+        all.Add(newData);
+        activeID = id;
+    }
     public void SetActivePlayer(int playerID)
     {
         activeID = playerID;
@@ -34,8 +53,16 @@ public class FightersManager : MonoBehaviour {
     }
     public void LoadRanking()
     {
-        //GetRanking
         SocialEvents.OnGetUsersByScore(RankingReady, -1, 0, true);
+    }
+    public PlayerData GetFighterByFacebookID(string facebookID)
+    {
+        foreach (PlayerData pData in all)
+        {
+            if (pData.facebookID == facebookID)
+                return pData;
+        }
+        return null;
     }
     public List<PlayerData> GetActualFighters()
     {

@@ -115,6 +115,12 @@ public class FightStatus : MonoBehaviour {
     }
     void OnAvatarStandUp(bool isHero)
     {
+        Invoke("RestartMatchAfterFall", 1);
+    }
+    void RestartMatchAfterFall()
+    {
+        if (state == states.BETWEEN_ROUNDS) return;
+        if (state == states.DONE) return;
         state = states.FIGHTING;
     }
     void OnRoundStart()

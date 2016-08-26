@@ -14,9 +14,11 @@ public class RankingLine : MonoBehaviour {
 
     private bool vosRetaste;
     private bool ganaste;
+    private PlayerData data;
 
 	public void Init(PlayerData data) 
     {
+        this.data = data;
         string facebookID = SocialManager.Instance.userData.facebookID;
         scoreField.text = data.stats.score.ToString();    
         profilePicture.setPicture(data.facebookID);
@@ -27,6 +29,7 @@ public class RankingLine : MonoBehaviour {
 	}
     public void More()
     {
-
+        Events.SetNewFighter(data);
+        Data.Instance.LoadLevel("03_FighterSelector");
     }
 }

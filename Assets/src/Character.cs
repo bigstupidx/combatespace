@@ -111,14 +111,21 @@ public class Character : MonoBehaviour {
         else
             DefenseRandom();
     }
+    int suma_de_defensas;
     public void ChangeState()
     {
         if (characterActions.state == CharacterActions.states.KO) return;
 
-        if (Random.Range(0, 100) < 50 && !Data.Instance.settings.playingTutorial)
+        if (Random.Range(0, 100) < 50 || suma_de_defensas>4)
+        {
             Attack();
+            suma_de_defensas = 0;
+        }
         else
+        {
+            suma_de_defensas += Random.Range(1, 2);
             DefenseRandom();
+        }
     }
     void Attack()
     {

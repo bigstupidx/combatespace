@@ -24,7 +24,9 @@ public class PlayerSettings : MonoBehaviour {
     }
     void DelayToEnableGyros()
     {
-        if (!Input.gyro.enabled)
+        if (SystemInfo.supportsGyroscope)
+            control = controls.CONTROL_360;
+        else
             control = controls.CONTROL_JOYSTICK;
     }
     public void SetAnonimo()

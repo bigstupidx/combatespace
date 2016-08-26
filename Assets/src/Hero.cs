@@ -68,6 +68,7 @@ public class Hero : MonoBehaviour
     }
     void OnRoundStart()
     {
+        actions.action = HeroActions.actions.IDLE;
         actions.OnHeroActionWithCrossFade(HeroActions.actions.IDLE, 0);
         transform.localEulerAngles = Vector3.zero;
     }

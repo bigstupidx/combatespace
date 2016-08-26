@@ -29,7 +29,6 @@ public class AvatarCustomizerPart {
     }
     public void ChangeTexture(string parts, string part)
     {
-        Debug.Log("ChangeTexture __________parts: " + parts + " part: " + part );
 
         int materialID = 0;
         switch (parts)

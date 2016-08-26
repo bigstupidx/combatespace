@@ -25,17 +25,17 @@ public class SummaryScreen : MonoBehaviour {
         int hero_cat = Categories.GetCategorieIdScore(score);
         int character_cat = Categories.GetCategorieIdScore(characterScore);
 
-        num = 1;
-        string text = "+1 por ganarle a uno de tu misma categoría";
+        num = 2;
+        string text = "+2 por ganarle a uno de tu misma categoría";
 
         if (hero_cat+1 == character_cat)
         {
-            num++;
-            text += "/n+1 por ganarle a alguien de una categoría más avanzada";
+            num = 4;
+            text += "+4 por ganarle a alguien de una categoría más avanzada";
         } else if (hero_cat + 2 == character_cat)
         {
-            num += 2;
-            text += "/n+2 por ganarle a alguien dos categorías más avanzadas";
+            num = 6;
+            text += "+6 por ganarle a alguien dos categorías más avanzadas";
         }
         Data.Instance.playerSettings.heroData.stats.AddScore(num);
         Events.OnGenericPopup("Ganaste " + num + " puntos.", text);

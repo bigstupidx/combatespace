@@ -15,6 +15,7 @@ public class CountDown : MonoBehaviour {
     private bool ready;
     public Animation anim;
     public Image GlowImage;
+    public HeroActions heroActions;
 
 	void Start () {
         fightStatus = Game.Instance.fightStatus;
@@ -28,7 +29,6 @@ public class CountDown : MonoBehaviour {
     }
     void OnAvatarFall(bool isHero)
     {
-
         ready = false;
         this.isHero = isHero;
         progressBar.gameObject.SetActive(false);
@@ -38,11 +38,11 @@ public class CountDown : MonoBehaviour {
     {
         if (isHero)
         {
-            if (fightStatus.caidas_hero >= 3)
-            {
-                Events.OnKO(true);
-                return;
-            }
+            //if (fightStatus.caidas_hero >= 3)
+            //{
+            //    Events.OnKO(true);
+            //    return;
+            //}
             hero_progress = 0;
             progressBar.gameObject.SetActive(true);
             LoopHero();
@@ -50,12 +50,12 @@ public class CountDown : MonoBehaviour {
         } else
         {            
             probabilityToStandAgain = ((100 - (int)(fightStatus.cansancio_hero * 50)) / 2) - (fightStatus.caidas_character*10);
-            if (fightStatus.caidas_character >= 3)
-            {
-                Events.OnKO(false);
-                SetOff();
-                return;
-            }
+            //if (fightStatus.caidas_character >= 3)
+            //{
+            //    Events.OnKO(false);
+            //    SetOff();
+            //    return;
+            //}
         }
         sec = 0;
         panel.SetActive(true);
@@ -92,24 +92,44 @@ public class CountDown : MonoBehaviour {
     {
         panel.SetActive(false);
     }
-
+    bool raising;
     void LoopHero()
     {
         hero_progress -= Time.deltaTime;
-        if (hero_progress < 0) 
+        if (hero_progress <= 0)
+        {
             hero_progress = 0;
+            if (raising)
+            {
+                raising = false;
+                heroActions.TryToRaiseButFails();
+            }
+        }
+        else if (hero_progress > 0.1f && !raising)
+        {
+            raising = true;
+            heroActions.TryToRaise();
+        }
         else if (hero_progress >= 1)
         {
             ready = true;
             Events.OnAvatarStandUp(true);
             SetOff();
+            hero_progress = 0;
+            return;
         }
         progressBar.SetProgress(hero_progress);
         Invoke("LoopHero", 0.1f);
     }
     public void OnClik()
     {
-        hero_progress += 0.2f * (1-fightStatus.cansancio_hero);
+        float caidas_suma = (float)Game.Instance.fightStatus.caidas_hero/25;
+        float cansancio_suma = 1-(fightStatus.cansancio_hero);
+        float total_para_sumar = (0.2f * cansancio_suma) - caidas_suma;
+        if (total_para_sumar < 0.05f) total_para_sumar = 0.05f;
+      //  print("caidas_suma " + caidas_suma + " cansancio_suma: " + cansancio_suma + " total_para_sumar: " + total_para_sumar);
+
+        hero_progress += total_para_sumar;
         GlowImage.enabled = true;
         Invoke("SetGlowOff", 0.1f);
     }

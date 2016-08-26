@@ -11,6 +11,8 @@ public class CarreraLine : MonoBehaviour {
     private bool vosRetaste;
     private bool ganaste;
 
+    private string other_FacebookID;
+
 	public void Init(Fight fight) 
     {
         string facebookID = SocialManager.Instance.userData.facebookID;
@@ -23,6 +25,7 @@ public class CarreraLine : MonoBehaviour {
         if (vosRetaste)
         {
             profilePicture.setPicture(fight.retado_facebookID);
+            other_FacebookID = fight.retado_facebookID;
             nickField.text = fight.retado_username;
             resultField.color = Data.Instance.settings.standardWINColor;
             if (ganaste)
@@ -39,6 +42,7 @@ public class CarreraLine : MonoBehaviour {
         else
         {
             profilePicture.setPicture(fight.retador_facebookID);
+            other_FacebookID = fight.retador_facebookID;
             nickField.text = fight.retador_username;
             resultField.color = Data.Instance.settings.standardWINColor;
             if (ganaste)
@@ -54,6 +58,11 @@ public class CarreraLine : MonoBehaviour {
 	}
     public void More()
     {
-
+        PlayerData pd = Data.Instance.fightersManager.GetFighterByFacebookID(other_FacebookID);
+        if (pd != null)
+        {
+            Events.SetNewFighter(pd);
+            Data.Instance.LoadLevel("03_FighterSelector");
+        }
     }
 }

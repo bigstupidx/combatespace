@@ -4,9 +4,11 @@ using System.Collections;
 public static class Events
 {
     public static System.Action OnSettings = delegate { };
+    public static System.Action OnConfirmReset = delegate { };
     public static System.Action OnGameSettings = delegate { };
     public static System.Action<PlayerData> OnUpdatePlayerData = delegate { };
     public static System.Action<bool> OnLoadingShow = delegate { };
+    public static System.Action<bool> OnLoadingFade = delegate { };
     public static System.Action OnRegisterPopup = delegate { };
     public static System.Action<string, string> OnGenericPopup = delegate { };
     public static System.Action<string, string> OnRetosPopup = delegate { };
@@ -60,6 +62,8 @@ public static class Events
     public static System.Action OnRoundStart = delegate { };
     public static System.Action<int> OnVerticalScrollSnapChanged = delegate { };
     public static System.Action<int> SetFighter = delegate { };
+    public static System.Action<PlayerData> SetNewFighter = delegate { };
+    
 
     public static System.Action<string> OnCustomizerRefresh = delegate { };
     public static System.Action<string> OnCustomizerChangeParts = delegate { };    

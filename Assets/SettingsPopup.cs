@@ -32,13 +32,12 @@ public class SettingsPopup : MonoBehaviour
     }
     public void ResetApp()
     {
-        SocialEvents.OnFacebookLogout();
-        SocialEvents.ResetApp();
-        PlayerPrefs.DeleteAll();
-        Data.Instance.LoadLevel("01_Register");
+        Close();
+        Events.OnConfirmReset();        
     }
     public void SwitchSoundMode()
     {
+        Data.Instance.interfaceSfx.PlaySfx(Data.Instance.interfaceSfx.click2);
         if (Data.Instance.settings.volume == 0)
         {
             Data.Instance.settings.volume = 1;
@@ -53,7 +52,8 @@ public class SettingsPopup : MonoBehaviour
     }
     public void SwitchMode()
     {
-        if (Input.gyro.enabled)
+        Data.Instance.interfaceSfx.PlaySfx(Data.Instance.interfaceSfx.click2);
+        if (!SystemInfo.supportsGyroscope)
         {
             Events.OnGenericPopup("Modo inhabilitado", "Tu dispositivo no acepta el modo 360 grados");
             return;
@@ -62,10 +62,12 @@ public class SettingsPopup : MonoBehaviour
         if (Data.Instance.playerSettings.control == PlayerSettings.controls.CONTROL_360)
         {
             Data.Instance.playerSettings.control = PlayerSettings.controls.CONTROL_JOYSTICK;
+            Events.OnGenericPopup("Modo Volante", "En este modo peleas rotando el dispositivo como si fuera un volante.");
         }
         else
         {
             Data.Instance.playerSettings.control = PlayerSettings.controls.CONTROL_360;
+            Events.OnGenericPopup("Modo 360", "En este modo peleas rotando el dispositivo 360 grados.");
         }
         SetActiveMode();
     }
