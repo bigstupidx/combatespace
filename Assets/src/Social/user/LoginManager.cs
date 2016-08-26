@@ -67,8 +67,12 @@ public class LoginManager : MonoBehaviour {
         facebookID = result.ResultDictionary["id"].ToString();
         username = result.ResultDictionary["name"].ToString();
         Debug.Log("facebookID: " + facebookID + " username:" + username  );
-        SocialEvents.OnFacebookLogin(facebookID, username, "");
+        Invoke("SetDataDelayed", 0.25f);
         Invoke("Delay", 2);
+    }
+    void SetDataDelayed()
+    {
+        SocialEvents.OnFacebookLogin(facebookID, username, "");
     }
     bool friendsLogged;
     void Delay()

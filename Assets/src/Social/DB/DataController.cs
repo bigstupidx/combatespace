@@ -33,8 +33,41 @@ public class DataController : MonoBehaviour
     }
     void OnFacebookLogin(string facebookID, string username, string email)
     {
-        print("onfaecbooklogin");
         StartCoroutine(CheckIfUserExistsOnLocalDB(facebookID, username, email));
+    }
+    public void LoadDataForExistingUser(string _facebookID)
+    {
+        StartCoroutine(LoadDataForExistingUserRoutine(_facebookID));
+    }
+    IEnumerator LoadDataForExistingUserRoutine(string _facebookID)
+    {
+        string post_url = getUserIdByFacebookID_URL + "facebookID=" + _facebookID;
+
+        print(post_url);
+
+        WWW receivedData = new WWW(post_url);
+        yield return receivedData;
+        if (receivedData.error != null)
+            print("There was an error in CheckIfUserExistsOnLocalDB: " + receivedData.error);
+        else
+        {
+            string[] userData = Regex.Split(receivedData.text, ":");
+            int userID = System.Int32.Parse(userData[1]);
+            string username = userData[2];
+
+            Data.Instance.playerSettings.heroData.stats.Power = System.Int32.Parse(userData[3]);
+            Data.Instance.playerSettings.heroData.stats.Resistence = System.Int32.Parse(userData[4]);
+            Data.Instance.playerSettings.heroData.stats.Defense = System.Int32.Parse(userData[5]);
+            Data.Instance.playerSettings.heroData.stats.Speed = System.Int32.Parse(userData[6]);
+            Data.Instance.playerSettings.heroData.stats.score = System.Int32.Parse(userData[7]);
+
+            Data.Instance.playerSettings.heroData.peleas.peleas_g = System.Int32.Parse(userData[8]);
+            Data.Instance.playerSettings.heroData.peleas.peleas_p = System.Int32.Parse(userData[9]);
+            Data.Instance.playerSettings.heroData.peleas.retos_g = System.Int32.Parse(userData[10]);
+            Data.Instance.playerSettings.heroData.peleas.retos_p = System.Int32.Parse(userData[11]);
+
+            string nick = userData[12];
+        }
     }
     IEnumerator CheckIfUserExistsOnLocalDB(string _facebookID, string _username, string _email)
     {

@@ -17,11 +17,14 @@ public class PeleasManager : MonoBehaviour {
         
         retos = new List<Fight>();
         peleas = new List<Fight>();
-        Events.OnFightEnd += OnFightEnd;        
-        Data.Instance.playerSettings.heroData.peleas.peleas_g = PlayerPrefs.GetInt("peleas_g", 0);
-        Data.Instance.playerSettings.heroData.peleas.peleas_p = PlayerPrefs.GetInt("peleas_p", 0);
-        Data.Instance.playerSettings.heroData.peleas.retos_g = PlayerPrefs.GetInt("retos_g", 0);
-        Data.Instance.playerSettings.heroData.peleas.retos_p = PlayerPrefs.GetInt("retos_p", 0);
+        Events.OnFightEnd += OnFightEnd;
+        if (Data.Instance.playerSettings.heroData.peleas.peleas_g == 0)
+        {
+            Data.Instance.playerSettings.heroData.peleas.peleas_g = PlayerPrefs.GetInt("peleas_g", 0);
+            Data.Instance.playerSettings.heroData.peleas.peleas_p = PlayerPrefs.GetInt("peleas_p", 0);
+            Data.Instance.playerSettings.heroData.peleas.retos_g = PlayerPrefs.GetInt("retos_g", 0);
+            Data.Instance.playerSettings.heroData.peleas.retos_p = PlayerPrefs.GetInt("retos_p", 0);
+        }
 
         SocialEvents.OnFacebookLogin += OnFacebookLogin;        
 	}

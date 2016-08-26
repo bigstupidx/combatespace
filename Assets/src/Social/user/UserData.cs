@@ -26,7 +26,10 @@ public class UserData : MonoBehaviour {
         return;
 #endif
         if (PlayerPrefs.GetString("username") != "" && PlayerPrefs.GetString("facebookID") != "")
+        {
             SetUser(PlayerPrefs.GetString("username"), PlayerPrefs.GetString("facebookID"));
+            SocialManager.Instance.GetComponent<DataController>().LoadDataForExistingUser(facebookID);
+        }
 
 	}
     void SetUser(string username, string facebookID)
