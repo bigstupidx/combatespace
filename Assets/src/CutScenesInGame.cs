@@ -35,7 +35,7 @@ public class CutScenesInGame : MonoBehaviour {
     {
         heroAnimations.Play("festeja");
         characterAnimations.Play("levanta2");
-        Invoke("TimeOutYouWinKO", 5);
+        Invoke("TimeOutYouWinKO", 6);
     }
     void TimeOutYouWinKO()
     {

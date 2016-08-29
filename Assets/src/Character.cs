@@ -17,8 +17,10 @@ public class Character : MonoBehaviour {
     public  CharacterActions characterActions;
     public CharacterAI ai;
     public int combo = 0;
+    private FightStatus fightStatus;
 
 	void Start () {
+        fightStatus = Game.Instance.fightStatus;
         ai = GetComponent<CharacterAI>();
         ai.Init();
         float speed = Data.Instance.settings.defaultSpeed.state_speed;
@@ -56,12 +58,10 @@ public class Character : MonoBehaviour {
     }
     void OnCharactersStartedFight()
     {
-        print("OnCharactersStartedFight");
         ChangeState();
     }
     void OnRoundStart()
     {
-        print("OnRoundStart");
         characterActions.Walk();
     }
     void OnGameOver()
@@ -234,5 +234,9 @@ public class Character : MonoBehaviour {
                 break;
         }
     }
-
+    
+    public bool CheckIfCancherea()
+    {
+        return ai.CheckIfCancherea();
+    }
 }

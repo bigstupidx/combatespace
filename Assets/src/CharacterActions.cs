@@ -21,7 +21,8 @@ public class CharacterActions : MonoBehaviour {
         ATTACKING,
         PUNCHED,
         KO,
-        LEVANTA
+        LEVANTA,
+        CANCHERO
     }
 
     public actions action;
@@ -42,7 +43,8 @@ public class CharacterActions : MonoBehaviour {
         ATTACK_R,
         ATTACK_L_CORTITO,
         ATTACK_R_CORTITO,
-        KO
+        KO,
+        CANCHERO
     }
 
     public string anim_idle;
@@ -69,12 +71,14 @@ public class CharacterActions : MonoBehaviour {
     public string anim_canchero;
 
     private Character character;
+    private FightStatus fightStatus;
 
     private IEnumerator levantaRoutine;
     private IEnumerator attackRoutine;
     private IEnumerator defenseRoutine;    
     
 	void Start () {
+        fightStatus = Game.Instance.fightStatus;
         AvatarCustomizer ac = Instantiate(avatarCustomizer);
         ac.isMyAvatar = false;
         ac.transform.SetParent(container);
@@ -89,10 +93,7 @@ public class CharacterActions : MonoBehaviour {
         print("WALK");
         anim.Play(anim_walk);
     }
-    public void Canchero()
-    {
-        anim.Play(anim_canchero);
-    }
+
     int randomDefense;
     public void ChangeRandomDefense()
     {
@@ -104,6 +105,11 @@ public class CharacterActions : MonoBehaviour {
         else
             randomDefense = Random.Range(1, 6);
 
+        if (character.CheckIfCancherea())
+        {
+            Cancherea();
+            return;
+        }
         switch (randomDefense)
         {
             //case 1: Defense(actions.DEFENSE_DOWN); break;
@@ -114,7 +120,13 @@ public class CharacterActions : MonoBehaviour {
             case 6: Defense(actions.DEFENSE_UP_CENTER); break;
         }
     }
-
+    public void Cancherea()
+    {
+        state = states.CANCHERO;
+        action = actions.CANCHERO;
+        PlayAnim();
+        Events.OnAvatarExpresion(AvatarExpresiones.types.IDLE, false);
+    }
     public void Defense(actions defenseAction)
     {
         if (state == states.KO) return;
@@ -188,7 +200,7 @@ public class CharacterActions : MonoBehaviour {
     }
     IEnumerator LevantaRoutine()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(3);
         ChangeRandomDefense();
     }
     public void Reset()
@@ -209,6 +221,7 @@ public class CharacterActions : MonoBehaviour {
 
         switch (action)
         {
+            case actions.CANCHERO: actionName = anim_canchero; break;
             case actions.DEFENSE_UP: actionName = anim_defense_up; break;
             case actions.DEFENSE_UP_CENTER: actionName = anim_defense_up_center; break;
             case actions.DEFENSE_DOWN: actionName = anim_defense_down; break;
