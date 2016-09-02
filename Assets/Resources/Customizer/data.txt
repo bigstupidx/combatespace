@@ -76,11 +76,10 @@
 		{  color:"56c6c9" , thumb:"icons_genericColor_5"},
 		{  color:"2e3192" , thumb:"icons_genericColor_6"},
 		{  color:"783576", 	thumb:"icons_genericColor_7"},
-		{  color:"e063bb" , thumb:"icons_genericColor_8"},
-		{  color:"f5f5f5" , thumb:"icons_genericColor_9"},
-		{  color:"999999" , thumb:"icons_genericColor_10"},
-		{  color:"333333" , thumb:"icons_genericColor_11"},
-		{  color:"000000" , thumb:"icons_genericColor_12"}
+		{  color:"f5f5f5" , thumb:"icons_genericColor_8"},
+		{  color:"999999" , thumb:"icons_genericColor_9"},
+		{  color:"333333" , thumb:"icons_genericColor_10"},
+		{  color:"000000" , thumb:"icons_genericColor_11"}
 	],
 	guantes:
 	[
@@ -91,11 +90,10 @@
 		{  color:"56c6c9" , thumb:"icons_genericColor_5"},
 		{  color:"2e3192" , thumb:"icons_genericColor_6"},
 		{  color:"783576", 	thumb:"icons_genericColor_7"},
-		{  color:"e063bb" , thumb:"icons_genericColor_8"},
-		{  color:"f5f5f5" , thumb:"icons_genericColor_9"},
-		{  color:"999999" , thumb:"icons_genericColor_10"},
-		{  color:"333333" , thumb:"icons_genericColor_11"},
-		{  color:"000000" , thumb:"icons_genericColor_12"}
+		{  color:"f5f5f5" , thumb:"icons_genericColor_8"},
+		{  color:"999999" , thumb:"icons_genericColor_9"},
+		{  color:"333333" , thumb:"icons_genericColor_10"},
+		{  color:"000000" , thumb:"icons_genericColor_11"}
 	],
 	pantalon:
 	[
@@ -106,11 +104,10 @@
 		{  color:"56c6c9" , thumb:"icons_genericColor_5"},
 		{  color:"2e3192" , thumb:"icons_genericColor_6"},
 		{  color:"783576", 	thumb:"icons_genericColor_7"},
-		{  color:"e063bb" , thumb:"icons_genericColor_8"},
-		{  color:"f5f5f5" , thumb:"icons_genericColor_9"},
-		{  color:"999999" , thumb:"icons_genericColor_10"},
-		{  color:"333333" , thumb:"icons_genericColor_11"},
-		{  color:"000000" , thumb:"icons_genericColor_12"}
+		{  color:"f5f5f5" , thumb:"icons_genericColor_8"},
+		{  color:"999999" , thumb:"icons_genericColor_9"},
+		{  color:"333333" , thumb:"icons_genericColor_10"},
+		{  color:"000000" , thumb:"icons_genericColor_11"}
 	],
 	pantalon_tela:
 	[
