@@ -183,7 +183,7 @@ public class HeroActions : MonoBehaviour
     public void KO()
     {
         Reset();
-        OnHeroActionWithCrossFade(actions.KO);
+        OnHeroActionWithCrossFade(actions.KO, 0.4f);
     }
     public void TryToRaise()
     {

@@ -161,6 +161,9 @@ public class FighterSelector : MonoBehaviour
         int Defense2 = playerData.stats.Defense;
         int Speed2 = playerData.stats.Speed;
 
+        float Inteligencia = (float)(Power2 + Resistence2 + Defense2 + Speed2)/4;
+        Data.Instance.playerSettings.characterData.stats.Inteligencia = (int)Inteligencia;
+
         compareStatsLine[0].Init("FUERZA", Power.ToString(), Power2.ToString(), Power - Power2);
         compareStatsLine[1].Init("RESISTENCIA", Resistence.ToString(), Resistence2.ToString(), Resistence - Resistence2);
         compareStatsLine[2].Init("DEFENSA", Defense.ToString(), Defense2.ToString(), Defense - Defense2);
@@ -174,17 +177,17 @@ public class FighterSelector : MonoBehaviour
         int retos_quien_gana = 0;
         if (SocialManager.Instance.userData.logged)
         {
-            hero_p_g = playerSettings.heroData.peleas.peleas_g + "/" + playerSettings.heroData.peleas.peleas_p;
-            hero_r_g = playerSettings.heroData.peleas.retos_g + "/" + playerSettings.heroData.peleas.retos_p;
+            hero_p_g = "G" + playerSettings.heroData.peleas.peleas_g + " - P" + playerSettings.heroData.peleas.peleas_p;
+            hero_r_g = "G" + playerSettings.heroData.peleas.retos_g + " - P" + playerSettings.heroData.peleas.retos_p;
 
             peleas_quien_gana = playerSettings.heroData.peleas.peleas_g - playerSettings.characterData.peleas.peleas_g;
             retos_quien_gana = playerSettings.heroData.peleas.retos_g - playerSettings.characterData.peleas.retos_g;
         }
-        string character_p = playerSettings.characterData.peleas.peleas_g + "/" + playerData.peleas.peleas_p;
-        string character_r = playerSettings.characterData.peleas.retos_g + "/" + playerData.peleas.retos_p;
+        string character_p = "G" + playerSettings.characterData.peleas.peleas_g + " - P" + playerData.peleas.peleas_p;
+        string character_r = "G" + playerSettings.characterData.peleas.retos_g + " - P" + playerData.peleas.retos_p;
 
-        compareStatsLine[4].Init("PELEAS G.", hero_p_g, character_p, peleas_quien_gana);
-        compareStatsLine[5].Init("RETOS G.", hero_r_g, character_r, retos_quien_gana);
+        compareStatsLine[4].Init("PELEAS", hero_p_g, character_p, peleas_quien_gana);
+        compareStatsLine[5].Init("RETOS", hero_r_g, character_r, retos_quien_gana);
     }
     void DelayToCharacterAppear()
     {

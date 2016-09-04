@@ -39,8 +39,11 @@ public class MainMenu : MonoBehaviour {
             (heroStats[3].num)
             );
 
+        float characterIntelligence = characterStats[0].num + characterStats[1].num + characterStats[2].num + characterStats[3].num;
+        characterIntelligence /= 4;
+
         Data.Instance.playerSettings.characterData.stats.SetStats(
-            ligas[1].num,
+            (int)characterIntelligence,
             (characterStats[0].num),
             (characterStats[1].num),
             (characterStats[2].num),

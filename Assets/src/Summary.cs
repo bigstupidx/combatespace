@@ -16,6 +16,8 @@ public class Summary : MonoBehaviour
     public GameObject panel;
     public Text field;
     private bool heroWin;
+    private bool endedByKO;
+
     void Start()
     {
         SetOff();
@@ -29,6 +31,7 @@ public class Summary : MonoBehaviour
     }
     void OnKO(bool isHero)
     {
+        this.endedByKO = true;
         this.heroWin = !isHero;
         Invoke("FightEnd", 2);
         Invoke("TimeOut1", 3);
@@ -108,7 +111,19 @@ public class Summary : MonoBehaviour
 
         print(totalHero + " + " + totalCharacter + " roundsPlayed: " + roundsPlayed);
 
-        //si hay empate: la compu se la juega por el más fuerte:
+        if (endedByKO)
+        {
+            if (heroWin)
+            {
+                totalHero = 10;
+                totalCharacter -= 1;
+            }
+            else
+            {
+                totalCharacter = 10;
+                totalHero -= 1;
+            }
+        }
         if (totalHero == totalCharacter)
         {
             if (Data.Instance.playerSettings.heroData.stats.score < Data.Instance.playerSettings.characterData.stats.score)
@@ -133,10 +148,11 @@ public class Summary : MonoBehaviour
             this.heroWin = false;
             field.text = "Perdiste\n";
         }
-        
 
         TotalRoundDataLine.Init(0, totalHero, totalCharacter);
         Invoke("TimeOut", 3);
+
+        Events.OnFightEnd(heroWin);
     }
     void TimeOut()
     {

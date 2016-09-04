@@ -136,14 +136,18 @@ public class PeleasManager : MonoBehaviour {
             fight.winner = Data.Instance.playerSettings.heroData.facebookID;
             Data.Instance.playerSettings.heroData.peleas.peleas_g++;
             PlayerPrefs.SetInt("peleas_g", Data.Instance.playerSettings.heroData.peleas.peleas_g);
+            Data.Instance.playerSettings.characterData.peleas.retos_p++;
         }
         else
         {
+            Data.Instance.playerSettings.characterData.peleas.retos_g++;
             fight.winner = Data.Instance.playerSettings.characterData.facebookID;
             Data.Instance.playerSettings.heroData.peleas.peleas_p++;
             PlayerPrefs.SetInt("peleas_p", Data.Instance.playerSettings.heroData.peleas.peleas_p);
         }
+
         Events.OnSavePelea(SocialManager.Instance.userData.facebookID, Data.Instance.playerSettings.heroData.peleas);
+        Events.OnSavePelea(Data.Instance.playerSettings.characterData.facebookID, Data.Instance.playerSettings.characterData.peleas);
 
         fight.retador_facebookID = Data.Instance.playerSettings.heroData.facebookID;
         fight.retado_facebookID = Data.Instance.playerSettings.characterData.facebookID;

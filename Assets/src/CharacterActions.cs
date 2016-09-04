@@ -75,9 +75,21 @@ public class CharacterActions : MonoBehaviour {
 
     private IEnumerator levantaRoutine;
     private IEnumerator attackRoutine;
-    private IEnumerator defenseRoutine;    
-    
+    private IEnumerator defenseRoutine;
+
+    float attackSpeedMultiplier = 1;
+
 	void Start () {
+
+        if (Data.Instance.playerSettings.characterData.stats.Inteligencia <= 16)
+            attackSpeedMultiplier = 1.6f;
+        else if (Data.Instance.playerSettings.characterData.stats.Inteligencia <= 23)
+            attackSpeedMultiplier = 1.4f;
+        else if (Data.Instance.playerSettings.characterData.stats.Inteligencia <= 32)
+            attackSpeedMultiplier = 1.2f;
+        else
+            attackSpeedMultiplier = 1;
+
         fightStatus = Game.Instance.fightStatus;
         AvatarCustomizer ac = Instantiate(avatarCustomizer);
         ac.isMyAvatar = false;
@@ -210,6 +222,7 @@ public class CharacterActions : MonoBehaviour {
         if (defenseRoutine != null)
             StopCoroutine(defenseRoutine);
     }
+    
     void PlayAnim()
     {
         if (state == states.KO) return;
@@ -217,7 +230,6 @@ public class CharacterActions : MonoBehaviour {
         Reset();
 
         string actionName = "";
-
 
         switch (action)
         {
@@ -248,7 +260,7 @@ public class CharacterActions : MonoBehaviour {
             case actions.ATTACK_R:
             case actions.ATTACK_L_CORTITO:
             case actions.ATTACK_R_CORTITO:
-                anim[actionName].speed = 0.8f;
+                anim[actionName].speed = 0.8f / attackSpeedMultiplier;
                 break;
         }
        
@@ -294,7 +306,7 @@ public class CharacterActions : MonoBehaviour {
     IEnumerator AttackRoutine(float hitTime, float resetTime)
     {
         
-        yield return new WaitForSeconds(hitTime);
+        yield return new WaitForSeconds(hitTime* attackSpeedMultiplier);
         if (state == states.ATTACKING)
             Events.OnCheckHeroHitted(action);
         yield return new WaitForSeconds(resetTime);

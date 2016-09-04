@@ -29,6 +29,7 @@ public class CountDown : MonoBehaviour {
     }
     void OnAvatarFall(bool isHero)
     {
+        raising = false;
         ready = false;
         this.isHero = isHero;
         progressBar.gameObject.SetActive(false);
@@ -36,6 +37,7 @@ public class CountDown : MonoBehaviour {
     }
     void Delay()
     {
+        hero_progress = 0;
         if (isHero)
         {
             //if (fightStatus.caidas_hero >= 3)
@@ -43,7 +45,7 @@ public class CountDown : MonoBehaviour {
             //    Events.OnKO(true);
             //    return;
             //}
-            hero_progress = 0;
+            
             progressBar.gameObject.SetActive(true);
             LoopHero();
             

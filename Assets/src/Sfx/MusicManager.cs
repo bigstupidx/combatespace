@@ -25,7 +25,6 @@ public class MusicManager : MonoBehaviour {
 	}
 
 	void OnGameOver(){
-		Debug.Log ("Aca");
 		FadeIn (4f, introMusic);
 	}
 
