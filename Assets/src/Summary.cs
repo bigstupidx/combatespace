@@ -116,14 +116,16 @@ public class Summary : MonoBehaviour
             if (heroWin)
             {
                 totalHero = 10;
-                totalCharacter -= 1;
+                if (totalHero == totalCharacter)
+                    totalCharacter -= 1;
             }
             else
             {
                 totalCharacter = 10;
-                totalHero -= 1;
+                if (totalHero == totalCharacter)
+                    totalHero -= 1;
             }
-        }
+        }else
         if (totalHero == totalCharacter)
         {
             if (Data.Instance.playerSettings.heroData.stats.score < Data.Instance.playerSettings.characterData.stats.score)
