@@ -42,6 +42,8 @@ public class CharacterAI : MonoBehaviour {
     }
     void OnHeroAction(HeroActions.actions action)
     {
+        if (fightStatus == null) fightStatus = Game.Instance.fightStatus;
+
         bool reaccionaAnteAttak = GetPrecentProbability(intelligence);
         int PercentNumToBlock = 50;
 
@@ -52,7 +54,18 @@ public class CharacterAI : MonoBehaviour {
             PercentNumToBlock = 80 + Random.Range(0,intelligence/2);
         }
 
-        if (!reaccionaAnteAttak) return;        
+        if (!reaccionaAnteAttak)
+        {
+            //antes de no reaccionar corre una regla nueva
+            //si esta muy baja tu aguante bar, entonces el otro reacciona a tu golpe
+            float heroAguanteStatus = fightStatus.heroAguanteStatus*10;
+            float rand = Random.Range(0, heroAguanteStatus);
+            if (rand > 2)
+            {
+              //  Debug.Log("No reacciona: " + heroAguanteStatus + "     random entre 0 y " + rand);
+                return;
+            }
+        }
 
         switch (action)
         {
