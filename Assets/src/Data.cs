@@ -70,7 +70,7 @@ public class Data : MonoBehaviour
     {
         if (playerSettings.heroData.nick == null || playerSettings.heroData.nick == "" || playerSettings.heroData.nick == "Anónimo")
             LoadLevel("04_Names");
-        else
+        else if (SceneManager.GetActiveScene().name != "0_Splash")
             LoadLevel("03_Home");
     }
 

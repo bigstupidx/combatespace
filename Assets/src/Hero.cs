@@ -10,6 +10,9 @@ public class Hero : MonoBehaviour
     public ParticleSystem particles_left;
     public ParticleSystem particles_right;
 
+    public ParticleSystem particles_glove_left;
+    public ParticleSystem particles_glove_right;
+
     public MeshRenderer[] AvatarCustomizerArms;
     public MeshRenderer[] AvatarCustomizerGuantes;
 
@@ -168,6 +171,10 @@ public class Hero : MonoBehaviour
             case HeroActions.actions.CORTITO_L: actions.OnHeroActionWithCrossFade(HeroActions.actions.IDLE, 0.03f); break;
             case HeroActions.actions.CORTITO_R: actions.OnHeroActionWithCrossFade(HeroActions.actions.IDLE, 0.03f); break;
         }
+        if (action == HeroActions.actions.GANCHO_UP_L || action == HeroActions.actions.GANCHO_DOWN_L || action == HeroActions.actions.CORTITO_L)
+            particles_glove_left.Play();
+        else
+            particles_glove_right.Play();
     }
     float lastAttackTime;
     void OnComputeCharacterPunched(HeroActions.actions action)
