@@ -11,9 +11,17 @@ public class AvatarCustomizer : MonoBehaviour {
 
     public AvatarCustomizerPart[] avatarCustomizerParts;
     public CharacterHead head;
+    public Material BoxerMaterial;
 
     void Start()
     {
+        //foreach (SkinnedMeshRenderer sm in GetComponentsInChildren<SkinnedMeshRenderer>())
+        //{
+        //    for (int a = 0; a < sm.materials.Length; a++ )
+        //    {
+        //        sm.materials[a] = BoxerMaterial;
+        //    }
+        //}
         if (Data.Instance.customizerData.data != null)
         {
             if (isMyAvatar)
