@@ -50,14 +50,14 @@ public class CharacterSounds : MonoBehaviour {
 	void OnAvatarFall(bool isHero)
 	{
 		if (!isHero)
-			StartCoroutine(LonaSfx(0.4f));		
+			StartCoroutine(LonaSfx(0.5f));		
 	}
 
 	IEnumerator LonaSfx(float delay)
 	{		
 		yield return new WaitForSeconds(delay);
 		float vol = Random.Range (volLowRange-0.2f, volHighRange-0.4f);
-		receiveSource.volume = vol;
+		receiveSource.volume = vol*0.25f;
 		float pitch = Random.Range (pitchLowRange-0.4f, pitchHighRange-0.2f);
 		receiveSource.pitch = pitch;
 		receiveSource.PlayOneShot (knock);
@@ -75,7 +75,7 @@ public class CharacterSounds : MonoBehaviour {
 		else if(action.Equals(HeroActions.actions.GANCHO_DOWN_L)||action.Equals(HeroActions.actions.GANCHO_DOWN_R))
 			clip = hitClips.abajoClips [(int)(Random.value * hitClips.abajoClips.Length)];
 		float vol = Random.Range (volLowRange, volHighRange);
-		receiveSource.volume = vol;
+		receiveSource.volume = vol*0.5f;
 		float pitch = Random.Range (pitchLowRange, pitchHighRange);
 		receiveSource.pitch = pitch;
 		receiveSource.PlayOneShot (clip);
@@ -95,7 +95,7 @@ public class CharacterSounds : MonoBehaviour {
 		else if(action.Equals(HeroActions.actions.GANCHO_DOWN_L)||action.Equals(HeroActions.actions.GANCHO_DOWN_R))
 			clip = hitClips.abajoBlockClips [(int)(Random.value * hitClips.abajoBlockClips.Length)];
 		float vol = Random.Range (volLowRange, volHighRange);
-		receiveSource.volume = vol*0.7f;
+		receiveSource.volume = vol*0.2f*0.5f;
 		float pitch = Random.Range (pitchLowRange, pitchHighRange);
 		receiveSource.pitch = pitch;
 		receiveSource.PlayOneShot (clip);

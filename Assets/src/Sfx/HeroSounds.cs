@@ -100,8 +100,8 @@ public class HeroSounds : MonoBehaviour {
     {
 		//Debug.Log (action);
 		if (!action.Equals (HeroActions.actions.DEFENSE) && !action.Equals (HeroActions.actions.IDLE)) {
-			float vol = Random.Range (volLowRange-0.4f, volHighRange-0.4f);
-			receiveSource.volume = vol;
+			float vol = Random.Range (volLowRange, volHighRange);
+			sendSource.volume = vol;
 			float pitch = Random.Range (pitchLowRange, pitchHighRange - 0.2f);
 			sendSource.pitch = pitch;
 			sendSource.Play ();
