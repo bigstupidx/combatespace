@@ -171,6 +171,13 @@ public class AvatarCustomizer : MonoBehaviour {
             OnChangePart("pantalon", int.Parse(allData[8]));
             OnChangePart("botas", int.Parse(allData[9]));
             OnChangePart("tatoo", int.Parse(allData[10]));
+            if (allData.Length > 11)
+            {
+                print(allData.Length + "  " + allData);
+                OnChangePart("pantalon_tela", int.Parse(allData[11]));
+                OnChangePart("guantes_tela", int.Parse(allData[12]));
+            }
+           
         }
         else
         {
