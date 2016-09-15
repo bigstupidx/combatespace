@@ -5,12 +5,16 @@ public class InGameSfx : MonoBehaviour {
 
 	public AudioClip publico;
 	public AudioClip bell;
+	public float minCrowdVol = 0.4f;
+	public float maxCrowdVol = 0.7f;
+	public float crowdPitch = 0.9f;
 
 	private AudioSource source;
 
 	private Hero hero;
 	private Character character;
 	private FightStatus fStatus;
+	private float vol;
 
     
 	void Start () {
@@ -49,33 +53,44 @@ public class InGameSfx : MonoBehaviour {
 
     void OnAudioEnable(float volume)
     {
-        source.volume = volume;
+		vol = volume;
+		source.volume = vol;
     }
 
 	void OnComputeCharacterPunched(HeroActions.actions action){		
 		if (hero.combo > 1) {
+			source.pitch = crowdPitch;
+			source.volume = vol * Random.Range (minCrowdVol, maxCrowdVol);
 			source.PlayOneShot(publico);
 		}
 	}
 
 	void OnComputeHeroPunched(CharacterActions.actions action){
-		if (character.combo > 1) {			
+		if (character.combo > 1) {
+			source.pitch = crowdPitch;
+			source.volume = vol * Random.Range (minCrowdVol, maxCrowdVol);
 			source.PlayOneShot(publico);
 		}
 
 	}
-	void OnAvatarFall(bool isHero){		
+	void OnAvatarFall(bool isHero){
+		source.pitch = crowdPitch;
+		source.volume = vol * Random.Range (minCrowdVol, maxCrowdVol);
 		source.PlayOneShot(publico);
 	}
 
-	void OnKO(bool isHero){		
+	void OnKO(bool isHero){
+		source.pitch = crowdPitch;
+		source.volume = vol * Random.Range (minCrowdVol, maxCrowdVol);
 		source.PlayOneShot(publico);
 	}
 
 	void OnRoundStart()
 	{
+		source.pitch = 1f;
+		source.volume = vol;
 		source.PlayOneShot(bell);
-		source.Play ();
+		//source.Play ();
 	}
     void OnAllRoundsComplete()
     {
@@ -83,7 +98,9 @@ public class InGameSfx : MonoBehaviour {
     }
 	void OnRoundComplete()
 	{
-		source.Stop ();
+		//source.Stop ();
+		source.pitch = 1f;
+		source.volume = vol;
 		source.PlayOneShot(bell);
 	}
 }

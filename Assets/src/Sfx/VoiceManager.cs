@@ -73,9 +73,10 @@ public class VoiceManager : MonoBehaviour {
 
 	void Comienzo(){
 		Debug.Log ("Round: " + Game.Instance.fightStatus.Round);
-		if (Game.Instance.fightStatus.Round == 1)
-			voice.PlayOneShot (vclips.comienzoPelea.GetNext ("Comienzo_Pelea"));
-		else {
+		if (Game.Instance.fightStatus.Round == 1) {
+			if (!voice.isPlaying)
+				voice.PlayOneShot (vclips.comienzoPelea.GetNext ("Comienzo_Pelea"));
+		}else {
 			voice.PlayOneShot (vclips.comienzoRound.GetNext ("Comienzo_Round"));
 			Invoke ("Idle", 3f);
 		}
