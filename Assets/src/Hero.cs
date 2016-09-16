@@ -101,14 +101,17 @@ public class Hero : MonoBehaviour
            // herocamera.transform.Rotate(inputManager.heroRotationVertical * 20, 0, 0);
           //  herocamera.transform.localEulerAngles = new Vector3(14 + inputManager.heroRotationVertical * 20, 180, 0);
         }
-        
 #elif UNITY_ANDROID || UNITY_IPHONE
             Vector3 gyroRot = Game.Instance.inputManager.gyro_rotation;
             Vector3 myRot = herocamera.transform.localEulerAngles;
 
-            float _x = myRot.x + (gyroRot.x*1.2f);
-            float angle_x = Mathf.LerpAngle(_x,0, 4 * Time.deltaTime);
-            herocamera.transform.localEulerAngles = new Vector3(angle_x,0,0);
+            if (Game.Instance.fightStatus.state != FightStatus.states.KO && Game.Instance.fightStatus.state != FightStatus.states.DONE)
+            {
+                float _x = myRot.x + (gyroRot.x*1.2f);
+                float angle_x = Mathf.LerpAngle(_x,0, 4 * Time.deltaTime);
+        
+                herocamera.transform.localEulerAngles = new Vector3(angle_x,0,0);
+            }
 
             transform.Rotate(0, -gyroRot.y*2, 0);
 #endif

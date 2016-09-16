@@ -102,7 +102,6 @@ public class CharacterActions : MonoBehaviour {
 	}
     public void Walk()
     {
-        print("WALK");
         anim.Play(anim_walk);
     }
 

@@ -85,7 +85,7 @@ public class Character : MonoBehaviour {
         if (Game.Instance.fightStatus.state == FightStatus.states.DONE)  return;
         if (Game.Instance.fightStatus.state == FightStatus.states.BETWEEN_ROUNDS) return;
         if (characterActions.state == CharacterActions.states.KO) return;
-        if (timer > state_speed && characterActions.state == CharacterActions.states.DEFENDING)
+        if (timer > state_speed)// && characterActions.state == CharacterActions.states.DEFENDING)
         {
             ChangeState();
             timer = 0;
@@ -163,6 +163,8 @@ public class Character : MonoBehaviour {
     }
     void OnCharacterChangeAction(CharacterActions.actions action)
     {
+        print("OnCharacterChangeAction: " + action);
+
         switch (action)
         {
             case CharacterActions.actions.IDLE:                     ChangeDefense(false, false,false,false); break;
@@ -182,6 +184,7 @@ public class Character : MonoBehaviour {
     }
     void OnCheckCharacterHitted(HeroActions.actions action)
     {
+        print("OnCheckCharacterHitted: " + action + DEFENSE_UP + " - " + DEFENSE_UP_R + " action: " + characterActions.action);
         bool punched = false;
         switch (action)
         {
