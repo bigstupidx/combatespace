@@ -46,11 +46,11 @@
 	],	
 	piel:
 	[
-		{  color:"e3c28d", thumb:"icons_skin1"},
-		{  color:"f0ba9a", thumb:"icons_skin2"},
-		{  color:"f0a67a", thumb:"icons_skin3"},
-		{  color:"db8065", thumb:"icons_skin4"},
-		{  color:"912626", thumb:"icons_skin5"}
+		{  color:"fadab9", thumb:"icons_skin1"},
+		{  color:"cc9078", thumb:"icons_skin2"},
+		{  color:"99603a", thumb:"icons_skin3"},
+		{  color:"663b2b", thumb:"icons_skin4"},
+		{  color:"331818", thumb:"icons_skin5"}
 	],
 	narices:
 	[
@@ -114,18 +114,21 @@
 		{  thumb:"icons_pantalontela_1", texture:"custom_set1"},
 		{  thumb:"icons_pantalontela_2", texture:"custom_set2"},
 		{  thumb:"icons_pantalontela_3", texture:"custom_set3"}
+		{  thumb:"icons_nada1", texture:""}
 	],
 	guantes_tela:
 	[
 		{  thumb:"icons_guantetela_1", texture:"custom_set1"},
 		{  thumb:"icons_guantetela_2", texture:"custom_set2"},
-		{  thumb:"icons_guantetela_3", texture:"custom_set3"}
+		{  thumb:"icons_guantetela_3", texture:"custom_set3"},
+		{  thumb:"icons_nada1", texture:""}
 	],
 	tatoo:
 	[
 		{  thumb:"icons_tatoo_1", texture:"custom_set1"},
 		{  thumb:"icons_tatoo_2", texture:"custom_set2"},
-		{  thumb:"icons_tatoo_3", texture:"custom_set3"}
+		{  thumb:"icons_tatoo_3", texture:"custom_set3"},
+		{  thumb:"icons_nada2", texture:""}
 	]
 
 
