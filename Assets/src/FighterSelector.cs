@@ -214,6 +214,7 @@ public class FighterSelector : MonoBehaviour
         }
         else
         {
+			Data.Instance.interfaceSfx.PlaySfx(Data.Instance.interfaceSfx.corte1);
             Data.Instance.GetComponent<HistorialManager>().LoadHistorial();
             Data.Instance.LoadLevel("04_FightIntro");
         }

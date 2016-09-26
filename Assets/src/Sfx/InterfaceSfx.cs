@@ -10,6 +10,8 @@ public class InterfaceSfx : MonoBehaviour {
 	public AudioClip swap2;
 	public AudioClip button;
 
+	public AudioClip corte1;
+
 	private AudioSource source;
 
 	// Use this for initialization

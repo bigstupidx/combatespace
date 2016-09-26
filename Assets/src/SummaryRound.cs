@@ -107,9 +107,11 @@ public class SummaryRound : MonoBehaviour
         StartCoroutine(FinishedCoroutine());
     }
     IEnumerator FinishedCoroutine()
-    {
+    {		
         newRound.SetActive(true);
         newRoundField.text = (Game.Instance.fightStatus.Round + 1).ToString();
+		AudioSource source = gameObject.GetComponent<AudioSource> ();
+		source.PlayOneShot (source.clip);
         yield return new WaitForSeconds(1);
         newRound.SetActive(false);
 
