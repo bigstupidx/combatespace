@@ -12,9 +12,11 @@ public class CompareStatsLine : MonoBehaviour {
     {
         //diff: si es 0 empate, si es menor, gana el otro, si el mayor gano yo:
 
+        if (stats1 == "0") stats1 = "";
         field.text = username;
-        num1.text = stats1.ToString();
-        num2.text = stats2.ToString();
+
+        num1.text = stats1;        
+        num2.text = stats2;
 
         if (diff > 0)
         {

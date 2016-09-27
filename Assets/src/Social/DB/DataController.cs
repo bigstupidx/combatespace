@@ -10,7 +10,7 @@ public class DataController : MonoBehaviour
     private string createUser_URL = URL + "createUser.php?";
     private string updateUser_URL = URL + "updateUser.php?";
     private string updatePeleas_URL = URL + "updatePeleas.php?";
-    private string getUsersByScore_URL = URL + "getUsersByScore.php?";
+    private string getUsersByScore_URL = URL + "getUsersByMyScore.php?";
     private string saveStats_URL = URL + "saveStats.php?";
     private string saveStyles_URL = URL + "saveStyles.php?";
     private string saveNewPelea_URL = URL + "saveNewPelea.php?";
@@ -208,7 +208,10 @@ public class DataController : MonoBehaviour
             post_url = getUsersByScore_URL + "ids=" + ids;
         }
         else
-            post_url = getUsersByScore_URL + "min=" + min + "&max=" + max;
+        {
+            int score = Data.Instance.playerSettings.heroData.stats.score;
+            post_url = getUsersByScore_URL + "score=" + score;
+        }
 
         print("OnGetUsersByScore : " + post_url);
         WWW hs_post = new WWW(post_url);

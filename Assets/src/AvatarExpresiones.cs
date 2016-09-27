@@ -9,6 +9,8 @@ public class AvatarExpresiones : MonoBehaviour {
     public types type;
     public GameObject ojos;
 
+    private bool colorSetted;
+
     public enum types
     {
         IDLE,
@@ -31,6 +33,14 @@ public class AvatarExpresiones : MonoBehaviour {
     }
     void SetEyesClosed(bool opened)
     {
+        if (!colorSetted && GetComponentInParent<CharacterHead>().color != null)
+        {
+            foreach (MeshRenderer mr in ojos.GetComponentsInChildren<MeshRenderer>())
+            {
+                mr.material.color = GetComponentInParent<CharacterHead>().color;                
+            }
+            colorSetted = true;
+        }
         ojos.SetActive(opened);
     }
     void OnDestroy()

@@ -5,6 +5,7 @@ using System.Collections;
 public class PlayerSettings : MonoBehaviour {
 
     public controls control;
+    public int wonByKO_in_level;
 
     void Start()
     {

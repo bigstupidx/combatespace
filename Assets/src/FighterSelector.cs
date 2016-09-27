@@ -49,7 +49,7 @@ public class FighterSelector : MonoBehaviour
 
         int score = Data.Instance.playerSettings.heroData.stats.score;
         category.text = Categories.GetCategorieByScore(score);
-        heroScore.text = "" + score;
+        heroScore.text = "Puntos: " + score;
         LoadFighters();
     }
     public void Register()
@@ -101,7 +101,11 @@ public class FighterSelector : MonoBehaviour
             if (Data.Instance.playerSettings.heroData.stats.score >= playerData.stats.score)
                 FighterID = id;
         }
-        if (Data.Instance.fightersManager.activeID > 0)
+        if (Data.Instance.fightersManager.filter == FightersManager.filters.ONLY_FRIENDS)
+        {
+            Data.Instance.fightersManager.ResetActualFighter();
+            FighterID = 0;
+        } else if (Data.Instance.fightersManager.activeID > 0)
             FighterID = Data.Instance.fightersManager.activeID;
 
         SetFighter(Data.Instance.fightersManager.GetActualFighter());
@@ -169,25 +173,30 @@ public class FighterSelector : MonoBehaviour
         compareStatsLine[2].Init("DEFENSA", Defense.ToString(), Defense2.ToString(), Defense - Defense2);
         compareStatsLine[3].Init("VELOCIDAD", Speed.ToString(), Speed2.ToString(), Speed - Speed2);
 
-        string hero_p_g = "";
-        string hero_r_g = "";
+        int hero_p_g = 0;
+        int hero_p_p = 0;
+
+        int character_p_g = 0;
+        int character_p_p = 0;
+
+        character_p_g = playerSettings.characterData.peleas.peleas_g + playerData.peleas.retos_g;
+        character_p_p = playerSettings.characterData.peleas.peleas_p + playerData.peleas.retos_p;
 
         //por default empatan:
         int peleas_quien_gana = 0;
-        int retos_quien_gana = 0;
+        int perdidas_quien_gana = 0;
+
         if (SocialManager.Instance.userData.logged)
         {
-            hero_p_g = "G" + playerSettings.heroData.peleas.peleas_g + " - P" + playerSettings.heroData.peleas.peleas_p;
-            hero_r_g = "G" + playerSettings.heroData.peleas.retos_g + " - P" + playerSettings.heroData.peleas.retos_p;
+            hero_p_g = playerSettings.heroData.peleas.peleas_g + playerSettings.heroData.peleas.retos_g;
+            hero_p_p = playerSettings.heroData.peleas.peleas_p + playerSettings.heroData.peleas.retos_p;
 
-            peleas_quien_gana = playerSettings.heroData.peleas.peleas_g - playerSettings.characterData.peleas.peleas_g;
-            retos_quien_gana = playerSettings.heroData.peleas.retos_g - playerSettings.characterData.peleas.retos_g;
+            peleas_quien_gana = hero_p_g - character_p_g;
+            perdidas_quien_gana = character_p_p - hero_p_p;
         }
-        string character_p = "G" + playerSettings.characterData.peleas.peleas_g + " - P" + playerData.peleas.peleas_p;
-        string character_r = "G" + playerSettings.characterData.peleas.retos_g + " - P" + playerData.peleas.retos_p;
 
-        compareStatsLine[4].Init("PELEAS", hero_p_g, character_p, peleas_quien_gana);
-        compareStatsLine[5].Init("RETOS", hero_r_g, character_r, retos_quien_gana);
+        compareStatsLine[4].Init("TRIUNFOS", hero_p_g.ToString(), character_p_g.ToString(), peleas_quien_gana);
+        compareStatsLine[5].Init("DERROTAS", hero_p_p.ToString(), character_p_p.ToString(), perdidas_quien_gana);
     }
     void DelayToCharacterAppear()
     {
@@ -232,7 +241,12 @@ public class FighterSelector : MonoBehaviour
             Data.Instance.fightersManager.filter = FightersManager.filters.ALL;
         else
         {
-            if (SocialManager.Instance.facebookFriends.all.Count == 0)
+            if (SocialManager.Instance.userData.facebookID == "")
+            {
+                Events.OnRegisterPopup();
+                return;
+            }
+            else if (SocialManager.Instance.facebookFriends.all.Count == 0)
             {
                 Events.OnGenericPopup("Sin amigos", "No tenés amigos registrados en Combate Space");
                 return;

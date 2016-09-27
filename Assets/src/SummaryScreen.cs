@@ -37,6 +37,15 @@ public class SummaryScreen : MonoBehaviour {
             num = 6;
             text += "+6 por ganarle a alguien dos categorías más avanzadas";
         }
+        if (Data.Instance.playerSettings.wonByKO_in_level == 1)
+        {
+            num += 2;
+            text += "\n+2 por KO en primer Round";
+        } else if (Data.Instance.playerSettings.wonByKO_in_level >1)
+        {
+            num += 1;
+            text += "\n+1 por ganar por KO";
+        }
         Data.Instance.playerSettings.heroData.stats.AddScore(num);
         Events.OnGenericPopup("Ganaste " + num + " puntos.", text);
         Invoke("Init", 0.1f);

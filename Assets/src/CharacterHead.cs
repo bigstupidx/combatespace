@@ -6,6 +6,8 @@ public class CharacterHead : MonoBehaviour {
     
     public GameObject[] cabezas;
 
+    public Color color;
+
     public GameObject orejas;
     public GameObject cejas;
     public GameObject narices;
@@ -68,7 +70,7 @@ public class CharacterHead : MonoBehaviour {
     }
     public void ChangePiel(string partType, Color color)
     {
-       // print(partType + " - " + color);
+        this.color = color;
         foreach (GameObject go in cabezas)
         {
             GameObject expresiones = go.transform.Find("expresiones").gameObject;

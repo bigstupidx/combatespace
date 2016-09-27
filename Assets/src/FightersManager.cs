@@ -72,6 +72,10 @@ public class FightersManager : MonoBehaviour {
         else
             return friends;
     }
+    public void ResetActualFighter()
+    {
+        activeID = 0;
+    }
     public PlayerData GetActualFighter()
     {
         List<PlayerData> arr = GetActualFighters();

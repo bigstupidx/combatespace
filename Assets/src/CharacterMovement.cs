@@ -31,6 +31,10 @@ public class CharacterMovement : MonoBehaviour {
     public void Init()
     {
         RotationArea = Data.Instance.settings.defaultSpeed.rotationArea;
+
+        if (Data.Instance.playerSettings.control == PlayerSettings.controls.CONTROL_JOYSTICK)
+            RotationArea /= 2;
+
         speed = 20 + (Data.Instance.playerSettings.characterData.stats.Speed / 2);       
     }
     void Loop()
@@ -38,7 +42,7 @@ public class CharacterMovement : MonoBehaviour {
         //AVANZA:
         if (Game.Instance.fightStatus.state == FightStatus.states.IDLE)
         {
-            _z += Time.deltaTime*2;
+            _z += Time.deltaTime*3;
             if (pivot.transform.localPosition.z >=0)
             {
                 _z = 0;

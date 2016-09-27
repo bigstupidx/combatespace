@@ -32,6 +32,8 @@ public class RankingUI : MonoBehaviour
     {
         Events.OnBackButtonPressed -= OnBackButtonPressed;
     }
+
+    
     void OnBackButtonPressed()
     {
         Data.Instance.LoadLevel("03_Home");
@@ -57,8 +59,8 @@ public class RankingUI : MonoBehaviour
             TodosButton.interactable = true;
             AmigosButton.interactable = false;
             TodosButton.GetComponentInChildren<Text>().color = Data.Instance.settings.standardUIColor;
-            AmigosButton.GetComponentInChildren<Text>().color = Color.white;
-            arr = Data.Instance.fightersManager.ranking;
+            AmigosButton.GetComponentInChildren<Text>().color = Color.white;            
+            arr = Data.Instance.fightersManager.friends;
             Loaded();
         }
         else
@@ -92,14 +94,37 @@ public class RankingUI : MonoBehaviour
     }
     public void All()
     {
-        timeNow = Time.time;
-        Data.Instance.peleasManager.showRetos = false;
         dataLoaded = false;
+        timeNow = Time.time;
+        onlyFriends = false;
     }
     public void Friends()
     {
-        timeNow = Time.time;
-        Data.Instance.peleasManager.showRetos = true;
-        dataLoaded = false;
+        if (SocialManager.Instance.userData.facebookID == "")
+        {
+            Events.OnRegisterPopup();
+        }
+        else
+        {
+            Events.OnLoadingShow(true);
+            LoadFriendsRanking();
+        }
+    }
+    void LoadFriendsRanking()
+    {
+        if (Data.Instance.fightersManager.friends.Count == 0)
+        {
+            Data.Instance.fightersManager.LoadFriends(0, 100);
+            Invoke("LoadFriendsRanking", 3);
+        }
+        else
+        {
+            Data.Instance.fightersManager.filter = FightersManager.filters.ONLY_FRIENDS;
+            Events.OnLoadingShow(false);
+            dataLoaded = false;
+            timeNow = Time.time;
+            onlyFriends = true;
+        }
+        
     }
 }

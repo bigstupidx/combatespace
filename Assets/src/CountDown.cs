@@ -33,9 +33,9 @@ public class CountDown : MonoBehaviour {
         ready = false;
         this.isHero = isHero;
         progressBar.gameObject.SetActive(false);
-        Invoke("Delay", 0.1f);
+        Invoke("OnAvatarFallDelay", 0.1f);
     }
-    void Delay()
+    void OnAvatarFallDelay()
     {
         hero_progress = 0;
         if (isHero)
@@ -87,7 +87,7 @@ public class CountDown : MonoBehaviour {
                 return;
             }
             field.text = sec.ToString();
-            Invoke("Loop", 1);
+            Invoke("Loop", 0.75f);
         }
     }
     void SetOff()

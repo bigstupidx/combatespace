@@ -22,6 +22,8 @@ public class Home : MonoBehaviour
 
     void Start()
     {
+        Data.Instance.fightersManager.ResetActualFighter();
+
         if (SocialManager.Instance.userData.logged)
         {
             NotLogged.SetActive(false);

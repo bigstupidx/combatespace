@@ -82,7 +82,8 @@ public class Tutorial : MonoBehaviour {
         if (id == 8)
         {
             Events.OnTutorialReady(1);
-            Data.Instance.LoadLevel("Game");
+            Events.OnLoadingFade(true);
+            Invoke("DelayToGoToGame", 1);
         }
         else if(id >4)
         {
@@ -100,6 +101,10 @@ public class Tutorial : MonoBehaviour {
             NextSignal();
             cartel.SetActive(false);            
         }
+    }
+    void DelayToGoToGame()
+    {
+        Data.Instance.LoadLevel("Game");
     }
     void DelayToNExt()
     {

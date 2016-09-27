@@ -35,7 +35,7 @@ public class FightData : MonoBehaviour {
     }
     void LoopTime()
     {
-        if (!ready && Game.Instance.fightStatus.state == FightStatus.states.FIGHTING)
+        if (!ready && (Game.Instance.fightStatus.state == FightStatus.states.FIGHTING || Game.Instance.fightStatus.state == FightStatus.states.IDLE))
         {
             SetField();
             sec--;

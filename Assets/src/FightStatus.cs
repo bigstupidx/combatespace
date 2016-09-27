@@ -36,7 +36,7 @@ public class FightStatus : MonoBehaviour {
     public float heroAguanteStatus = 1;
     public float characterAguanteStatus = 1;
 
-    private float AguanteRecovery = 0.025f;
+    private float AguanteRecovery = 0.035f;
     private float MIN_AguanteRecovery = 0.005f;
 
     public float heroRecovery;
@@ -60,6 +60,7 @@ public class FightStatus : MonoBehaviour {
     
     void Start()
     {
+        Data.Instance.playerSettings.wonByKO_in_level = 0;
         Round = 0;
         power_gancho_up = (float)Data.Instance.settings.defaultPower.gancho_up;
         power_gancho_down = (float)Data.Instance.settings.defaultPower.gancho_down;
@@ -109,6 +110,7 @@ public class FightStatus : MonoBehaviour {
     }
     void OnKO(bool isHero)
     {
+        Data.Instance.playerSettings.wonByKO_in_level = Round;
         state = states.DONE;
         HeroAguanteProgressBar.transform.gameObject.SetActive(false);
         EnemyAguanteProgressBar.transform.gameObject.SetActive(false);
@@ -168,8 +170,7 @@ public class FightStatus : MonoBehaviour {
             heroStatus += ((1 - cansancio_character) * Time.deltaTime) / 3.2f;
             characterStatus += ((1 - cansancio_character) * Time.deltaTime) / 3.2f;
         }
-        else
-        {
+        
             heroStatus += heroRecovery;
             characterStatus += characterRecovery;
 
@@ -181,7 +182,9 @@ public class FightStatus : MonoBehaviour {
 
             heroAguanteStatus += AguanteRecovery_hero;
             characterAguanteStatus += AguanteRecovery_character;
-        }
+        
+
+
         if (heroStatus > 1) heroStatus = 1;
         if (characterStatus > 1) characterStatus = 1;
 

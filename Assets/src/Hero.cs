@@ -102,19 +102,29 @@ public class Hero : MonoBehaviour
           //  herocamera.transform.localEulerAngles = new Vector3(14 + inputManager.heroRotationVertical * 20, 180, 0);
         }
 #elif UNITY_ANDROID || UNITY_IPHONE
-            Vector3 gyroRot = Game.Instance.inputManager.gyro_rotation;
-            Vector3 myRot = herocamera.transform.localEulerAngles;
-
-            if (Game.Instance.fightStatus.state != FightStatus.states.KO && Game.Instance.fightStatus.state != FightStatus.states.DONE)
-            {
-                float _x = myRot.x + (gyroRot.x*1.2f);
-                float angle_x = Mathf.LerpAngle(_x,0, 4 * Time.deltaTime);
-        
-                herocamera.transform.localEulerAngles = new Vector3(angle_x,0,0);
-            }
-
-            transform.Rotate(0, -gyroRot.y*2, 0);
+         IsMobile();
 #endif
+    }
+    void IsMobile()
+    {
+        Vector3 gyroRot = Game.Instance.inputManager.gyro_rotation;
+        Vector3 myRot = herocamera.transform.localEulerAngles;
+
+        if (Data.Instance.playerSettings.control == PlayerSettings.controls.CONTROL_360)
+        {
+
+            float angle_x = 0;
+            float _x = myRot.x + (gyroRot.x * 1.2f);
+
+            if (Game.Instance.fightStatus.state != FightStatus.states.KO)
+                angle_x = Mathf.LerpAngle(_x, 0, 4 * Time.deltaTime);
+            else
+                angle_x = _x;
+
+            herocamera.transform.localEulerAngles = new Vector3(angle_x, 0, 0);
+        }
+
+        transform.Rotate(0, -gyroRot.y * 2, 0);
     }
     void OnAvatarFall(bool heroWin)
     {

@@ -20,7 +20,7 @@ public class FighterSelectorButton : MonoBehaviour {
         this.id = id;
         this.playerData = _playerData;
         username.text = playerData.nick;
-        score.text = "" + _playerData.stats.score;
+        score.text = "Puntos: " + _playerData.stats.score;
         profilePicture.setPicture(_playerData.facebookID);
 	}
     public void Clicked()

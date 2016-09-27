@@ -67,8 +67,6 @@ public class CustomizerView : MonoBehaviour {
     }
     public void Selected(string part, int partID)
     {
-        print(part + " partID: " + partID);
-
         Events.OnCustomizerChangePart(part, partID);       
     }
 }
