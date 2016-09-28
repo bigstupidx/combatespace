@@ -5,7 +5,6 @@ using Facebook.Unity;
 
 public class ConfirmReset : MonoBehaviour
 {
-    public GameObject canvas;
     public GameObject panel;
     public GameObject[] toInactive;
 
@@ -24,7 +23,6 @@ public class ConfirmReset : MonoBehaviour
             go.SetActive(false);
 
         panel.SetActive(true);
-        canvas.SetActive(true);
     }
     public void ResetApp()
     {
@@ -37,6 +35,5 @@ public class ConfirmReset : MonoBehaviour
     {
 		Data.Instance.interfaceSfx.PlaySfx (Data.Instance.interfaceSfx.click2);
         panel.SetActive(false);
-        canvas.SetActive(false);
     }
 }

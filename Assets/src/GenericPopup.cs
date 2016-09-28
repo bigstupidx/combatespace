@@ -17,7 +17,6 @@ public class GenericPopup : ScreenBase
     }
     void SetOff()
     {
-       // canvas.SetActive(false);
         panel.SetActive(false);
     }
     void OnGenericPopup(string _title, string _text)

@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Loading : ScreenBase
 {
-    public GameObject canvas;
+   // public GameObject canvas;
     public GameObject panel;
     private bool fadeOn;
 
@@ -15,12 +15,11 @@ public class Loading : ScreenBase
     }
     void SetOff()
     {
-        canvas.SetActive(false);
         panel.SetActive(false);
     }
     void OnLoadingShow(bool show)
     {
-        canvas.SetActive(show);
+       // canvas.SetActive(show);
         panel.SetActive(show);
     }
     void OnLoadingFade(bool show)
@@ -28,7 +27,7 @@ public class Loading : ScreenBase
         fadeOn = true;
         if (show)
         {
-            canvas.SetActive(show);
+            //canvas.SetActive(show);
             panel.SetActive(show);
         }
         panel.GetComponent<Animator>().Play("loadingOn");

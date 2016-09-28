@@ -51,6 +51,11 @@ public class Carrera : MonoBehaviour {
 
         if (Data.Instance.peleasManager.showRetos)
         {
+            if (PlayerPrefs.GetInt("retosLeidaAyudaUnaVez", 0) == 0)
+            {
+                Events.OnGenericPopup("Retos recibidos", "Este es el listado de usuarios que eligieron pelear contra vos");
+                PlayerPrefs.SetInt("retosLeidaAyudaUnaVez", 1);
+            }
             if (Data.Instance.peleasManager.retos.Count == 0)
                 field.text = "Nadie te retó todavía.";
             else

@@ -5,7 +5,6 @@ using Facebook.Unity;
 
 public class SettingsPopup : MonoBehaviour
 {
-    public GameObject canvas;
     public GameObject panel;
     public SwitchButton soundsSwitchButton;
     public SwitchButton modeSwitchButton;
@@ -26,7 +25,6 @@ public class SettingsPopup : MonoBehaviour
             go.SetActive(false);
 
         panel.SetActive(true);
-        canvas.SetActive(true);
         SetActiveMode();
         SetActiveSoundMode();
     }
@@ -75,7 +73,6 @@ public class SettingsPopup : MonoBehaviour
     {
 		Data.Instance.interfaceSfx.PlaySfx (Data.Instance.interfaceSfx.click2);
         panel.SetActive(false);
-        canvas.SetActive(false);
     }
     void SetActiveMode()
     {

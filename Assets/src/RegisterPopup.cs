@@ -4,7 +4,6 @@ using System.Collections;
 
 public class RegisterPopup : ScreenBase
 {
-    public GameObject canvas;
     public GameObject panel;
 
     public void Start()
@@ -15,12 +14,10 @@ public class RegisterPopup : ScreenBase
     }
     void SetOff()
     {
-        //canvas.SetActive(false);
         panel.SetActive(false);
     }
     void OnRegisterPopup()
     {
-        canvas.SetActive(true);
         panel.SetActive(true);
     }
     public void ClickedRegister()

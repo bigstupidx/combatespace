@@ -18,6 +18,10 @@ public class Hero : MonoBehaviour
 
     void Start()
     {
+
+        if (Data.Instance.playerSettings.heroData.stats.score == 0)
+            AreaOfPunch += 6;
+
         actions = GetComponent<HeroActions>();
 
         Events.OnHeroAction += OnHeroAction;

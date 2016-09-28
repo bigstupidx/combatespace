@@ -160,7 +160,7 @@ public class HeroActions : MonoBehaviour
     bool CheckIfCharacterIsInTarget()
     {
         float angle = GetAngleBetweenFighters();
-        int AreaOfPunch = hero.AreaOfPunch;
+        int AreaOfPunch = hero.AreaOfPunch;        
 
         if ( action == actions.CORTITO_L ||  action == actions.CORTITO_R)
             AreaOfPunch /= 2;

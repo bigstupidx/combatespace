@@ -4,7 +4,6 @@ using UnityEngine.SceneManagement;
 
 public class GameSettingsPopup : MonoBehaviour
 {
-    public GameObject canvas;
     public GameObject panel;
     public SwitchButton soundsSwitchButton;
 
@@ -20,7 +19,6 @@ public class GameSettingsPopup : MonoBehaviour
     void OnGameSettings()
     {
         panel.SetActive(true);
-        canvas.SetActive(true);
         Time.timeScale = 0;
         Data.Instance.settings.gamePaused = true;
         SetActiveSoundMode();
@@ -43,7 +41,6 @@ public class GameSettingsPopup : MonoBehaviour
     public void Close()
     {
         panel.SetActive(false);
-        canvas.SetActive(false);
         Time.timeScale = 1;
         Data.Instance.settings.gamePaused = false;
     }
