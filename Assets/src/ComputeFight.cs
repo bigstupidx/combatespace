@@ -9,11 +9,15 @@ public class ComputeFight : MonoBehaviour {
 	void Start () {
         Events.OnComputeCharacterPunched += OnComputeCharacterPunched;
         Events.OnComputeHeroPunched += OnComputeHeroPunched;
+        Events.OnHeroBlockPunch += OnHeroBlockPunch;
+        Events.OnCharacterBlockPunch += OnCharacterBlockPunch;
 	}
     void OnDestroy()
     {
         Events.OnComputeCharacterPunched -= OnComputeCharacterPunched;
         Events.OnComputeHeroPunched -= OnComputeHeroPunched;
+        Events.OnHeroBlockPunch -= OnHeroBlockPunch;
+        Events.OnCharacterBlockPunch -= OnCharacterBlockPunch;
     }
     void OnComputeHeroPunched(CharacterActions.actions action)
     {
@@ -34,6 +38,18 @@ public class ComputeFight : MonoBehaviour {
 
        // print("HERO damage: " + damage + " combo: " + character.combo);
 	}
+    void OnHeroBlockPunch(CharacterActions.actions characterAction)
+    {
+        float damage = CalculateDamage(Data.Instance.playerSettings.characterData.stats, Data.Instance.playerSettings.heroData.stats);
+        damage += Data.Instance.settings.defaultPower.cortito/4;
+        Events.OnChangeStatusHero(damage);
+    }
+    void OnCharacterBlockPunch(HeroActions.actions action)
+    {
+        float damage = CalculateDamage(Data.Instance.playerSettings.characterData.stats, Data.Instance.playerSettings.heroData.stats);
+        damage += Data.Instance.settings.defaultPower.cortito / 4;
+        Events.OnChangeStatusCharacter(damage);
+    }
     void OnComputeCharacterPunched(HeroActions.actions action)
     {
         float damage = CalculateDamage(Data.Instance.playerSettings.heroData.stats, Data.Instance.playerSettings.characterData.stats);

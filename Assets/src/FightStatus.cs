@@ -82,6 +82,8 @@ public class FightStatus : MonoBehaviour {
         Events.OnComputeCharacterPunched += OnComputeCharacterPunched;
         Events.OnComputeHeroPunched += OnComputeHeroPunched;
         Events.OnCharactersStartedFight += OnCharactersStartedFight;
+        Events.OnHeroBlockPunch += OnHeroBlockPunch;
+        Events.OnCharacterBlockPunch += OnCharacterBlockPunch;
         Loop();
         //if(state != states.KO)
         //Events.OnRoundStart();
@@ -101,7 +103,10 @@ public class FightStatus : MonoBehaviour {
         Events.OnComputeCharacterPunched -= OnComputeCharacterPunched;
         Events.OnComputeHeroPunched -= OnComputeHeroPunched;
         Events.OnCharactersStartedFight -= OnCharactersStartedFight;
+        Events.OnHeroBlockPunch -= OnHeroBlockPunch;
+        Events.OnCharacterBlockPunch -= OnCharacterBlockPunch;
     }
+   
     public bool IsLastRound()
     {
         if (roundsData.Count == Data.Instance.settings.totalRounds)
@@ -265,10 +270,21 @@ public class FightStatus : MonoBehaviour {
     }
     void OnComputeCharacterPunched(HeroActions.actions action)
     {
-        GetActiveRound().hero_punches++;
+        if(action == HeroActions.actions.CORTITO_L || action == HeroActions.actions.CORTITO_R)
+            GetActiveRound().hero_punches += 2;
+        else
+            GetActiveRound().hero_punches += 4;
     }
     void OnComputeHeroPunched(CharacterActions.actions action)
     {
+        GetActiveRound().character_punches += 5;
+    }
+    void OnHeroBlockPunch(CharacterActions.actions characterAction)
+    {
         GetActiveRound().character_punches++;
+    }
+    void OnCharacterBlockPunch(HeroActions.actions action)
+    {
+       // GetActiveRound().hero_punches += 2;
     }
 }
