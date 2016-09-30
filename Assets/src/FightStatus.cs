@@ -18,6 +18,7 @@ public class FightStatus : MonoBehaviour {
     public states state;
     public enum states
     {
+        INTRO,
         IDLE,
         FIGHTING,
         KO,
