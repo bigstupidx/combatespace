@@ -7,13 +7,14 @@ public class ShareScreenshot : MonoBehaviour {
   
     private bool isProcessing = false;
 
-    private string shareText  = "Which Hollywood Movie does this PICTURE represent?\n";
-    private string gameLink = "Download the game on play store at "+"\nhttps://play.google.com/store/apps/details?id=com.TGC.guessthemovie&pcampaignid=GPC_shareGame";
-    private string subject = "Rebus Guess The Movie Game";
-    private string imageName = "Mypic"; // without the extension, for iinstance, MyPic 
+    private string shareText;
+    private string gameLink = "Podés bajar el juego desde: "+"\nhttps://play.google.com/store/apps/details?id=com.TGC.guessthemovie&pcampaignid=GPC_shareGame";
+    private string subject = "Combate Space";
 
     public void TakeScreenshot()
-    { 
+    {
+        shareText = Data.Instance.playerSettings.heroData.nick + " VS " + Data.Instance.playerSettings.characterData.nick + ". ";
+
         if(!isProcessing)
             StartCoroutine( ShareScreenshotNow() );  
     }
@@ -33,7 +34,7 @@ public class ShareScreenshot : MonoBehaviour {
         byte[] bytes = tex.EncodeToPNG();
         Object.Destroy(tex);
    
-        string destination = Path.Combine(Application.persistentDataPath,System.DateTime.Now.ToString("yyyy-MM-dd-HHmmss") + ".png");
+        string destination = Path.Combine(Application.persistentDataPath,"Fight.png");
         Debug.Log(destination);
 
         File.WriteAllBytes(destination, bytes);

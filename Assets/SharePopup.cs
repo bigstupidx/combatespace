@@ -39,6 +39,7 @@ public class SharePopup : MonoBehaviour {
             sharing = true;
 
             ShowPanels.SetActive(true);
+
             foreach (GameObject go in hidePanels)
                 go.SetActive(false);
 
