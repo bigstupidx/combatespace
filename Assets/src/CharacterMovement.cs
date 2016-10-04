@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class CharacterMovement : MonoBehaviour {
@@ -10,9 +11,13 @@ public class CharacterMovement : MonoBehaviour {
     public int MoveTo;
     public float actualZ;
     private float _z;
+    private bool playingTutorial;
 
     void Start()
     {
+        if (SceneManager.GetActiveScene().name == "Tutorial")
+            playingTutorial = true;
+
         Events.OnRoundStart += OnRoundStart;
     }
     void OnDestroy()
@@ -62,6 +67,7 @@ public class CharacterMovement : MonoBehaviour {
         Invoke("Loop", 2);
     }
 	void Update () {
+        if (playingTutorial) return;
         if (Game.Instance.fightStatus.state == FightStatus.states.IDLE)
         {
             Vector3 pos = pivot.transform.localPosition;
