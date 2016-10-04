@@ -22,6 +22,7 @@ public class PopupRetos : ScreenBase
     {
         Data.Instance.peleasManager.showRetos = true;
         Data.Instance.LoadLevel("07_Carrera");
+        SetOff();
     }
     void OnRetosPopup(string _title, string _text)
     {

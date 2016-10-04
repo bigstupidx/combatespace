@@ -143,12 +143,12 @@ public class Summary : MonoBehaviour
         if (totalHero > totalCharacter)
         {
             this.heroWin = true;
-            field.text = "Ganaste\n";
+            field.text = "Ganaste";
         }
         else
         {
             this.heroWin = false;
-            field.text = "Perdiste\n";
+            field.text = "Perdiste";
         }
 
         TotalRoundDataLine.Init(0, totalHero, totalCharacter);
@@ -177,5 +177,30 @@ public class Summary : MonoBehaviour
             Data.Instance.LoadLevel("06_Summary");
         else
             Data.Instance.LoadLevel("03_Home");
+    }
+    public void Share()
+    {
+        if (SocialManager.Instance.userData.facebookID == "")
+        {
+            Events.OnRegisterPopup();
+            return;
+        }
+        else
+        {
+            string facebookID = Data.Instance.playerSettings.characterData.facebookID;
+            string oponent = Data.Instance.playerSettings.characterData.nick;
+
+            string text = "Te acabo de ganar una pelea de Combate Space." + oponent;
+
+            if(Data.Instance.playerSettings.wonByKO_in_level == 1)
+                text += " Te gané por KO en el primer Round!";
+            else if (Data.Instance.playerSettings.wonByKO_in_level == 2)
+                text += " Te gané por KO en 2 rounds.";
+            else if (Data.Instance.playerSettings.wonByKO_in_level == 3)
+                text += " Te gané por KO en el último round.";
+
+            //SocialManager.Instance.GetComponent<FacebookShare>().WinTo(text);
+            SocialManager.Instance.GetComponent<FacebookShare>().ShareToFriend(facebookID, text);
+        }
     }
 }

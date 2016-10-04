@@ -4,6 +4,7 @@ using System;
 
 public class CustomizerCamera : MonoBehaviour {
 
+    public Animation characterAnim;
     public Camera camera;
 
     public CameraSet defaultSet;
@@ -38,6 +39,7 @@ public class CustomizerCamera : MonoBehaviour {
     }
     void OnCustomizerChangeParts(string part)
     {
+        string anim = "idle";
         switch (part)
         {
             case "cabezas":
@@ -50,12 +52,14 @@ public class CustomizerCamera : MonoBehaviour {
                 activeSet = peinados; 
                 break;
             case "barbas":
+                anim = "defenseUp_L_Down_R";
                 activeSet = barbas; 
                 break;
             case "cejas":
                 activeSet = cejas; 
                 break;
             case "narices":
+                anim = "defenseUp_L_Down_R";
                 activeSet = pelo; 
                 break;
             case "pantalon":
@@ -68,6 +72,7 @@ public class CustomizerCamera : MonoBehaviour {
                 activeSet = defaultSet; 
                 break;
         }
+        characterAnim.Play(anim);
     }
 	void Update () {
         camera.transform.localPosition = Vector3.Lerp(camera.transform.localPosition, activeSet.cam_pos, 0.1f);

@@ -40,11 +40,11 @@ public class CountDown : MonoBehaviour {
         hero_progress = 0;
         if (isHero)
         {
-            //if (fightStatus.caidas_hero >= 3)
-            //{
-            //    Events.OnKO(true);
-            //    return;
-            //}
+            if (fightStatus.GetActiveRound().hero_falls >= 3)
+            {
+                Events.OnKO(true);
+                return;
+            }
             
             progressBar.gameObject.SetActive(true);
             LoopHero();
@@ -52,12 +52,12 @@ public class CountDown : MonoBehaviour {
         } else
         {            
             probabilityToStandAgain = ((100 - (int)(fightStatus.cansancio_hero * 50)) / 2) - (fightStatus.caidas_character*10);
-            //if (fightStatus.caidas_character >= 3)
-            //{
-            //    Events.OnKO(false);
-            //    SetOff();
-            //    return;
-            //}
+            if (fightStatus.GetActiveRound().character_falls >= 3)
+            {
+                Events.OnKO(false);
+                SetOff();
+                return;
+            }
         }
         sec = 0;
         panel.SetActive(true);

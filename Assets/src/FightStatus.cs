@@ -141,7 +141,7 @@ public class FightStatus : MonoBehaviour {
     {
         state = states.FIGHTING;
     }
-    RoundData GetActiveRound()
+    public RoundData GetActiveRound()
     {
         return roundsData[roundsData.Count - 1];
     }

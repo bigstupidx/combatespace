@@ -68,6 +68,8 @@ public static class Events
     public static System.Action<string> OnCustomizerRefresh = delegate { };
     public static System.Action<string> OnCustomizerChangeParts = delegate { };    
     public static System.Action<string, int> OnCustomizerChangePart = delegate { };
+
+    public static System.Action OnScreenShotReady= delegate { };
     
     
 }
