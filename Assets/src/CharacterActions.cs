@@ -235,7 +235,7 @@ public class CharacterActions : MonoBehaviour {
             case actions.CANCHERO: actionName = anim_canchero; break;
             case actions.DEFENSE_UP: actionName = anim_defense_up; break;
             case actions.DEFENSE_UP_CENTER: actionName = anim_defense_up_center; break;
-            case actions.DEFENSE_DOWN: actionName = anim_defense_down; break;
+            case actions.DEFENSE_DOWN: actionName = anim_defense_down; defenseRoutine = ResetActions(0.2f); StartCoroutine(defenseRoutine); break;
             case actions.DEFENSE_UP_L_DOWN_R: actionName = anim_defense_up_l_down_r; break;
             case actions.DEFENSE_UP_R_DOWN_L: actionName = anim_defense_up_r_down_l; break;
             case actions.IDLE: actionName = anim_idle; break;
