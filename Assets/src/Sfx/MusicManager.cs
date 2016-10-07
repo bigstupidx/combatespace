@@ -13,11 +13,16 @@ public class MusicManager : MonoBehaviour {
 		source = gameObject.GetComponent<AudioSource> ();
 		Events.OnAudioEnable += OnAudioEnable;
 		Events.OnGameOver += OnGameOver;
+		Events.OnRoundComplete += OnRoundComplete;
+		Events.OnRoundStart += OnRoundStart;
 	}
 
 	void OnDestroy(){		
 		Events.OnAudioEnable -= OnAudioEnable;
 		Events.OnGameOver -= OnGameOver;
+		Events.OnRoundComplete -= OnRoundComplete;
+		Events.OnRoundStart -= OnRoundStart;
+
 	}
 	void OnAudioEnable(float vol)
 	{		
@@ -26,6 +31,14 @@ public class MusicManager : MonoBehaviour {
 
 	void OnGameOver(){
 		FadeIn (4f, introMusic);
+	}
+
+	void OnRoundComplete(){
+		FadeIn (1f, introMusic);
+	}
+
+	void OnRoundStart(){
+		FadeOut (2f);
 	}
 
 	public void MusicChange(string scene){		

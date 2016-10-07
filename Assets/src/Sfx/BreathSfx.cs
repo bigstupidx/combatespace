@@ -7,6 +7,7 @@ public class BreathSfx : MonoBehaviour {
 
 	private float volLowRange = 0.5f;
 	private float volHighRange = 0.9f;
+	private float maxVol = 1f;
 
 	private AudioSource source;
 	private int next;
@@ -19,20 +20,28 @@ public class BreathSfx : MonoBehaviour {
 		Events.OnHeroAguanteStatus += OnHeroAguanteStatus;
 		Events.OnRoundComplete += OnRoundComplete;
 		Events.OnRoundStart += OnRoundStart;
+		Events.OnAudioEnable += OnAudioEnable;
 	}
 
 	void OnDestroy(){
 		Events.OnHeroAguanteStatus -= OnHeroAguanteStatus;
 		Events.OnRoundComplete -= OnRoundComplete;
 		Events.OnRoundStart -= OnRoundStart;
+		Events.OnAudioEnable -= OnAudioEnable;
 	}
-	
+
+	void OnAudioEnable(float volume)
+	{
+		maxVol = volume;
+		source.volume = maxVol;
+	}
+
 	// Update is called once per frame
 	void Update () {
 		if (!source.isPlaying && !paused) {
 			source.clip = clips [next];
 			source.loop = true;
-			float vol = Random.Range (volLowRange, volHighRange);
+			float vol = Random.Range (volLowRange, volHighRange)*maxVol;
 			source.volume = vol;
 			source.Play ();
 		}
