@@ -106,8 +106,8 @@ public class Summary : MonoBehaviour
 
         int roundsPlayed = (Game.Instance.fightStatus.roundsData.Count);
 
-        totalHero /= roundsPlayed;
-        totalCharacter /= roundsPlayed;
+        //totalHero /= roundsPlayed;
+        //totalCharacter /= roundsPlayed;
 
         print(totalHero + " + " + totalCharacter + " roundsPlayed: " + roundsPlayed);
 
@@ -115,15 +115,21 @@ public class Summary : MonoBehaviour
         {
             if (heroWin)
             {
-                totalHero = 10;
+                //totalHero += 1;
                 if (totalHero == totalCharacter)
+                {
+                    totalHero += 1;
                     totalCharacter -= 1;
+                }
             }
             else
             {
-                totalCharacter = 10;
+                //totalCharacter += 1;
                 if (totalHero == totalCharacter)
+                {
                     totalHero -= 1;
+                    totalCharacter += 1;
+                }
             }
         }else
         if (totalHero == totalCharacter)

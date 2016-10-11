@@ -37,7 +37,7 @@ public class FightStatus : MonoBehaviour {
     public float heroAguanteStatus = 1;
     public float characterAguanteStatus = 1;
 
-    private float AguanteRecovery = 0.035f;
+    private float AguanteRecovery = 0.026f;
     private float MIN_AguanteRecovery = 0.005f;
 
     public float heroRecovery;

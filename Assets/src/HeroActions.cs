@@ -3,7 +3,7 @@ using System.Collections;
 
 public class HeroActions : MonoBehaviour
 {
-
+    public float speed;
     private Animator anim;
     public string anim_idle;
     public string anim_defense;
@@ -59,7 +59,7 @@ public class HeroActions : MonoBehaviour
     }
     public bool isPunched()
     {
-        if (action == actions.PUNCHED_L || action == actions.PUNCHED_R) return true;
+        if (action == actions.KO || action == actions.PUNCHED_L || action == actions.PUNCHED_R) return true;
         else return false;
     }
     void Reset()
@@ -77,6 +77,7 @@ public class HeroActions : MonoBehaviour
     }
     public void DefensePunched()
     {
+        if (action == actions.KO) return;
         action = actions.PUNCHED_L;
         anim.Play(anim_defense_punched);
         Invoke("ResetDefensePunched", 0.1f);
@@ -88,9 +89,10 @@ public class HeroActions : MonoBehaviour
     string animName = "";
     public void OnHeroActionWithCrossFade(actions newAction, float CrossFadeTime = 0.1f)
     {
+        speed = 1 - ((1 - Game.Instance.fightStatus.heroAguanteStatus)/8);
         if (action == actions.KO) return;
         if (action == newAction) return;
-        if (isAttackingAndAttack(newAction)) return ;
+        if (newAction != actions.KO && isAttackingAndAttack(newAction)) return;
 
         Events.OnHeroSound(newAction);
 
@@ -100,24 +102,25 @@ public class HeroActions : MonoBehaviour
         
         switch (action)
         {
-            case actions.KO: animName = anim_ko; break;
+            case actions.KO: speed = 1;  animName = anim_ko; break;
             case actions.IDLE: animName = anim_idle; state = states.IDLE; break;
             case actions.DEFENSE: CrossFadeTime = 0.05f; animName = anim_defense; state = states.DEFENDING; break;
             case actions.DEFENSE_L: animName = anim_defense_l; state = states.DEFENDING; break;
             case actions.DEFENSE_R: animName = anim_defense_r; state = states.DEFENDING; break;
-            case actions.GANCHO_UP_R: animName = anim_gancho_up_r; hitRoutine = HitRoutine(0.14f, 0.32f); StartCoroutine(hitRoutine); break;
-            case actions.GANCHO_UP_L: animName = anim_gancho_up_l; hitRoutine = HitRoutine(0.14f, 0.32f); StartCoroutine(hitRoutine); break;
+            case actions.GANCHO_UP_R: animName = anim_gancho_up_r; hitRoutine = HitRoutine(0.14f, 0.34f); StartCoroutine(hitRoutine); break;
+            case actions.GANCHO_UP_L: animName = anim_gancho_up_l; hitRoutine = HitRoutine(0.14f, 0.34f); StartCoroutine(hitRoutine); break;
 
-            case actions.GANCHO_DOWN_R: animName = anim_gancho_down_r; hitRoutine = HitRoutine(0.14f, 0.32f); StartCoroutine(hitRoutine); break;
-            case actions.GANCHO_DOWN_L: animName = anim_gancho_down_l; hitRoutine = HitRoutine(0.14f, 0.32f); StartCoroutine(hitRoutine); break;
+            case actions.GANCHO_DOWN_R: animName = anim_gancho_down_r; hitRoutine = HitRoutine(0.14f, 0.34f); StartCoroutine(hitRoutine); break;
+            case actions.GANCHO_DOWN_L: animName = anim_gancho_down_l; hitRoutine = HitRoutine(0.14f, 0.34f); StartCoroutine(hitRoutine); break;
 
-            case actions.CORTITO_L: animName = anim_cortito_l; hitRoutine = HitRoutine(0.1f, 0.17f); StartCoroutine(hitRoutine); break;
-            case actions.CORTITO_R: animName = anim_cortito_r; hitRoutine = HitRoutine(0.1f, 0.17f); StartCoroutine(hitRoutine); break;
+            case actions.CORTITO_L: animName = anim_cortito_l; hitRoutine = HitRoutine(0.1f, 0.19f); StartCoroutine(hitRoutine); break;
+            case actions.CORTITO_R: animName = anim_cortito_r; hitRoutine = HitRoutine(0.1f, 0.19f); StartCoroutine(hitRoutine); break;
 
-            case actions.PUNCHED_L: animName = anim_punched_l; punchedRoutine = PunchedRoutine(0.4f); StartCoroutine(punchedRoutine); break;
-            case actions.PUNCHED_R: animName = anim_punched_r; punchedRoutine = PunchedRoutine(0.4f); StartCoroutine(punchedRoutine); break;
+            case actions.PUNCHED_L: animName = anim_punched_l; punchedRoutine = PunchedRoutine(0.45f); StartCoroutine(punchedRoutine); break;
+            case actions.PUNCHED_R: animName = anim_punched_r; punchedRoutine = PunchedRoutine(0.45f); StartCoroutine(punchedRoutine); break;
         }
         anim.CrossFade(animName, CrossFadeTime, 0, 0);
+        anim.speed = speed;
     }
     bool isAttackingAndAttack(actions newAction)
     {
@@ -143,6 +146,8 @@ public class HeroActions : MonoBehaviour
     }
     IEnumerator HitRoutine(float timer1, float timer2)
     {
+        timer1 += (1 - speed);
+        timer2 += (1 - speed);
         state = states.ATTACKING;
         yield return new WaitForSeconds(timer1);
         CheckHit();
@@ -152,6 +157,7 @@ public class HeroActions : MonoBehaviour
     }
     public void CheckHit()
     {
+        if (action == actions.KO) return;
         if (Game.Instance.fightStatus.state != FightStatus.states.FIGHTING) return;
         if(!CheckIfCharacterIsInTarget()) return;
         
