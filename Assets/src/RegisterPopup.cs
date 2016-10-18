@@ -35,7 +35,12 @@ public class RegisterPopup : ScreenBase
 		Data.Instance.interfaceSfx.PlaySfx (Data.Instance.interfaceSfx.click2);
         SetOff();
         Data.Instance.playerSettings.SetAnonimo();
-        if (SceneManager.GetActiveScene().name != "03_FighterSelector" && SceneManager.GetActiveScene().name != "03_Home" && SceneManager.GetActiveScene().name != "08_Ranking")
+        if (
+            SceneManager.GetActiveScene().name != "03_FighterSelector" 
+            && SceneManager.GetActiveScene().name != "03_Home" 
+            && SceneManager.GetActiveScene().name != "08_Ranking"
+            && SceneManager.GetActiveScene().name != "Game"
+            )
             Data.Instance.LoadLevel("03_Home");
       
 	}

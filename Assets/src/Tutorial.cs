@@ -62,14 +62,14 @@ public class Tutorial : MonoBehaviour {
         {
             case 0: SetCartel("Aprendé los básicos", true); break;
             case 1: cartel.SetActive(true); break;
-            case 2: SetCartel("Bien!, ahora el UPPERCUT al cuerpo", false); break;
-            case 3: SetCartel("Perfecto! ahora el GANCHO", false); break;
+            case 2: SetCartel("Bien! Ahora el UPPERCUT al cuerpo", false); break;
+            case 3: SetCartel("Perfecto! Ahora el GANCHO", false); break;
             case 4: SetCartel("Bien! Ahora la defensa", false); break;
             case 5:
-                SetCartel("¡Bien!. Habrás notado que para girar debes rotar el dispositivo...", true);
+                SetCartel("¡Bien! Habrás notado que para girar debes rotar el dispositivo...", true);
                 break;
-            case 6: barraEnergia.SetActive(true); SetCartel("Ahora... esta es la barra de tu energía", true); break;
-            case 7: barraPotencia.SetActive(true); SetCartel("y esta es la potencia: si pegás mucho, esperá que se llene, sino el daño será muy bajo", true); break;          
+            case 6: barraEnergia.SetActive(true); SetCartel("Ahora... ésta es la barra de tu energía", true); break;
+            case 7: barraPotencia.SetActive(true); SetCartel("y ésta es la potencia: si pegás mucho, esperá que se llene, sino el daño será muy bajo", true); break;          
             case 8: SetCartel("Perfecto... ¡Ahora un poco de práctica!", true); break;
         }
     }

@@ -18,8 +18,12 @@ public class Summary : MonoBehaviour
     private bool heroWin;
     private bool endedByKO;
 
+    public GameObject tooltip;
+    public Text tooltipField;
+
     void Start()
     {
+        tooltip.SetActive(false);
         SetOff();
         Events.OnAllRoundsComplete += OnAllRoundsComplete;
         Events.OnKO += OnKO;
@@ -35,6 +39,10 @@ public class Summary : MonoBehaviour
         this.heroWin = !isHero;
         Invoke("FightEnd", 2);
         Invoke("TimeOut1", 3);
+    }
+    public void CloseToolTip()
+    {
+        tooltip.SetActive(false);
     }
     void TimeOut1()
     {
@@ -158,9 +166,19 @@ public class Summary : MonoBehaviour
         }
 
         TotalRoundDataLine.Init(0, totalHero, totalCharacter);
-        Invoke("TimeOut", 3);
+        Invoke("TimeOut", 4);
+        Invoke("StartToolTip", 1);
 
         Events.OnFightEnd(heroWin);
+    }
+    void StartToolTip()
+    {
+        if (heroWin)
+            tooltipField.text = "Sos un ganador!\nColgá este poster en tu muro, o enviáselo a tu contrincante!";
+        else
+            tooltipField.text = "La liga siempre da revancha!\nCompartí esta imagen y seguí la lucha!";
+
+        tooltip.SetActive(true);
     }
     void TimeOut()
     {
@@ -186,6 +204,7 @@ public class Summary : MonoBehaviour
     }
     public void Share()
     {
+        tooltip.SetActive(false);
         if (SocialManager.Instance.userData.facebookID == "")
         {
             Events.OnRegisterPopup();
@@ -207,6 +226,7 @@ public class Summary : MonoBehaviour
 
             //SocialManager.Instance.GetComponent<FacebookShare>().WinTo(text);
             SocialManager.Instance.GetComponent<FacebookShare>().ShareToFriend(facebookID, text);
+           // Invoke("Restart", 2);
         }
     }
 }

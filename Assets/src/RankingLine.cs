@@ -23,9 +23,11 @@ public class RankingLine : MonoBehaviour {
         scoreField.text = data.stats.score.ToString();    
         profilePicture.setPicture(data.facebookID);
         nickField.text = data.nick;
-        resultField.color = Data.Instance.settings.standardWINColor;     
-        pgField.text = "P.G/P: " + data.peleas.peleas_g + "/" + data.peleas.peleas_p;
-        rgField.text = "R.G/P: " + data.peleas.retos_g + "/" + data.peleas.retos_p;
+        resultField.color = Data.Instance.settings.standardWINColor;
+        int ganadas = data.peleas.peleas_g + data.peleas.retos_g;
+        int perdidas = data.peleas.retos_p + data.peleas.peleas_p;
+        pgField.text = "G: " + ganadas;
+        rgField.text = "P: " + perdidas;
 	}
     public void More()
     {
