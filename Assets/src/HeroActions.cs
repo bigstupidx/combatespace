@@ -89,7 +89,7 @@ public class HeroActions : MonoBehaviour
     string animName = "";
     public void OnHeroActionWithCrossFade(actions newAction, float CrossFadeTime = 0.1f)
     {
-        speed = 1 - ((1 - Game.Instance.fightStatus.heroAguanteStatus)/8);
+        speed = 1 - ((1 - Game.Instance.fightStatus.heroAguanteStatus)/9);
         if (action == actions.KO) return;
         if (action == newAction) return;
         if (newAction != actions.KO && isAttackingAndAttack(newAction)) return;
@@ -107,14 +107,14 @@ public class HeroActions : MonoBehaviour
             case actions.DEFENSE: CrossFadeTime = 0.05f; animName = anim_defense; state = states.DEFENDING; break;
             case actions.DEFENSE_L: animName = anim_defense_l; state = states.DEFENDING; break;
             case actions.DEFENSE_R: animName = anim_defense_r; state = states.DEFENDING; break;
-            case actions.GANCHO_UP_R: animName = anim_gancho_up_r; hitRoutine = HitRoutine(0.14f, 0.34f); StartCoroutine(hitRoutine); break;
-            case actions.GANCHO_UP_L: animName = anim_gancho_up_l; hitRoutine = HitRoutine(0.14f, 0.34f); StartCoroutine(hitRoutine); break;
+            case actions.GANCHO_UP_R: animName = anim_gancho_up_r; hitRoutine = HitRoutine(0.125f, 0.34f); StartCoroutine(hitRoutine); break;
+            case actions.GANCHO_UP_L: animName = anim_gancho_up_l; hitRoutine = HitRoutine(0.125f, 0.34f); StartCoroutine(hitRoutine); break;
 
-            case actions.GANCHO_DOWN_R: animName = anim_gancho_down_r; hitRoutine = HitRoutine(0.14f, 0.34f); StartCoroutine(hitRoutine); break;
-            case actions.GANCHO_DOWN_L: animName = anim_gancho_down_l; hitRoutine = HitRoutine(0.14f, 0.34f); StartCoroutine(hitRoutine); break;
+            case actions.GANCHO_DOWN_R: animName = anim_gancho_down_r; hitRoutine = HitRoutine(0.125f, 0.34f); StartCoroutine(hitRoutine); break;
+            case actions.GANCHO_DOWN_L: animName = anim_gancho_down_l; hitRoutine = HitRoutine(0.125f, 0.34f); StartCoroutine(hitRoutine); break;
 
-            case actions.CORTITO_L: animName = anim_cortito_l; hitRoutine = HitRoutine(0.1f, 0.19f); StartCoroutine(hitRoutine); break;
-            case actions.CORTITO_R: animName = anim_cortito_r; hitRoutine = HitRoutine(0.1f, 0.19f); StartCoroutine(hitRoutine); break;
+            case actions.CORTITO_L: animName = anim_cortito_l; hitRoutine = HitRoutine(0.09f, 0.19f); StartCoroutine(hitRoutine); break;
+            case actions.CORTITO_R: animName = anim_cortito_r; hitRoutine = HitRoutine(0.09f, 0.19f); StartCoroutine(hitRoutine); break;
 
             case actions.PUNCHED_L: animName = anim_punched_l; punchedRoutine = PunchedRoutine(0.45f); StartCoroutine(punchedRoutine); break;
             case actions.PUNCHED_R: animName = anim_punched_r; punchedRoutine = PunchedRoutine(0.45f); StartCoroutine(punchedRoutine); break;

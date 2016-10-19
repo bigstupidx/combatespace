@@ -244,14 +244,14 @@ public class CharacterActions : MonoBehaviour {
             case actions.PUNCHED_DOWN_L: actionName = anim_punched_down_l; defenseRoutine =ResetActions(0.4f); StartCoroutine(defenseRoutine); break;
             case actions.PUNCHED_DOWN_R: actionName = anim_punched_down_r; defenseRoutine = ResetActions(0.4f); StartCoroutine(defenseRoutine); break;
             case actions.PUNCHED_CENTER: actionName = anim_punched_center; defenseRoutine = ResetActions(0.3f); StartCoroutine(defenseRoutine); break;
-            case actions.ATTACK_L: actionName = anim_attack_l; attackRoutine = AttackRoutine(0.25f, 0.4f); StartCoroutine(attackRoutine); break;
-            case actions.ATTACK_R: actionName = anim_attack_r; attackRoutine = AttackRoutine(0.25f, 0.4f); StartCoroutine(attackRoutine); break;
-            case actions.ATTACK_L_CORTITO: actionName = anim_attack_l_cortito; attackRoutine = AttackRoutine(0.15f, 0.3f); StartCoroutine(attackRoutine); break;
-            case actions.ATTACK_R_CORTITO: actionName = anim_attack_r_cortito; attackRoutine = AttackRoutine(0.15f, 0.3f); StartCoroutine(attackRoutine); break;
+            case actions.ATTACK_L: actionName = anim_attack_l; attackRoutine = AttackRoutine(0.24f, 0.4f); StartCoroutine(attackRoutine); break;
+            case actions.ATTACK_R: actionName = anim_attack_r; attackRoutine = AttackRoutine(0.24f, 0.4f); StartCoroutine(attackRoutine); break;
+            case actions.ATTACK_L_CORTITO: actionName = anim_attack_l_cortito; attackRoutine = AttackRoutine(0.14f, 0.3f); StartCoroutine(attackRoutine); break;
+            case actions.ATTACK_R_CORTITO: actionName = anim_attack_r_cortito; attackRoutine = AttackRoutine(0.14f, 0.3f); StartCoroutine(attackRoutine); break;
         }
       //  animator.CrossFade(actionName, 0.5f, 0, 0);
 
-        anim.CrossFade(actionName, 0.15f);
+        anim.CrossFade(actionName, 0.135f);
         anim[actionName].speed = 1;
         switch (action)
         {

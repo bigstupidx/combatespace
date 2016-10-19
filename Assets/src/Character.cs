@@ -163,7 +163,7 @@ public class Character : MonoBehaviour {
     }
     void OnCharacterChangeAction(CharacterActions.actions action)
     {
-        print("OnCharacterChangeAction: " + action);
+       // print("OnCharacterChangeAction: " + action);
 
         switch (action)
         {
@@ -184,7 +184,7 @@ public class Character : MonoBehaviour {
     }
     void OnCheckCharacterHitted(HeroActions.actions action)
     {
-        print("OnCheckCharacterHitted: " + action + DEFENSE_UP + " - " + DEFENSE_UP_R + " action: " + characterActions.action);
+       // print("OnCheckCharacterHitted: " + action + DEFENSE_UP + " - " + DEFENSE_UP_R + " action: " + characterActions.action);
         bool punched = false;
         switch (action)
         {
