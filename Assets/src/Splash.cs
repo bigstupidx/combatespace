@@ -1,11 +1,15 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using com.adobe.mobile;
 
 public class Splash : MonoBehaviour {
 
     public Text debug;
-
+void Awake()
+    {        
+        ADBMobile.SetContext();
+    }
     void Start()
     {
     }
