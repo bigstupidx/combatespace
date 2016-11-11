@@ -6,7 +6,8 @@ using com.adobe.mobile;
 public class Splash : MonoBehaviour {
 
     public Text debug;
-void Awake()
+
+    void Awake()
     {        
         ADBMobile.SetContext();
     }

@@ -56,8 +56,13 @@ public class LoginManager : MonoBehaviour {
 
     void AuthCallBack(IResult result)
     {
-        if (result.Error != null) {
+        if(result.Cancelled)
+        {
+            SocialEvents.OnFacebookError();
+        } else if (result.Error != null) {            
             Debug.Log (result.Error);
+            if(result.Error == "Error: Error button pressed")
+                SocialEvents.OnFacebookError();
         } else {
             SetInit();
         }

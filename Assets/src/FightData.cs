@@ -29,7 +29,8 @@ public class FightData : MonoBehaviour {
     void OnRoundStart()
     {
         ready = false;
-        RoundField.text = "ROUND " + Game.Instance.fightStatus.Round.ToString();
+        int roundReal = Game.Instance.fightStatus.Round + 1;
+        RoundField.text = "ROUND " + roundReal.ToString();
         sec = Data.Instance.settings.totalSecsForRound;
         SetField();
     }

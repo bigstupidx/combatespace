@@ -18,6 +18,7 @@ public static class SocialEvents {
     public static System.Action OnFacebookLoginPressed = delegate { };
     public static System.Action OnFacebookFriends = delegate { };
     public static System.Action OnFacebookInviteFriends = delegate { };
+    public static System.Action OnFacebookError = delegate { };
 
     public static System.Action OnFacebookLogout = delegate { };
     public static System.Action<string, string, string> OnFacebookLogin = delegate { };
@@ -27,7 +28,10 @@ public static class SocialEvents {
     public static System.Action<int> OnNewHiscore = delegate { };
     public static System.Action<int> OnAddToTotalScore = delegate { };
     public static System.Action<int> OnSetToTotalBarScore = delegate { };
-    
+
+    //metrics
+    public static System.Action<string, string> OnMetric = delegate { };
+
     public static System.Action OnRefreshRanking = delegate { };
 
     //challenges:

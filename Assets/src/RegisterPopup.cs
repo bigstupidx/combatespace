@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using Facebook;
+using com.adobe.mobile;
 
 public class RegisterPopup : ScreenBase
 {
@@ -10,6 +12,7 @@ public class RegisterPopup : ScreenBase
     {        
         Events.OnRegisterPopup += OnRegisterPopup;
         SocialEvents.OnUserReady += OnUserReady;
+        SocialEvents.OnFacebookError += OnFacebookError;
         SetOff();
     }
     void SetOff()
@@ -30,6 +33,7 @@ public class RegisterPopup : ScreenBase
     void OnUserReady(string facebookID, string username, string email)
     {
         Events.OnLoadingShow(false);
+        ADBMobile.SetUserIdentifier(facebookID);
     }
 	public void ClickedLater () {
 		Data.Instance.interfaceSfx.PlaySfx (Data.Instance.interfaceSfx.click2);
@@ -44,6 +48,12 @@ public class RegisterPopup : ScreenBase
             Data.Instance.LoadLevel("03_Home");
       
 	}
+    void OnFacebookError()
+    {
+        Events.OnLoadingShow(false);
+        Events.OnGenericPopup("Facebook Error", "Hubo un problema en el login con facebook");
+        SetOff();
+    }
     public override void OnBackButtonPressed() 
     {
 		Data.Instance.interfaceSfx.PlaySfx (Data.Instance.interfaceSfx.click2);
