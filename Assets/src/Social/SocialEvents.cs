@@ -30,7 +30,9 @@ public static class SocialEvents {
     public static System.Action<int> OnSetToTotalBarScore = delegate { };
 
     //metrics
-    public static System.Action<string, string> OnMetric = delegate { };
+    public static System.Action<string> OnMetricState = delegate { };
+    public static System.Action<string> OnMetricAction = delegate { };
+    public static System.Action<string, string> OnMetricActionSpecial = delegate { };
 
     public static System.Action OnRefreshRanking = delegate { };
 

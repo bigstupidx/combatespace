@@ -61,6 +61,7 @@ public class CarreraLine : MonoBehaviour {
         PlayerData pd = Data.Instance.fightersManager.GetFighterByFacebookID(other_FacebookID);
         if (pd != null)
         {
+            SocialEvents.OnMetricAction("fight");
             Events.SetNewFighter(pd);
             Data.Instance.LoadLevel("03_FighterSelector");
         }

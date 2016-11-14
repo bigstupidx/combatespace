@@ -26,14 +26,17 @@ public class ConfirmReset : MonoBehaviour
     }
     public void ResetApp()
     {
+        SocialEvents.OnMetricActionSpecial("logout", "logout exitóso");
         SocialEvents.OnFacebookLogout();
         SocialEvents.ResetApp();
         PlayerPrefs.DeleteAll();
         Data.Instance.LoadLevel("01_Register");
+        panel.SetActive(false);
     }    
     public void Close()
     {
-		Data.Instance.interfaceSfx.PlaySfx (Data.Instance.interfaceSfx.click2);
+        SocialEvents.OnMetricActionSpecial("logout", "cancelado");
+        Data.Instance.interfaceSfx.PlaySfx (Data.Instance.interfaceSfx.click2);
         panel.SetActive(false);
     }
 }

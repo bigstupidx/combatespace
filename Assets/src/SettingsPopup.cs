@@ -21,6 +21,7 @@ public class SettingsPopup : MonoBehaviour
     }
     void OnSettings()
     {
+        SocialEvents.OnMetricState("Settings");
         foreach (GameObject go in toInactive)
             go.SetActive(false);
 
@@ -30,6 +31,7 @@ public class SettingsPopup : MonoBehaviour
     }
     public void ResetApp()
     {
+        SocialEvents.OnMetricState("Logout");
         Close();
         Events.OnConfirmReset();        
     }

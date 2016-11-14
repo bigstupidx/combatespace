@@ -61,6 +61,7 @@ public class FightStatus : MonoBehaviour {
     
     void Start()
     {
+        SocialEvents.OnMetricState("Presentación del Round");
         Data.Instance.playerSettings.wonByKO_in_level = 0;
         Round = 0;
         power_gancho_up = (float)Data.Instance.settings.defaultPower.gancho_up;
@@ -120,6 +121,7 @@ public class FightStatus : MonoBehaviour {
         state = states.DONE;
         HeroAguanteProgressBar.transform.gameObject.SetActive(false);
         EnemyAguanteProgressBar.transform.gameObject.SetActive(false);
+        SocialEvents.OnMetricState("Final de la Pelea");
     }
     void OnAvatarStandUp(bool isHero)
     {

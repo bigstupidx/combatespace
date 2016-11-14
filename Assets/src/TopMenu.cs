@@ -5,7 +5,8 @@ public class TopMenu : MonoBehaviour {
 
     public void Carrera()
     {
-		Data.Instance.interfaceSfx.PlaySfx (Data.Instance.interfaceSfx.click2);
+        SocialEvents.OnMetricActionSpecial("clicked.main.menu", "carrera");
+        Data.Instance.interfaceSfx.PlaySfx (Data.Instance.interfaceSfx.click2);
         if (!SocialManager.Instance.userData.logged)
             Events.OnRegisterPopup();
         else
@@ -13,22 +14,26 @@ public class TopMenu : MonoBehaviour {
     }
     public void Back()
     {
-		Data.Instance.interfaceSfx.PlaySfx (Data.Instance.interfaceSfx.click2);
+        SocialEvents.OnMetricActionSpecial("clicked.main.menu", "home");
+        Data.Instance.interfaceSfx.PlaySfx (Data.Instance.interfaceSfx.click2);
         Data.Instance.LoadLevel("Dificulty");
     }
     public void OpenCustomizer()
     {
-		Data.Instance.interfaceSfx.PlaySfx (Data.Instance.interfaceSfx.click2);
+        SocialEvents.OnMetricActionSpecial("clicked.main.menu", "customizador");
+        Data.Instance.interfaceSfx.PlaySfx (Data.Instance.interfaceSfx.click2);
         Data.Instance.LoadLevel("02_Customizer");
     }
     public void Settings()
     {
-		Data.Instance.interfaceSfx.PlaySfx (Data.Instance.interfaceSfx.click2);
+        SocialEvents.OnMetricActionSpecial("clicked.main.menu", "settings");
+        Data.Instance.interfaceSfx.PlaySfx (Data.Instance.interfaceSfx.click2);
         Events.OnSettings();
     }
     public void Tutorial()
     {
-		Data.Instance.interfaceSfx.PlaySfx (Data.Instance.interfaceSfx.click2);
+        SocialEvents.OnMetricActionSpecial("clicked.main.menu", "tutorial");
+        Data.Instance.interfaceSfx.PlaySfx (Data.Instance.interfaceSfx.click2);
         Data.Instance.settings.playingTutorial = true;
       //  Data.Instance.playerSettings.heroData.stats.SetStats(5, 5, 5, 5, 5);
         Data.Instance.playerSettings.characterData.stats.SetStats(5, 5, 5, 5, 5);

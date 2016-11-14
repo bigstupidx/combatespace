@@ -21,11 +21,13 @@ public class RegisterPopup : ScreenBase
     }
     void OnRegisterPopup()
     {
+        SocialEvents.OnMetricState("Pedido de Registro");
         panel.SetActive(true);
     }
     public void ClickedRegister()
     {
-		Data.Instance.interfaceSfx.PlaySfx (Data.Instance.interfaceSfx.click1);
+        SocialEvents.OnMetricAction("register");
+        Data.Instance.interfaceSfx.PlaySfx (Data.Instance.interfaceSfx.click1);
         Events.OnLoadingShow(true);
         SocialEvents.OnFacebookLoginPressed();
         panel.SetActive(false);
@@ -36,7 +38,8 @@ public class RegisterPopup : ScreenBase
         ADBMobile.SetUserIdentifier(facebookID);
     }
 	public void ClickedLater () {
-		Data.Instance.interfaceSfx.PlaySfx (Data.Instance.interfaceSfx.click2);
+        SocialEvents.OnMetricAction("avoid.register");
+        Data.Instance.interfaceSfx.PlaySfx (Data.Instance.interfaceSfx.click2);
         SetOff();
         Data.Instance.playerSettings.SetAnonimo();
         if (
@@ -50,6 +53,7 @@ public class RegisterPopup : ScreenBase
 	}
     void OnFacebookError()
     {
+        SocialEvents.OnMetricAction("Facebook Error");
         Events.OnLoadingShow(false);
         Events.OnGenericPopup("Facebook Error", "Hubo un problema en el login con facebook");
         SetOff();

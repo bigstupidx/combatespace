@@ -62,23 +62,32 @@ public class Home : MonoBehaviour
     {
 		Data.Instance.interfaceSfx.PlaySfx (Data.Instance.interfaceSfx.click1);
         if (Data.Instance.settings.ToturialReady == 0)
+        {
+            SocialEvents.OnMetricAction("init.tutorial");
             Data.Instance.LoadLevel("Tutorial");
+        }
         else
+        {
+            SocialEvents.OnMetricAction("choose.challenger");
             Data.Instance.LoadLevel("03_FighterSelector");
+        }
     }
     public void PlayTutorial()
     {
+        SocialEvents.OnMetricAction("init.tutorial");
         Data.Instance.interfaceSfx.PlaySfx(Data.Instance.interfaceSfx.click1);
         Events.OnTutorialReady(0);
         StartGame();
     }
     public void Register()
-    {
-		Data.Instance.interfaceSfx.PlaySfx (Data.Instance.interfaceSfx.click1);
+    {        
+        SocialEvents.OnMetricAction("register");
+        Data.Instance.interfaceSfx.PlaySfx (Data.Instance.interfaceSfx.click1);
         Events.OnRegisterPopup();
     }
     public void Ranking()
     {
+        SocialEvents.OnMetricActionSpecial("clicked.main.menu", "ranking");
         Data.Instance.interfaceSfx.PlaySfx(Data.Instance.interfaceSfx.click1);
         Data.Instance.LoadLevel("08_Ranking");
     }

@@ -15,6 +15,7 @@ public class Data : MonoBehaviour
     public HistorialManager hostorialManager;
     public CustomizerData customizerData;
     public string lastScene;
+    public string actualScene;
 	public MusicManager music;
 	public InterfaceSfx interfaceSfx;
 
@@ -33,10 +34,12 @@ public class Data : MonoBehaviour
         }
     }
     public void LoadLevel(string aLevelName)
-    {
+    {        
+        SocialEvents.OnMetricState(aLevelName);
         lastScene = SceneManager.GetActiveScene().name;
 		music.MusicChange (aLevelName);
         SceneManager.LoadScene(aLevelName);
+        actualScene = aLevelName;
         GetComponent<Loading>().SceneChanged();
     }
     void Awake()

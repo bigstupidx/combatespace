@@ -70,9 +70,14 @@ public class SummaryRound : MonoBehaviour
         anim.Play("intro");
 
         yield return new WaitForSeconds(10);
-        StartGame();
+        StartFirstRound();
     }
     public void StartGame()
+    {
+        SocialEvents.OnMetricAction("skip.presentation");
+        StartFirstRound();
+    }
+    void StartFirstRound()
     {
         if (startFightCoroutine != null)
             StopCoroutine(startFightCoroutine);

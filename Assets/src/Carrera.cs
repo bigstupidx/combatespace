@@ -102,12 +102,14 @@ public class Carrera : MonoBehaviour {
     }
     public void Peleas()
     {
+        SocialEvents.OnMetricAction("init.peleas");
         timeNow = Time.time;
         Data.Instance.peleasManager.showRetos = false;
         dataLoaded = false;
     }
     public void Retos()
     {
+        SocialEvents.OnMetricAction("init.retos");
         timeNow = Time.time;
         Data.Instance.peleasManager.showRetos = true;
         dataLoaded = false;

@@ -13,10 +13,12 @@ public class Splash : MonoBehaviour {
     }
     void Start()
     {
+        SocialEvents.OnMetricState("0_Splash");
     }
     public void Clicked()
     {
-		Data.Instance.interfaceSfx.PlaySfx (Data.Instance.interfaceSfx.click1);
+        SocialEvents.OnMetricAction("init.game");
+        Data.Instance.interfaceSfx.PlaySfx (Data.Instance.interfaceSfx.click1);
         if(SocialManager.Instance.userData.logged || Data.Instance.playerSettings.heroData.username != "")
             Data.Instance.LoadLevel("03_Home");
         else

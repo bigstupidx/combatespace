@@ -197,6 +197,7 @@ public class Summary : MonoBehaviour
     }
     public void Restart()
     {
+        SocialEvents.OnMetricAction("back.home");
         if (heroWin)
             Data.Instance.LoadLevel("06_Summary");
         else
@@ -204,6 +205,7 @@ public class Summary : MonoBehaviour
     }
     public void Share()
     {
+        SocialEvents.OnMetricAction("share.results");
         tooltip.SetActive(false);
         if (SocialManager.Instance.userData.facebookID == "")
         {
