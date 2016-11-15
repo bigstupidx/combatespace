@@ -1,16 +1,96 @@
 ﻿using UnityEngine;
-using System.Collections;
-using com.adobe.mobile;
+#if UNITY_IPHONE
+using NotificationServices = UnityEngine.iOS.NotificationServices;
+using NotificationType = UnityEngine.iOS.NotificationType;
+#endif
 
+using UnityEngine.UI;
+using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
+using com.adobe.mobile;
+using UnityEngine.SceneManagement;
+using AOT;
 
 public class Metrics : MonoBehaviour {
     
-	void Start () {
+#if UNITY_ANDROID
+    void Awake()
+    {
+        ADBMobile.SetContext();
+    }
+#endif
+    void OnEnable()
+    {
+        ADBMobile.SubmitAdvertisingIdentifierTask(HandleSubmitAdIdCallable);
+        var cdata = new Dictionary<string, object>();
+        cdata.Add("launch.data", "added");
+        ADBMobile.CollectLifecycleData(cdata);
+    }
+    void OnDisable()
+    {
+        ADBMobile.PauseCollectingLifecycleData();
+    }
+
+    void OnApplicationPause(bool isPaused)
+    {
+        if (isPaused)
+        {
+            ADBMobile.PauseCollectingLifecycleData();
+        }
+        else
+        {
+            ADBMobile.CollectLifecycleData();
+        }
+    }
+#if UNITY_IPHONE
+	bool tokenSent;
+#endif
+    [MonoPInvokeCallback(typeof(SubmitAdIdCallable))]
+    public static string HandleSubmitAdIdCallable()
+    {
+        //Write Code to return Adid
+        return @"GoogleAdid";
+    }
+
+
+    void Start () {
+        ADBMobile.SetDebugLogging(true);
+        // use this code for push messaging on iOS
+#if UNITY_IPHONE
+		tokenSent = false;
+		NotificationServices.RegisterForNotifications(NotificationType.Alert | NotificationType.Badge | NotificationType.Sound);
+#endif
+        ADBMobile.EnableLocalNotifications();
+
+
+
+
+
         SocialEvents.OnMetricState += OnMetricState;
         SocialEvents.OnMetricAction += OnMetricAction;
         SocialEvents.OnMetricActionSpecial += OnMetricActionSpecial;
     }
+
+
+#if UNITY_IPHONE
+	void Update () {
+		// handle a push token 
+		if (!tokenSent) {
+			byte[] token = NotificationServices.deviceToken;
+			if (token != null) {				
+				// send token to the SDK
+//				string hexToken = "%" + System.BitConverter.ToString(token).Replace('-', '%');
+				string hexToken = System.BitConverter.ToString(token);
+				ADBMobile.SetPushIdentifier (hexToken);
+				tokenSent = true;
+				text.text = hexToken;
+			}
+		}
+	}
+#endif
+
+
     void OnMetricState(string sceneName)
     {
         //Presentación del Round
@@ -33,7 +113,7 @@ public class Metrics : MonoBehaviour {
             case "07_Carrera": pageName = "Carrera del Boxeador"; break;
             case "08_Ranking": pageName = "Ranking"; break;
             case "09_Share": pageName = "Share"; break;
-            //case "Game": pageName = ""; break;
+            case "Game": pageName = "Inicio de la Pelea"; break;
             case "Tutorial": pageName = "Tutorial"; break;
         }
 
@@ -47,7 +127,7 @@ public class Metrics : MonoBehaviour {
             contextData.Add("session.user", "Sin registro");
 
         contextData.Add("page.view", pageName);
-        ADBMobile.TrackState("page.view", contextData);
+        ADBMobile.TrackState(pageName, contextData);
     }
     void OnMetricAction(string value)
     {
