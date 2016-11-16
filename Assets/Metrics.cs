@@ -84,7 +84,7 @@ public class Metrics : MonoBehaviour {
 				string hexToken = System.BitConverter.ToString(token);
 				ADBMobile.SetPushIdentifier (hexToken);
 				tokenSent = true;
-				text.text = hexToken;
+				//text.text = hexToken;
 			}
 		}
 	}
