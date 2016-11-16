@@ -44,6 +44,9 @@ public class AvatarCustomizerPart {
     }
     Texture GetTexture(string textureURL)
     {
+        if (textureURL == null || textureURL == "")
+            textureURL = "basic_texture";
+        Debug.Log("texture: " + textureURL);
         Texture texture = Resources.Load("Customizer/textures/" + textureURL) as Texture;
         return texture;
     }

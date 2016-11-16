@@ -21,6 +21,7 @@ public class CustomizerView : MonoBehaviour {
     void OnDestroy()
     {
         Events.OnCustomizerRefresh -= OnCustomizerRefresh;
+        Resources.UnloadUnusedAssets();
     }
     void LoppUntikLoad()
     {
@@ -40,8 +41,10 @@ public class CustomizerView : MonoBehaviour {
             newPartsButton.SetOff();
         }
     }
+    string newPart;
     void OnCustomizerRefresh(string part)
     {
+        this.newPart = part;
         foreach (CustomizerPartsButton button in partsContainer.GetComponentsInChildren<CustomizerPartsButton>())
         {
             if (button.partName == part)
@@ -49,18 +52,24 @@ public class CustomizerView : MonoBehaviour {
             else
                 button.SetOff();
         }
-        Events.OnCustomizerChangeParts(part);
+        Events.OnCustomizerChangeParts(newPart);
         Utils.RemoveAllChildsIn(partContainer);
+       
+        Invoke("LoadNewButtons", 0.5f);
+    }
+    void LoadNewButtons()
+    {
         int id = 0;
+        Resources.UnloadUnusedAssets();
         foreach (CustomizerPartData data in Data.Instance.customizerData.data)
         {
-            if (data.name == part)
+            if (data.name == newPart)
             {
                 CustomizerPartButton newPartButton = Instantiate(partbutton);
                 newPartButton.transform.SetParent(partContainer);
-               // newPartButton.data = data;
+                // newPartButton.data = data;
                 newPartButton.transform.localScale = Vector3.one;
-                newPartButton.Init(id, part, data.thumb, this);
+                newPartButton.Init(id, newPart, data.thumb, this);
                 id++;
             }
         }

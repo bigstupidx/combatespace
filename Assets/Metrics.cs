@@ -93,6 +93,24 @@ public class Metrics : MonoBehaviour {
 
     void OnMetricState(string sceneName)
     {
+        
+        var contextData = new Dictionary<string, object>();
+
+        if (SocialManager.Instance.userData.facebookID != "")
+        {
+            contextData.Add("session.user.facebookID", SocialManager.Instance.userData.facebookID);
+            contextData.Add("session.user", "Registrado");
+        }
+        else
+        {
+            contextData.Add("session.user", "Sin registro");
+        }
+        string pageName = GetPageByName(sceneName);
+        contextData.Add("page.view", pageName);
+        ADBMobile.TrackState(pageName, contextData);
+    }
+    string GetPageByName(string sceneName)
+    {
         //Presentación del Round
         //Final de la Pelea;
         //Settings
@@ -116,18 +134,7 @@ public class Metrics : MonoBehaviour {
             case "Game": pageName = "Inicio de la Pelea"; break;
             case "Tutorial": pageName = "Tutorial"; break;
         }
-
-        var contextData = new Dictionary<string, object>();
-
-        if (SocialManager.Instance.userData.facebookID != "")
-        {
-            contextData.Add("session.user.facebookID", SocialManager.Instance.userData.facebookID);
-            contextData.Add("session.user", "Registrado");
-        }
-            contextData.Add("session.user", "Sin registro");
-
-        contextData.Add("page.view", pageName);
-        ADBMobile.TrackState(pageName, contextData);
+        return pageName;
     }
     void OnMetricAction(string value)
     {
@@ -138,8 +145,12 @@ public class Metrics : MonoBehaviour {
             contextData.Add("session.user.facebookID", SocialManager.Instance.userData.facebookID);
             contextData.Add("session.user", "Registrado");
         }
-        contextData.Add("session.user", "Sin registro");
-        
+        else
+        {
+            contextData.Add("session.user", "Sin registro");
+        }
+        string pageName = GetPageByName( SceneManager.GetActiveScene().name);
+        contextData.Add("page.view", pageName);
         ADBMobile.TrackAction(value, contextData);
     }
     void OnMetricActionSpecial(string trackActionName, string value)
@@ -151,7 +162,12 @@ public class Metrics : MonoBehaviour {
             contextData.Add("session.user.facebookID", SocialManager.Instance.userData.facebookID);
             contextData.Add("session.user", "Registrado");
         }
-        contextData.Add("session.user", "Sin registro");
+        else
+        {
+            contextData.Add("session.user", "Sin registro");
+        }
+        string pageName = GetPageByName(SceneManager.GetActiveScene().name);
+        contextData.Add("page.view", pageName);
 
         contextData.Add(trackActionName, value);
 

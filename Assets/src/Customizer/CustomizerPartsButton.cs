@@ -7,6 +7,7 @@ public class CustomizerPartsButton : MonoBehaviour
     public string partName;
     public Image thumb;
     public Image Selector;
+    private Texture2D texture;
 
     public void Init(string partName)
     {
@@ -30,8 +31,8 @@ public class CustomizerPartsButton : MonoBehaviour
             case "tatoo": thumbName = "icons_menu_tatoo"; break;
             default: thumbName = "icons_menu_moustache"; break;
         }
-        Texture2D texture = Resources.Load("Customizer/icons/" + thumbName) as Texture2D;
-        thumb.sprite = Sprite.Create(texture, new Rect(0, 0, 512, 512), Vector2.zero);
+        texture = Resources.Load("Customizer/icons/" + thumbName) as Texture2D;
+        thumb.sprite = Sprite.Create(texture, new Rect(0, 0, 511, 511), Vector2.zero);
     }
     public void OnClicked()
     {
@@ -45,5 +46,9 @@ public class CustomizerPartsButton : MonoBehaviour
     public void SetOff()
     {
         Selector.enabled = false;
+    }
+    void OnDestroy()
+    {
+        texture = null;
     }
 }

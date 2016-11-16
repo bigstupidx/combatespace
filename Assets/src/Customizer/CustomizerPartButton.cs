@@ -9,6 +9,7 @@ public class CustomizerPartButton : MonoBehaviour {
     private string part;
     private CustomizerView view;
     public Image thumb;
+    private Texture2D texture;
 
     public void Init(int id, string part, string thumbName, CustomizerView view)
     {
@@ -16,11 +17,15 @@ public class CustomizerPartButton : MonoBehaviour {
         this.id = id;
         this.part = part;
 
-        Texture2D texture = Resources.Load("Customizer/icons/" + thumbName) as Texture2D;
-        thumb.sprite = Sprite.Create(texture, new Rect(0, 0, 512, 512), Vector2.zero);
+        texture = Resources.Load("Customizer/icons/" + thumbName) as Texture2D;
+        thumb.sprite = Sprite.Create(texture, new Rect(0, 0, 511, 511), Vector2.zero);
     }
 	public void OnClicked () {
 		Data.Instance.interfaceSfx.PlaySfx (Data.Instance.interfaceSfx.click2);
         view.Selected(part, id);
 	}
+    void OnDestroy()
+    {
+        texture = null;
+    }
 }

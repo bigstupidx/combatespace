@@ -20,7 +20,7 @@ public class TopMenu : MonoBehaviour {
     }
     public void OpenCustomizer()
     {
-        SocialEvents.OnMetricActionSpecial("clicked.main.menu", "customizador");
+        SocialEvents.OnMetricActionSpecial("clicked.main.menu", "estilo");
         Data.Instance.interfaceSfx.PlaySfx (Data.Instance.interfaceSfx.click2);
         Data.Instance.LoadLevel("02_Customizer");
     }
