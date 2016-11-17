@@ -108,8 +108,8 @@ public class FightersManager : MonoBehaviour {
         for (var i = 0; i < allData.Length - 1; i++)
         {
             PlayerData playerData = SetPlayerData(allData[i]);
-            if (playerData.facebookID != SocialManager.Instance.userData.facebookID)
-                all.Add(playerData);
+            if (playerData != null && playerData.facebookID != SocialManager.Instance.userData.facebookID)
+                AddToList(all, playerData);
         }
     }
     void RankingReady(string result)
@@ -120,7 +120,8 @@ public class FightersManager : MonoBehaviour {
         for (var i = 0; i < allData.Length - 1; i++)
         {
             PlayerData playerData = SetPlayerData(allData[i]);
-            ranking.Add(playerData);
+            if (playerData != null && playerData.nick != "" )
+                AddToList(ranking, playerData);
         }
     }
     void UsersFriendsReady(string result)
@@ -131,21 +132,37 @@ public class FightersManager : MonoBehaviour {
         for (var i = 0; i < allData.Length - 1; i++)
         {
             PlayerData playerData = SetPlayerData(allData[i]);
-            if (playerData.facebookID != SocialManager.Instance.userData.facebookID)
-                friends.Add(playerData);
+            if (playerData != null && playerData.facebookID != SocialManager.Instance.userData.facebookID && playerData.nick != "")
+                AddToList(friends, playerData);
         }
+    }
+    void AddToList(List<PlayerData> arr, PlayerData playerData)
+    {
+        foreach (PlayerData pData in arr)
+        {
+            if (pData.facebookID == playerData.facebookID)
+                return;
+        }
+        arr.Add(playerData);
     }
     PlayerData SetPlayerData(string text)
     {
-        PlayerData playerData = new PlayerData();
-
         string[] userData = Regex.Split(text, ":");
+
+        if (userData[2] == "" && userData[2] == null) return null;
+
+        PlayerData playerData = new PlayerData();
 
         playerData.facebookID = userData[1];
         playerData.nick = userData[2];
-
         playerData.stats = new Stats();
-        playerData.stats.score = int.Parse(userData[3]);
+
+        int score;
+        if (int.TryParse(userData[3], out score))
+            playerData.stats.score = int.Parse(userData[3]);
+        else
+            return null;
+
         playerData.stats.Power = int.Parse(userData[4]);
         playerData.stats.Resistence = int.Parse(userData[5]);
         playerData.stats.Defense = int.Parse(userData[6]);

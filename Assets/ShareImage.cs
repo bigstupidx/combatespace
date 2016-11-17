@@ -58,9 +58,9 @@ public class ShareImage : MonoBehaviour
             AndroidJavaClass uriClass = new AndroidJavaClass("android.net.Uri");
             AndroidJavaObject uriObject = uriClass.CallStatic<AndroidJavaObject>("parse", "file://" + path);
             intentObject.Call<AndroidJavaObject>("putExtra", intentClass.GetStatic<string>("EXTRA_STREAM"), uriObject);
-            intentObject.Call<AndroidJavaObject>("putExtra", intentClass.GetStatic<string>("EXTRA_TEXT"), "Which Football Club does this Rebus represent?\n" +
-                                                 "Download the game on play store at " + "\nhttps://play.google.com/store/apps/details?id=com.TGC.RebusFC&pcampaignid=GPC_shareGame");
-            intentObject.Call<AndroidJavaObject>("putExtra", intentClass.GetStatic<string>("EXTRA_SUBJECT"), "Which club is this?");
+            intentObject.Call<AndroidJavaObject>("putExtra", intentClass.GetStatic<string>("EXTRA_TEXT"), "Liga Combate Space" +
+                                                 "Download the game on play store at " + "\nhttps://play.google.com/store/apps/details?id=com.space.turner.combatespace");
+            intentObject.Call<AndroidJavaObject>("putExtra", intentClass.GetStatic<string>("EXTRA_SUBJECT"), "Boxeo de alto nivel");
             intentObject.Call<AndroidJavaObject>("setType", "image/jpeg");
             AndroidJavaClass unity = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
             AndroidJavaObject currentActivity = unity.GetStatic<AndroidJavaObject>("currentActivity");

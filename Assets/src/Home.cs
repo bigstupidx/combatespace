@@ -61,7 +61,7 @@ public class Home : MonoBehaviour
     public void StartGame()
     {
 		Data.Instance.interfaceSfx.PlaySfx (Data.Instance.interfaceSfx.click1);
-        if (Data.Instance.settings.ToturialReady == 0)
+        if (Data.Instance.settings.ToturialReady == 0 && Data.Instance.playerSettings.heroData.stats.score == 0)
         {
             SocialEvents.OnMetricAction("init.tutorial");
             Data.Instance.LoadLevel("Tutorial");

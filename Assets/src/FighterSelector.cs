@@ -216,7 +216,7 @@ public class FighterSelector : MonoBehaviour
     {
         Data.Instance.interfaceSfx.PlaySfx(Data.Instance.interfaceSfx.click1);
         Data.Instance.music.FadeOut(4f);
-        if (Data.Instance.settings.ToturialReady == 0)
+        if (Data.Instance.settings.ToturialReady == 0 && Data.Instance.playerSettings.heroData.stats.score == 0)
         {
             Data.Instance.settings.playingTutorial = true;
             Data.Instance.LoadLevel("Tutorial");
