@@ -5,13 +5,13 @@ public class NameSelectorScreen : MonoBehaviour {
 
     public NameButton nameButton;
     public GameObject content;
-    public GameObject BackButton;
+   // public GameObject BackButton;
 
 	void Start () {
 
-        if (Data.Instance.lastScene != "02_Customizer")
-            BackButton.SetActive(false);
-        else               
+        //if (Data.Instance.lastScene != "02_Customizer")
+        //    BackButton.SetActive(false);
+        //else               
             Events.OnBackButtonPressed += OnBackButtonPressed;
 
         Init();

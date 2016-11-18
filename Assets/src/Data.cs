@@ -3,6 +3,7 @@ using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using Fabric;
 
 public class Data : MonoBehaviour
 {
@@ -57,6 +58,7 @@ public class Data : MonoBehaviour
     }
     void Start()
     {
+        Fabric.Runtime.Fabric.Initialize();
         SocialEvents.OnUserReady += OnUserReady;
         fightersManager = GetComponent<FightersManager>();
         peleasManager = GetComponent<PeleasManager>();

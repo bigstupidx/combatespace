@@ -5,9 +5,8 @@ using System.Text.RegularExpressions;
 public class DataController : MonoBehaviour
 {
     private string secretKey = "ranlogic2008";
-    const string URL = "http://www.pontura.com/combateSpace/";
-    //const string URL = "http://juegocombate.qa.dmti.cloud/";
-  //  const string URL = "http://juegocombate.dmti.cloud";
+   // const string URL = "http://www.pontura.com/combateSpace/";
+    const string URL = "http://juegocombate.dmti.cloud/";
     private string getUserIdByFacebookID_URL = URL + "getUserIdByFacebookID.php?";
     private string createUser_URL = URL + "createUser.php?";
     private string updateUser_URL = URL + "updateUser.php?";
