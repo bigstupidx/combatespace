@@ -50,8 +50,11 @@ public class MainMenu : MonoBehaviour {
             (characterStats[3].num)
             );
 
-        if(Data.Instance.settings.ToturialReady == 0 && Data.Instance.playerSettings.heroData.stats.score==0)
+        if (Data.Instance.settings.ToturialReady == 0 && Data.Instance.playerSettings.heroData.stats.score == 0)
+        {
+            Data.Instance.playerSettings.FightToTutorial();
             Data.Instance.LoadLevel("Tutorial");
+        }
         else
             Data.Instance.LoadLevel("Game");
     }

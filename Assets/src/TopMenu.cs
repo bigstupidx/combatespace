@@ -36,7 +36,8 @@ public class TopMenu : MonoBehaviour {
         Data.Instance.interfaceSfx.PlaySfx (Data.Instance.interfaceSfx.click2);
         Data.Instance.settings.playingTutorial = true;
       //  Data.Instance.playerSettings.heroData.stats.SetStats(5, 5, 5, 5, 5);
-        Data.Instance.playerSettings.characterData.stats.SetStats(5, 5, 5, 5, 5);
+       
+        Data.Instance.playerSettings.FightToTutorial();
         Data.Instance.LoadLevel("Tutorial");
     }
 }

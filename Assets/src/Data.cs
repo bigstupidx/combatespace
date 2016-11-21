@@ -58,7 +58,7 @@ public class Data : MonoBehaviour
     }
     void Start()
     {
-        Fabric.Runtime.Fabric.Initialize();
+       // Fabric.Runtime.Fabric.Initialize();
         SocialEvents.OnUserReady += OnUserReady;
         fightersManager = GetComponent<FightersManager>();
         peleasManager = GetComponent<PeleasManager>();

@@ -2,8 +2,8 @@
 	names:
 	[
 		"Látigo",
-		"Mano de piedra",
-		"Puño de acero",
+		"Mano de Piedra",
+		"Puño de Acero",
 		"Tigre",
 		"Peste",
 		"Roña",
@@ -16,7 +16,7 @@
 		"El Indio", 
 		"Bonito" ,
 		"Ratón" ,
-		"El Feróz" ,
+		"El Feroz" ,
 		"Chiquita" ,
 		"Matador" ,
 		"Arritmia",
@@ -37,7 +37,7 @@
 		"Sugar" ,
 		"Tornado" ,
 		"El Tanque" ,
-		 "Terror",
+		"Terror",
 		"Bam Bam" ,
 		"El Feo",
 		"toro salvaje",

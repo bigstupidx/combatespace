@@ -64,6 +64,7 @@ public class Home : MonoBehaviour
         if (Data.Instance.settings.ToturialReady == 0 && Data.Instance.playerSettings.heroData.stats.score == 0)
         {
             SocialEvents.OnMetricAction("init.tutorial");
+            Data.Instance.playerSettings.FightToTutorial();
             Data.Instance.LoadLevel("Tutorial");
         }
         else

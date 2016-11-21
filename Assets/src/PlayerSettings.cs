@@ -30,6 +30,12 @@ public class PlayerSettings : MonoBehaviour {
         else
             control = controls.CONTROL_JOYSTICK;
     }
+    public void FightToTutorial()
+    {
+        characterData.stats.SetStats(5, 5, 5, 5, 5);
+        characterData.nick = "";
+        characterData.facebookID = "";
+    }
     public void SetAnonimo()
     {        
         string username = "Anónimo";

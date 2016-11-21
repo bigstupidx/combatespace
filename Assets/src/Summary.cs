@@ -173,6 +173,7 @@ public class Summary : MonoBehaviour
     }
     void StartToolTip()
     {
+        if (Data.Instance.playerSettings.characterData.facebookID == "") return;
         if (heroWin)
             tooltipField.text = "Sos un ganador!\nColgá este poster en tu muro, o enviáselo a tu contrincante!";
         else
@@ -198,6 +199,12 @@ public class Summary : MonoBehaviour
     public void Restart()
     {
         SocialEvents.OnMetricAction("back.home");
+
+        if (Data.Instance.playerSettings.characterData.facebookID == "")
+        { 
+            Data.Instance.LoadLevel("03_Home");
+            return;
+        }
         if (heroWin)
             Data.Instance.LoadLevel("06_Summary");
         else

@@ -176,6 +176,7 @@ public class Hero : MonoBehaviour
     }
     void OnCharacterBlockPunch(HeroActions.actions action)
     {
+        print("OnCharacterBlockPunch");
         if (Game.Instance.fightStatus.state != FightStatus.states.FIGHTING) return;
         switch (action)
         {
