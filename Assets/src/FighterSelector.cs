@@ -98,7 +98,7 @@ public class FighterSelector : MonoBehaviour
             newButton.transform.localScale = Vector3.one;
             newButton.Init(id, playerData);
             id++;
-            if (Data.Instance.playerSettings.heroData.stats.score >= playerData.stats.score)
+            if (id < fighters.Count && Data.Instance.playerSettings.heroData.stats.score >= playerData.stats.score)
                 FighterID = id;
         }
         if (Data.Instance.fightersManager.filter == FightersManager.filters.ONLY_FRIENDS)
@@ -142,7 +142,14 @@ public class FighterSelector : MonoBehaviour
     void SetFighter(int playerID)
     {
         FighterID = playerID;
-        SetFighter(Data.Instance.fightersManager.GetActualFighters()[playerID]);
+        List<PlayerData> arr = Data.Instance.fightersManager.GetActualFighters();
+
+        if (arr.Count <= FighterID)
+            FighterID = 0;
+
+        print("FighterID: " + FighterID + "     arr.Count: " + arr.Count + " playerID: " + playerID);
+
+        SetFighter(arr[FighterID]);
     }
     void SetFighter(PlayerData playerData)
     {

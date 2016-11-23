@@ -8,7 +8,7 @@ public class ShareScreenshot : MonoBehaviour {
     private bool isProcessing = false;
 
     private string shareText;
-    private string gameLink = "Podés bajar el juego desde: "+"\nhttps://play.google.com/store/apps/details?id=com.TGC.guessthemovie&pcampaignid=GPC_shareGame";
+    private string gameLink_Android = "Podés bajar el juego desde: "+ "\nhttps://play.google.com/store/apps/details?id=com.space.turner.combatespace";
     private string subject = "Combate Space";
 
     public void TakeScreenshot()
@@ -39,8 +39,11 @@ public class ShareScreenshot : MonoBehaviour {
 
         File.WriteAllBytes(destination, bytes);
 
-
-        Data.Instance.GetComponent<NativeShare>().Share(shareText + gameLink, destination, destination, "");
+# if UNITY_ANDROID
+        Data.Instance.GetComponent<NativeShare>().Share(shareText + gameLink_Android, destination, destination, "");
+#elif UNITY_IPHONE
+        Data.Instance.GetComponent<NativeShare>().Share(shareText, destination, destination, "");
+#endif
         isProcessing = false;
         Events.OnScreenShotReady();
 

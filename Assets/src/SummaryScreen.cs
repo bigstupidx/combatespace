@@ -52,6 +52,7 @@ public class SummaryScreen : MonoBehaviour {
     }
     void Init()
     {
+        Data.Instance.fightersManager.LoadFighters(0, 100);
         Power =  Data.Instance.playerSettings.heroData.stats.Power;
         Resistence = Data.Instance.playerSettings.heroData.stats.Resistence;
         Defense = Data.Instance.playerSettings.heroData.stats.Defense;

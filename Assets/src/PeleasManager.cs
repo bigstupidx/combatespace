@@ -52,7 +52,7 @@ public class PeleasManager : MonoBehaviour {
     }
     void OnGetFightsReady(string result)
     {
-        print("OnGetFightsReady" + result);
+        Debug.Log("OnGetFightsReady" + result);
         retadoPor.Clear();
         string[] allData = Regex.Split(result, "</n>");
 
@@ -93,7 +93,12 @@ public class PeleasManager : MonoBehaviour {
         }
         loaded = true;
         SaveNewViewedFights();
-        if (retadoPor.Count >0)
+    }
+    bool showed;
+    public void CheckIfShowPopup()
+    {
+        if (showed) return;
+        if (retadoPor.Count > 0)
         {
             string field = "Tenés un nuevo reto de " + retadoPor[0];
             if (retadoPor.Count > 1)
@@ -101,6 +106,7 @@ public class PeleasManager : MonoBehaviour {
                 field = "Tenés nuevos Retos de " + GetNamesRetadores();
             }
             Events.OnRetosPopup("FUISTE RETADO!", field);
+            showed = true;
         }
     }
     private string GetNamesRetadores()

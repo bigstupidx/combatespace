@@ -212,6 +212,7 @@ public class DataController : MonoBehaviour
         {
             int score = Data.Instance.playerSettings.heroData.stats.score;
             if (score == 0) score = 1;
+            else if (score > 1) score -= 1;
             post_url = getUsersByScore_URL + "score=" + score;
         }
 

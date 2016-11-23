@@ -103,7 +103,7 @@ public class FightersManager : MonoBehaviour {
     }
     void UsersReady(string result)
     {
-        all.Clear();
+        //all.Clear();
         string[] allData = Regex.Split(result, "</n>");
         for (var i = 0; i < allData.Length - 1; i++)
         {

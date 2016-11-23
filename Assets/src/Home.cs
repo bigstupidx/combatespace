@@ -22,6 +22,7 @@ public class Home : MonoBehaviour
 
     void Start()
     {
+        Data.Instance.GetComponent<PeleasManager>().CheckIfShowPopup();
         Data.Instance.fightersManager.ResetActualFighter();
 
         if (SocialManager.Instance.userData.logged)
@@ -60,7 +61,8 @@ public class Home : MonoBehaviour
     }
     public void StartGame()
     {
-		Data.Instance.interfaceSfx.PlaySfx (Data.Instance.interfaceSfx.click1);
+       
+        Data.Instance.interfaceSfx.PlaySfx (Data.Instance.interfaceSfx.click1);
         if (Data.Instance.settings.ToturialReady == 0 && Data.Instance.playerSettings.heroData.stats.score == 0)
         {
             SocialEvents.OnMetricAction("init.tutorial");
