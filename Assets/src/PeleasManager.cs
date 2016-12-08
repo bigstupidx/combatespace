@@ -13,7 +13,7 @@ public class PeleasManager : MonoBehaviour {
     public List<string> retadoPor;
 
 	void Start () {
-        lastTimeViewed = PlayerPrefs.GetInt("lastTimeViewed", 0);
+        
         
         retos = new List<Fight>();
         peleas = new List<Fight>();
@@ -98,6 +98,7 @@ public class PeleasManager : MonoBehaviour {
     public void CheckIfShowPopup()
     {
         if (showed) return;
+        lastTimeViewed = PlayerPrefs.GetInt("lastTimeViewed", 0);
         if (retadoPor.Count > 0)
         {
             string field = "Tenés un nuevo reto de " + retadoPor[0];

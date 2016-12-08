@@ -31,7 +31,9 @@ public class RankingLine : MonoBehaviour {
 	}
     public void More()
     {
+        Events.OnLoadingShow(true);
         Events.SetNewFighter(data);
+        SocialEvents.OnMetricAction("fight");
         Data.Instance.LoadLevel("03_FighterSelector");
     }
 }

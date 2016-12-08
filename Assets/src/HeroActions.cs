@@ -168,7 +168,7 @@ public class HeroActions : MonoBehaviour
     }
     bool CheckIfCharacterIsInTarget()
     {
-        if (Data.Instance.settings.playingTutorial) return false;
+       // if (Data.Instance.settings.playingTutorial) return false;
 
         float angle = GetAngleBetweenFighters();
         int AreaOfPunch = hero.AreaOfPunch;        

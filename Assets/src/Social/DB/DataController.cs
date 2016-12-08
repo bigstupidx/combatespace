@@ -31,6 +31,8 @@ public class DataController : MonoBehaviour
         SocialEvents.OnGetUsersByScore += OnGetUsersByScore;
         SocialEvents.OnGetFights += OnGetFights;
         SocialEvents.OnGetHistorial += OnGetHistorial;
+
+        SocialEvents.OnGetNewFighter += OnGetNewFighter;
     }
     void OnFacebookLogin(string facebookID, string username, string email)
     {
@@ -299,6 +301,29 @@ public class DataController : MonoBehaviour
         WWW hs_post = new WWW(post_url);
         yield return hs_post;
         if (hs_post.error != null) print("Error con: OnGetHistorial: " + hs_post.error); else { OnGetHistorialListener(hs_post.text); }
+    }
+
+
+
+
+
+
+
+
+
+    private System.Action<string, string> LoadDataForNewUserListener;
+    public void OnGetNewFighter(System.Action<string, string> action, string _facebookID)
+    {
+        this.LoadDataForNewUserListener = action;
+        StartCoroutine(LoadDataForNewUserRoutine(_facebookID));
+    }
+    IEnumerator LoadDataForNewUserRoutine(string _facebookID)
+    {
+        string post_url = getUserIdByFacebookID_URL + "facebookID=" + _facebookID;
+        print(post_url);
+        WWW receivedData = new WWW(post_url);
+        yield return receivedData;
+        if (receivedData.error != null) print("Error con: OnGetHistorial: " + receivedData.error); else { print("___");  LoadDataForNewUserListener(receivedData.text, _facebookID); }
     }
 
 

@@ -25,8 +25,30 @@ public class FightersManager : MonoBehaviour {
     {
         Events.SetNewFighter += SetNewFighter;
     }
+
+
+    public void LoadNewFighter(string facebookID)
+    {
+        //Data.Instance
+        SocialEvents.OnGetNewFighter(NewFighterReady, facebookID);
+    }
+    void NewFighterReady(string result, string facebookID)
+    {
+        print("NewFighterReady  PLAYER DATA: " + result);
+        PlayerData playerData = SetNewPlayerData(result, facebookID);
+        if (playerData != null)
+        {
+            AddToList(all, playerData);
+            SetNewFighter(playerData);
+            Data.Instance.LoadLevel("03_FighterSelector");
+        }          
+    }
+
+
+
     void SetNewFighter(PlayerData newData)
     {
+        print("SetNewFighter: " + newData.facebookID);
         int id = 0;
         foreach (PlayerData pData in all)
         {
@@ -138,12 +160,17 @@ public class FightersManager : MonoBehaviour {
     }
     void AddToList(List<PlayerData> arr, PlayerData playerData)
     {
+        int id = 0;
+        int positionToAdd = 0;
         foreach (PlayerData pData in arr)
         {
+            if (pData.stats.score < playerData.stats.score)
+                positionToAdd++;
             if (pData.facebookID == playerData.facebookID)
                 return;
+            id++;
         }
-        arr.Add(playerData);
+        arr.Insert(positionToAdd, playerData);
     }
     PlayerData SetPlayerData(string text)
     {
@@ -176,6 +203,47 @@ public class FightersManager : MonoBehaviour {
 
         playerData.styles = new Styles();
         playerData.styles.Parse(userData[12]);
+
+        return playerData;
+    }
+
+
+
+
+
+
+    PlayerData SetNewPlayerData(string text, string facebookID)
+    {
+        int num = 1;
+        string[] userData = Regex.Split(text, ":");
+
+        if (userData[0 + num] == "" && userData[0+num] == null) return null;
+
+        PlayerData playerData = new PlayerData();
+
+        playerData.facebookID = facebookID;
+        playerData.nick = userData[11 + num];
+        playerData.stats = new Stats();
+
+       // int score;
+       // if (int.TryParse(userData[3 + num], out score))
+            playerData.stats.score = int.Parse(userData[6 + num]);
+       // else
+         //   return null;
+
+        playerData.stats.Power = int.Parse(userData[2 + num]);
+        playerData.stats.Resistence = int.Parse(userData[3 + num]);
+        playerData.stats.Defense = int.Parse(userData[4 + num]);
+        playerData.stats.Speed = int.Parse(userData[5 + num]);
+
+        playerData.peleas = new Peleas();
+        playerData.peleas.peleas_g = int.Parse(userData[7 + num]);
+        playerData.peleas.peleas_p = int.Parse(userData[8 + num]);
+        playerData.peleas.retos_g = int.Parse(userData[9 + num]);
+        playerData.peleas.retos_p = int.Parse(userData[10 + num]);
+
+        playerData.styles = new Styles();
+        playerData.styles.Parse("2-3-0-1-3-0-3-8-1-3-1");
 
         return playerData;
     }

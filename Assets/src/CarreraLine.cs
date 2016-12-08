@@ -58,12 +58,23 @@ public class CarreraLine : MonoBehaviour {
 	}
     public void More()
     {
+        print("MORE");
         PlayerData pd = Data.Instance.fightersManager.GetFighterByFacebookID(other_FacebookID);
+        Events.OnLoadingShow(true);
+        SocialEvents.OnMetricAction("fight");
         if (pd != null)
         {
-            SocialEvents.OnMetricAction("fight");
             Events.SetNewFighter(pd);
-            Data.Instance.LoadLevel("03_FighterSelector");
+            Invoke("Delay", 0.5f);
         }
+        else
+        {
+            //te lo agrega y te lleva a pelear:
+            Data.Instance.fightersManager.LoadNewFighter(other_FacebookID);
+        }
+    }
+    void Delay()
+    {
+        Data.Instance.LoadLevel("03_FighterSelector");
     }
 }
